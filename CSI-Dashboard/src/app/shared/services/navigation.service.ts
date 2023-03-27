@@ -31,7 +31,7 @@ export class NavigationService {
   iconMenu: IMenuItem[] = [
    
     {
-      name: 'Tabeau de Bord',
+      name: 'Tableau de Bord',
       type: 'dropDown',
       tooltip: 'Dashboard',
       icon: 'dashboard',
@@ -62,14 +62,14 @@ export class NavigationService {
     {
       name: 'Ressource Humaine',
       type: 'dropDown',
-      tooltip: 'Shop',
+      tooltip: 'RH',
       icon: 'group',
       sub: [
         { name: 'Candidats', state: 'cruds/ngx-table' },
-        { name: 'Entretiens & Recrutment', state: 'cruds/ngx-table' },
+        { name: 'Entretiens & Recrutement', state: 'cruds/ngx-table' },
         { name: 'Ressources', state: 'shop/products/5a9ae2106f155194e5c95d67' },
         { name: 'Feuille de Temps', state: 'shop/cart' },
-        { name: 'Congés', state: 'shop/products/5a9ae2106f155194e5c95d67' },
+        { name: 'Congés', state: 'time-off/time-off-crud' },
         { name: 'Rapports', state: 'shop/checkout' }
       ]
     },
@@ -83,8 +83,9 @@ export class NavigationService {
       sub: [
         { name: 'Contact', state: 'shop/products/5a9ae2106f155194e5c95d67' },
         { name: 'Rendez-vous', state: 'shop/cart' },
-        { name: 'Partenaires', state: 'shop' },
+        {name:  'Partenaires', state: 'partner/partner-crud'},
         { name: 'Contrats', state: 'shop' },
+        {name:  'Besoin', state: 'requirement/requirement-crud'},
         { name: 'Vente & Commande', state: 'shop/cart' },
         { name: 'Rapports', state: 'shop/checkout' }
       ]

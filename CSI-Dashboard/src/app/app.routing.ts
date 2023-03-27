@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './shared/components/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './shared/components/layouts/auth-layout/auth-layout.component';
@@ -156,7 +157,22 @@ export const rootRouterConfig: Routes = [
         path: 'project',
         loadChildren: () => import('./views/Component/Operation/project/crudProject.module').then(m => m.CrudsModule),
         data: { title: 'Project', breadcrumb: 'Projects'}
-      }
+      },
+      {
+        path: 'time-off',
+        loadChildren: () => import('./views/Component/HumanResource/timeOff/TimeOff.module').then(m => m.TimeOffModule),
+        data: { title: 'TimeOff', breadcrumb: 'TimeOffs'}
+      },
+      {
+        path: 'partner',
+        loadChildren: () => import('./views/Component/Sales/partner/crudsPartner.module').then(m => m.PartnerModule),
+        data: { title: 'Partner', breadcrumb: 'Partners'}
+      },
+      {
+        path: 'requirement',
+        loadChildren: () => import('./views/Component/Sales/Requirement/req.module').then(m => m.ReqModule),
+        data: { title: 'Tables', breadcrumb: 'TABLES'}
+      },
       
     ]
   },
