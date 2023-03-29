@@ -164,6 +164,11 @@ export const rootRouterConfig: Routes = [
         data: { title: 'TimeOff', breadcrumb: 'TimeOffs'}
       },
       {
+        path: 'time-off-employee',
+        loadChildren: () => import('./views/Component/HumanResource/timeOffEmployee/app-calendar.module').then(m => m.TimeOffCalendarModule),
+        data: { title: 'TimeOff', breadcrumb: 'TimeOffs'}
+      },
+      {
         path: 'partner',
         loadChildren: () => import('./views/Component/Sales/partner/crudsPartner.module').then(m => m.PartnerModule),
         data: { title: 'Partner', breadcrumb: 'Partners'}

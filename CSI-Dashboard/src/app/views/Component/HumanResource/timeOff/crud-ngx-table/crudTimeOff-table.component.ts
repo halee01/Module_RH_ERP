@@ -1,4 +1,3 @@
-import { PopupCalendarTimeOffComponent } from './calendar-popup/popup-CalendarTimeOff.component';
 import { PopupCreateTimeOffComponent } from './ngx-table-popup/popup-createTimeOff.component';
 import { CrudTimeOffService } from './../timeOff.service';
 import { egretAnimations } from '../../../../../shared/animations/egret-animations';
@@ -106,15 +105,5 @@ export class CrudTimeOffTableComponent implements OnInit, OnDestroy {
         }
       })
   }
-  openModal() {
-    const dialogRef = this.dialog.open(PopupCalendarTimeOffComponent, {
-      width: '400px',
-      data: { /* Les données à transmettre au pop-up */ }
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Le pop-up est fermé');
-      // Effectuer une action après la fermeture du pop-up
-    });
-  }
 }

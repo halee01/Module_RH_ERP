@@ -1,3 +1,5 @@
+import { ReactiveFormsModule } from '@angular/forms';
+import { QuillModule } from 'ngx-quill';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
@@ -36,6 +38,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 @NgModule({
   imports: [
     BrowserModule,
+    QuillModule.forRoot(),
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
     HttpClientModule,
