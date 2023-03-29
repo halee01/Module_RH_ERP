@@ -102,6 +102,11 @@ export const rootRouterConfig: Routes = [
         data: { title: 'Calendar', breadcrumb: 'CALENDAR'}
       },
       {
+        path: 'cvCandidat',
+        loadChildren: () => import('./views/Component/HumanResource/candidate/CvCandidat/cv-candidat.module').then(m => m.CvCandidatModule),
+        data: { title: 'CvCandidat', breadcrumb: 'CVCANDIDAT'}
+      },
+      {
         path: 'chat',
         loadChildren: () => import('./views/app-chats/app-chats.module').then(m => m.AppChatsModule),
         data: { title: 'Chat', breadcrumb: 'CHAT'}
