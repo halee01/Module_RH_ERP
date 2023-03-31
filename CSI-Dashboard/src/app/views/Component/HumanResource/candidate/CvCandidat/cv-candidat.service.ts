@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Observable, of } from 'rxjs';
-
 import { map } from 'rxjs/operators';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';

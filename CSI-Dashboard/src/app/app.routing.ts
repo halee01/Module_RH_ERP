@@ -102,6 +102,11 @@ export const rootRouterConfig: Routes = [
         data: { title: 'Calendar', breadcrumb: 'CALENDAR'}
       },
       {
+        path: 'candidatCrud',
+        loadChildren: () => import('./views/Component/HumanResource/candidate/CandidatCrud/candidat-crud.module').then(m => m.CandidatCrudModule),
+        data: { title: 'CandidatCrud', breadcrumb: 'CandidatCrud'}
+      },
+      {
         path: 'cvCandidat',
         loadChildren: () => import('./views/Component/HumanResource/candidate/CvCandidat/cv-candidat.module').then(m => m.CvCandidatModule),
         data: { title: 'CvCandidat', breadcrumb: 'CVCANDIDAT'}
