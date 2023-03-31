@@ -66,7 +66,7 @@ export class NavigationService {
       icon: 'group',
       sub: [
         { name: 'Candidats', state: 'cvCandidat/cvCandidat-crud' },
-        { name: 'Entretiens & Recrutement', state: 'cruds/ngx-table' },
+        { name: 'Entretiens & Recrutement', state: 'entretienRecrutment/evaluation' },
         { name: 'Ressources', state: 'shop/products/5a9ae2106f155194e5c95d67' },
         { name: 'Feuille de Temps', state: 'shop/cart' },
         { name: 'Congés', state: 'time-off/time-off-crud' },
