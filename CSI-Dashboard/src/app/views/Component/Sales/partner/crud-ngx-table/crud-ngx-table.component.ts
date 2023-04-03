@@ -14,6 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Partner } from 'app/shared/models/Partner';
+import { Router } from '@angular/router';
 
 
 
@@ -34,7 +35,7 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
 
 
   constructor(
-    
+    private router : Router,
     private dialog: MatDialog,
     private snack: MatSnackBar,
     private crudService: CrudPartnerService,
@@ -79,7 +80,7 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
   openPopUp(data:  any , isNew?) {
     let title = isNew ? 'Add new Partner' : 'Update Partner';
     let dialogRef: MatDialogRef<any> = this.dialog.open(NgxTablePopupComponent, {
-      width: '720px',
+      width: '1000px',
       disableClose: true,
       data: { title: title, payload: data }
     })
@@ -125,7 +126,9 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
         }
       })
   }
-
+add(){
+  this.router.navigateByUrl('add-partner/add-partner');
+}
   applyFilter(event :Event){
     const FilterValue = (event.target as HTMLInputElement).value ;
      this.dataSource.filter = FilterValue.trim().toLowerCase();

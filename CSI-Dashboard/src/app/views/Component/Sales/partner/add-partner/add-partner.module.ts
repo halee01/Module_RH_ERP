@@ -1,7 +1,4 @@
-import { CrudsRoutes } from './crudsPartner.routing';
 
-import { NgxTablePopupComponent } from './crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
-import { DetailCrudComponent } from './crud-detail/detail-crud/detail-crud.component';
 
 import { RouterModule } from '@angular/router';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -30,8 +27,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule} from '@angular/core';
 import { CrudNgxTableComponent } from 'app/views/Component/Sales/Partner/crud-ngx-table/crud-ngx-table.component';
-import { CrudPartnerService } from './crudPartner.service';
-import { MatTabsModule } from '@angular/material/tabs';
+
+import { addpartner } from './add-partner.routing';
+import { addpartnerComponent } from './add-partner.component';
+import { CrudPartnerService } from '../crudPartner.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTabsModule, MAT_TAB, MAT_TAB_GROUP } from '@angular/material/tabs';
+import { SharedPipesModule } from 'app/shared/pipes/shared-pipes.module';
+import { NgChartsModule } from 'ng2-charts';
+import { FileUploadModule } from 'ng2-file-upload';
 
 
 
@@ -63,12 +70,17 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatSelectModule,
     MatDatepickerModule,
     MatExpansionModule,
+    MatGridListModule,
+    MatCheckboxModule,
+    MatRadioModule,
     MatTabsModule,
-
-
-    RouterModule.forChild(CrudsRoutes)
+    MatProgressBarModule,
+    NgChartsModule,
+    FileUploadModule,
+    SharedPipesModule,
+    RouterModule.forChild(addpartner)
   ],
-  declarations: [CrudNgxTableComponent, NgxTablePopupComponent, DetailCrudComponent],
-  providers: [CrudPartnerService]
+  declarations: [addpartnerComponent],
+  providers: [CrudPartnerService , {provide : MAT_TAB , useValue:{}} ]
 })
-export class PartnerModule { }
+export class addPartnerModule { }
