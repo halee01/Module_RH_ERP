@@ -1,24 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
-
+import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms'; 
 import {FormControl} from '@angular/forms';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+
 
 @Component({
   selector: 'app-basic-form',
   templateUrl: './cv-candidat.component.html',
-  styleUrls: ['./cv-candidat.component.css']
+  styleUrls: ['./cv-candidat.component.css'],
+  
 })
+
+
+
 export class cvcandidatComponent implements OnInit {
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
 
-  constructor() { }
+  
+
+  constructor(private _formBuilder: FormBuilder) { }
 
   ngOnInit() {
+
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
+
+
     let password = new UntypedFormControl('', Validators.required);
     let confirmPassword = new UntypedFormControl('');
-
+    
     this.basicForm = new UntypedFormGroup({
       username: new UntypedFormControl('', [
         Validators.minLength(4),

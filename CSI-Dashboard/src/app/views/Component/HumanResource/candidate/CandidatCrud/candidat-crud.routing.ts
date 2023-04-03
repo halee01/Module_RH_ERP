@@ -3,6 +3,8 @@ import { cvcandidatComponent } from './../CvCandidat/cv-candidat.component';
 import { CandidatCrudTableComponent } from './CandidatCrud-table/candidat-crud-table.component';
 import { Routes } from '@angular/router';
 
+
+
 export const CrudsRoutes: Routes = [
   { 
     path: 'CandidatCrud-table', 

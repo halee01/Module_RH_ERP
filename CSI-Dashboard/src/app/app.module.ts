@@ -41,6 +41,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SharedModule,
     HttpClientModule,
     PerfectScrollbarModule,
+    
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

@@ -1,22 +1,29 @@
 <mat-card class="p-0">
-    <mat-card-title class="">
+  <mat-horizontal-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup" errorMessage="Tous les champs sont obligatoires.">
+      <ng-template matStepLabel>Coordonnées</ng-template>
+      
+
+      <mat-card-title class="">
+        <mat-divider></mat-divider>
         <div class="card-title-text">Indiquez les renseignements personnels</div>
         <mat-divider></mat-divider>
     </mat-card-title>
 
-    <mat-card-content>
+      <mat-card-content style="padding-top: 2cm;">
         <form [formGroup]="basicForm">
-            <!--<div  fxLayout="row" fxLayoutAlign="start center">-->
-              <div fxLayout="row wrap">
-                 <div fxFlex="100" fxFlex.gt-xs="80" class="pr-16">
-                    <div class="pb-16">
+          <div fxLayout="row" fxLayoutAlign="space-evenly center" >
+              <div div fxLayout="column" fxLayoutAlign="space-around center">
+                 <div fxFlex="100" fxFlex.gt-xs="35" style="width: 8cm;" >
+                      <div class="pb-16">
                         <mat-form-field class="full-width">
                             <input
                             matInput
-                            name="Prénom"
-                            formControlName="Prénom"
+                            name="first-name"
+                            formControlName="first-name"
                             placeholder="Prénom"
-                            value="">
+                            value=""
+                            required>
                         </mat-form-field>
                         <small 
                         *ngIf="basicForm.controls['username'].hasError('minlength') && basicForm.controls['username'].touched" 
@@ -24,31 +31,194 @@
                         <small 
                         *ngIf="basicForm.controls['username'].hasError('maxlength') && basicForm.controls['username'].touched" 
                         class="form-error-msg"> Le prénom ne peut pas contenir plus de  {{basicForm.controls['username'].errors.maxlength.requiredLength}} caractères </small>
+                      </div>
+
+                    
+                    <!--Birthdate-->
+                      <div class="pb-16">
+                      <mat-form-field>
+                        <input matInput [matDatepicker]="picker" formControlName="birthdate" placeholder="Date de naissance" required>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                      </mat-form-field>
+                      </div>
+
+
+                      <!---->
+                     <div class="pb-16">
+                      <mat-form-field>
+                        <mat-label>Intitulè du poste</mat-label>
+                        <mat-select >
+                          
+                          <mat-option value="option1">...</mat-option>
+                          <mat-option value="option2">....</mat-option>
+                          <mat-option value="option3">.....</mat-option>
+                          <mat-option value="option1">......</mat-option>
+                          <mat-option value="option2">.......</mat-option>
+                          <mat-option value="option3">........</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      </div>
+  
+                    <!--Country-->
+                    <div class="pb-16">
+                      <mat-form-field class="full-width">
+                      <input
+                        matInput
+                        name="country"
+                        formControlName="country"
+                        placeholder="Pays"
+                        value=""
+                        required>
+                      </mat-form-field>
                     </div>
 
+
+                    <!--Adress-->
                     <div class="pb-16">
                         <mat-form-field class="full-width">
-                            <input
+                        <input
                             matInput
-                            name="Nom"
-                            formControlName="Nom"
-                            placeholder="Nom"
-                            value="">
+                            name="adress"
+                            formControlName="adress"
+                            placeholder="Adresse"
+                            value=""
+                            required>
                         </mat-form-field>
-                        <small 
-                        *ngIf="basicForm.controls['firstname'].hasError('required') && basicForm.controls['firstname'].touched" 
-                        class="form-error-msg"> Le prénom est obligatoire</small>
                     </div>
 
+                    <!--Email1-->
+                    <div class="pb-16">
+                      <mat-form-field class="full-width">
+                      <input
+                          matInput
+                          type="email"
+                          name="email"
+                          formControlName="email1"
+                          placeholder="Email 1"
+                          value=""
+                          required>
+                      </mat-form-field>
+                      <small 
+                      *ngIf="basicForm.controls['email'].hasError('required') && basicForm.controls['email'].touched" 
+                      class="form-error-msg"> Email is required </small>
+                      <small 
+                      *ngIf="basicForm.controls['email'].hasError('email') && basicForm.controls['email'].touched" 
+                      class="form-error-msg"> Invaild email address </small>
+                    </div>
+
+                     <!--Phone Number 1-->
+                     <div class="pb-16">
+                       <mat-form-field class="full-width">
+                        <input 
+                        type=""
+                        name="phone-number1"
+                        matInput
+                        formControlName="phone-number1"
+                        placeholder="Numéro de téléphone 1 " 
+                        value=""
+                        required>
+                       </mat-form-field>
+                      </div>
+                   </div>
+                   </div>
+
+
+
+
+
+
+                   <div div fxLayout="column" fxLayoutAlign="space-around center">
+                   <div fxFlex="100" fxFlex.gt-xs="35" style="width: 8cm;" >
+                    <!--last name-->
+                    <div class="pb-16">
+                      <mat-form-field class="full-width">
+                          <input
+                          matInput
+                          name="last-name"
+                          formControlName="last-name"
+                          placeholder="Nom"
+                          value=""
+                          required>
+                      </mat-form-field>
+                      <small 
+                      *ngIf="basicForm.controls['username'].hasError('minlength') && basicForm.controls['username'].touched" 
+                      class="form-error-msg"> Le nom nécessite au moins {{basicForm.controls['username'].errors.minlength.requiredLength}} caractères </small>
+                      <small 
+                      *ngIf="basicForm.controls['username'].hasError('maxlength') && basicForm.controls['username'].touched" 
+                      class="form-error-msg"> Le nom ne peut pas contenir plus de  {{basicForm.controls['username'].errors.maxlength.requiredLength}} caractères </small>
+                    </div>
+                       
+                      <!-- Marital situation-->
+                      <div class="pb-16">
+                        <mat-form-field>
+
+                        <mat-label>Civilité</mat-label>
+                        <mat-select >
+                          <mat-option value="option1">...</mat-option>
+                          <mat-option value="option2">....</mat-option>
+                          <mat-option value="option3">.....</mat-option>
+                          <mat-option value="option1">......</mat-option>
+                          <mat-option value="option2">.......</mat-option>
+                          <mat-option value="option3">........</mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                      </div>
+
+                      <!--Job Title -->
+                      <div class="pb-16">
+                        <mat-form-field>
+                        <mat-label>Détails du poste</mat-label>
+                        <mat-select >
+                          <mat-option value="option1">...</mat-option>
+                          <mat-option value="option2">....</mat-option>
+                          <mat-option value="option3">.....</mat-option>
+                          <mat-option value="option1">......</mat-option>
+                          <mat-option value="option2">.......</mat-option>
+                          <mat-option value="option3">........</mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                      </div>
+
+
+                      <!--City-->
+                      <div class="pb-16">
+                        <mat-form-field class="full-width">
+                        <input
+                            matInput
+                            name="city"
+                            formControlName="city"
+                            placeholder="Ville"
+                            value=""
+                            required>
+                        </mat-form-field>
+                      </div>
+
+
+                      <!--PostCode-->
+                      <div class="pb-16">
+                        <mat-form-field class="full-width">
+                          <input 
+                          matInput
+                          name="code postal"
+                          formControlName="post-code"
+                          placeholder="Code Postal"
+                          required>
+                        </mat-form-field>
+                       </div>
+
+
+                    <!--Email 2-->
                     <div class="pb-16">
                         <mat-form-field class="full-width">
                         <input
                             matInput
                             type="email"
                             name="email"
-                            formControlName="email"
-                            placeholder="Your Email"
-                            value="">
+                            formControlName="email2"
+                            placeholder="Email 2"
+                            value=""
+                            required>
                         </mat-form-field>
                         <small 
                         *ngIf="basicForm.controls['email'].hasError('required') && basicForm.controls['email'].touched" 
@@ -56,105 +226,63 @@
                         <small 
                         *ngIf="basicForm.controls['email'].hasError('email') && basicForm.controls['email'].touched" 
                         class="form-error-msg"> Invaild email address </small>
-                    </div>
-
-                    <div class="pb-16">
-                        <mat-form-field class="full-width">
-                        <input
-                            matInput
-                            name="website"
-                            formControlName="website"
-                            placeholder="Your Website (http://mhrafi.com)"
-                            value="">
-                        </mat-form-field>
-                    </div>
-
-                    <div class="pb-16">
-                        <mat-form-field class="full-width">
-                            <input 
-                            matInput
-                            name="date"
-                            formControlName="date"
-                            placeholder="Date" 
-                            [matDatepicker]="appDatepicker">
-                            
-                            <mat-datepicker-toggle matSuffix [for]="appDatepicker"></mat-datepicker-toggle>
-                        </mat-form-field>
-                        <mat-datepicker #appDatepicker></mat-datepicker>
-                    </div>
-                 </div>
-
-                 <div fxFlex="100" fxFlex.gt-xs="50">
-                    <div class="pb-16">
-                        <mat-form-field class="full-width">
-                            <input 
-                            matInput
-                            name="cardno"
-                            formControlName="cardno"
-                            placeholder="Credit card number">
-                        </mat-form-field>
-                        
-                    </div>
-
+                      </div>
+    
+                    <!--Phone Number 2-->
                     <div class="pb-16">
                         <mat-form-field class="full-width">
                         <input 
-                            type="password"
-                            name="password"
+                            type=""
+                            name="phone-number2"
                             matInput
-                            formControlName="password"
-                            placeholder="Password" 
-                            value="">
+                            formControlName="phone-number2"
+                            placeholder="Numéro de téléphone 2 " 
+                            value=""
+                            required>
                         </mat-form-field>
-                        <small 
-                        *ngIf="basicForm.controls['password'].hasError('required') && basicForm.controls['password'].touched" 
-                        class="form-error-msg"> Password is required </small>
-                    </div>
-
-                    <div class="pb-16">
-                        <mat-form-field class="full-width">
-                        <input
-                            type="password"
-                            name="confirmPassword"
-                            matInput
-                            appEqualValidator="password"
-                            formControlName="confirmPassword"
-                            placeholder="Confirm Password"
-                            value="">
-                        </mat-form-field>
-                        
-                    </div>
-
-                    <div class="pb-16">
-                        <Label>Gender*</Label>
-                        <mat-radio-group 
-                        name="gender" 
-                        formControlName="gender" >
-                            <mat-radio-button value="male" class="mx-12">Male</mat-radio-button>
-                            <mat-radio-button value="female">Female</mat-radio-button>
-                        </mat-radio-group>
-                    </div>
-                    
-                    <div class="pb-16 pt-8">
-                        <mat-checkbox
-                        name="agreed"
-                        formControlName="agreed" 
-                        class="pb-16">I have read and agree to the terms of service.</mat-checkbox>
-
-                        <small 
-                            *ngIf="basicForm.controls['agreed'].hasError('agreed') && basicForm.controls['agreed'].touched" 
-                            class="form-error-msg"> You must agree to the terms and conditions </small>
                     </div>
                 </div>
+             </div>
             </div>
 
-            <img src="CSI-Front\CSI-Error\src\assets\images" alt="PuffBall">
-         
-         
-            <button 
+            <div dir="rtl" fxLayoutGap="20px">
+              <button 
             mat-raised-button 
             color="primary" 
-            [disabled]="basicForm.invalid">Submit</button>
+            [disabled]="basicForm.valid" matStepperNext>Suivant : Formation
+            </button>
+            </div>
+            
         </form>
     </mat-card-content>
+  </mat-step>
+
+  
+  <mat-step [stepControl]="secondFormGroup" errorMessage="Tous les champs sont obligatoires.">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Formation</ng-template>
+      <mat-form-field>
+        <input matInput placeholder="Address" formControlName="secondCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    You are now done.
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>
+  
+    
+
+
+
+    
 </mat-card>

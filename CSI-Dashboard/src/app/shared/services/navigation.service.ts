@@ -58,37 +58,21 @@ export class NavigationService {
       badges: [{ color: 'warn', value: '1' }]
     },
    
-
     {
       name: 'Ressource Humaine',
       type: 'dropDown',
       tooltip: 'RH',
       icon: 'group',
       sub: [
-        { name: 'Candidat', state: 'candidatCrud/CandidatCrud-table' },
-        { name: 'Entretiens & Recrutement', state: 'cruds/ngx-table' },
+
+        { name: 'Candidats', state: 'candidatCrud/CandidatCrud-table' },
+        { name: 'Entretiens & Recrutement', state: 'entretienRecrutment/evaluation' },
         { name: 'Ressources', state: 'shop/products/5a9ae2106f155194e5c95d67' },
         { name: 'Feuille de Temps', state: 'shop/cart' },
         { name: 'Congés', state: 'time-off/time-off-crud' },
         { name: 'Rapports', state: 'shop/checkout' }
       ]
     },
-
-
-    {
-      name: 'Ressource Humaine',
-      type: 'dropDown',
-      tooltip: 'RH',
-      icon: 'group',
-      sub: [
-        { name: 'Candidat', state: 'candidatCrud/CandidatCrud-table' },
-        { name: 'Entretiens & Recrutement', state: 'cruds/ngx-table' },
-        { name: 'Ressources', state: 'shop/products/5a9ae2106f155194e5c95d67' },
-        { name: 'Feuille de Temps', state: 'shop/cart' },
-        { name: 'Congés', state: 'time-off/time-off-crud' },
-        { name: 'Rapports', state: 'shop/checkout' }
-      ]
-    },  
 
 
     {

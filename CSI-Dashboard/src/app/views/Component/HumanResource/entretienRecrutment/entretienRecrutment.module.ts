@@ -1,5 +1,6 @@
-import { MatSelectModule } from '@angular/material/select';
-import { cvcandidatComponent } from './cv-candidat.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { EntretienRecru } from './entretienRecrutment.routing';
+
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -19,23 +20,24 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { entretienRecrutmentService } from './entretienRecrutment.service';
+import { entretienRecrutmentComponent } from './entretienRecrutment.component';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
-import { CalendarRoutes } from "./cv-candidat.routing";
-import { CalendarFormDialogComponent } from './calendar-form-dialog/calendar-form-dialog.component';
-import { CvCandidatService } from './cv-candidat.service';
-import { MatStepperModule } from '@angular/material/stepper';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    MatSelectModule,
     ReactiveFormsModule,
-    MatStepperModule,
     HttpClientModule,
+    MatProgressBarModule,
+
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
+    MatExpansionModule,
     MatRadioModule,
     MatCardModule,
     MatListModule,
@@ -45,17 +47,17 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatInputModule,
     FlexLayoutModule,
     ColorPickerModule,
+    NgApexchartsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    RouterModule.forChild(CalendarRoutes)
+    RouterModule.forChild(EntretienRecru)
   ],
-  providers: [CvCandidatService],
+  providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    cvcandidatComponent, 
-    CalendarFormDialogComponent
-  ]
+    entretienRecrutmentComponent
+  ],
 })
-export class CvCandidatModule { }
+export class EntretienRecrutmentModule { }

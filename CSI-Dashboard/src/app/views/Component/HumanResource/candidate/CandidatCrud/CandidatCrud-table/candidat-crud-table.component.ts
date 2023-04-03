@@ -36,7 +36,7 @@ export class CandidatCrudTableComponent implements OnInit {
    
 
   goToCV() {
-    this.router.navigate(['/cvCandidat-crud']);
+    this.router.navigate(['cvCandidat/cvCandidat-crud']);
   }
 
   ngOnInit() {
