@@ -121,7 +121,7 @@ export class ReqlistComponent implements OnInit , OnDestroy {
           })
       } else {
         this.loader.open('Updating Req');
-        this.ReqService.updateItem(data.id,res)
+        this.ReqService.updateItem(data.id, res)
           .subscribe((data:any) => {
             this.dataSource = data ;
             this.loader.close();

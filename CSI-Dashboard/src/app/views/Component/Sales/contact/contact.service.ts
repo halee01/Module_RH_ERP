@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { contact } from 'app/shared/models/Contact';
+import { contact } from 'app/shared/models/contact';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable,  of,  throwError } from 'rxjs';
 import { catchError, delay, tap } from 'rxjs/operators';
@@ -37,18 +37,16 @@ export class ContactService {
       catchError(this.handleError)
     );
   }
-  addItem(item): Observable<any> {
-    item._id = Math.round(Math.random() * 10000000000).toString();
-    this.items.unshift(item);
-    return of(this.items.slice()).pipe(delay(1000));
+  addItem(contact: any): Observable<any> {
+   
+    return this.http.post<any>(this.apiUrl2, contact).pipe(
+      catchError(this.handleError)
+    );
   }
-  updateItem(id, item) {
-    this.items = this.items.map(i => {
-      if(i._id === id) {
-        return Object.assign({}, i, item);
-      }
-      return i;
-    })
-    return of(this.items.slice()).pipe(delay(1000));
+  updateItem(id: number, contact: contact): Observable<contact> {
+    const url = `${this.apiUrl2}/${id}`;
+    return this.http.put<contact>(url,contact).pipe(
+      catchError(this.handleError)
+    );
   }
 }

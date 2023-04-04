@@ -1,6 +1,17 @@
 <h1 matDialogTitle>{{data.title}}</h1>
 {{"ADD" | translate }} {{"Partner" | translate }}
   <form [formGroup]="itemForm" (ngSubmit)="submit()" >
+    <mat-card class="p-0">
+  
+      <mat-tab-group mat-stretch-tabs>
+         
+          <mat-tab>
+           
+            <ng-template mat-tab-label>
+              <mat-icon style="color: #0077C2;">account_circle</mat-icon>
+              <span class="tab-label" style="color: #0077C2;">Informations générales</span>
+            </ng-template>
+            <mat-card-content class="mt-16">
     <div fxLayout="row wrap" fxLayout.lt-sm="column">
 
     <div fxFlex="50"  class="pr-16">
@@ -33,6 +44,16 @@
         placeholder="parentCompany">
       </mat-form-field>
     </div>
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        name="description"
+        type="text"
+        [formControlName]="'description'"
+        placeholder="description">
+      </mat-form-field>
+    </div>
 
     <div fxFlex="50"  class="pr-16">
       <mat-form-field class="full-width">
@@ -43,22 +64,59 @@
         placeholder="ceoName">
       </mat-form-field>
     </div>
-
     <div fxFlex="50"  class="pr-16">
+
       <mat-form-field class="full-width">
-        <input
-        matInput
-        type="number"
-        name="postCode"
-        [formControlName]="'postCode'"
-        placeholder="postCode">
+        <mat-label>Provenance</mat-label>
+        <mat-select  [formControlName]="'provenance'">
+          <mat-option *ngFor="let provenances of Provenance" [value]="provenances">{{provenances }}</mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
+    <div  fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+          formControlName="activityStartDate"
+          matInput
+          [matDatepicker]="picker"
+          placeholder="activity Start Date"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div  fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+          formControlName="partnerShipDate"
+          matInput
+          [matDatepicker]="picker2"
+          placeholder="partner Ship Date"
+          required
+        />
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  </mat-card-content>
+     
+</mat-tab>
 
+<mat-tab>
+           
+  <ng-template mat-tab-label>
+    <mat-icon style="color: #0077C2;">account_circle</mat-icon>
+    <span class="tab-label" style="color: #0077C2;">Coordonnées</span>
+  </ng-template>
+  <mat-card-content class="mt-16">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+   
     <div fxFlex="50"  class="pr-16">
       <mat-form-field class="full-width">
         
-        <input matInput ng2TelInput [formControlName]="'phoneNumber'">
+        <input matInput  [formControlName]="'phoneNumber'" placeholder="Phone ">
         
       </mat-form-field>
       </div>
@@ -76,26 +134,27 @@
 
         <div fxFlex="50"  class="pr-16">
           <mat-form-field class="full-width">
-              <mat-label>RefPhoneNumber</mat-label>
-              <input matInput formControlName="refPhoneNumber" placeholder="+1 1234567890">
-              <mat-error *ngIf="itemForm.get('refPhoneNumber').invalid && itemForm.get('refPhoneNumber').touched">
-                <div *ngIf="itemForm.get('refPhoneNumber').errors.required">Phone number is required</div>
-                <div *ngIf="itemForm.get('refPhoneNumber').errors.pattern">Invalid phone number format</div>
-              </mat-error>
+            <mat-label>RefPhoneNumber</mat-label>
+            <input matInput formControlName="refPhoneNumber" placeholder="+1 1234567890">
+            <mat-error *ngIf="itemForm.get('refPhoneNumber').invalid && itemForm.get('refPhoneNumber').touched">
+              <div *ngIf="itemForm.get('refPhoneNumber').errors.required">Phone number is required</div>
+              <div *ngIf="itemForm.get('refPhoneNumber').errors.pattern">Invalid phone number format</div>
+            </mat-error>
             </mat-form-field>
           </div>
-
-          <div fxFlex="50"  class="pr-16">
-            <mat-form-field class="full-width">
-              <input
-              matInput
-              name="description"
-              type="text"
-              [formControlName]="'description'"
-              placeholder="description">
-            </mat-form-field>
-          </div>
-
+     </div>
+        </mat-card-content>
+     
+      </mat-tab>
+      <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon style="color: #0077C2;">work</mat-icon>
+        <span class="tab-label" style="color: #0077C2;">Informations légales</span>
+      </ng-template>
+     
+      <mat-card-content class="mt-16">
+        <div fxLayout="row wrap" fxLayout.lt-sm="column">
+          
           <div fxFlex="50"  class="pr-16">
 
             <mat-form-field class="full-width">
@@ -116,15 +175,7 @@
           </mat-form-field>
       </div>
 
-      <div fxFlex="50"  class="pr-16">
-
-        <mat-form-field class="full-width">
-          <mat-label>Provenance</mat-label>
-          <mat-select  [formControlName]="'provenance'">
-            <mat-option *ngFor="let provenances of Provenance" [value]="provenances">{{provenances }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+     
 
       <div fxFlex="50"  class="pr-16">
 
@@ -134,8 +185,20 @@
             <mat-option *ngFor="let companyStatuss of CompanyStatus" [value]="companyStatuss">{{ companyStatuss }}</mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
 
+      </div>
+    </div>
+
+</mat-card-content>
+</mat-tab>
+<mat-tab>
+<ng-template mat-tab-label>
+  <mat-icon style="color: #0077C2;">account_circle</mat-icon>
+  <span class="tab-label" style="color: #0077C2;">Informations générales</span>
+</ng-template>
+
+  <mat-card-content class="mt-16">
+  <div fxLayout="row wrap" fxLayout.lt-sm="column">
       <div fxFlex="50"  class="pr-16">
 
         <mat-form-field class="full-width">
@@ -156,47 +219,36 @@
       </mat-form-field>
 
       </div>
-
-      <div  fxFlex="50"  class="pr-16">
+      <div fxFlex="50"  class="pr-16">
         <mat-form-field class="full-width">
           <input
-            formControlName="activityStartDate"
-            matInput
-            [matDatepicker]="picker"
-            placeholder="activity Start Date"
-            required
-          />
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          matInput
+          type="number"
+          name="postCode"
+          [formControlName]="'postCode'"
+          placeholder="postCode">
         </mat-form-field>
       </div>
-      <div  fxFlex="50"  class="pr-16">
-        <mat-form-field class="full-width">
-          <input
-            formControlName="partnerShipDate"
-            matInput
-            [matDatepicker]="picker2"
-            placeholder="partner Ship Date"
-            required
-          />
-          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-          <mat-datepicker #picker2></mat-datepicker>
-        </mat-form-field>
-      </div>
+  
+      
 
         
         <div  fxFlex="50"  class="pr-16">
           <input type="file" (change)="onFileSelected($event)">
         </div>
-
+        <div fxFlex="100" class="mt-16">
+          <button mat-raised-button color="primary" >{{"SAVE" | translate }}</button>
+          <span fxFlex></span>
+          <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
+        </div>
+</div>
+</mat-card-content>
+</mat-tab>
   
 
 
-    <div fxFlex="100" class="mt-16">
-      <button mat-raised-button color="primary" >{{"SAVE" | translate }}</button>
-      <span fxFlex></span>
-      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Cancel</button>
-    </div>
-  </div>
+    
+  </mat-tab-group>
+</mat-card>
   </form>
 

@@ -11,6 +11,7 @@ import { ContactService } from '../../contact.service';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service'; 
 import { contact } from 'app/shared/models/contact';
 import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
+import { ContactPopComponent } from '../../contact-pop/contact-pop/contact-pop.component';
 @Component({
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
@@ -20,19 +21,22 @@ export class ContactListComponent implements OnInit,OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  public dataSource: any;
+  public dataSource: MatTableDataSource<contact>;
   public displayedColumns: any;
   public getItemSub: Subscription;
-  public contactService: ContactService;
   
-  constructor( private snack: MatSnackBar,private dialog: MatDialog,
-   private loader: AppLoaderService,private ContactService :ContactService,private confirmService: AppConfirmService ) {
+  
+  constructor( private snack: MatSnackBar,
+              private dialog: MatDialog,
+              private loader: AppLoaderService,
+              private contactService :ContactService,
+              private confirmService: AppConfirmService ) {
     this.dataSource = new MatTableDataSource<contact>([]);
     }
    
    
    getDisplayedColumns() {
-    return ['firstName','lastName','function','emailOne','phoneNumberOne','actions'];
+    return ['firstName','lastName','function','actions'];
   }
 
 
@@ -43,7 +47,7 @@ export class ContactListComponent implements OnInit,OnDestroy {
   }
 
   getItems() {    
-    this.getItemSub =this.ContactService.getItems().subscribe((data) => {
+    this.getItemSub =this.contactService.getItems().subscribe((data) => {
       this.dataSource = new MatTableDataSource(data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
@@ -71,7 +75,7 @@ export class ContactListComponent implements OnInit,OnDestroy {
     .subscribe(res => {
       if (res) {
         this.loader.open('Deleting Partner');
-        this.ContactService.deleteItem(row)
+        this.contactService.deleteItem(row)
           .subscribe((data:any)=> {
             this.dataSource = data;
             this.loader.close();
@@ -83,8 +87,8 @@ export class ContactListComponent implements OnInit,OnDestroy {
 }
 
 openPopUp(data: any = {}, isNew?) {
-  let title = isNew ? 'Add new Candidat' : 'Update Candidat';
-  let dialogRef: MatDialogRef<any> = this.dialog.open(NgxTablePopupComponent, {
+  let title = isNew ? 'Add new contact' : 'Update Contact';
+  let dialogRef: MatDialogRef<any> = this.dialog.open(ContactPopComponent, {
     width: '720px',
     disableClose: true,
     data: { title: title, payload: data }
@@ -96,20 +100,22 @@ openPopUp(data: any = {}, isNew?) {
         return;
       }
       if (isNew) {
-        this.loader.open('Adding new Candidat');
+        this.loader.open('Adding new Contact');
         this.contactService.addItem(res)
-          .subscribe(data => {
+          .subscribe((data:any) => {
             this.dataSource = data;
             this.loader.close();
-            this.snack.open('Candidat Added!', 'OK', { duration: 4000 })
+            this.snack.open('Contact Added!', 'OK', { duration: 4000 })
+            this.getItems();
           })
       } else {
-        this.loader.open('Updating Candidat');
+        this.loader.open('Updating Contact');
         this.contactService.updateItem(data._id, res)
-          .subscribe(data => {
+          .subscribe((data :any) => {
             this.dataSource = data;
             this.loader.close();
-            this.snack.open('Candidat Updated!', 'OK', { duration: 4000 })
+            this.snack.open('Contatc Updated!', 'OK', { duration: 4000 })
+            this.getItems();
           })
       }
     })

@@ -36,6 +36,7 @@ import { ContactListComponent } from "./contact-list/contact-list/contact-list.c
 import { ContactPopComponent } from "./contact-pop/contact-pop/contact-pop.component";
 import { contactRoutes } from "./contact.routing";
 import { ContactService } from "./contact.service";
+import { CrudPartnerService } from "../partner/crudPartner.service";
 
 
 
@@ -44,7 +45,7 @@ import { ContactService } from "./contact.service";
     ContactListComponent,
     ContactPopComponent
   ],
-  providers: [ContactService],
+  providers: [ContactService, CrudPartnerService],
   imports: [
     CommonModule,
     ReactiveFormsModule,
