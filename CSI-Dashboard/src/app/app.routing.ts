@@ -178,11 +178,7 @@ export const rootRouterConfig: Routes = [
         loadChildren: () => import('./views/Component/Sales/Requirement/req.module').then(m => m.ReqModule),
         data: { title: 'Tables', breadcrumb: 'TABLES'}
       },
-      {
-        path: 'add-partner',
-        loadChildren: () => import('./views/Component/Sales/partner/add-partner/add-partner.module').then(m => m.addPartnerModule),
-        data: { title: 'Tables', breadcrumb: 'TABLES'}
-      },
+      
       
     ]
   },
