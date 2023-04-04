@@ -3,6 +3,8 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {  Validators,  FormGroup, FormBuilder } from '@angular/forms';
 import { Partner,CompanyStatus,WorkField,LegalStatus,Provenance ,Country} from 'app/shared/models/Partner';
+import { Civility, Privilege, Service } from 'app/shared/models/contact';
+import { Availability, RequirementStatus, RequirementType } from 'app/shared/models/req';
 
 
 @Component({
@@ -18,10 +20,15 @@ export class NgxTablePopupComponent implements OnInit {
   countries: Country[];
   states: string[];
   selectedFile: File;
-
+  Privilege :string []= Object.values(Privilege);
+  Civility :string []= Object.values(Civility);
+  Service :string []= Object.values(Service);
   formWidth = 200; // declare and initialize formWidth property
   formHeight = 700; // declare and initialize formHeight property
-
+  Availability : string [] = Object.values(Availability);
+  
+  RequirementStatus  :string []= Object.values(RequirementStatus);
+  RequirementType : string[] = Object.values(RequirementType);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -54,7 +61,30 @@ export class NgxTablePopupComponent implements OnInit {
       workField : [item.workField || '', Validators.required],
       legalStatus : [item.legalStatus || '', Validators.required],
       provenance : [item.provenance || '', Validators.required],
-
+      firstName : [item.firstName || '', Validators.required],
+      lastName : [item.lastName || '', Validators.required],
+      function : [item.function || '', Validators.required],
+      emailOne : [item.emailOne || '', Validators.required],
+      emailTwo : [item.emailTwo || '', Validators.required],
+      phoneNumberOne : [item.phoneNumberOne || '', Validators.required],
+      
+      comment : [item.comment || '', Validators.required],
+      privilege : [item.privilege || '', Validators.required],
+      civility : [item.civility || '', Validators.required],
+      service : [item.service || '', Validators.required],
+      title : [item.title || '', Validators.required],
+     
+      criteria : [item.criteria || '', Validators.required],
+      plannedBudget : [item.plannedBudget || '', Validators.required],
+      plannedIncome : [item.plannedIncome || '', Validators.required ,],
+      startDate: [item.startDate ||'', Validators.required, ],
+      expectedEndDate : [item.expectedEndDate || '', Validators.required],
+      responseDate : [item.responseDate || '', Validators.required],
+      totalCandidateNumber : [item.totalCandidateNumber || '', Validators.required],
+      requirementType : [item.requirementType || '', Validators.required],
+      requirementStatus : [item.requirementStatus || '', Validators.required ,],
+      
+      availability : [item.availability || '', Validators.required],
       
   
       

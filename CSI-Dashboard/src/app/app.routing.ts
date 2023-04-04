@@ -160,7 +160,7 @@ export const rootRouterConfig: Routes = [
       },
       {
         path: 'time-off',
-        loadChildren: () => import('./views/Component/HumanResource/timeOff/TimeOff.module').then(m => m.TimeOffModule),
+        loadChildren: () => import('./views/Component/HumanResource/timeOff/timeOff.module').then(m => m.TimeOffModule),
         data: { title: 'TimeOff', breadcrumb: 'TimeOffs'}
       },
       {
@@ -171,7 +171,7 @@ export const rootRouterConfig: Routes = [
       {
         path: 'partner',
         loadChildren: () => import('./views/Component/Sales/partner/crudsPartner.module').then(m => m.PartnerModule),
-        data: { title: 'Partner', breadcrumb: 'Partners'}
+        data: { title: 'Partner', breadcrumb: 'Partenaires'}
       },
       {
         path: 'requirement',

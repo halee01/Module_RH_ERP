@@ -52,7 +52,7 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
   }
 
   getDisplayedColumns() {
-    return ['name','parentCompany','ceoName','phoneNumber','Country','city','CompanyStatus','actions'];
+    return ['name','parentCompany','ceoName','Country','CompanyStatus','actions'];
   }
 
 
