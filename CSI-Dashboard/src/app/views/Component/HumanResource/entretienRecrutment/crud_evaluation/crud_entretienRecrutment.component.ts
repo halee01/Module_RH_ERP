@@ -1,23 +1,27 @@
+import { crudEntretien } from './crud_entretienRecrutment.routing';
+
+
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { UntypedFormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
 import { Subscription } from 'rxjs';
-import { CrudService } from '../candidat-crud.service';
-import { Router } from '@angular/router';
+import { CrudService } from '../../candidate/CandidatCrud/candidat-crud.service';
+import { crud_entretienRecrutmentService } from './crud_entretienRecrutment.service';
+
 
 @Component({
-  selector: 'app-candidat-crud',
-  templateUrl: './candidat-crud-table.component.html'
+  selector: 'evaluation-form',
+  templateUrl: './crud_entretienRecrutment.component.html'
 })
-
-
-export class CandidatCrudTableComponent implements OnInit {
+export class crudEntretienRecrutmentComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -28,7 +32,7 @@ export class CandidatCrudTableComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private snack: MatSnackBar,
-    private crudService: CrudService,
+    private crudEntretien: crud_entretienRecrutmentService,
     private confirmService: AppConfirmService,
     private loader: AppLoaderService,
     private router: Router
@@ -54,11 +58,11 @@ export class CandidatCrudTableComponent implements OnInit {
   }
 
   getDisplayedColumns() {
-    return ['name', 'age', 'balance', 'company', 'status', 'actions'];
+    return ['name', 'last name', 'offre', 'note globale', 'status', 'actions'];
   }
 
   getItems() {    
-    this.getItemSub = this.crudService.getItems()
+    this.getItemSub = this.crudEntretien.getItems()
       .subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
       })
@@ -85,7 +89,7 @@ export class CandidatCrudTableComponent implements OnInit {
         }
         if (isNew) {
           this.loader.open('Adding new Candidat');
-          this.crudService.addItem(res)
+          this.crudEntretien.addItem(res)
             .subscribe(data => {
               this.dataSource = data;
               this.loader.close();
@@ -93,7 +97,7 @@ export class CandidatCrudTableComponent implements OnInit {
             })
         } else {
           this.loader.open('Updating Candidat');
-          this.crudService.updateItem(data._id, res)
+          this.crudEntretien.updateItem(data._id, res)
             .subscribe(data => {
               this.dataSource = data;
               this.loader.close();
@@ -107,7 +111,7 @@ export class CandidatCrudTableComponent implements OnInit {
       .subscribe(res => {
         if (res) {
           this.loader.open('Deleting Candidat');
-          this.crudService.removeItem(row)
+          this.crudEntretien.removeItem(row)
             .subscribe(data => {
               this.dataSource = data;
               this.loader.close();
@@ -116,9 +120,10 @@ export class CandidatCrudTableComponent implements OnInit {
         }
       })
   }
-  openAffichage(){
-    this.router.navigate(['affichage/candidatAffiche'])
+  openCandidature(){
+    this.router.navigate(['entretienRecrutment/evaluation'])
   }
- 
-
+  
+  
 }
+

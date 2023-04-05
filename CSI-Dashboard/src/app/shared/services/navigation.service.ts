@@ -66,7 +66,7 @@ export class NavigationService {
       sub: [
 
         { name: 'Candidats', state: 'candidatCrud/CandidatCrud-table' },
-        { name: 'Entretiens & Recrutement', state: 'entretienRecrutment/evaluation' },
+        { name: 'Entretiens & Recrutement', state: 'crudEntretien/evaluationCrud' },
         { name: 'Ressources', state: 'shop/products/5a9ae2106f155194e5c95d67' },
         { name: 'Feuille de Temps', state: 'shop/cart' },
         { name: 'Congés', state: 'time-off/time-off-crud' },

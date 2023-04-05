@@ -8,7 +8,7 @@
       <div class="description">Les Notifications </div>
    </div>
 
-
+<!------------------------------------------------
    <mat-card class="p-0" [@animate]="{ value: '*', params: { y: '50px', delay: '300ms' } }">
      <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
        <div
@@ -62,7 +62,7 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Filtrer">
     </mat-form-field> 
     
-
+------->
 
 
 
@@ -70,7 +70,7 @@
    
    
     <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" routerLink="/cvCandidat-crud"  (click)="goToCV()">
-        Ajouter un Candidat</button>
+        Ajouter un entretien </button>
        <div style="clear: both;"></div>
    
    
@@ -87,19 +87,19 @@
            <mat-cell *matCellDef="let row" data-label="name"> {{row.name}} </mat-cell>
          </ng-container>
    
-         <ng-container matColumnDef="age">
+         <ng-container matColumnDef="last name">
            <mat-header-cell *matHeaderCellDef mat-sort-header>  Nom </mat-header-cell>
-           <mat-cell *matCellDef="let row" data-label="age"> {{row.age}} </mat-cell>
+           <mat-cell *matCellDef="let row" data-label="age"> {{row.last_name}} </mat-cell>
          </ng-container>
    
-         <ng-container matColumnDef="balance">
-           <mat-header-cell *matHeaderCellDef mat-sort-header> Intitulé du poste </mat-header-cell>
-           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.balance}} </mat-cell>
+         <ng-container matColumnDef="note globale">
+           <mat-header-cell *matHeaderCellDef mat-sort-header>note globale</mat-header-cell>
+           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.note_globale}} </mat-cell>
          </ng-container>
    
-         <ng-container matColumnDef="company">
-           <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.company}} </mat-cell>
+         <ng-container matColumnDef="offre">
+           <mat-header-cell *matHeaderCellDef mat-sort-header>Offre</mat-header-cell>
+           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.offre}} </mat-cell>
          </ng-container>
    
          <ng-container matColumnDef="status">
@@ -113,10 +113,8 @@
          <ng-container matColumnDef="actions">
            <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
            <mat-cell *matCellDef="let row">
-             <button mat-icon-button mat-sm-button color="primary" class="mr-16 " (click)="openPopUp(row)">
-               <mat-icon>edit</mat-icon>
-             </button>
-             <button mat-icon-button mat-sm-button color="accent" class=" mr-16 "  (click)="openAffichage()">
+             
+             <button mat-icon-button mat-sm-button color="primary" class=" mr-16 "  (click)="openCandidature()">
                <mat-icon>remove_red_eye </mat-icon>
              </button>
              <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row)">
