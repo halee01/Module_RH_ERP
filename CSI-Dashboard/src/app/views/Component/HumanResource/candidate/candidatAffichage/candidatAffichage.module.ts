@@ -1,13 +1,13 @@
-import { NgApexchartsModule } from 'ng-apexcharts';
-import { EntretienRecru } from './entretienRecrutment.routing';
-
+import { MatChipsModule } from '@angular/material/chips';
+import { candidatAffichageComponent } from './candidatAffichage.component';
+import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import {   MatCardModule, MatCardTitle } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -20,24 +20,28 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { entretienRecrutmentService } from './entretienRecrutment.service';
-import {  MatExpansionModule } from '@angular/material/expansion';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { entretienRecrutmentComponent } from './entretienRecrutment.component';
-
-
+import { MatStepperModule } from '@angular/material/stepper';
+import { candidatAffichage } from './candidatAffichage.routing';
+import { candidatAffichageService } from './candidatAffichage.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    MatSelectModule,
     ReactiveFormsModule,
+    MatStepperModule,
     HttpClientModule,
-    MatProgressBarModule,
     MatIconModule,
-    MatDialogModule,
-    MatButtonModule,
+    MatMenuModule,
     MatExpansionModule,
+    MatDialogModule,
+    MatChipsModule,
+    
+    MatCardModule,
+    MatButtonModule,
     MatRadioModule,
     MatCardModule,
     MatListModule,
@@ -47,17 +51,17 @@ import { entretienRecrutmentComponent } from './entretienRecrutment.component';
     MatInputModule,
     FlexLayoutModule,
     ColorPickerModule,
-    NgApexchartsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    RouterModule.forChild(EntretienRecru)
+    RouterModule.forChild(candidatAffichage)
   ],
-  providers: [entretienRecrutmentService],
+  providers: [candidatAffichageService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    entretienRecrutmentComponent
-  ],
+     candidatAffichageComponent
+    
+  ]
 })
-export class EntretienRecrutmentModule { }
+export class candidatAffichageModule { }

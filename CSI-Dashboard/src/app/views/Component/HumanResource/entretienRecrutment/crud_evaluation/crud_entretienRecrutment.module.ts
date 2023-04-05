@@ -1,6 +1,5 @@
-import { NgApexchartsModule } from 'ng-apexcharts';
-import { EntretienRecru } from './entretienRecrutment.routing';
 
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -20,11 +19,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { entretienRecrutmentService } from './entretienRecrutment.service';
-import {  MatExpansionModule } from '@angular/material/expansion';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { entretienRecrutmentComponent } from './entretienRecrutment.component';
-
+import { crud_entretienRecrutmentService } from './crud_entretienRecrutment.service';
+import { crudEntretien } from './crud_entretienRecrutment.routing';
+import { crudEntretienRecrutmentComponent } from './crud_entretienRecrutment.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 
 
@@ -34,6 +35,8 @@ import { entretienRecrutmentComponent } from './entretienRecrutment.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressBarModule,
+    MatPaginatorModule,
+    MatTableModule,
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
@@ -52,12 +55,12 @@ import { entretienRecrutmentComponent } from './entretienRecrutment.component';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    RouterModule.forChild(EntretienRecru)
+    RouterModule.forChild(crudEntretien)
   ],
-  providers: [entretienRecrutmentService],
+  providers: [crud_entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    entretienRecrutmentComponent
+    crudEntretienRecrutmentComponent
   ],
 })
-export class EntretienRecrutmentModule { }
+export class CrudEntretienRecrutmentModule { }

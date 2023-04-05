@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './shared/components/layouts/admin-layout/admin-layout.component';
@@ -112,10 +113,22 @@ export const rootRouterConfig: Routes = [
         data: { title: 'CvCandidat', breadcrumb: 'CVCANDIDAT'}
       },
       {
+        path: 'affichage',
+        loadChildren: () => import('./views/Component/HumanResource/candidate/candidatAffichage/candidatAffichage.module').then(m => m.candidatAffichageModule),
+        data: { title: 'CandidatAffichage', breadcrumb: 'Candidat'}
+      },
+      {
         path: 'entretienRecrutment',
         loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/entretienRecrutment.module').then(m => m.EntretienRecrutmentModule),
         data: { title: 'EntretienRecrutment', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
       },
+
+      {
+        path: 'crudEntretien',
+        loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/crud_entretienRecrutment/crud_entretienRecrutment.module').then(m => m.CrudEntretienRecrutmentModule),
+        data: { title: 'CrudEvaluation', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
+      },
+      
       {
         path: 'chat',
         loadChildren: () => import('./views/app-chats/app-chats.module').then(m => m.AppChatsModule),
@@ -175,7 +188,7 @@ export const rootRouterConfig: Routes = [
       },
       {
         path: 'time-off',
-        loadChildren: () => import('./views/Component/HumanResource/timeOff/TimeOff.module').then(m => m.TimeOffModule),
+        loadChildren: () => import('./views/Component/HumanResource/timeOff/timeOff.module').then(m => m.TimeOffModule),
         data: { title: 'TimeOff', breadcrumb: 'TimeOffs'}
       },
       {
