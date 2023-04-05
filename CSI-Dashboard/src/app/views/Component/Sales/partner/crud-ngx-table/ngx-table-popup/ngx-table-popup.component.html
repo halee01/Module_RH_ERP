@@ -20,7 +20,7 @@
         matInput
         name="name"
         [formControlName]="'name'"
-        placeholder="Name">
+        placeholder="Nom">
       </mat-form-field>
     </div>
 
@@ -31,7 +31,7 @@
         name="staffNumber"
         type="number"
         [formControlName]="'staffNumber'"
-        placeholder="staffNumber">
+        placeholder="Nombre d'effectifs">
       </mat-form-field>
     </div>
 
@@ -41,7 +41,7 @@
         matInput
         name="parentCompany"
         [formControlName]="'parentCompany'"
-        placeholder="parentCompany">
+        placeholder="Société mère">
       </mat-form-field>
     </div>
     <div fxFlex="50"  class="pr-16">
@@ -61,7 +61,7 @@
         matInput
         name="ceoName"
         [formControlName]="'ceoName'"
-        placeholder="ceoName">
+        placeholder="Nom du CEO">
       </mat-form-field>
     </div>
     <div fxFlex="50"  class="pr-16">
@@ -73,32 +73,44 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div  fxFlex="50"  class="pr-16">
+    <div fxFlex="50"  class="pr-16">
+
+      <mat-form-field class="full-width">
+        <mat-label>Pays</mat-label>
+        <mat-select  [formControlName]="'country'">
+          <mat-option *ngFor="let country of countries" [value]="country.shortName">{{ country.name }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+  </div>
+
+  <div fxFlex="50"  class="pr-16">
+
+    <mat-form-field class="full-width">
+      <mat-label>Ville</mat-label>
+      <mat-select  [formControlName]="'city'">
+        <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    </div>
+    <div fxFlex="50"  class="pr-16">
       <mat-form-field class="full-width">
         <input
-          formControlName="activityStartDate"
-          matInput
-          [matDatepicker]="picker"
-          placeholder="activity Start Date"
-          required
-        />
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+        matInput
+        type="number"
+        name="postCode"
+        [formControlName]="'postCode'"
+        placeholder="Code Postal">
       </mat-form-field>
     </div>
-    <div  fxFlex="50"  class="pr-16">
-      <mat-form-field class="full-width">
-        <input
-          formControlName="partnerShipDate"
-          matInput
-          [matDatepicker]="picker2"
-          placeholder="partner Ship Date"
-          required
-        />
-        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-        <mat-datepicker #picker2></mat-datepicker>
-      </mat-form-field>
-    </div>
+
+    
+
+      
+      <div  fxFlex="50"  class="pr-16">
+        <input type="file" (change)="onFileSelected($event)">
+      </div>
+    
   </div>
   </mat-card-content>
      
@@ -116,14 +128,14 @@
     <div fxFlex="50"  class="pr-16">
       <mat-form-field class="full-width">
         
-        <input matInput  [formControlName]="'phoneNumber'" placeholder="Phone ">
+        <input matInput  [formControlName]="'phoneNumber'" placeholder="Téléphone ">
         
       </mat-form-field>
       </div>
 
       <div fxFlex="50"  class="pr-16">
         <mat-form-field class="full-width">
-            <mat-label>phoneNumberTwo</mat-label>
+            <mat-label>Téléphone 2</mat-label>
             <input matInput formControlName="phoneNumberTwo" placeholder="+1 1234567890">
             <mat-error *ngIf="itemForm.get('phoneNumberTwo').invalid && itemForm.get('phoneNumberTwo').touched">
               <div *ngIf="itemForm.get('phoneNumberTwo').errors.required">Phone number is required</div>
@@ -158,7 +170,7 @@
           <div fxFlex="50"  class="pr-16">
 
             <mat-form-field class="full-width">
-              <mat-label>WorkField</mat-label>
+              <mat-label>Secteur d'activité</mat-label>
               <mat-select  [formControlName]="'workField'">
                 <mat-option *ngFor="let x of WorkField" [value]="x">{{ x }}</mat-option>
               </mat-select>
@@ -168,7 +180,7 @@
         <div fxFlex="50"  class="pr-16">
 
           <mat-form-field class="full-width">
-            <mat-label>LegalStatus</mat-label>
+            <mat-label>Statut juridique</mat-label>
             <mat-select  [formControlName]="'legalStatus'">
               <mat-option *ngFor="let legalStatuss of LegalStatus" [value]="legalStatuss">{{ legalStatuss }}</mat-option>
             </mat-select>
@@ -180,12 +192,38 @@
       <div fxFlex="50"  class="pr-16">
 
         <mat-form-field class="full-width">
-          <mat-label>CompanyStatus</mat-label>
+          <mat-label>Statut de la société</mat-label>
           <mat-select  [formControlName]="'companyStatus'">
             <mat-option *ngFor="let companyStatuss of CompanyStatus" [value]="companyStatuss">{{ companyStatuss }}</mat-option>
           </mat-select>
         </mat-form-field>
 
+      </div>
+      <div  fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+            formControlName="activityStartDate"
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Date de début d'activité"
+            required
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div  fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+            formControlName="partnerShipDate"
+            matInput
+            [matDatepicker]="picker2"
+            placeholder="Date de partenairiat"
+            required
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
       </div>
     </div>
 
@@ -193,49 +231,252 @@
 </mat-tab>
 <mat-tab>
 <ng-template mat-tab-label>
-  <mat-icon style="color: #0077C2;">account_circle</mat-icon>
-  <span class="tab-label" style="color: #0077C2;">Informations générales</span>
+  <mat-icon style="color: #0077C2;">person</mat-icon>
+  <span class="tab-label" style="color: #0077C2;">Contacts</span>
 </ng-template>
 
   <mat-card-content class="mt-16">
   <div fxLayout="row wrap" fxLayout.lt-sm="column">
-      <div fxFlex="50"  class="pr-16">
-
-        <mat-form-field class="full-width">
-          <mat-label>Country</mat-label>
-          <mat-select  [formControlName]="'country'">
-            <mat-option *ngFor="let country of countries" [value]="country.shortName">{{ country.name }}</mat-option>
-          </mat-select>
-        </mat-form-field>
+    
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        name="firstName"
+        [formControlName]="'firstName'"
+        placeholder="Nom">
+      </mat-form-field>
+    </div>
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        name="lastName"
+        type="text"
+        [formControlName]="'lastName'"
+        placeholder="Prénom">
+      </mat-form-field>
     </div>
 
     <div fxFlex="50"  class="pr-16">
-
       <mat-form-field class="full-width">
-        <mat-label>state</mat-label>
-        <mat-select  [formControlName]="'city'">
-          <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
-        </mat-select>
+        <input
+        matInput
+        name="function"
+        [formControlName]="'function'"
+        placeholder="Fonction">
       </mat-form-field>
+    </div>
 
+    <div fxFlex="50"  class="pr-16">
+      <mat-form-field class="full-width">
+        <input
+        matInput
+        name="emailOne"
+        type="email"
+        [formControlName]="'emailOne'"
+        placeholder="Email 1">
+      </mat-form-field>
+    </div>
+
+    <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          name="emailTwo"
+          type="email"
+          [formControlName]="'emailTwo'"
+          placeholder="Email 2">
+        </mat-form-field>
       </div>
+
+
+
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+            <mat-label>Téléphone 1</mat-label>
+            <input matInput formControlName="phoneNumberOne" placeholder="+1 1234567890">
+            <mat-error *ngIf="itemForm.get('phoneNumberOne').invalid && itemForm.get('phoneNumberOne').touched">
+              <div *ngIf="itemForm.get('phoneNumberOne').errors.required">Phone number is required</div>
+              <div *ngIf="itemForm.get('phoneNumberOne').errors.pattern">Invalid phone number format</div>
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        
+
+          <div fxFlex="50"  class="pr-16">
+            <mat-form-field class="full-width">
+              <input
+              matInput
+              name="comment"
+              type="text"
+              [formControlName]="'comment'"
+              placeholder="Commentaire">
+            </mat-form-field>
+          </div>
+
+          <div fxFlex="50"  class="pr-16">
+
+            <mat-form-field class="full-width">
+              <mat-label>Privilège</mat-label>
+              <mat-select  [formControlName]="'privilege'">
+                <mat-option *ngFor="let x of Privilege" [value]="x">{{ x }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div fxFlex="50"  class="pr-16">
+
+          <mat-form-field class="full-width">
+            <mat-label>Civilité</mat-label>
+            <mat-select  [formControlName]="'civility'">
+              <mat-option *ngFor="let x of Civility" [value]="x">{{ x }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+
+      <div fxFlex="50"  class="pr-16">
+
+        <mat-form-field class="full-width">
+          <mat-label>Service</mat-label>
+          <mat-select  [formControlName]="'service'">
+            <mat-option *ngFor="let service of Service" [value]="service">{{service }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+  </div>
+</mat-card-content>
+</mat-tab>
+<mat-tab>
+  <ng-template mat-tab-label>
+    <mat-icon style="color: #0077C2;">assignment</mat-icon>
+    <span class="tab-label" style="color: #0077C2;">Besoins</span>
+  </ng-template>
+  
+    <mat-card-content class="mt-16">
+    <div fxLayout="row wrap" fxLayout.lt-sm="column">
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          name="title"
+          type="text"
+          [formControlName]="'title'"
+          placeholder="Titre">
+        </mat-form-field>
+      </div>
+  
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          name="description"
+          type="text"
+          [formControlName]="'description'"
+          placeholder="description">
+        </mat-form-field>
+      </div>
+  
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          name="criteria"
+          type="text"
+          [formControlName]="'criteria'"
+          placeholder="Critère">
+        </mat-form-field>
+      </div>
+  
+      <div fxFlex="50"  class="pr-16">
+        <mat-form-field class="full-width">
+          <input
+          matInput
+          name="plannedBudget"
+          type="number"
+          [formControlName]="'plannedBudget'"
+          placeholder="Budget planifié">
+        </mat-form-field>
+      </div>
+  
       <div fxFlex="50"  class="pr-16">
         <mat-form-field class="full-width">
           <input
           matInput
           type="number"
-          name="postCode"
-          [formControlName]="'postCode'"
-          placeholder="postCode">
+          name="plannedIncome"
+          [formControlName]="'plannedIncome'"
+          placeholder="Revenu prévu">
         </mat-form-field>
       </div>
   
-      
-
-        
-        <div  fxFlex="50"  class="pr-16">
-          <input type="file" (change)="onFileSelected($event)">
+      <div fxFlex="50"  class="pr-16">
+          <mat-form-field class="full-width">
+            <input
+            matInput
+            type="number"
+            name="totalCandidateNumber"
+            [formControlName]="'totalCandidateNumber'"
+            placeholder="Nombre total de candidats">
+          </mat-form-field>
         </div>
+  
+      
+        
+            <div fxFlex="50"  class="pr-16">
+              <mat-form-field class="full-width">
+                <input
+                matInput
+                name="description"
+                type="text"
+                [formControlName]="'description'"
+                placeholder="description">
+              </mat-form-field>
+            </div>
+  
+            <div fxFlex="50"  class="pr-16">
+  
+              <mat-form-field class="full-width">
+                <mat-label>Secteur d'activité</mat-label>
+                <mat-select  [formControlName]="'workField'">
+                  <mat-option *ngFor="let x of WorkField" [value]="x">{{ x }}</mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+  
+  
+  
+        <div fxFlex="50"  class="pr-16">
+  
+          <mat-form-field class="full-width">
+            <mat-label>Type de Besoin</mat-label>
+            <mat-select  [formControlName]="'requirementType'">
+              <mat-option *ngFor="let requirementType of RequirementType" [value]="requirementType">{{requirementType }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div fxFlex="50"  class="pr-16">
+  
+          <mat-form-field class="full-width">
+            <mat-label>Statut de besoin</mat-label>
+            <mat-select  [formControlName]="'requirementStatus'">
+              <mat-option *ngFor="let requirementStatus of RequirementStatus" [value]="requirementStatus">{{ requirementStatus }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  
+        <div fxFlex="50"  class="pr-16">
+  
+          <mat-form-field class="full-width">
+            <mat-label>Disponibilité</mat-label>
+            <mat-select  [formControlName]="'availability'">
+              <mat-option *ngFor="let availability of Availability" [value]="availability">{{ availability }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
+ 
         <div fxFlex="100" class="mt-16">
           <button mat-raised-button color="primary" >{{"SAVE" | translate }}</button>
           <span fxFlex></span>

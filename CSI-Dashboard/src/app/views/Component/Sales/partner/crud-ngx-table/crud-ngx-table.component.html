@@ -1,11 +1,11 @@
 <div class="m-4" [@animate]="{value:'*',params:{y:'50px',delay:'200ms'}}">
 
 
-  <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)=" openPopUp({},true)">{{"ADD" | translate }}
-    Customer</button>
+  <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)=" openPopUp({},true)"> Nouveau 
+    partenaire </button>
 
   <mat-form-field  >
-    <input matInput (keyup)="applyFilter($event)" placeholder="Filter">
+    <input matInput (keyup)="applyFilter($event)" placeholder="Filtre">
     </mat-form-field> 
  
 </div>
@@ -17,26 +17,21 @@
 
 
       <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
         <mat-cell *matCellDef="let row" data-label="name"> {{row.name}} </mat-cell>
       </ng-container>
 
 
 
       <ng-container matColumnDef="ceoName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> ceoName </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nom CEO </mat-header-cell>
         <mat-cell *matCellDef="let row" data-label="ceoName"> {{row.ceoName}} </mat-cell>
       </ng-container>
 
       
      <ng-container matColumnDef="parentCompany">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> parentCompany </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nom du groupe </mat-header-cell>
         <mat-cell *matCellDef="let row" data-label="parentCompany"> {{row.parentCompany}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="phoneNumber">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> phoneNumber </mat-header-cell>
-        <mat-cell *matCellDef="let row" data-label="phoneNumber"> {{row.phoneNumber}} </mat-cell>
       </ng-container>
 
 
@@ -45,20 +40,15 @@
 
 
       <ng-container matColumnDef="Country">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Country </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Pays </mat-header-cell>
         <mat-cell *matCellDef="let row" data-label="Country"> {{row.country}} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="city">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> city </mat-header-cell>
-        <mat-cell *matCellDef="let row" data-label="city"> {{row.city}} </mat-cell>
       </ng-container>
 
       
 
 
       <ng-container matColumnDef="CompanyStatus">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> CompanyStatus </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Statut du partenaire </mat-header-cell>
         <mat-cell *matCellDef="let row" data-label="CompanyStatus"> {{row.companyStatus}} </mat-cell>
       </ng-container>
 
@@ -66,7 +56,7 @@
 
 
       <ng-container matColumnDef="actions">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
         <mat-cell *matCellDef="let row">
           
          

@@ -160,7 +160,7 @@ export const rootRouterConfig: Routes = [
       },
       {
         path: 'time-off',
-        loadChildren: () => import('./views/Component/HumanResource/timeOff/TimeOff.module').then(m => m.TimeOffModule),
+        loadChildren: () => import('./views/Component/HumanResource/timeOff/timeOff.module').then(m => m.TimeOffModule),
         data: { title: 'TimeOff', breadcrumb: 'TimeOffs'}
       },
       {
@@ -171,15 +171,20 @@ export const rootRouterConfig: Routes = [
       {
         path: 'partner',
         loadChildren: () => import('./views/Component/Sales/partner/crudsPartner.module').then(m => m.PartnerModule),
-        data: { title: 'Partner', breadcrumb: 'Partners'}
+        data: { title: 'Partner', breadcrumb: 'Partenaires'}
       },
       {
         path: 'requirement',
         loadChildren: () => import('./views/Component/Sales/Requirement/req.module').then(m => m.ReqModule),
         data: { title: 'Tables', breadcrumb: 'TABLES'}
       },
-      
-      
+
+      {
+        path: 'contact',
+        loadChildren: () => import('./views/Component/Sales/contact/contact.module').then(m => m.ContactModule),
+        data: { title: 'Contact', breadcrumb: 'Contacts'}
+      },
+>>>>>>> houssem
     ]
   },
   {

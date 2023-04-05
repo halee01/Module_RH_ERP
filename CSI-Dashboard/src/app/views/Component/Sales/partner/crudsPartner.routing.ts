@@ -6,7 +6,7 @@ export const CrudsRoutes: Routes = [
   { 
     path: 'partner-crud', 
     component: CrudNgxTableComponent, 
-    data: { title: 'Partner', breadcrumb: 'Partner' } 
+    data: { title: '', breadcrumb: 'Partner' } 
   },
   {
     path: ":iiid",

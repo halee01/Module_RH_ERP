@@ -9,7 +9,7 @@ export const contactRoutes: Routes = [
     {
       path: 'contact-table',
       component: ContactListComponent,
-      data: { title: 'Material TAble', breadcrumb: 'Material Table' }
+      data: { title: 'Material Table', breadcrumb: 'Material Table' }
     }]
   }
 ];

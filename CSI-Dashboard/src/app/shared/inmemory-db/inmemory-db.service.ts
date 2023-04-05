@@ -6,7 +6,6 @@ import { Todo, TodoTag } from './todo';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     return { 
-      'contacts': ChatDB.contacts,
       'chat-collections': ChatDB.chatCollection,
       'chat-user': ChatDB.user,
       'invoices': InvoiceDB.invoices,

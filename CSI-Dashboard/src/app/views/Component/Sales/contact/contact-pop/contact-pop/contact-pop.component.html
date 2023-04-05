@@ -122,6 +122,14 @@
         </mat-form-field>
       </div>
 
+      <div>
+        <mat-form-field class="full-width">
+            <mat-label>partnerNum</mat-label>
+            <mat-select  [formControlName]="'partnerNum'">
+              <mat-option *ngFor="let partnerNum of listPartner" [value]="partnerNum.id">{{ partnerNum.name}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+      </div>
 
 
 
