@@ -3,7 +3,7 @@ import { cvcandidatComponent } from './cv-candidat.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -19,11 +19,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
-
 import { CalendarRoutes } from "./cv-candidat.routing";
 import { CalendarFormDialogComponent } from './calendar-form-dialog/calendar-form-dialog.component';
 import { CvCandidatService } from './cv-candidat.service';
 import { MatStepperModule } from '@angular/material/stepper';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatChipList, MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
@@ -33,7 +36,10 @@ import { MatStepperModule } from '@angular/material/stepper';
     ReactiveFormsModule,
     MatStepperModule,
     HttpClientModule,
+    MatExpansionModule,
+    FormsModule,
     MatIconModule,
+    MatChipsModule,
     MatDialogModule,
     MatButtonModule,
     MatRadioModule,
@@ -45,13 +51,17 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatInputModule,
     FlexLayoutModule,
     ColorPickerModule,
+    MatCheckboxModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
     RouterModule.forChild(CalendarRoutes)
   ],
-  providers: [CvCandidatService],
+  providers: [CvCandidatService,{
+    provide: STEPPER_GLOBAL_OPTIONS,
+    useValue: { showError: true }
+  }],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
     cvcandidatComponent, 

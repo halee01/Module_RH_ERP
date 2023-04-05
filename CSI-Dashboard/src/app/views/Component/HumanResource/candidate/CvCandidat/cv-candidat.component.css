@@ -3,3 +3,12 @@
     width: 30cm;
 
   }
+  .example-chip-list {
+    width: 100%;
+  }
+  .centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }

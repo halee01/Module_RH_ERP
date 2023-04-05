@@ -1,5 +1,7 @@
 <mat-card class="p-0">
   <mat-horizontal-stepper linear #stepper>
+    
+    <!---------------------------COORDONNES-------------------------->
   <mat-step [stepControl]="firstFormGroup" errorMessage="Tous les champs sont obligatoires.">
       <ng-template matStepLabel>Coordonnées</ng-template>
       
@@ -8,20 +10,22 @@
         <mat-divider></mat-divider>
         <div class="card-title-text">Indiquez les renseignements personnels</div>
         <mat-divider></mat-divider>
-    </mat-card-title>
+        </mat-card-title>
 
       <mat-card-content style="padding-top: 2cm;">
         <form [formGroup]="basicForm">
           <div fxLayout="row" fxLayoutAlign="space-evenly center" >
               <div div fxLayout="column" fxLayoutAlign="space-around center">
-                 <div fxFlex="100" fxFlex.gt-xs="35" style="width: 8cm;" >
+                 <div fxFlex="100" fxFlex.gt-xs="35" style="width: 10cm;" >
+
                       <div class="pb-16">
-                        <mat-form-field class="full-width">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Prénom</mat-label>
                             <input
                             matInput
                             name="first-name"
                             formControlName="first-name"
-                            placeholder="Prénom"
+                            placeholder="Ex.Emmanuel"
                             value=""
                             required>
                         </mat-form-field>
@@ -36,7 +40,8 @@
                     
                     <!--Birthdate-->
                       <div class="pb-16">
-                      <mat-form-field>
+                      <mat-form-field appearance="outline" [style.width.cm]=10>
+                        <mat-label>Date de naissancee</mat-label>
                         <input matInput [matDatepicker]="picker" formControlName="birthdate" placeholder="Date de naissance" required>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
@@ -46,10 +51,9 @@
 
                       <!---->
                      <div class="pb-16">
-                      <mat-form-field>
+                      <mat-form-field appearance="outline" [style.width.cm]=10>
                         <mat-label>Intitulè du poste</mat-label>
                         <mat-select >
-                          
                           <mat-option value="option1">...</mat-option>
                           <mat-option value="option2">....</mat-option>
                           <mat-option value="option3">.....</mat-option>
@@ -62,12 +66,13 @@
   
                     <!--Country-->
                     <div class="pb-16">
-                      <mat-form-field class="full-width">
+                      <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Pays</mat-label>
                       <input
                         matInput
                         name="country"
                         formControlName="country"
-                        placeholder="Pays"
+                        placeholder="Ex.France"
                         value=""
                         required>
                       </mat-form-field>
@@ -76,12 +81,13 @@
 
                     <!--Adress-->
                     <div class="pb-16">
-                        <mat-form-field class="full-width">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Adresse</mat-label>
                         <input
                             matInput
                             name="adress"
                             formControlName="adress"
-                            placeholder="Adresse"
+                            placeholder="Ex.121 Av.des Champs-Élysées"
                             value=""
                             required>
                         </mat-form-field>
@@ -89,13 +95,14 @@
 
                     <!--Email1-->
                     <div class="pb-16">
-                      <mat-form-field class="full-width">
+                      <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Email 1</mat-label>
                       <input
                           matInput
                           type="email"
                           name="email"
                           formControlName="email1"
-                          placeholder="Email 1"
+                          placeholder="Ex.csi.digital@exemple.fr"
                           value=""
                           required>
                       </mat-form-field>
@@ -109,13 +116,14 @@
 
                      <!--Phone Number 1-->
                      <div class="pb-16">
-                       <mat-form-field class="full-width">
+                       <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Numéro de téléphone 1</mat-label>
                         <input 
                         type=""
                         name="phone-number1"
                         matInput
                         formControlName="phone-number1"
-                        placeholder="Numéro de téléphone 1 " 
+                        placeholder="Ex.+33 801 123 456" 
                         value=""
                         required>
                        </mat-form-field>
@@ -123,21 +131,17 @@
                    </div>
                    </div>
 
-
-
-
-
-
                    <div div fxLayout="column" fxLayoutAlign="space-around center">
-                   <div fxFlex="100" fxFlex.gt-xs="35" style="width: 8cm;" >
+                   <div fxFlex="100" fxFlex.gt-xs="35" style="width: 10cm;" >
                     <!--last name-->
                     <div class="pb-16">
-                      <mat-form-field class="full-width">
+                      <mat-form-field appearance="outline" class="full-width">
+                        <mat-label>Nom</mat-label>
                           <input
                           matInput
                           name="last-name"
                           formControlName="last-name"
-                          placeholder="Nom"
+                          placeholder="Ex.Macron"
                           value=""
                           required>
                       </mat-form-field>
@@ -151,8 +155,7 @@
                        
                       <!-- Marital situation-->
                       <div class="pb-16">
-                        <mat-form-field>
-
+                        <mat-form-field appearance="outline" [style.width.cm]=10>
                         <mat-label>Civilité</mat-label>
                         <mat-select >
                           <mat-option value="option1">...</mat-option>
@@ -167,7 +170,7 @@
 
                       <!--Job Title -->
                       <div class="pb-16">
-                        <mat-form-field>
+                        <mat-form-field appearance="outline" [style.width.cm]=10>
                         <mat-label>Détails du poste</mat-label>
                         <mat-select >
                           <mat-option value="option1">...</mat-option>
@@ -183,12 +186,13 @@
 
                       <!--City-->
                       <div class="pb-16">
-                        <mat-form-field class="full-width">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Ville</mat-label>
                         <input
                             matInput
                             name="city"
                             formControlName="city"
-                            placeholder="Ville"
+                            placeholder="Ex.Lyon"
                             value=""
                             required>
                         </mat-form-field>
@@ -197,12 +201,13 @@
 
                       <!--PostCode-->
                       <div class="pb-16">
-                        <mat-form-field class="full-width">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Code Postal</mat-label>
                           <input 
                           matInput
                           name="code postal"
                           formControlName="post-code"
-                          placeholder="Code Postal"
+                          placeholder="Ex.69000"
                           required>
                         </mat-form-field>
                        </div>
@@ -210,13 +215,14 @@
 
                     <!--Email 2-->
                     <div class="pb-16">
-                        <mat-form-field class="full-width">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Email 2</mat-label>
                         <input
                             matInput
                             type="email"
                             name="email"
                             formControlName="email2"
-                            placeholder="Email 2"
+                            placeholder="Ex.csi.digital@exemple.fr"
                             value=""
                             required>
                         </mat-form-field>
@@ -230,13 +236,14 @@
     
                     <!--Phone Number 2-->
                     <div class="pb-16">
-                        <mat-form-field class="full-width">
+                        <mat-form-field appearance="outline" class="full-width">
+                          <mat-label>Numéro de téléphone 2</mat-label>
                         <input 
                             type=""
                             name="phone-number2"
                             matInput
                             formControlName="phone-number2"
-                            placeholder="Numéro de téléphone 2 " 
+                            placeholder="Ex.+33 801 123 456" 
                             value=""
                             required>
                         </mat-form-field>
@@ -257,32 +264,468 @@
     </mat-card-content>
   </mat-step>
 
-  
+  <!--------------------------------FORMATION------------------------------->
+
   <mat-step [stepControl]="secondFormGroup" errorMessage="Tous les champs sont obligatoires.">
     <form [formGroup]="secondFormGroup">
       <ng-template matStepLabel>Formation</ng-template>
-      <mat-form-field>
-        <input matInput placeholder="Address" formControlName="secondCtrl" required>
-      </mat-form-field>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+
+      <mat-card-title class="">
+        <mat-divider></mat-divider>
+        <div class="card-title-text">Décrivez votre formation</div>
+        <mat-divider></mat-divider>
+        <div class="mat-heading-label" [style.padding-left.px]=24>
+          Ajoutez les diplômes ou formations par ordre chronologique, en commençant par le plus récent.
+        </div>
+        <mat-divider></mat-divider>
+        </mat-card-title>
+
+        <mat-card-content style="padding-top: 2cm;">
+          <form [formGroup]="repeatForm" class="repeat-form">
+            <div class="card-body" formArrayName="repeatArray">
+                <div class="col-12 align-items-center" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
+                  <div class="repeater-default" style="display: flex;justify-content: center;align-items: center;">
+                    <div [formGroupName]="i" >
+                      <div class="form-group mb-1 col-sm-12 col-md-3">
+                        <mat-form-field appearance="outline" [style.width.cm]=15>
+                          <mat-label>Nom de l'établissement</mat-label>
+                            <input
+                            matInput
+                            name="institution"
+                            formControlName="institution"
+                            placeholder="Ex. Université de paris"
+                            value=""
+                            required>
+                        </mat-form-field>
+                      </div>
+
+                      <div class="d-flex ">
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                          <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
+                            <mat-label>Diplome</mat-label>
+                              <input
+                              matInput
+                              name="diploma"
+                              formControlName="diploma"
+                              placeholder="Ex. Licence en arts"
+                              value=""
+                              required>
+                          </mat-form-field>
+                        </div>
+                       <div class="form-group mb-1 col-sm-12 col-md-3">
+                            <!--score-->
+                            <mat-form-field appearance="outline"  [style.width.cm]=7>
+                              <mat-label>Mention</mat-label>
+                              <input
+                              matInput
+                              name="score"
+                              formControlName="score"
+                              placeholder="Ex. mention bien"
+                              value=""
+                              required>
+                            </mat-form-field>
+                      </div>
+                      </div> 
+
+                      <div class="d-flex ">
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                        <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
+                          <mat-label>Date de dèbut</mat-label>
+                          <input matInput [matDatepicker]="picker" formControlName="start-year" placeholder="Date de dèbut" required>
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      <div class="form-group mb-1 col-sm-12 col-md-3">
+                        <mat-form-field appearance="outline" [style.width.cm]=7>
+                          <mat-label>Date d'obtention</mat-label>
+                          <input matInput [matDatepicker]="picker" formControlName="obtained-year" placeholder="Date d'obtention" required>
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                      </div>
+                      </div>
+
+                      <div class="pb-16">
+                        <mat-checkbox>En cours</mat-checkbox>
+                      </div>
+
+                    </div>
+                      <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+                        <button mat-icon-button color="warn" type="button"  [disabled]="i === 0" (click)="handleRemoveRepeatForm(i)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" type="button" (click)="handleAddRepeatForm()">
+                          <mat-icon>add</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </form>
+      </mat-card-content>
+
+
+      <div  fxLayout="row" fxLayoutAlign="space-between center">
+        <!--Button 2-->
+        <div>
+          <button 
+        mat-raised-button 
+        color="primary" 
+        [disabled]="basicForm.valid" matStepperPrevious>Précédent : Coordonnées
+        </button>
+        </div>
+
+        <!--Button 1-->
+        <div>
+          <button 
+        mat-raised-button 
+        color="primary" 
+        [disabled]="basicForm.valid" matStepperNext>Suivant : Expérience
+        </button>
+        </div>
+      </div>
+
+    </form>
+  </mat-step>
+
+
+  <!--------------------------------EXPERIENCE------------------------------>
+
+  <mat-step [stepControl]="thirdFormGroup" errorMessage="Tous les champs sont obligatoires.">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>Expériences</ng-template>
+
+      <mat-card-title class="">
+        <mat-divider></mat-divider>
+        <div class="card-title-text">Parcours professionnel</div>
+        <mat-divider></mat-divider>
+        <div class="mat-heading-label" [style.padding-left.px]=24>
+          Indiquez les postes par ordre chronologique, en commençant par le plus récent.
+        </div>
+        <mat-divider></mat-divider>
+        </mat-card-title>
+
+        <mat-card-content style="padding-top: 2cm;">
+          <form [formGroup]="repeatForm" class="repeat-form">
+            <div class="card-body" formArrayName="repeatArray">
+                <div class="col-12 align-items-center" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
+                  <div class="repeater-default" style="display: flex;justify-content: center;align-items: center;">
+                    <div [formGroupName]="i" >
+                      <div class="d-flex ">
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                          <!--Institution-->
+                          <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
+                            <mat-label>Employeur / Société</mat-label>
+                              <input
+                              matInput
+                              name="institution"
+                              formControlName="institution"
+                              placeholder="Ex.Orange"
+                              value=""
+                              required>
+                          </mat-form-field>
+                          
+                        </div>
+                       <div class="form-group mb-1 col-sm-12 col-md-3">
+                            <!--Contract type -->
+                            <mat-form-field appearance="outline" [style.width.cm]=7>
+                              <mat-label>Type de contrat</mat-label>
+                                <input
+                                matInput
+                                name="post"
+                                formControlName="post"
+                                placeholder="Ex.Stage"
+                                value=""
+                                required>
+                            </mat-form-field>
+                      </div>
+                      </div> 
+
+                      <div class="d-flex ">
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                          <!--Post Title-->
+                          <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
+                            <mat-label>Intitulé du poste</mat-label>
+                              <input
+                              matInput
+                              name="title"
+                              formControlName="title"
+                              placeholder="Ex.Développeur,Vendeuse"
+                              value=""
+                              required>
+                          </mat-form-field>
+                        </div>
+                      <div class="form-group mb-1 col-sm-12 col-md-3">
+                        <!--Role-->
+                        <mat-form-field appearance="outline" [style.width.cm]=7>
+                          <mat-label>Role / Tâches</mat-label>
+                            <input
+                            matInput
+                            name="role"
+                            formControlName="role"
+                            placeholder="Ex.Devloppement front-end"
+                            value=""
+                            required>
+                        </mat-form-field>
+                      </div>
+                      </div>
+                      <div class="form-group mb-1 col-sm-12 col-md-3">
+                        <!--Technologies-->
+                        <mat-form-field appearance="outline"  [style.width.cm]=20 class="example-full-width">
+                          <mat-label>Technologies</mat-label>
+                          <textarea matInput placeholder="Listez ici les technologies utilisées."></textarea>
+                        </mat-form-field>
+                      </div>
+                      <div class="d-flex ">
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                          <!--Dates-->
+                          <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
+                            <mat-hint>Date Début</mat-hint>
+                            <input matInput [matDatepicker]="picker" formControlName="start-year" placeholder="Année" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                          </div>
+                          <div class="form-group mb-1 col-sm-12 col-md-3">
+                            <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
+                              <input matInput [matDatepicker]="picker" formControlName="start-month" placeholder="Mois " required>
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          <div class="form-group mb-1 col-sm-12 col-md-3">
+                            <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
+                              <mat-hint>Date Fin</mat-hint>
+                              <input matInput [matDatepicker]="picker" formControlName="end-year" placeholder="Année" required>
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          <div class="form-group mb-1 col-sm-12 col-md-3">
+                            <mat-form-field [style.width.cm]=5 appearance="outline">
+                              <input matInput [matDatepicker]="picker" formControlName="end-month" placeholder="Mois" required>
+                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                          </div>
+                          </div>
+
+                      <div class="pb-16">
+                        <mat-checkbox>En cours</mat-checkbox>
+                      </div>
+
+                    </div>
+                      <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+                        <button mat-icon-button color="warn" type="button"  [disabled]="i === 0" (click)="handleRemoveRepeatForm(i)">
+                          <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" type="button" (click)="handleAddRepeatForm()">
+                          <mat-icon>add</mat-icon>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </form>
+      </mat-card-content>
+      <div  fxLayout="row" fxLayoutAlign="space-between center">
+        <!--Button 2-->
+        <div>
+          <button 
+        mat-raised-button 
+        color="primary" 
+        [disabled]="basicForm.valid" matStepperPrevious>Précédent : Formation
+        </button>
+        </div>
+
+        <!--Button 1-->
+        <div>
+          <button 
+        mat-raised-button 
+        color="primary" 
+        [disabled]="basicForm.valid" matStepperNext>Suivant : Compétances
+        </button>
+        </div>
       </div>
     </form>
   </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    You are now done.
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
+
+  <!--------------------------------COMPETANCES------------------------------->
+
+  <mat-step [stepControl]="fourthFormGroup" errorMessage="Tous les champs sont obligatoires.">
+    <form [formGroup]="fourthFormGroup">
+      <ng-template matStepLabel>Compétances</ng-template>
+      <mat-card-title class="">
+        <mat-divider></mat-divider>
+        <div class="card-title-text">Indiquez les compétences</div>
+        <mat-divider></mat-divider>
+        </mat-card-title>
+
+        <mat-card-content style="padding-top: 2cm;">
+          <mat-accordion>
+            <!---------------------Certification---------------------->
+            <mat-expansion-panel >
+              <mat-expansion-panel-header  style="height: 2cm;">
+                <mat-panel-title>
+                  Certifications
+                </mat-panel-title>
+                <mat-panel-description>
+                  This is a summary of the content
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <form [formGroup]="repeatForm" class="repeat-form">
+                <div class="card-body" formArrayName="repeatArray">
+                  <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
+                    <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
+                      <div [formGroupName]="i" class="d-flex align-items-center">
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                          <mat-form-field [style.width.cm]=8 appearance="outline" style="margin-right: 2cm;">
+                            <mat-label>Certification</mat-label>
+                            <input matInput name="certification" formControlName="certification" placeholder="Ex. Google certification " value="" required>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                          <mat-form-field [style.width.cm]=8 appearance="outline">
+                            <mat-label>Année d'obtention</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="certif-date" placeholder="Année d'obtention" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+                          <button mat-icon-button color="warn" type="button" [disabled]="i === 0"  (click)="handleRemoveRepeatForm(i)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                          <button mat-icon-button color="primary" type="button" (click)="handleAddRepeatForm()">
+                            <mat-icon>add</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </mat-expansion-panel>
+             <!-----------------------Languages------------------------>
+            <mat-expansion-panel hideToggle >
+              <mat-expansion-panel-header  style="height: 2cm;">
+                <mat-panel-title>
+                 Langues
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <form [formGroup]="repeatForm" class="repeat-form">
+                <div class="card-body" formArrayName="repeatArray">
+                  <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
+                    <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
+                      <div [formGroupName]="i" class="d-flex align-items-center">
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                          <mat-form-field [style.width.cm]=8 appearance="outline" style="margin-right: 0.5cm;">
+                            <mat-label>Langue</mat-label>
+                            <input
+                            matInput
+                            name="language"
+                            formControlName="language"
+                            placeholder="Ex. Français "
+                            value=""
+                            required>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                          <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
+                            <mat-label>Niveau</mat-label>
+                            <mat-select  name="language-level" formControlName="language-level">
+                              <mat-option value="option1">...</mat-option>
+                              <mat-option value="option2">....</mat-option>
+                              <mat-option value="option3">.....</mat-option>
+                              <mat-option value="option1">......</mat-option>
+                              <mat-option value="option2">.......</mat-option>
+                              <mat-option value="option3">........</mat-option>
+                            </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                          <mat-form-field appearance="outline"  [style.width.cm]=8 class="example-full-width">
+                            <mat-label>Technologies</mat-label>
+                            <textarea matInput placeholder="Listez ici les technologies utilisées."></textarea>
+                          </mat-form-field>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+                          <button mat-icon-button color="warn" type="button" [disabled]="i === 0"  (click)="handleRemoveRepeatForm(i)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                          <button mat-icon-button color="primary" type="button" (click)="handleAddRepeatForm()">
+                            <mat-icon>add</mat-icon>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <!---------------------------------------->
+              
+            </mat-expansion-panel>
+
+            <mat-expansion-panel  >
+              <mat-expansion-panel-header  style="height: 2cm;">
+                <mat-panel-title>
+                 Soft Skills
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+                  <div class=" pb-16">
+                    <mat-form-field class="example-chip-list" style="width:50%">
+                      <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
+                                 [removable]="removable" (removed)="remove(fruit)">
+                          {{fruit.name}}
+                          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Ajouter des soft skills"
+                               [matChipInputFor]="chipList"
+                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                               [matChipInputAddOnBlur]="addOnBlur"
+                               (matChipInputTokenEnd)="add($event)">
+                      </mat-chip-list>
+                    </mat-form-field>
+                  </div>
+                <div >
+                </div>
+            </mat-expansion-panel>
+            
+          </mat-accordion>
+         <!-- <form [formGroup]="repeatForm" ><div>
+                    <button mat-icon-button color="warn" type="button" (click)="handleRemoveRepeatForm(i)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" type="button" (click)="handleAddRepeatForm()">
+                      <mat-icon>add</mat-icon>
+                    </button>
+                  </div>
+          </form>-->
+      </mat-card-content>
+
+      <div  fxLayout="row" fxLayoutAlign="space-between center">
+        <!--Button 2-->
+        <div>
+          <button 
+        mat-raised-button 
+        color="primary" 
+        [disabled]="basicForm.valid" matStepperPrevious>Précédent : Expérience
+        </button>
+        </div>
+
+        <!--Button 1-->
+        <div>
+          <button 
+        mat-raised-button 
+        color="primary" 
+        [disabled]="basicForm.valid" matStepperNext>Finalisation
+        </button>
+        </div>
+      </div>
+
+    </form>
   </mat-step>
 </mat-horizontal-stepper>
-  
-    
-
-
-
-    
 </mat-card>
