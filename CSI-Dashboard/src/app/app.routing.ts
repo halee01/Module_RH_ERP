@@ -184,7 +184,7 @@ export const rootRouterConfig: Routes = [
         loadChildren: () => import('./views/Component/Sales/contact/contact.module').then(m => m.ContactModule),
         data: { title: 'Contact', breadcrumb: 'Contacts'}
       },
->>>>>>> houssem
+
     ]
   },
   {

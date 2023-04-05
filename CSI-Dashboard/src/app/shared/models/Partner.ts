@@ -1,3 +1,6 @@
+import { contact } from "./contact";
+import { req } from "./req";
+
 export interface Partner {
      id ?:number;
     name?: string;
@@ -14,11 +17,12 @@ export interface Partner {
     partnerShipDate ?: string;
     companyStatus ?:CompanyStatus,
     refPhoneNumber?: number,
-    country? :string ,
+    country? :string,
     workField ?:WorkField,
     legalStatus?:LegalStatus,
     provenance?:Provenance,
-
+    contacts?: contact[],
+    requirements?:req[]
 
   }
 

@@ -23,8 +23,8 @@ export class NgxTablePopupComponent implements OnInit {
   Privilege :string []= Object.values(Privilege);
   Civility :string []= Object.values(Civility);
   Service :string []= Object.values(Service);
-  formWidth = 200; // declare and initialize formWidth property
-  formHeight = 700; // declare and initialize formHeight property
+  formWidth = 200; //declare and initialize formWidth property
+  formHeight = 700; //declare and initialize formHeight property
   Availability : string [] = Object.values(Availability);
   
   RequirementStatus  :string []= Object.values(RequirementStatus);
