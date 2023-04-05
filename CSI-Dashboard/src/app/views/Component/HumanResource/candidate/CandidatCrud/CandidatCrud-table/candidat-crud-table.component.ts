@@ -32,7 +32,7 @@ export class CandidatCrudTableComponent implements OnInit {
     private confirmService: AppConfirmService,
     private loader: AppLoaderService,
     private router: Router
-  ) { }
+  ) {  }
    
 
   goToCV() {
@@ -59,7 +59,7 @@ export class CandidatCrudTableComponent implements OnInit {
 
   getItems() {    
     this.getItemSub = this.crudService.getItems()
-      .subscribe(data => {
+      .subscribe((data:any) => {
         this.dataSource = new MatTableDataSource(data);
       })
   }
