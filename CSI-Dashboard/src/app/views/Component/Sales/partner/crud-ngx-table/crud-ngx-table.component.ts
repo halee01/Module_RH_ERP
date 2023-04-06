@@ -23,6 +23,7 @@ import { Partner } from 'app/shared/models/Partner';
   templateUrl: './crud-ngx-table.component.html',
   animations: egretAnimations
 })
+
 export class CrudNgxTableComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

@@ -32,7 +32,7 @@ export class CandidatCrudTableComponent implements OnInit {
     private confirmService: AppConfirmService,
     private loader: AppLoaderService,
     private router: Router
-  ) {  }
+  ) { }
    
 
   goToCV() {
@@ -59,7 +59,7 @@ export class CandidatCrudTableComponent implements OnInit {
 
   getItems() {    
     this.getItemSub = this.crudService.getItems()
-      .subscribe((data:any) => {
+      .subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
       })
   }
@@ -116,9 +116,5 @@ export class CandidatCrudTableComponent implements OnInit {
         }
       })
   }
-  openAffichage(){
-    this.router.navigate(['affichage/candidatAffiche'])
-  }
- 
 
 }

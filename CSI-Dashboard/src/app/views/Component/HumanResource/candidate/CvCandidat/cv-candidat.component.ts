@@ -14,9 +14,7 @@ import { Fruit } from 'assets/examples/material/input-chip/input-chip.component'
   styleUrls: ['./cv-candidat.component.css'],
   
 })
-
-
-
+ 
 export class cvcandidatComponent implements OnInit {
   formData = {}
   console = console;
