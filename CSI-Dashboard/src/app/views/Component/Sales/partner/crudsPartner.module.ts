@@ -33,6 +33,8 @@ import { CrudNgxTableComponent } from './crud-ngx-table/crud-ngx-table.component
 import { CrudPartnerService } from './crudPartner.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { ContactService } from '../contact/contact.service';
+import { RequirementDetailsComponent } from './requirements-details/requirements-details.component';
+import { ContactsDetailsComponent } from './crud-ngx-table/contacts-details/contacts-details.component';
 
 
 
@@ -69,7 +71,7 @@ import { ContactService } from '../contact/contact.service';
 
     RouterModule.forChild(CrudsRoutes)
   ],
-  declarations: [CrudNgxTableComponent, NgxTablePopupComponent, DetailCrudComponent],
+  declarations: [CrudNgxTableComponent, NgxTablePopupComponent, DetailCrudComponent , RequirementDetailsComponent, ContactsDetailsComponent],
   providers: [ContactService, CrudPartnerService]
 })
 export class PartnerModule { }
