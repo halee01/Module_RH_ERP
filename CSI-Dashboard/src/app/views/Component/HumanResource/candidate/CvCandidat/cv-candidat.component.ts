@@ -60,6 +60,8 @@ export class cvcandidatComponent implements OnInit {
     }
   }
 
+
+
   ngOnInit() {
 
     //this.firstFormGroup = this._formBuilder.group({
@@ -104,6 +106,9 @@ export class cvcandidatComponent implements OnInit {
     });
   
   }
+
+  //Section Supplimentaire button
+  showInput = false;
  
 createRepeatForm(): FormGroup {
   return this._formBuilder.group({
