@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './shared/components/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './shared/components/layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { RequirementDetailsComponent } from './views/Component/Sales/partner/requirements-details/requirements-details.component';
 
 export const rootRouterConfig: Routes = [
   {
@@ -178,11 +179,14 @@ export const rootRouterConfig: Routes = [
         loadChildren: () => import('./views/Component/Sales/Requirement/req.module').then(m => m.ReqModule),
         data: { title: 'Requirement', breadcrumb: 'Besoins'}
       },
+
       {
         path: 'contact',
         loadChildren: () => import('./views/Component/Sales/contact/contact.module').then(m => m.ContactModule),
         data: { title: 'Contact', breadcrumb: 'Contacts'}
       },
+      
+  
     ]
   },
   {
