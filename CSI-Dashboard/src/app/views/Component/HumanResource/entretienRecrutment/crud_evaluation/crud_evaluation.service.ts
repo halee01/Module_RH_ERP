@@ -9,7 +9,7 @@ import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { UserDB } from 'app/shared/inmemory-db/users';
 
 @Injectable()
-export class crud_entretienRecrutmentService {
+export class crudEvaluationService {
   items: any[];
   constructor(
     private http: HttpClient

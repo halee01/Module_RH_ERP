@@ -130,6 +130,7 @@ handleRemoveRepeatForm(index: number) {
 }
   
 
+
   email = new FormControl('', [Validators.required, Validators.email]);
 
   getErrorMessage() {
@@ -139,5 +140,6 @@ handleRemoveRepeatForm(index: number) {
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+
 }
 

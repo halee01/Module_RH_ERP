@@ -119,15 +119,20 @@ export const rootRouterConfig: Routes = [
         data: { title: 'CandidatAffichage', breadcrumb: 'Candidat'}
       },
       {
-        path: 'entretienRecrutment',
+        path: 'CandidatEvaluation',
         loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/entretienRecrutment.module').then(m => m.EntretienRecrutmentModule),
         data: { title: 'EntretienRecrutment', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
       },
 
       {
-        path: 'crudEntretien',
+        path: 'entretienTable',
         loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/crud_entretienRecrutment/crud_entretienRecrutment.module').then(m => m.CrudEntretienRecrutmentModule),
         data: { title: 'CrudEvaluation', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
+      },
+      {
+        path: 'evaluationCrud',
+        loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/crud_evaluation/crud_evaluation.module').then(m => m.CrudEvaluationModule),
+        data: { title: 'Evaluation', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
       },
       
       {
