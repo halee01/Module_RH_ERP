@@ -14,9 +14,7 @@ import { Fruit } from 'assets/examples/material/input-chip/input-chip.component'
   styleUrls: ['./cv-candidat.component.css'],
   
 })
-
-
-
+ 
 export class cvcandidatComponent implements OnInit {
   formData = {}
   console = console;
@@ -62,6 +60,8 @@ export class cvcandidatComponent implements OnInit {
     }
   }
 
+
+
   ngOnInit() {
 
     //this.firstFormGroup = this._formBuilder.group({
@@ -106,6 +106,9 @@ export class cvcandidatComponent implements OnInit {
     });
   
   }
+
+  //Section Supplimentaire button
+  showInput = false;
  
 createRepeatForm(): FormGroup {
   return this._formBuilder.group({

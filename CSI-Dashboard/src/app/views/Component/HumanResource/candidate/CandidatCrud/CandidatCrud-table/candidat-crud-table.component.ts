@@ -116,9 +116,5 @@ export class CandidatCrudTableComponent implements OnInit {
         }
       })
   }
-  openAffichage(){
-    this.router.navigate(['affichage/candidatAffiche'])
-  }
- 
 
 }

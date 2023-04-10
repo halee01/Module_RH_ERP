@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { UserDB } from 'app/shared/inmemory-db/users';
-
 @Injectable()
 export class CrudService {
   items: any[];
@@ -13,7 +12,6 @@ export class CrudService {
     let userDB = new UserDB();
     this.items = userDB.users;
   }
-
   //******* Implement your APIs ********
   getItems(): Observable<any> {
     return  of(this.items.slice())
