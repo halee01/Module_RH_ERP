@@ -4,6 +4,7 @@ import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './shared/components/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './shared/components/layouts/auth-layout/auth-layout.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { RequirementDetailsComponent } from './views/Component/Sales/partner/requirements-details/requirements-details.component';
 
 export const rootRouterConfig: Routes = [
   {
@@ -192,16 +193,28 @@ export const rootRouterConfig: Routes = [
         data: { title: 'TimeOff', breadcrumb: 'TimeOffs'}
       },
       {
+        path: 'time-off-employee',
+        loadChildren: () => import('./views/Component/HumanResource/timeOffEmployee/app-calendar.module').then(m => m.TimeOffCalendarModule),
+        data: { title: 'TimeOff', breadcrumb: 'TimeOffs'}
+      },
+      {
         path: 'partner',
         loadChildren: () => import('./views/Component/Sales/partner/crudsPartner.module').then(m => m.PartnerModule),
-        data: { title: 'Partner', breadcrumb: 'Partners'}
+        data: { title: 'Partner', breadcrumb: 'Partenaires'}
       },
       {
         path: 'requirement',
         loadChildren: () => import('./views/Component/Sales/Requirement/req.module').then(m => m.ReqModule),
-        data: { title: 'Tables', breadcrumb: 'TABLES'}
+        data: { title: 'Requirement', breadcrumb: 'Besoins'}
+      },
+
+      {
+        path: 'contact',
+        loadChildren: () => import('./views/Component/Sales/contact/contact.module').then(m => m.ContactModule),
+        data: { title: 'Contact', breadcrumb: 'Contacts'}
       },
       
+  
     ]
   },
   {
