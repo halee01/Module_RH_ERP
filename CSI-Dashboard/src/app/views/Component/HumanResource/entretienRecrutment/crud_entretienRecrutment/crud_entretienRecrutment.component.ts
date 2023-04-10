@@ -120,8 +120,11 @@ export class crudEntretienRecrutmentComponent implements OnInit {
         }
       })
   }
-  openCandidature(){
-    this.router.navigate(['entretienRecrutment/evaluation'])
+  openEvaluationCandidat(){
+    this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
+  }
+  goToEvaluer(){
+    this.router.navigate(['evaluationCrud/crudEvaluation'])
   }
   
   

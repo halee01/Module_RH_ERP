@@ -2,19 +2,28 @@
 import { Routes } from '@angular/router';
 import { crudEntretienRecrutmentComponent } from './crud_entretienRecrutment.component';
 import { entretienRecrutmentComponent } from '../entretienRecrutment.component';
+import { crudEvaluationComponent } from '../crud_evaluation/crud_evaluation.component';
 
 
 
 
 export const crudEntretien: Routes = [{ 
-    path: 'evaluationCrud', 
+    path: 'tableEntretien', 
 component: crudEntretienRecrutmentComponent, 
 data: { title: 'CrudEvaluation' } },
 
 {
-  path:'evaluation',
+  path:'evaluationCandidat',
   component: entretienRecrutmentComponent,
   data:{title:'EntretienRecrutment'}
-}];
+}
+,
+{ 
+  path: 'crudEvaluation', 
+component: crudEvaluationComponent, 
+data: { title: 'Evaluation' } 
+}
+
+];
 
 

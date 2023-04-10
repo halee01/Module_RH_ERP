@@ -3,7 +3,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -21,11 +21,14 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { crud_entretienRecrutmentService } from './crud_entretienRecrutment.service';
-import { crudEntretien } from './crud_entretienRecrutment.routing';
-import { crudEntretienRecrutmentComponent } from './crud_entretienRecrutment.component';
+
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { crudEvaluationService } from './crud_evaluation.service';
+import { crudEvaluationComponent } from './crud_evaluation.component';
+import { crudEvalu } from './crud_evaluation.routing';
+import { SharedComponentsModule } from 'app/shared/components/shared-components.module';
+import { SharedMaterialModule } from 'app/shared/shared-material.module';
 
 
 
@@ -51,16 +54,21 @@ import { MatTableModule } from '@angular/material/table';
     FlexLayoutModule,
     ColorPickerModule,
     NgApexchartsModule,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedComponentsModule,
+    SharedMaterialModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    RouterModule.forChild(crudEntretien)
+    RouterModule.forChild(crudEvalu)
   ],
-  providers: [crud_entretienRecrutmentService],
+  providers: [crudEvaluationService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    crudEntretienRecrutmentComponent
+    crudEvaluationComponent
   ],
 })
-export class CrudEntretienRecrutmentModule { }
+export class CrudEvaluationModule { }
