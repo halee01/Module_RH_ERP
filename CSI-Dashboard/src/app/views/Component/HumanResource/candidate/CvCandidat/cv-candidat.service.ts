@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of, throwError } from 'rxjs';
 import * as countrycitystatejson from 'countrycitystatejson';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
+import { Employee } from 'app/shared/models/Employee.model';
 
 @Injectable()
 export class CvCandidatService {
@@ -70,6 +71,77 @@ export class CvCandidatService {
 
 
   /////////////////////////Back Connection//////////////////////////
+//******* Implement your APIs ********
+getItems(): Observable<Employee[]> {
+  return this.http.get<Employee[]>(this.apiUrl).pipe(
+    catchError(this.handleError)
+  );
+}
+
+
+ // GET an item by id
+ getItem(id: number): Observable<Employee> {
+  const url = `${this.apiUrl}/${id}`;
+  return this.http.get<Employee>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+/*getrequirement(id: number): Observable<req[]> {
+  const url = `${this.apiUrl}/${id}`;
+  return this.http.get<Partner>(url).pipe(map(partner => partner.requirements),
+  catchError(error => {
+    console.error(error);
+    return of([]);
+  }));
+}*/
+
+// POST a new item
+addItem(customer: any): Observable<any> {
+  
+  return this.http.post<any>(this.apiUrl, customer).pipe(
+    catchError(this.handleError)
+  );
+}
+
+// PUT an existing item
+updateItem(id: number, customer: Employee): Observable<Employee> {
+  const url = `${this.apiUrl}/${id}`;
+  return this.http.put<Employee>(url, customer).pipe(
+    catchError(this.handleError)
+  );
+}
+
+// DELETE an item by id
+deleteItem(id: number): Observable<Employee> {
+  const url = `${this.apiUrl}/${id}`;
+  return this.http.delete<Employee>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+
+
+private handleError(error: HttpErrorResponse) {
+  if (error.error instanceof ErrorEvent) {
+    // A client-side or network error occurred. Handle it accordingly.
+    console.error('An error occurred:', error.error.message);
+  } else {
+    // The backend returned an unsuccessful response code.
+    // The response body may contain clues as to what went wrong.
+    console.error(
+      `Backend returned code ${error.status}, ` +
+      `body was: ${error.error}`);
+  }
+  // Return an observable with a user-facing error message.
+  return throwError(
+    'Something bad happened; please try again later.');
+}
+getCountries() {
+  return this.countryData.getCountries();
+}
+
+getStatesByCountry(name: string) {
+  return this.countryData.getStatesByShort(name);
+}
 
 
 }

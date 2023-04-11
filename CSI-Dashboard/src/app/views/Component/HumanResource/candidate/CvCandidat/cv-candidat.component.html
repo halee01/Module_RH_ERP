@@ -24,7 +24,7 @@
                             <input
                             matInput
                             name="first-name"
-                            formControlName="first-name"
+                            formControlName="firstName"
                             placeholder="Ex.Emmanuel"
                             value=""
                             required>
@@ -53,7 +53,7 @@
                      <div class="pb-16">
                       <mat-form-field appearance="outline" [style.width.cm]=10>
                         <mat-label>Intitulè du poste</mat-label>
-                        <mat-select >
+                        <mat-select formControlName="intitulePoste" >
                           <mat-option value="option1">...</mat-option>
                           <mat-option value="option2">....</mat-option>
                           <mat-option value="option3">.....</mat-option>
@@ -123,7 +123,7 @@
                         type=""
                         name="phone-number1"
                         matInput
-                        formControlName="phone-number1"
+                        formControlName="phoneNumber1"
                         placeholder="Ex.+33 801 123 456" 
                         value=""
                         required>
@@ -141,7 +141,7 @@
                           <input
                           matInput
                           name="last-name"
-                          formControlName="last-name"
+                          formControlName="lastName"
                           placeholder="Ex.Macron"
                           value=""
                           required>
@@ -158,7 +158,7 @@
                       <div class="pb-16">
                         <mat-form-field appearance="outline" [style.width.cm]=10>
                         <mat-label>Civilité</mat-label>
-                        <mat-select >
+                        <mat-select formControlName="civility">
                           <mat-option value="option1">...</mat-option>
                           <mat-option value="option2">....</mat-option>
                           <mat-option value="option3">.....</mat-option>
@@ -173,7 +173,7 @@
                       <div class="pb-16">
                         <mat-form-field appearance="outline" [style.width.cm]=10>
                         <mat-label>Détails du poste</mat-label>
-                        <mat-select >
+                        <mat-select formControlName="jobTitle" >
                           <mat-option value="option1">...</mat-option>
                           <mat-option value="option2">....</mat-option>
                           <mat-option value="option3">.....</mat-option>
@@ -207,7 +207,7 @@
                           <input 
                           matInput
                           name="code postal"
-                          formControlName="post-code"
+                          formControlName="postCode"
                           placeholder="Ex.69000"
                           required>
                         </mat-form-field>
@@ -243,7 +243,7 @@
                             type=""
                             name="phone-number2"
                             matInput
-                            formControlName="phone-number2"
+                            formControlName="phoneNumber2"
                             placeholder="Ex.+33 801 123 456" 
                             value=""
                             required>
@@ -331,7 +331,7 @@
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                         <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
                           <mat-label>Date de dèbut</mat-label>
-                          <input matInput [matDatepicker]="picker" formControlName="start-year" placeholder="Date de dèbut" required>
+                          <input matInput [matDatepicker]="picker" formControlName="EducationstartYear" placeholder="Date de dèbut" required>
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -339,7 +339,7 @@
                       <div class="form-group mb-1 col-sm-12 col-md-3">
                         <mat-form-field appearance="outline" [style.width.cm]=7>
                           <mat-label>Date d'obtention</mat-label>
-                          <input matInput [matDatepicker]="picker" formControlName="obtained-year" placeholder="Date d'obtention" required>
+                          <input matInput [matDatepicker]="picker" formControlName="obtainedYear" placeholder="Date d'obtention" required>
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -380,6 +380,7 @@
         <div>
           <button 
         mat-raised-button 
+
         color="primary" 
         [disabled]="basicForm.valid" matStepperNext>Suivant : Expérience
         </button>
@@ -420,7 +421,7 @@
                               <input
                               matInput
                               name="institution"
-                              formControlName="institution"
+                              formControlName="company"
                               placeholder="Ex.Orange"
                               value=""
                               required>
@@ -482,14 +483,14 @@
                           <!--Dates-->
                           <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
                             <mat-hint>Date Début</mat-hint>
-                            <input matInput [matDatepicker]="picker" formControlName="start-year" placeholder="Année" required>
+                            <input matInput [matDatepicker]="picker" formControlName="ExperienceStartYear" placeholder="Année" required>
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                           </mat-form-field>
                           </div>
                           <div class="form-group mb-1 col-sm-12 col-md-3">
                             <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
-                              <input matInput [matDatepicker]="picker" formControlName="start-month" placeholder="Mois " required>
+                              <input matInput [matDatepicker]="picker" formControlName="ExperienceStartMonth" placeholder="Mois " required>
                               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                               <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
@@ -497,14 +498,14 @@
                           <div class="form-group mb-1 col-sm-12 col-md-3">
                             <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
                               <mat-hint>Date Fin</mat-hint>
-                              <input matInput [matDatepicker]="picker" formControlName="end-year" placeholder="Année" required>
+                              <input matInput [matDatepicker]="picker" formControlName="ExperienceEndYear" placeholder="Année" required>
                               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                               <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
                           </div>
                           <div class="form-group mb-1 col-sm-12 col-md-3">
                             <mat-form-field [style.width.cm]=5 appearance="outline">
-                              <input matInput [matDatepicker]="picker" formControlName="end-month" placeholder="Mois" required>
+                              <input matInput [matDatepicker]="picker" formControlName="ExperienceEndMonth" placeholder="Mois" required>
                               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                               <mat-datepicker #picker></mat-datepicker>
                             </mat-form-field>
@@ -588,7 +589,7 @@
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field [style.width.cm]=8 appearance="outline">
                             <mat-label>Année d'obtention</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="certif-date" placeholder="Année d'obtention" required>
+                            <input matInput [matDatepicker]="picker" formControlName="certifDate" placeholder="Année d'obtention" required>
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                           </mat-form-field>
@@ -634,7 +635,7 @@
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
                             <mat-label>Niveau</mat-label>
-                            <mat-select  name="language-level" formControlName="language-level">
+                            <mat-select  name="language-level" formControlName="languageLevel">
                               <mat-option value="option1">...</mat-option>
                               <mat-option value="option2">....</mat-option>
                               <mat-option value="option3">.....</mat-option>
@@ -647,7 +648,7 @@
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field appearance="outline"  [style.width.cm]=8 class="example-full-width">
                             <mat-label>Informations supplémentaires</mat-label>
-                            <textarea matInput placeholder="Listez ici les technologies utilisées."></textarea>
+                            <textarea matInput placeholder="Listez ici les technologies utilisées." formControlName="languageInfo"></textarea>
                           </mat-form-field>
                         </div>
                         <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
@@ -673,7 +674,7 @@
               </mat-expansion-panel-header>
                   <div class=" pb-16">
                     <mat-form-field class="example-chip-list" style="width:50%">
-                      <mat-chip-list #chipList>
+                      <mat-chip-list #chipList formControlName="skills">
                         <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable"
                                  [removable]="removable" (removed)="remove(fruit)">
                           {{fruit.name}}

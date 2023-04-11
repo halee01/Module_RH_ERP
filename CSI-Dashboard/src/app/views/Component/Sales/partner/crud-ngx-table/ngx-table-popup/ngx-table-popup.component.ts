@@ -115,10 +115,6 @@ export class NgxTablePopupComponent implements OnInit {
     });
 
 
-
-
-
-
     this.repeatForm = this._formBuilder.group({
       repeatArray: this._formBuilder.array([this.createRepeatForm()])
     });
@@ -126,10 +122,7 @@ export class NgxTablePopupComponent implements OnInit {
   }
 
   submit() {
-    
     this.dialogRef.close(this.itemForm.value)
-
-
   }
 
   onCountryChange(countryShotName: string) {

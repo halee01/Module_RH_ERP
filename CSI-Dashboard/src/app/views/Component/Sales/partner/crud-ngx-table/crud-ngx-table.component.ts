@@ -6,10 +6,8 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
 import { NgxTablePopupComponent } from './ngx-table-popup/ngx-table-popup.component';
 import { Subscription } from 'rxjs';
-
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -46,10 +44,7 @@ export class CrudNgxTableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.displayedColumns = this.getDisplayedColumns();
-    this.getItems()
- 
-
-      
+    this.getItems()  
   }
 
   getDisplayedColumns() {

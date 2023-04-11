@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray } from '@angular/forms'; 
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -6,6 +6,10 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Fruit } from 'assets/examples/material/input-chip/input-chip.component';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CompanyStatus, LegalStatus, Provenance, Country } from 'app/shared/models/Partner';
+import { Privilege, Civility, Service } from 'app/shared/models/contact';
+import { WorkField, Availability, RequirementStatus, RequirementType } from 'app/shared/models/req';
 
 
 @Component({
@@ -24,7 +28,24 @@ export class cvcandidatComponent implements OnInit {
   thirdFormGroup: FormGroup;
   fourthFormGroup : FormGroup;
   repeatForm: FormGroup;
-
+//////////////Ajout Candidat///////////////
+  
+  public itemForm: FormGroup;;
+  CompanyStatus = Object.values(CompanyStatus);
+  WorkField :string []= Object.values(WorkField);
+  LegalStatus = Object.values(LegalStatus);
+  Provenance = Object.values(Provenance);
+  countries: Country[];
+  states: string[];
+  selectedFile: File;
+  Privilege :string []= Object.values(Privilege);
+  Civility :string []= Object.values(Civility);
+  Service :string []= Object.values(Service);
+  formWidth = 200; //declare and initialize formWidth property
+  formHeight = 700; //declare and initialize formHeight property
+  Availability : string [] = Object.values(Availability);
+  RequirementStatus  :string []= Object.values(RequirementStatus);
+  RequirementType : string[] = Object.values(RequirementType);
 
   constructor(private _formBuilder: FormBuilder) { }
 
@@ -35,6 +56,47 @@ export class cvcandidatComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [];
 
+  ////////////////////Ajout Candidat///////////////
+  buildItemForm(item){
+    this.itemForm = this._formBuilder.group({
+
+      firstName : [item.name || '', Validators.required],
+      lastName : [item.name || '', Validators.required],
+      birthdate : [item.name || '', Validators.required],
+      country : [item.name || '', Validators.required],
+      adress : [item.name || '', Validators.required],
+      email1 : [item.name || '', Validators.required],
+      phoneNumber1 : [item.name || '', Validators.required],
+      civility : [item.name || '', Validators.required],
+      jobTitle : [item.name || '', Validators.required],
+      city : [item.name || '', Validators.required],
+      postCode : [item.name || '', Validators.required],
+      email2 : [item.name || '', Validators.required],
+      phoneNumber2 : [item.name || '', Validators.required],
+      institution : [item.name || '', Validators.required],
+      diploma : [item.name || '', Validators.required],
+      score : [item.name || '', Validators.required],
+      educationStartYear: [item.name || '', Validators.required],
+      obtainedYear : [item.name || '', Validators.required],
+      company : [item.name || '', Validators.required],
+      post : [item.name || '', Validators.required],
+      title : [item.name || '', Validators.required],
+      role : [item.name || '', Validators.required],
+      ExperienceStartYear : [item.name || '', Validators.required],
+      ExperienceStartMonth: [item.name || '', Validators.required],
+      ExperienceEndYear : [item.name || '', Validators.required],
+      ExperienceEndMonth : [item.name || '', Validators.required],
+      certification : [item.name || '', Validators.required],
+      certifDate : [item.name || '', Validators.required],
+      language : [item.name || '', Validators.required],
+      languageLevel : [item.name || '', Validators.required],
+      languageInfo: [item.name || '', Validators.required],
+      skills : [item.name || '', Validators.required],
+      
+    });
+
+  }
+/////////////////Fin ajout Candidat///////////////
   
 
   add(event: MatChipInputEvent): void {
