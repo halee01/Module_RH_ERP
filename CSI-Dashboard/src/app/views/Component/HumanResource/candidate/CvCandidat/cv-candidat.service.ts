@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
+import * as countrycitystatejson from 'countrycitystatejson';
 import { map } from 'rxjs/operators';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 
 @Injectable()
 export class CvCandidatService {
+  private apiUrl = 'http://localhost:8080/rh/employee';
+  private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
 
@@ -63,4 +66,10 @@ export class CvCandidatService {
     this.events = this.events.filter((e) => e._id !== eventID);
     return of(this.events);
   }
+
+
+
+  /////////////////////////Back Connection//////////////////////////
+
+
 }
