@@ -1,23 +1,5 @@
-.example-section {
-  clear: both;
-}
-
-.example-margin {
-  margin-right: 12px;
-}
-
-.container {
-  padding: 24px;
-}
-
-.text-small {
-  font-size: 14px;
-}
-
-.mat-form-field {
-  width: 100%;
-}
-
-.mat-slider {
-  width: 100%;
+.input-slider-container {
+  display: flex;
+  align-items: center;
+  gap: 5rem; /* adjust the gap as needed */
 }

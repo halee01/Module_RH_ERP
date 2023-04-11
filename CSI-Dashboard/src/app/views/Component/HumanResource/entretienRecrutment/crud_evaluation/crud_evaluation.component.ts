@@ -36,7 +36,9 @@ export class crudEvaluationComponent implements OnInit {
 
 save() {
     this.slider.disabled = true;
+    this.slider.color = 'warn';
     this.input.nativeElement.disabled = true;
+    
 
   }
 
@@ -46,7 +48,7 @@ save() {
   }
   
  
-  
+  panelOpenState = false;
   
   
   constructor() { }

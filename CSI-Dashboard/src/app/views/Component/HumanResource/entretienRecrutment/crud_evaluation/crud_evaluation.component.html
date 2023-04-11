@@ -1,4 +1,5 @@
-<div class="">
+
+<!----------------<div class="">
     <mat-card class="p-24">
         <div fxLayout="row wrap">
           <div fxFlex="70">
@@ -16,53 +17,100 @@
       </div>
 
     
-            <!-------------entretien RH----------------->
+            -----------entretien RH---------------
             <mat-accordion>
-                <mat-expansion-panel hideToggle>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                     Entretien
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-                  <div class="mat-heading-label" [style.padding-left.px]=24>
-                    Slider configuration
-                  </div>
-                  <mat-divider></mat-divider>
+              <mat-expansion-panel hideToggle>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                   Entretien
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="mat-heading-label" [style.padding-left.px]=24>
+                  Slider configuration
+                </div>
+                <mat-divider></mat-divider>
 
-                    <div style="padding-right: 3cm; width: 5cm;">
-                        <div class="d-flex">
-                            <section class="example-section">
-                                <mat-form-field class="example-margin">
-                                <input #input matInput type="number" placeholder="Value" [(ngModel)]="value">
-                                </mat-form-field>
-                            </section>
-                        </div>
+                  <div style="padding-right: 3cm; width: 5cm;">
+                      <div class="d-flex">
+                          <section class="example-section">
+                              <mat-form-field class="example-margin">
+                              <input #input matInput type="number" placeholder="Value" [(ngModel)]="value">
+                              </mat-form-field>
+                          </section>
+                      </div>
 
-                    <div>
-                      <h2 class="example-h2">Result</h2>
-                      <mat-slider #slider
-                          class="example-margin"
-                          [(ngModel)]="value">
-                      </mat-slider>  
-                    </div>
-                    <section class="example-section">
-                        <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary"  (click)="save()">
-                            Enregistrer</button>
-                            <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary"  (click)="modify()">
-                                Modifier</button>
-                    </section>
+                  <div>
+                    <h2 class="example-h2">Result</h2>
+                    <mat-slider #slider
+                        class="example-margin"
+                        [(ngModel)]="value">
+                    </mat-slider>  
                   </div>
-                </mat-expansion-panel>
-              </mat-accordion>        
-    
-              
+                  <section class="example-section">
+                      <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary"  (click)="save()">
+                          Enregistrer</button>
+                          <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary"  (click)="modify()">
+                              Modifier</button>
+                  </section>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>        
+  
+            ------------------------>
             
                 
                   
+
             
+
+
+
+
+
+
+
+
+
+
+
+            <mat-accordion>
+              <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Entretien Technique
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="input-slider-container">
+                  <mat-form-field appearance="outline" style="margin-right: 0.5cm;">
+                    <mat-label>Score</mat-label>
+                    <input #input matInput type="number" min="0" max="10" placeholder="Value" [(ngModel)]="value">
+                  </mat-form-field>
+            
+                  <mat-slider #slider [(ngModel)]="value" min="0" max="10" step="1" color="primary" [style.width.px]="500"></mat-slider>
+            
+                  <button mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="save()">
+                    Enregistrer</button>
+                  <button mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="modify()">
+                    Modifier</button>
+                </div>
+              </mat-expansion-panel>
+              <!----------------------------->
+
+            </mat-accordion>
+            
+            
+
+
+
+
+
+
                 
              
                 
@@ -87,58 +135,3 @@
 
 
 
-
-
-<!--------------------------------------------------------------------------------------
-<mat-card>
-    <mat-card-content>
-      <h2 class="example-h2">Slider configuration</h2>
-  
-      <section class="example-section">
-        <mat-form-field class="example-margin">
-          <input matInput type="number" placeholder="Value" [(ngModel)]="value">
-        </mat-form-field>
-      
-      </section>
-  
-      <section class="example-section">
-        <mat-checkbox class="example-margin" [(ngModel)]="showTicks">Show ticks</mat-checkbox>
-        <mat-checkbox class="example-margin" [(ngModel)]="autoTicks" *ngIf="showTicks">
-          Auto ticks
-        </mat-checkbox>
-        <mat-form-field class="example-margin" *ngIf="showTicks && !autoTicks">
-          <input matInput type="number" placeholder="Tick interval" [(ngModel)]="tickInterval">
-        </mat-form-field>
-      </section>
-  
-      <section class="example-section">
-        <mat-checkbox class="example-margin" [(ngModel)]="thumbLabel">Show thumb label</mat-checkbox>
-      </section>
-  
-      
-  
-      <section class="example-section">
-        <mat-checkbox class="example-margin" [(ngModel)]="disabled">Disabled</mat-checkbox>
-      </section>
-  
-    </mat-card-content>
-  </mat-card>
-  
-  <mat-card class="result">
-    <mat-card-content>
-      <h2 class="example-h2">Result</h2>
-  
-      <mat-slider
-          class="example-margin"
-          [disabled]="disabled"
-          
-         
-          [thumbLabel]="thumbLabel"
-          [tickInterval]="tickInterval"
-          [(ngModel)]="value">
-          
-      </mat-slider>
-
-    </mat-card-content>
-  </mat-card>
- --------------------------->
