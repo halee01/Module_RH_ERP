@@ -70,6 +70,10 @@ export class CvCandidatService {
 
 
 
+
+
+
+
   /////////////////////////Back Connection//////////////////////////
 //******* Implement your APIs ********
 getItems(): Observable<Employee[]> {
@@ -96,17 +100,17 @@ getItems(): Observable<Employee[]> {
 }*/
 
 // POST a new item
-addItem(customer: any): Observable<any> {
+addItem(candidate: any): Observable<any> {
   
-  return this.http.post<any>(this.apiUrl, customer).pipe(
+  return this.http.post<any>(this.apiUrl, candidate).pipe(
     catchError(this.handleError)
   );
 }
 
 // PUT an existing item
-updateItem(id: number, customer: Employee): Observable<Employee> {
+updateItem(id: number, candidate: Employee): Observable<Employee> {
   const url = `${this.apiUrl}/${id}`;
-  return this.http.put<Employee>(url, customer).pipe(
+  return this.http.put<Employee>(url, candidate).pipe(
     catchError(this.handleError)
   );
 }

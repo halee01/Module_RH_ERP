@@ -49,33 +49,25 @@
                       </div>
 
 
-                      <!---->
+                      <!--intitulé du poste / title-->
                      <div class="pb-16">
                       <mat-form-field appearance="outline" [style.width.cm]=10>
                         <mat-label>Intitulè du poste</mat-label>
-                        <mat-select formControlName="intitulePoste" >
-                          <mat-option value="option1">...</mat-option>
-                          <mat-option value="option2">....</mat-option>
-                          <mat-option value="option3">.....</mat-option>
-                          <mat-option value="option1">......</mat-option>
-                          <mat-option value="option2">.......</mat-option>
-                          <mat-option value="option3">........</mat-option>
+                        <mat-select formControlName="title" >
+                          <mat-option  *ngFor="let titles of title " [value]="titles">{{titles}}</mat-option>
                         </mat-select>
                       </mat-form-field>
                       </div>
                        
   
                     <!--Country-->
+                    
                     <div class="pb-16">
-                      <mat-form-field appearance="outline" class="full-width">
-                        <mat-label>Pays</mat-label>
-                      <input
-                        matInput
-                        name="country"
-                        formControlName="country"
-                        placeholder="Ex.France"
-                        value=""
-                        required>
+                      <mat-form-field appearance="outline" [style.width.cm]=10>
+                      <mat-label>Pays</mat-label>
+                      <mat-select formControlName="country" placeholder="Ex.France" >
+                        <mat-option *ngFor="let country of countries" [value]="country.shortName">{{country.name}}</mat-option>
+                      </mat-select>
                       </mat-form-field>
                     </div>
 
@@ -134,6 +126,8 @@
 
                    <div div fxLayout="column" fxLayoutAlign="space-around center">
                    <div fxFlex="100" fxFlex.gt-xs="35" style="width: 10cm;" >
+
+                    
                     <!--last name-->
                     <div class="pb-16">
                       <mat-form-field appearance="outline" class="full-width">
@@ -154,32 +148,24 @@
                       class="form-error-msg"> Le nom ne peut pas contenir plus de  {{basicForm.controls['username'].errors.maxlength.requiredLength}} caractères </small>
                     </div>
                        
-                      <!-- Marital situation-->
+                      <!-- civility-->
                       <div class="pb-16">
                         <mat-form-field appearance="outline" [style.width.cm]=10>
                         <mat-label>Civilité</mat-label>
                         <mat-select formControlName="civility">
-                          <mat-option value="option1">...</mat-option>
-                          <mat-option value="option2">....</mat-option>
-                          <mat-option value="option3">.....</mat-option>
-                          <mat-option value="option1">......</mat-option>
-                          <mat-option value="option2">.......</mat-option>
-                          <mat-option value="option3">........</mat-option>
+                          <mat-option  *ngFor="let civilities of Civility " [value]="civilities">{{civilities}}</mat-option>
+                          
                         </mat-select>
                         </mat-form-field>
                       </div>
 
-                      <!--Job Title -->
+                      <!--Maritial Situation -->
                       <div class="pb-16">
                         <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Détails du poste</mat-label>
-                        <mat-select formControlName="jobTitle" >
-                          <mat-option value="option1">...</mat-option>
-                          <mat-option value="option2">....</mat-option>
-                          <mat-option value="option3">.....</mat-option>
-                          <mat-option value="option1">......</mat-option>
-                          <mat-option value="option2">.......</mat-option>
-                          <mat-option value="option3">........</mat-option>
+                        <mat-label>Situation Maritale</mat-label>
+                        <mat-select formControlName="maritalSitation" >
+                          <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{MaritalSituations}}</mat-option>
+                          
                         </mat-select>
                         </mat-form-field>
                       </div>
@@ -187,15 +173,11 @@
 
                       <!--City-->
                       <div class="pb-16">
-                        <mat-form-field appearance="outline" class="full-width">
-                          <mat-label>Ville</mat-label>
-                        <input
-                            matInput
-                            name="city"
-                            formControlName="city"
-                            placeholder="Ex.Lyon"
-                            value=""
-                            required>
+                        <mat-form-field appearance="outline" [style.width.cm]=10>
+                        <mat-label>Ville</mat-label>
+                        <mat-select formControlName="city" placeholder="Ex.Lyon" >
+                          <mat-option *ngFor="let state of states"  [value]="state">{{state}}</mat-option>
+                        </mat-select>
                         </mat-form-field>
                       </div>
 
@@ -435,7 +417,7 @@
                                 <input
                                 matInput
                                 name="post"
-                                formControlName="post"
+                                formControlName="experiencePost"
                                 placeholder="Ex.Stage"
                                 value=""
                                 required>
@@ -451,7 +433,7 @@
                               <input
                               matInput
                               name="title"
-                              formControlName="title"
+                              formControlName="experienceTitle"
                               placeholder="Ex.Développeur,Vendeuse"
                               value=""
                               required>
@@ -464,7 +446,7 @@
                             <input
                             matInput
                             name="role"
-                            formControlName="role"
+                            formControlName="experienceRole"
                             placeholder="Ex.Devloppement front-end"
                             value=""
                             required>
@@ -620,31 +602,26 @@
                   <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                     <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
                       <div [formGroupName]="i" class="d-flex align-items-center">
-                        <div class="form-group mb-1 col-sm-12 col-md-3">
-                          <mat-form-field [style.width.cm]=8 appearance="outline" style="margin-right: 0.5cm;">
-                            <mat-label>Langue</mat-label>
-                            <input
-                            matInput
-                            name="language"
-                            formControlName="language"
-                            placeholder="Ex. Français "
-                            value=""
-                            required>
-                            </mat-form-field>
-                        </div>
+                       
+                        <!--languages-->
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
-                            <mat-label>Niveau</mat-label>
-                            <mat-select  name="language-level" formControlName="languageLevel">
-                              <mat-option value="option1">...</mat-option>
-                              <mat-option value="option2">....</mat-option>
-                              <mat-option value="option3">.....</mat-option>
-                              <mat-option value="option1">......</mat-option>
-                              <mat-option value="option2">.......</mat-option>
-                              <mat-option value="option3">........</mat-option>
+                            <mat-label>Language</mat-label>
+                            <mat-select  placeholder="Ex. Français" formControlName="language">
+                              <mat-option *ngFor="let Language of Languages" [value]="Language">{{Language}}</mat-option>
                             </mat-select>
                             </mat-form-field>
                         </div>
+                        <!--language Level-->
+                        <div class="form-group mb-1 col-sm-12 col-md-3">
+                          <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
+                            <mat-label>Niveau</mat-label>
+                            <mat-select  placeholder="Ex. Courant" formControlName="languageLevel">
+                              <mat-option *ngFor="let LanguageLevels of LanguageLevel" [value]="LanguageLevels">{{LanguageLevels}}</mat-option>
+                            </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <!--Langauage Info-->
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field appearance="outline"  [style.width.cm]=8 class="example-full-width">
                             <mat-label>Informations supplémentaires</mat-label>

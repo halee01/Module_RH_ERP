@@ -71,34 +71,26 @@
    <mat-card class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
      <mat-card-content class="p-0">
        <mat-table [dataSource]="dataSource" matSort>
-         <ng-container matColumnDef="candidate.id">
-           <mat-header-cell *matHeaderCellDef mat-sort-header > ID </mat-header-cell>
-           <mat-cell *matCellDef="let row" data-label="id"> {{row._id}} </mat-cell>
-         </ng-container>
+        
+        <ng-container matColumnDef="firstName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="firstName" [style.color]="row.color"> {{row.firstName}} </mat-cell>
+        </ng-container>
    
-         <ng-container matColumnDef="name">
-           <mat-header-cell *matHeaderCellDef mat-sort-header > Prénom </mat-header-cell>
-           <mat-cell *matCellDef="let row" data-label="name"> {{row.name}} </mat-cell>
-         </ng-container>
+        <ng-container matColumnDef="lastName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="lastName" [style.color]="row.color"> {{row.lastName}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="postName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Intitulé du poste</mat-header-cell>
+          <mat-cell *matCellDef="let row" data-label="postName" [style.color]="row.color"> {{row.postName}} </mat-cell>
+        </ng-container>
    
-         <ng-container matColumnDef="age">
-           <mat-header-cell *matHeaderCellDef mat-sort-header>  Nom </mat-header-cell>
-           <mat-cell *matCellDef="let row" data-label="age"> {{row.age}} </mat-cell>
-         </ng-container>
-   
-         <ng-container matColumnDef="balance">
-           <mat-header-cell *matHeaderCellDef mat-sort-header> Intitulé du poste </mat-header-cell>
-           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.balance}} </mat-cell>
-         </ng-container>
-   
-         <ng-container matColumnDef="company">
-           <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.company}} </mat-cell>
-         </ng-container>
-   
+    
          <ng-container matColumnDef="status">
            <mat-header-cell *matHeaderCellDef mat-sort-header> Statut </mat-header-cell>
-           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color">
+           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="status">
              <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.isActive">{{row.isActive ? 'active' : 'inactive'}}
              </mat-chip>
            </mat-cell>

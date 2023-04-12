@@ -1,3 +1,4 @@
+import { MaritalSituation } from './../../../../../shared/models/Employee.model';
 import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray } from '@angular/forms'; 
 import {FormControl} from '@angular/forms';
@@ -10,6 +11,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CompanyStatus, LegalStatus, Provenance, Country } from 'app/shared/models/Partner';
 import { Privilege, Civility, Service } from 'app/shared/models/contact';
 import { WorkField, Availability, RequirementStatus, RequirementType } from 'app/shared/models/req';
+import { Title } from 'app/shared/models/Employee.model';
+import { CvCandidatService } from './cv-candidat.service';
+import { LanguageLevel, Languages } from 'app/shared/models/Language';
 
 
 @Component({
@@ -38,16 +42,18 @@ export class cvcandidatComponent implements OnInit {
   countries: Country[];
   states: string[];
   selectedFile: File;
-  Privilege :string []= Object.values(Privilege);
+  title :string[]= Object.values(Title);
   Civility :string []= Object.values(Civility);
+  MaritalSituation :string []= Object.values(MaritalSituation);
   Service :string []= Object.values(Service);
   formWidth = 200; //declare and initialize formWidth property
   formHeight = 700; //declare and initialize formHeight property
   Availability : string [] = Object.values(Availability);
   RequirementStatus  :string []= Object.values(RequirementStatus);
   RequirementType : string[] = Object.values(RequirementType);
+  Languages : string[] = Object.values(Languages);
+  LanguageLevel : string[] = Object.values(LanguageLevel);
 
-  constructor(private _formBuilder: FormBuilder) { }
 
   visible = true;
   selectable = true;
@@ -56,42 +62,49 @@ export class cvcandidatComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [];
 
+ constructor(private _formBuilder: FormBuilder,private cvCandidatService: CvCandidatService) { 
+  this.countries = this.cvCandidatService.getCountries(); }
+
+
+
+
   ////////////////////Ajout Candidat///////////////
   buildItemForm(item){
     this.itemForm = this._formBuilder.group({
 
-      firstName : [item.name || '', Validators.required],
-      lastName : [item.name || '', Validators.required],
-      birthdate : [item.name || '', Validators.required],
-      country : [item.name || '', Validators.required],
-      adress : [item.name || '', Validators.required],
-      email1 : [item.name || '', Validators.required],
-      phoneNumber1 : [item.name || '', Validators.required],
-      civility : [item.name || '', Validators.required],
-      jobTitle : [item.name || '', Validators.required],
-      city : [item.name || '', Validators.required],
-      postCode : [item.name || '', Validators.required],
-      email2 : [item.name || '', Validators.required],
-      phoneNumber2 : [item.name || '', Validators.required],
-      institution : [item.name || '', Validators.required],
-      diploma : [item.name || '', Validators.required],
-      score : [item.name || '', Validators.required],
-      educationStartYear: [item.name || '', Validators.required],
-      obtainedYear : [item.name || '', Validators.required],
-      company : [item.name || '', Validators.required],
-      post : [item.name || '', Validators.required],
-      title : [item.name || '', Validators.required],
-      role : [item.name || '', Validators.required],
-      ExperienceStartYear : [item.name || '', Validators.required],
-      ExperienceStartMonth: [item.name || '', Validators.required],
-      ExperienceEndYear : [item.name || '', Validators.required],
-      ExperienceEndMonth : [item.name || '', Validators.required],
-      certification : [item.name || '', Validators.required],
-      certifDate : [item.name || '', Validators.required],
-      language : [item.name || '', Validators.required],
-      languageLevel : [item.name || '', Validators.required],
-      languageInfo: [item.name || '', Validators.required],
-      skills : [item.name || '', Validators.required],
+      firstName : [item.firstName || '', Validators.required],
+      lastName : [item.lastName || '', Validators.required],
+      birthDate : [item.birthDate || '', Validators.required],
+      country : [item.country || '', Validators.required],
+      title : [item.postName || '', Validators.required],
+      adress : [item.adress || '', Validators.required],
+      email1 : [item.email1 || '', Validators.required],
+      phoneNumber1 : [item.phoneNumber1 || '', Validators.required],
+      civility : [item.civility || '', Validators.required],
+      maritalSitation : [item.maritalSitation || '', Validators.required],
+      city : [item.city || '', Validators.required],
+      postCode : [item.postCode || '', Validators.required],
+      email2 : [item.email2 || '', Validators.required],
+      phoneNumber2 : [item.phoneNumber2 || '', Validators.required],
+      institution : [item.institution || '', Validators.required],
+      diploma : [item.diploma || '', Validators.required],
+      score : [item.score || '', Validators.required],
+      educationStartYear: [item.educationStartYear || '', Validators.required],
+      obtainedYear : [item.obtainedYear || '', Validators.required],
+      company : [item.company || '', Validators.required],
+      experiencePost : [item.experiencePost || '', Validators.required],
+      experienceTitle : [item.experienceTitle || '', Validators.required],
+      experienceRole : [item.experienceRole || '', Validators.required],
+      ExperienceStartYear : [item.ExperienceStartYear || '', Validators.required],
+      ExperienceStartMonth: [item.ExperienceStartMonth || '', Validators.required],
+      ExperienceEndYear : [item.ExperienceEndYear || '', Validators.required],
+      ExperienceEndMonth : [item.ExperienceEndMonth || '', Validators.required],
+      certification : [item.certification || '', Validators.required],
+      certifDate : [item.certifDate || '', Validators.required],
+      language : [item.language || '', Validators.required],
+      languageLevel : [item.languageLevel || '', Validators.required],
+      languageInfo: [item.languageInfo || '', Validators.required],
+      skills : [item.skills || '', Validators.required],
       
     });
 
@@ -166,6 +179,15 @@ export class cvcandidatComponent implements OnInit {
     this.repeatForm = this._formBuilder.group({
       repeatArray: this._formBuilder.array([this.createRepeatForm()])
     });
+
+    /////Countries////
+    this.itemForm.get("country").valueChanges.subscribe((country) => {
+      this.itemForm.get("city").reset();
+      if (country) {
+        this.states = this.cvCandidatService.getStatesByCountry(country);
+   
+      }
+    });
   
   }
 
@@ -202,6 +224,8 @@ handleRemoveRepeatForm(index: number) {
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
-
+  onCountryChange(countryShotName: string) {
+    this.states = this.cvCandidatService.getStatesByCountry(countryShotName);
+  }
 }
 

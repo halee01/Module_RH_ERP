@@ -1,12 +1,12 @@
 export class Employee {
     id?: number;
-      lastName ?:string;
+     lastName ?:string;
      firstName?:string;
      birthDate ?:string;
-     emailOne ?:string;
-     emailTwo ?:string;
-     phoneNumberOne ?: number;
-     phoneNumberTwo ?: number;
+     email1 ?:string;
+     email2 ?:string;
+     phoneNumber1 ?: number;
+     phoneNumber2 ?: number;
     /*adress?:string;*/
      postCode ?: number;
      city ?: number;
@@ -16,7 +16,7 @@ export class Employee {
     employeeFirstName ?:string;
     employeeLastName ?:string;
     employeeSerialNumber ?:string;
-     civility?: Civility;
+    civility?: Civility;
     title?: Title;
     employeeStatus?:EmployeeStatus;
     country?:Country;
@@ -25,33 +25,33 @@ export class Employee {
     
 }
 export enum Civility{
-    MRS,
-    MS,
-    MR
+    MRS="Mme",
+    MS="Mlle",
+    MR="Mr"
 }
 export enum Title{
-    FRONT_END_DEVELOPER,
-    BACK_END_DEVELOPER,
-    FULLSTACK_DEVELOPER,
-    CRM,
-     HUMAN_RESOURCE_MANAGER,
-    HUMAN_RESOURCE,
-    PROJECT_MANAGER,
-    TECH_LEAD,
-    UI_UX_DESIGNER,
-    QA_ENGINEER,
-    DEVOPS_ENGINEER,
-    WEB_DEVELOPER,
-    OFFICE_MANAGER,
-     ACCOUNTANT,
-     SALES_REPRESENTATIVE,
-     CUSTOMER_SUPPORT_SPECIALIST,
-      MARKETING_COORDINATOR
+    FRONT_END_DEVELOPER ="Front end developpeur",
+    BACK_END_DEVELOPER="Back end developpeur",
+    FULLSTACK_DEVELOPER="FullStack developpeur",
+    CRM="CRM",
+     HUMAN_RESOURCE_MANAGER="Manager Ressources Humaines",
+    HUMAN_RESOURCE="Resoources Humaines",
+    PROJECT_MANAGER="Manager Projet",
+    TECH_LEAD="Consultant Technique",
+    UI_UX_DESIGNER="Ui_Ux Designer",
+    QA_ENGINEER="Ingénieur QA",
+    DEVOPS_ENGINEER="Ingénieur DevOps",
+    WEB_DEVELOPER="Developpeur Web",
+    OFFICE_MANAGER="Manager Office",
+     ACCOUNTANT="Financier",
+     SALES_REPRESENTATIVE="Représentant Ventes",
+     CUSTOMER_SUPPORT_SPECIALIST="Spécialiste Support Client",
+      MARKETING_COORDINATOR="Coordinateur Marketing"
 }
 export enum EmployeeStatus{
     IN_PROCESS, IN_PROGRESS, PRE_QUALIFIED, TOP_PROFILES, CONVERTED_TO_RESOURCE, DO_NOT_CONTACT, ARCHIVE
 }
-export enum Country{
+/*export enum Country{
     USA,
         AFGHANISTAN,
         ALBANIA,
@@ -254,13 +254,17 @@ export enum Country{
         YEMEN,
         ZAMBIA,
         ZIMBABWE
+}*/
+export interface Country{
+    shortName?: string;
+    name?: string;
 }
 export enum MaritalSituation {
-    SINGLE,
-    MARRIED,
-    DIVORCED,
-    WIDOWED,
-    COMPLICATED
+    SINGLE="Célibataire",
+    MARRIED="Marrié",
+    DIVORCED="Divorcé",
+    WIDOWED="veuf / veuve",
+    COMPLICATED="Compliqué"
 }
 export enum Provenance {
     LINKEDIN,

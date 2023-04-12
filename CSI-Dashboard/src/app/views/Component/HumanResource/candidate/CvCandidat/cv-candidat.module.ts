@@ -27,6 +27,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChipList, MatChipsModule } from '@angular/material/chips';
+import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { MatChipList, MatChipsModule } from '@angular/material/chips';
     HttpClientModule,
     MatExpansionModule,
     FormsModule,
+    MatGridListModule,
     MatIconModule,
     MatChipsModule,
     MatDialogModule,
