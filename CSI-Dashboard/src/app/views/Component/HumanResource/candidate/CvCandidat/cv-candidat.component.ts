@@ -105,7 +105,6 @@ export class cvcandidatComponent implements OnInit {
       languageLevel : [item.languageLevel || '', Validators.required],
       languageInfo: [item.languageInfo || '', Validators.required],
       skills : [item.skills || '', Validators.required],
-      
     });
 
   }
