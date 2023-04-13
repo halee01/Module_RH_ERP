@@ -7,7 +7,7 @@ export class Employee {
      email2 ?:string;
      phoneNumber1 ?: number;
      phoneNumber2 ?: number;
-    /*adress?:string;*/
+    adress?:string;
      postCode ?: number;
      city ?: number;
     recommendationType ?: number;

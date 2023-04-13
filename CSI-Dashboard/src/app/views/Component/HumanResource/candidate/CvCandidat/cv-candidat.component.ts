@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { MaritalSituation } from './../../../../../shared/models/Employee.model';
+import { MaritalSituation } from '../../../../../shared/models/Employee';
 import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray } from '@angular/forms'; 
 import {FormControl} from '@angular/forms';
@@ -12,7 +12,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CompanyStatus, LegalStatus, Provenance, Country } from 'app/shared/models/Partner';
 import { Privilege, Civility, Service } from 'app/shared/models/contact';
 import { WorkField, Availability, RequirementStatus, RequirementType } from 'app/shared/models/req';
-import { Title } from 'app/shared/models/Employee.model';
+import { Title } from 'app/shared/models/Employee';
 import { CvCandidatService } from './cv-candidat.service';
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { catchError, of } from 'rxjs';
@@ -28,7 +28,6 @@ import { catchError, of } from 'rxjs';
 export class cvcandidatComponent implements OnInit {
   formData = {}
   console = console;
-  basicForm: UntypedFormGroup;
   repeatForm: FormGroup;
   parentForm: FormGroup;
   form1: FormGroup;
@@ -37,7 +36,7 @@ export class cvcandidatComponent implements OnInit {
   form4: FormGroup;
   step1:FormGroup;
   step2:FormGroup;
- step3:FormGroup;
+  step3:FormGroup;
   step4:FormGroup;
 
 //////////////Ajout Candidat///////////////
@@ -73,16 +72,62 @@ export class cvcandidatComponent implements OnInit {
   private cvCandidatService: CvCandidatService,
   private formBuilder: FormBuilder,
    private http: HttpClient) 
-   {  this.countries = this.cvCandidatService.getCountries(); }
+   {  this.countries = this.cvCandidatService.getCountries();
 
+    /*this.form1 = new FormGroup({
 
+      firstName: new FormControl(''),
+      birthdate: new FormControl(''),
+      title: new FormControl(''),
+      country: new FormControl(''),
+      adress: new FormControl(''),
+      email1: new FormControl(''),
+      phoneNumber1: new FormControl(''),
+      lasttName: new FormControl(''),
+      civility: new FormControl(''),
+      maritalSituation: new FormControl(''),
+      postCode: new FormControl(''),
+      email2: new FormControl(''),
+      phoneNumber2: new FormControl(''),
+      city: new FormControl('')
 
+    });
 
+    this.form2 = new FormGroup({
+      institution: new FormControl(''),
+      diploma: new FormControl(''),
+      score: new FormControl(''),
+      educationStartYear: new FormControl(''),
+      obtainedYear: new FormControl('')
+    });
+
+      this.form3 = new FormGroup({
+      company: new FormControl(''),
+      experiencePost: new FormControl(''),
+      experienceTitle: new FormControl(''),
+      experienceRole: new FormControl(''),
+      experienceStartYear: new FormControl(''),
+      experienceStartMonth: new FormControl(''),
+      experienceEndtYear: new FormControl(''),
+      experienceEndMonth: new FormControl('')
+
+    }); 
+    this.form4 = new FormGroup({
+      certification: new FormControl(''),
+      certifDate: new FormControl(''),
+      language: new FormControl(''),
+      languageLevel: new FormControl(''),
+      languageInfo: new FormControl(''),
+      skillsCategory: new FormControl(''),
+      skills: new FormControl(''),
+    });
+    this.form4.addControl('language', new FormControl(''));*/
+  }
 
 
   ////////////////////Ajout Candidat///////////////
   buildItemForm(item){
-    this.itemForm = this._formBuilder.group({
+    this.parentForm = this._formBuilder.group({
 
       firstName : [item.firstName || '', Validators.required],
       lastName : [item.lastName || '', Validators.required],
@@ -127,31 +172,12 @@ export class cvcandidatComponent implements OnInit {
     let password = new UntypedFormControl('', Validators.required);
     let confirmPassword = new UntypedFormControl('');
     
-    this.basicForm = new UntypedFormGroup({
+    this.parentForm = new UntypedFormGroup({
       username: new UntypedFormControl('', [
         Validators.minLength(4),
         Validators.maxLength(9)
       ]),
-      firstname: new UntypedFormControl('', [
-        Validators.required
-      ]),
-      email: new UntypedFormControl('', [
-        Validators.required,
-        Validators.email
-      ]),
-      website: new UntypedFormControl(''),
-      date: new UntypedFormControl(),
-      cardno: new UntypedFormControl(''),
-      password: password,
-      confirmPassword: confirmPassword,
-      gender: new UntypedFormControl(''),
-      agreed: new UntypedFormControl('', (control: UntypedFormControl) => {
-        const agreed = control.value;
-        if(!agreed) {
-          return { agreed: true }
-        }
-        return null;
-      })
+      
     })
   
     this.repeatForm = this._formBuilder.group({
@@ -168,33 +194,10 @@ export class cvcandidatComponent implements OnInit {
     });
 
     ///form submit
-    this.parentForm = this.formBuilder.group({
-      form1: this.form1,
-      form2: this.form2,
-      form3: this.form3,
-      form4: this.form4
-    });
-
-  
-   this.form1 = this.formBuilder.group({
-    firstCtrl: ['', Validators.required]
-  });
-
-  this.form2 = this.formBuilder.group({
-    firstCtrl: ['', Validators.required]
-    
-  });
-
-  this.form3 = this.formBuilder.group({
-    firstCtrl: ['', Validators.required]
    
-  });
-
-  this.form4 = this.formBuilder.group({
-    firstCtrl: ['', Validators.required]
-    
-  });
   }
+
+
   //////////////fonction ghada///////
   saveCandidate(): void {
     console.log('saveCandidat() called');
@@ -265,12 +268,13 @@ export class cvcandidatComponent implements OnInit {
  
 createRepeatForm(): FormGroup {
   return this._formBuilder.group({
-    
   });
 }
+
 get repeatFormGroup() {
   return this.repeatForm.get('repeatArray') as FormArray;
 }
+
 handleAddRepeatForm() {
   this.repeatFormGroup.push(this.createRepeatForm());
 }

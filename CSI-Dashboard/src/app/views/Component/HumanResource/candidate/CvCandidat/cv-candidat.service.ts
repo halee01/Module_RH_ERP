@@ -5,7 +5,7 @@ import * as countrycitystatejson from 'countrycitystatejson';
 import { map, catchError } from 'rxjs/operators';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
-import { Employee } from 'app/shared/models/Employee.model';
+import { Employee } from 'app/shared/models/Employee';
 
 @Injectable()
 export class CvCandidatService {
@@ -101,11 +101,18 @@ getItems(): Observable<Employee[]> {
 
 // POST a new item
 addItem(candidate: any): Observable<any> {
+  const apiUrlWithAdd = this.apiUrl + '/add'; // Append /add to the apiUrl
+  return this.http.post<any>(apiUrlWithAdd, candidate).pipe(
+    catchError(this.handleError)
+  );
+}
+/*
+addItem(candidate: any): Observable<any> {
   
   return this.http.post<any>(this.apiUrl, candidate).pipe(
     catchError(this.handleError)
   );
-}
+}*/
 
 // PUT an existing item
 updateItem(id: number, candidate: Employee): Observable<Employee> {
