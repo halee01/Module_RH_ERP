@@ -1,9 +1,9 @@
 <mat-card class="p-0">
   <mat-horizontal-stepper linear #stepper>
-
+    <form [formGroup]="parentForm" (ngSubmit)="saveCandidate()">
 
     <!---------------------------COORDONNES-------------------------->
-  <mat-step [stepControl]="firstFormGroup" errorMessage="Tous les champs sont obligatoires.">
+  <mat-step [stepControl]="step1" errorMessage="Tous les champs sont obligatoires.">
       <ng-template matStepLabel>Coordonnées</ng-template>
       
       <mat-card-title class="">
@@ -13,7 +13,7 @@
         </mat-card-title>
 
       <mat-card-content style="padding-top: 2cm;">
-        <form [formGroup]="firstFormGroup">
+        <div [formGroup]="form1" >
           <div fxLayout="row" fxLayoutAlign="space-evenly center" >
               <div div fxLayout="column" fxLayoutAlign="space-around center">
                  <div fxFlex="100" fxFlex.gt-xs="35" style="width: 10cm;" >
@@ -29,12 +29,14 @@
                             value=""
                             required>
                         </mat-form-field>
+                       <!--
                         <small 
                         *ngIf="basicForm.controls['username'].hasError('minlength') && basicForm.controls['username'].touched" 
                         class="form-error-msg"> Le prénom nécessite au moins {{basicForm.controls['username'].errors.minlength.requiredLength}} caractères </small>
                         <small 
                         *ngIf="basicForm.controls['username'].hasError('maxlength') && basicForm.controls['username'].touched" 
                         class="form-error-msg"> Le prénom ne peut pas contenir plus de  {{basicForm.controls['username'].errors.maxlength.requiredLength}} caractères </small>
+                       --> 
                       </div>
 
                     
@@ -65,7 +67,7 @@
                     <div class="pb-16">
                       <mat-form-field appearance="outline" [style.width.cm]=10>
                       <mat-label>Pays</mat-label>
-                      <mat-select formControlName="country" placeholder="Ex.France" >
+                      <mat-select formControlName="country" placeholder="Ex.France" required >
                         <mat-option *ngFor="let country of countries" [value]="country.shortName">{{country.name}}</mat-option>
                       </mat-select>
                       </mat-form-field>
@@ -99,12 +101,14 @@
                           value=""
                           required>
                       </mat-form-field>
-                      <small 
+                      <!--
+                        <small 
                       *ngIf="basicForm.controls['email'].hasError('required') && basicForm.controls['email'].touched" 
                       class="form-error-msg"> Email is required </small>
                       <small 
                       *ngIf="basicForm.controls['email'].hasError('email') && basicForm.controls['email'].touched" 
                       class="form-error-msg"> Invaild email address </small>
+                      -->
                     </div>
 
                      <!--Phone Number 1-->
@@ -206,8 +210,7 @@
                             name="email"
                             formControlName="email2"
                             placeholder="Ex.csi.digital@exemple.fr"
-                            value=""
-                            required>
+                            value="">
                         </mat-form-field>
                         <small 
                         *ngIf="basicForm.controls['email'].hasError('required') && basicForm.controls['email'].touched" 
@@ -227,8 +230,7 @@
                             matInput
                             formControlName="phoneNumber2"
                             placeholder="Ex.+33 801 123 456" 
-                            value=""
-                            required>
+                            value="">
                         </mat-form-field>
                     </div>
                 </div>
@@ -242,14 +244,14 @@
             [disabled]="basicForm.valid" matStepperNext>Suivant : Formation
             </button>
             </div>
-        </form>
+          </div>
     </mat-card-content>
   </mat-step>
 
   <!--------------------------------FORMATION------------------------------->
 
-  <mat-step [stepControl]="secondFormGroup" errorMessage="Tous les champs sont obligatoires.">
-    <form [formGroup]="secondFormGroup">
+  <mat-step [stepControl]="step2" errorMessage="Tous les champs sont obligatoires.">
+    <div [formGroup]="form2" >
       <ng-template matStepLabel>Formation</ng-template>
 
       <mat-card-title class="">
@@ -263,7 +265,7 @@
         </mat-card-title>
 
         <mat-card-content style="padding-top: 2cm;">
-          <form [formGroup]="repeatForm" class="repeat-form">
+          <div [formGroup]="repeatForm" class="repeat-form">
             <div class="card-body" formArrayName="repeatArray">
                 <div class="col-12 align-items-center" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                   <div class="repeater-default" style="display: flex;justify-content: center;align-items: center;">
@@ -276,8 +278,7 @@
                             name="institution"
                             formControlName="institution"
                             placeholder="Ex. Université de paris"
-                            value=""
-                            required>
+                            value="">
                         </mat-form-field>
                       </div>
 
@@ -303,8 +304,7 @@
                               name="score"
                               formControlName="score"
                               placeholder="Ex. mention bien"
-                              value=""
-                              required>
+                              value="">
                             </mat-form-field>
                       </div>
                       </div> 
@@ -321,9 +321,9 @@
                       <div class="form-group mb-1 col-sm-12 col-md-3">
                         <mat-form-field appearance="outline" [style.width.cm]=7>
                           <mat-label>Date d'obtention</mat-label>
-                          <input matInput [matDatepicker]="picker" formControlName="obtainedYear" placeholder="Date d'obtention" required>
-                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                          <mat-datepicker #picker></mat-datepicker>
+                          <input matInput [matDatepicker]="picker2" formControlName="obtainedYear" placeholder="Date d'obtention" required>
+                          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                          <mat-datepicker #picker2></mat-datepicker>
                         </mat-form-field>
                       </div>
                       </div>
@@ -331,7 +331,6 @@
                       <div class="pb-16">
                         <mat-checkbox>En cours</mat-checkbox>
                       </div>
-
                     </div>
                       <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
                         <button mat-icon-button color="warn" type="button"  [disabled]="i === 0" (click)="handleRemoveRepeatForm(i)">
@@ -344,7 +343,7 @@
                     </div>
                   </div>
               </div>
-          </form>
+            </div>
       </mat-card-content>
 
 
@@ -369,14 +368,14 @@
         </div>
       </div>
 
-    </form>
+    </div>
   </mat-step>
 
 
   <!--------------------------------EXPERIENCE------------------------------>
 
-  <mat-step [stepControl]="thirdFormGroup" errorMessage="Tous les champs sont obligatoires.">
-    <form [formGroup]="thirdFormGroup">
+  <mat-step [stepControl]="step3" errorMessage="Tous les champs sont obligatoires.">
+    <div [formGroup]="form3" >
       <ng-template matStepLabel>Expériences</ng-template>
 
       <mat-card-title class="">
@@ -390,7 +389,7 @@
         </mat-card-title>
 
         <mat-card-content style="padding-top: 2cm;">
-          <form [formGroup]="repeatForm" class="repeat-form">
+          <div [formGroup]="repeatForm" class="repeat-form">
             <div class="card-body" formArrayName="repeatArray">
                 <div class="col-12 align-items-center" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                   <div class="repeater-default" style="display: flex;justify-content: center;align-items: center;">
@@ -405,8 +404,7 @@
                               name="institution"
                               formControlName="company"
                               placeholder="Ex.Orange"
-                              value=""
-                              required>
+                              value="">
                           </mat-form-field>
                           
                         </div>
@@ -419,8 +417,7 @@
                                 name="post"
                                 formControlName="experiencePost"
                                 placeholder="Ex.Stage"
-                                value=""
-                                required>
+                                value="">
                             </mat-form-field>
                       </div>
                       </div> 
@@ -435,8 +432,7 @@
                               name="title"
                               formControlName="experienceTitle"
                               placeholder="Ex.Développeur,Vendeuse"
-                              value=""
-                              required>
+                              value="">
                           </mat-form-field>
                         </div>
                       <div class="form-group mb-1 col-sm-12 col-md-3">
@@ -448,8 +444,7 @@
                             name="role"
                             formControlName="experienceRole"
                             placeholder="Ex.Devloppement front-end"
-                            value=""
-                            required>
+                            value="">
                         </mat-form-field>
                       </div>
                       </div>
@@ -465,31 +460,31 @@
                           <!--Dates-->
                           <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
                             <mat-hint>Date Début</mat-hint>
-                            <input matInput [matDatepicker]="picker" formControlName="ExperienceStartYear" placeholder="Année" required>
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
+                            <input matInput [matDatepicker]="picker1" formControlName="ExperienceStartYear" placeholder="Année" required>
+                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                            <mat-datepicker #picker1></mat-datepicker>
                           </mat-form-field>
                           </div>
                           <div class="form-group mb-1 col-sm-12 col-md-3">
                             <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
-                              <input matInput [matDatepicker]="picker" formControlName="ExperienceStartMonth" placeholder="Mois " required>
-                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                              <mat-datepicker #picker></mat-datepicker>
+                              <input matInput [matDatepicker]="picker2" formControlName="ExperienceStartMonth" placeholder="Mois " required>
+                              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                              <mat-datepicker #picker2></mat-datepicker>
                             </mat-form-field>
                           </div>
                           <div class="form-group mb-1 col-sm-12 col-md-3">
                             <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
                               <mat-hint>Date Fin</mat-hint>
-                              <input matInput [matDatepicker]="picker" formControlName="ExperienceEndYear" placeholder="Année" required>
-                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                              <mat-datepicker #picker></mat-datepicker>
+                              <input matInput [matDatepicker]="picker3" formControlName="ExperienceEndYear" placeholder="Année" required>
+                              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                              <mat-datepicker #picker3></mat-datepicker>
                             </mat-form-field>
                           </div>
                           <div class="form-group mb-1 col-sm-12 col-md-3">
                             <mat-form-field [style.width.cm]=5 appearance="outline">
-                              <input matInput [matDatepicker]="picker" formControlName="ExperienceEndMonth" placeholder="Mois" required>
-                              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                              <mat-datepicker #picker></mat-datepicker>
+                              <input matInput [matDatepicker]="picker4" formControlName="ExperienceEndMonth" placeholder="Mois" required>
+                              <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                              <mat-datepicker #picker4></mat-datepicker>
                             </mat-form-field>
                           </div>
                           </div>
@@ -510,7 +505,7 @@
                     </div>
                   </div>
               </div>
-          </form>
+            </div>
       </mat-card-content>
       <div  fxLayout="row" fxLayoutAlign="space-between center">
         <!--Button 2-->
@@ -531,13 +526,13 @@
         </button>
         </div>
       </div>
-    </form>
+    </div>
   </mat-step>
 
   <!--------------------------------COMPETANCES------------------------------->
 
-  <mat-step [stepControl]="fourthFormGroup" errorMessage="Tous les champs sont obligatoires.">
-    <form [formGroup]="fourthFormGroup">
+  <mat-step [stepControl]="step4" errorMessage="Tous les champs sont obligatoires.">
+    <div [formGroup]="form4">
       <ng-template matStepLabel>Compétances</ng-template>
       <mat-card-title class="">
         <mat-divider></mat-divider>
@@ -557,17 +552,19 @@
                   ...
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <form [formGroup]="repeatForm" class="repeat-form">
+              <div [formGroup]="repeatForm" class="repeat-form">
                 <div class="card-body" formArrayName="repeatArray">
                   <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                     <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
                       <div [formGroupName]="i" class="d-flex align-items-center">
+                        <!--Certif-->
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field [style.width.cm]=8 appearance="outline" style="margin-right: 2cm;">
                             <mat-label>Certification</mat-label>
                             <input matInput name="certification" formControlName="certification" placeholder="Ex. Google certification " required>
                           </mat-form-field>
                         </div>
+                        <!--Certif Year-->
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field [style.width.cm]=8 appearance="outline">
                             <mat-label>Année d'obtention</mat-label>
@@ -588,7 +585,7 @@
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </mat-expansion-panel>
              <!-----------------------Languages------------------------>
             <mat-expansion-panel  >
@@ -597,7 +594,7 @@
                  Langues
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <form [formGroup]="repeatForm" class="repeat-form">
+              <div [formGroup]="repeatForm" class="repeat-form">
                 <div class="card-body" formArrayName="repeatArray">
                   <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                     <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
@@ -640,7 +637,7 @@
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </mat-expansion-panel>
             <!---------------------Compétances-------------------->
             <mat-expansion-panel  >
@@ -649,7 +646,7 @@
                  Compétances
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <form [formGroup]="repeatForm" class="repeat-form">
+              <div [formGroup]="repeatForm" class="repeat-form">
                 <div class="card-body" formArrayName="repeatArray">
                   <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                     <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
@@ -661,8 +658,7 @@
                               <input
                               matInput
                               formControlName="skillsCategory"
-                              placeholder="Ex.Soft Skills / Hard Skills"
-                              required>
+                              placeholder="Ex.Soft Skills / Hard Skills">
                           </mat-form-field>
                         </div>
                         
@@ -699,7 +695,7 @@
                     </div>
                   </div>
                 </div>
-              </form>
+              </div>
             </mat-expansion-panel>
 
             <!--Sections supplémentaires-->
@@ -720,20 +716,26 @@
           <button 
         mat-raised-button 
         color="primary" 
-        [disabled]="basicForm.valid" matStepperPrevious>Précédent : Expérience
+        [disabled]="basicForm.valid" matStepperPrevious>
+        Précédent : Expérience
         </button>
         </div>
 
         <!--Button 1-->
         <div>
-          <button 
-        mat-raised-button 
-        color="primary" 
-        [disabled]="basicForm.valid" matStepperNext>Finalisation
-        </button>
+          <button  mat-raised-button 
+          color="primary"
+           [disabled]="basicForm.valid" 
+           type="submit"
+           >
+           Finalisation</button>
         </div>
       </div>
-    </form>
-  </mat-step>
+    </div>
+    </mat-step>
+   </form>
 </mat-horizontal-stepper>
 </mat-card>
+
+   
+

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { MaritalSituation } from './../../../../../shared/models/Employee.model';
 import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray } from '@angular/forms'; 
@@ -14,6 +15,7 @@ import { WorkField, Availability, RequirementStatus, RequirementType } from 'app
 import { Title } from 'app/shared/models/Employee.model';
 import { CvCandidatService } from './cv-candidat.service';
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
+import { catchError, of } from 'rxjs';
 
 
 @Component({
@@ -27,13 +29,18 @@ export class cvcandidatComponent implements OnInit {
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup: FormGroup;
-  fourthFormGroup : FormGroup;
   repeatForm: FormGroup;
+  parentForm: FormGroup;
+  form1: FormGroup;
+  form2: FormGroup;
+  form3: FormGroup;
+  form4: FormGroup;
+  step1:FormGroup;
+  step2:FormGroup;
+ step3:FormGroup;
+  step4:FormGroup;
+
 //////////////Ajout Candidat///////////////
-  
   public itemForm: FormGroup;;
   CompanyStatus = Object.values(CompanyStatus);
   WorkField :string []= Object.values(WorkField);
@@ -54,7 +61,7 @@ export class cvcandidatComponent implements OnInit {
   Languages : string[] = Object.values(Languages);
   LanguageLevel : string[] = Object.values(LanguageLevel);
 
-
+  submitted = false;
   visible = true;
   selectable = true;
   removable = true;
@@ -62,8 +69,13 @@ export class cvcandidatComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [];
 
- constructor(private _formBuilder: FormBuilder,private cvCandidatService: CvCandidatService) { 
-  this.countries = this.cvCandidatService.getCountries(); }
+ constructor(private _formBuilder: FormBuilder,
+  private cvCandidatService: CvCandidatService,
+  private formBuilder: FormBuilder,
+   private http: HttpClient) 
+   {  this.countries = this.cvCandidatService.getCountries(); }
+
+
 
 
 
@@ -108,42 +120,9 @@ export class cvcandidatComponent implements OnInit {
     });
 
   }
-/////////////////Fin ajout Candidat///////////////
   
 
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add skill
-    if ((value || '').trim()) {
-      this.fruits.push({name: value.trim()});
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-  }
-
-  remove(fruit: Fruit): void {
-    const index = this.fruits.indexOf(fruit);
-
-    if (index >= 0) {
-      this.fruits.splice(index, 1);
-    }
-  }
-
-
-
   ngOnInit() {
-
-    //this.firstFormGroup = this._formBuilder.group({
-     // firstCtrl: ['', Validators.required]
-    //});
-   //this.secondFormGroup = this._formBuilder.group({
-     // secondCtrl: ['', Validators.required]
-    //});
     
     let password = new UntypedFormControl('', Validators.required);
     let confirmPassword = new UntypedFormControl('');
@@ -187,8 +166,99 @@ export class cvcandidatComponent implements OnInit {
    
       }
     });
+
+    ///form submit
+    this.parentForm = this.formBuilder.group({
+      form1: this.form1,
+      form2: this.form2,
+      form3: this.form3,
+      form4: this.form4
+    });
+
   
+   this.form1 = this.formBuilder.group({
+    firstCtrl: ['', Validators.required]
+  });
+
+  this.form2 = this.formBuilder.group({
+    firstCtrl: ['', Validators.required]
+    
+  });
+
+  this.form3 = this.formBuilder.group({
+    firstCtrl: ['', Validators.required]
+   
+  });
+
+  this.form4 = this.formBuilder.group({
+    firstCtrl: ['', Validators.required]
+    
+  });
   }
+  //////////////fonction ghada///////
+  saveCandidate(): void {
+    console.log('saveCandidat() called');
+    if (this.parentForm.valid) {
+      console.log('Form is valid, submitting...');
+      this.cvCandidatService.addItem(this.parentForm.value).subscribe({
+        next: (res) => {
+          console.log('Item added successfully', res);
+          console.log('Form value', this.parentForm.value);
+          this.submitted = true;
+        },
+        error: (e) => console.error('Error adding item', e)
+      });
+    } else {
+      console.warn('Form is invalid');
+    }
+  }
+  public confirmer(){}
+
+   ///////Skills chips//////////
+   add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add skill
+    if ((value || '').trim()) {
+      this.fruits.push({name: value.trim()});
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  // Remove skill
+  remove(fruit: Fruit): void {
+    const index = this.fruits.indexOf(fruit);
+
+    if (index >= 0) {
+      this.fruits.splice(index, 1);
+    }
+  }
+
+
+  ///// Form Submit///// 
+  onSubmit() {
+    // Get the values of each form
+    const formData = this.parentForm.value;
+
+    this.http.post('http://localhost:8080/rh/employee', formData)
+  .pipe(
+    catchError(error => {
+      console.log(error);
+      return of(error);
+    })
+  )
+  .subscribe(response => {
+    console.log(response);
+    // Handle the response, such as displaying a success message
+  });
+  }
+
+
 
   //Section Supplimentaire button
   showInput = false;

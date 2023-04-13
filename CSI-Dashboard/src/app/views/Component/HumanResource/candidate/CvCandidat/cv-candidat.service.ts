@@ -29,7 +29,7 @@ export class CvCandidatService {
       })
     );
   }
-
+  
   public addEvent(event): Observable<EgretCalendarEvent[]> {
     // return this.http.post('api/calendar/events', event)
     // .map((events: EgretCalendarEvent[]) => {
