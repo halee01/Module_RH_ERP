@@ -29,7 +29,7 @@ export class cvcandidatComponent implements OnInit {
   formData = {}
   console = console;
   repeatForm: FormGroup;
-  parentForm: FormGroup;
+  myForm: FormGroup;
   form1: FormGroup;
   form2: FormGroup;
   form3: FormGroup;
@@ -126,58 +126,59 @@ export class cvcandidatComponent implements OnInit {
 
 
   ////////////////////Ajout Candidat///////////////
-  buildItemForm(item){
-    this.parentForm = this._formBuilder.group({
-
-      firstName : [item.firstName || '', Validators.required],
-      lastName : [item.lastName || '', Validators.required],
-      birthDate : [item.birthDate || '', Validators.required],
-      country : [item.country || '', Validators.required],
-      title : [item.postName || '', Validators.required],
-      adress : [item.adress || '', Validators.required],
-      email1 : [item.email1 || '', Validators.required],
-      phoneNumber1 : [item.phoneNumber1 || '', Validators.required],
-      civility : [item.civility || '', Validators.required],
-      maritalSitation : [item.maritalSitation || '', Validators.required],
-      city : [item.city || '', Validators.required],
-      postCode : [item.postCode || '', Validators.required],
-      email2 : [item.email2 || '', Validators.required],
-      phoneNumber2 : [item.phoneNumber2 || '', Validators.required],
-      institution : [item.institution || '', Validators.required],
-      diploma : [item.diploma || '', Validators.required],
-      score : [item.score || '', Validators.required],
-      educationStartYear: [item.educationStartYear || '', Validators.required],
-      obtainedYear : [item.obtainedYear || '', Validators.required],
-      company : [item.company || '', Validators.required],
-      experiencePost : [item.experiencePost || '', Validators.required],
-      experienceTitle : [item.experienceTitle || '', Validators.required],
-      experienceRole : [item.experienceRole || '', Validators.required],
-      ExperienceStartYear : [item.ExperienceStartYear || '', Validators.required],
-      ExperienceStartMonth: [item.ExperienceStartMonth || '', Validators.required],
-      ExperienceEndYear : [item.ExperienceEndYear || '', Validators.required],
-      ExperienceEndMonth : [item.ExperienceEndMonth || '', Validators.required],
-      certification : [item.certification || '', Validators.required],
-      certifDate : [item.certifDate || '', Validators.required],
-      language : [item.language || '', Validators.required],
-      languageLevel : [item.languageLevel || '', Validators.required],
-      languageInfo: [item.languageInfo || '', Validators.required],
-      skills : [item.skills || '', Validators.required],
-    });
-
-  }
+  
+  
   
 
   ngOnInit() {
     
     let password = new UntypedFormControl('', Validators.required);
     let confirmPassword = new UntypedFormControl('');
-    
-    this.parentForm = new UntypedFormGroup({
-      username: new UntypedFormControl('', [
-        Validators.minLength(4),
+
+    this.myForm = new UntypedFormGroup({
+      firstName: new UntypedFormControl('', [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(15)
+      ]),
+      lastName: new UntypedFormControl('', [
+        Validators.required,
+        Validators.minLength(2),
         Validators.maxLength(9)
       ]),
-      
+      birthDate: new UntypedFormControl('', [Validators.required]),
+      /*country: new UntypedFormControl('', [Validators.required]),
+      title: new UntypedFormControl('', []),*/
+       address: new UntypedFormControl(''),
+      emailOne: new UntypedFormControl('', [Validators.required, Validators.email]),
+     /* phoneNumberOne: new UntypedFormControl('', [Validators.required]),
+      civility: new UntypedFormControl('', []),
+      maritalSituation: new UntypedFormControl('', []),
+      city: new UntypedFormControl('', []),
+      postCode: new UntypedFormControl('', []),
+      emailTwo: new UntypedFormControl('', [ Validators.email]),
+      phoneNumberTwo: new UntypedFormControl('', []),
+      institution: new UntypedFormControl('', []),
+      diploma: new UntypedFormControl('', []),
+      score: new UntypedFormControl('', []),
+      educationStartYear: new UntypedFormControl('', []),
+      obtainedYear: new UntypedFormControl('', []),
+      experienceCompany: new UntypedFormControl('', []),
+      experiencePost: new UntypedFormControl('', []),
+      experienceTitle: new UntypedFormControl('', []),
+      experienceRole : new UntypedFormControl('', []),
+      experienceStartYear: new UntypedFormControl('', []),
+      experienceStartMonth: new UntypedFormControl('', []),
+      experienceEndYear: new UntypedFormControl('', []),
+      experienceEndMonth: new UntypedFormControl('', []),
+      certification: new UntypedFormControl('', []),
+      certifDate: new UntypedFormControl('', []),
+      language: new UntypedFormControl('', []),
+      languageLevel: new UntypedFormControl('', []),
+      additionalInformation: new UntypedFormControl('', []),
+      skillTitle : new UntypedFormControl('', []),
+      skillCategoryTitle: new UntypedFormControl('', []),*/
+
     })
   
     this.repeatForm = this._formBuilder.group({
@@ -201,13 +202,24 @@ export class cvcandidatComponent implements OnInit {
   //////////////fonction ghada///////
   saveCandidate(): void {
     console.log('saveCandidat() called');
-    if (this.parentForm.valid) {
+    if (this.myForm.valid) {
       console.log('Form is valid, submitting...');
-      this.cvCandidatService.addItem(this.parentForm.value).subscribe({
+      this.cvCandidatService.addItem(this.myForm.value).subscribe({
         next: (res) => {
           console.log('Item added successfully', res);
-          console.log('Form value', this.parentForm.value);
+          console.log('Form value', this.myForm.value);
           this.submitted = true;
+          console.log(this.myForm.get("firstName"))
+          console.log(this.myForm.get("lastName"))
+          console.log(this.myForm.get("country"))
+          console.log(this.myForm.get("title"))
+          console.log(this.myForm.get("adress"))
+          console.log(this.myForm.get("birthDate"))
+          console.log(this.myForm.get("emailOne"))
+          console.log(this.myForm.get("emailtwo"))
+          console.log(this.myForm.get("phoneNumberOne"))
+          console.log(this.myForm.get("civility"))
+          console.log(this.myForm.get("maritalSituation"))
         },
         error: (e) => console.error('Error adding item', e)
       });
@@ -246,7 +258,7 @@ export class cvcandidatComponent implements OnInit {
   ///// Form Submit///// 
   onSubmit() {
     // Get the values of each form
-    const formData = this.parentForm.value;
+    const formData = this.myForm.value;
 
     this.http.post('http://localhost:8080/rh/employee', formData)
   .pipe(

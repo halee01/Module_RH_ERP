@@ -1,5 +1,5 @@
 export interface Skills{
-    id ?:number;
-    title ?:string;
+    Id ?:number;
+    skillTitle ?:string;
     
 }

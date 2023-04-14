@@ -1,4 +1,4 @@
 export interface SkillsCategory{
-    id ?:number;
-    title ?:string;
+    Id ?:number;
+    skillCategoryTitle ?:string;
 }

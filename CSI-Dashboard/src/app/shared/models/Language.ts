@@ -1,7 +1,7 @@
 export interface Language{
-    id ?:number;
+    Id ?:number;
     languageLevel?:LanguageLevel;
-    additionalInformation ?:string;
+    additionalInformation?:string;
     language ?:Languages;
 }
 

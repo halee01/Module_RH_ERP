@@ -1,29 +1,25 @@
 export class Employee {
-    id?: number;
+    Id?: number;
      lastName ?:string;
      firstName?:string;
      birthDate ?:string;
-     email1 ?:string;
-     email2 ?:string;
-     phoneNumber1 ?: number;
-     phoneNumber2 ?: number;
-    adress?:string;
+     emailOne ?:string;
+     emailTwo?:string;
+     phoneNumberOne ?: number;
+     phoneNumberTwo ?: number;
+     address?:string;
      postCode ?: number;
      city ?: number;
-    recommendationType ?: number;
-    experience ?: number;
-    experienceDetails ?:string;
-    employeeFirstName ?:string;
-    employeeLastName ?:string;
-    employeeSerialNumber ?:string;
-    civility?: Civility;
-    title?: Title;
-    employeeStatus?:EmployeeStatus;
-    country?:Country;
-    maritalSituation ?:MaritalSituation;
-    provenance ?: Provenance;
-    
+     recommendationMark ?: number;
+     experience ?: number;
+     experienceDetails ?:string;
+     civility?: Civility;
+     title?: Title;
+     employeeStatus?:EmployeeStatus;
+     country?:Country;
+     maritalSituation ?:MaritalSituation;
 }
+
 export enum Civility{
     MRS="Mme",
     MS="Mlle",
