@@ -77,7 +77,8 @@ export class CvCandidatService {
   /////////////////////////Back Connection//////////////////////////
 //******* Implement your APIs ********
 getItems(): Observable<Employee[]> {
-  return this.http.get<Employee[]>(this.apiUrl).pipe(
+  const apiUrlWithGET = this.apiUrl + '/getEmployees';
+  return this.http.get<any>(apiUrlWithGET).pipe(
     catchError(this.handleError)
   );
 }
@@ -85,7 +86,7 @@ getItems(): Observable<Employee[]> {
 
  // GET an item by id
  getItem(id: number): Observable<Employee> {
-  const url = `${this.apiUrl}/${id}`;
+  const url = `${this.apiUrl+ '/get'}/${id}`;
   return this.http.get<Employee>(url).pipe(
     catchError(this.handleError)
   );
@@ -124,7 +125,8 @@ updateItem(id: number, candidate: Employee): Observable<Employee> {
 
 // DELETE an item by id
 deleteItem(id: number): Observable<Employee> {
-  const url = `${this.apiUrl}/${id}`;
+ 
+  const url = `${this.apiUrl+'/delete'}/${id}`;
   return this.http.delete<Employee>(url).pipe(
     catchError(this.handleError)
   );
@@ -153,6 +155,5 @@ getCountries() {
 getStatesByCountry(name: string) {
   return this.countryData.getStatesByShort(name);
 }
-
 
 }

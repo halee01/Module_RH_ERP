@@ -14,19 +14,20 @@ import { CompanyStatus, LegalStatus, Provenance, Country } from 'app/shared/mode
 import { Privilege, Civility, Service } from 'app/shared/models/contact';
 import { WorkField, Availability, RequirementStatus, RequirementType } from 'app/shared/models/req';
 import { Title } from 'app/shared/models/Employee';
-import { CvCandidatService } from './cv-candidat.service';
+
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { catchError, of } from 'rxjs';
+import { updateCandidateService } from './updateCandidat.service';
 
 
 @Component({
   selector: 'app-basic-form',
-  templateUrl: './cv-candidat.component.html',
-  styleUrls: ['./cv-candidat.component.css'],
+  templateUrl: './updateCandidat.component.html',
+  styleUrls: ['./updateCandidat.component.css'],
   
 })
  
-export class cvcandidatComponent implements OnInit {
+export class updatecandidatComponent implements OnInit {
   
   formData = {}
   console = console;
@@ -71,11 +72,11 @@ export class cvcandidatComponent implements OnInit {
   fruits: Fruit[] = [];
 
  constructor(private _formBuilder: FormBuilder,
-  private cvCandidatService: CvCandidatService,
+  private updateCandidatService: updateCandidateService,
   private formBuilder: FormBuilder,
   private router:Router,
    private http: HttpClient) 
-   {  this.countries = this.cvCandidatService.getCountries();
+   {  this.countries = this.updateCandidatService.getCountries();
 
     /*this.form1 = new FormGroup({
 
@@ -191,7 +192,7 @@ export class cvcandidatComponent implements OnInit {
     this.itemForm.get("country").valueChanges.subscribe((country) => {
       this.itemForm.get("city").reset();
       if (country) {
-        this.states = this.cvCandidatService.getStatesByCountry(country);
+        this.states = this.updateCandidatService.getStatesByCountry(country);
    
       }
     });
@@ -202,13 +203,15 @@ export class cvcandidatComponent implements OnInit {
 
 
   //////////////fonction ghada///////
-  saveCandidate(): void {
-    console.log('saveCandidat() called');
+  updateCandidate(): void {
+    console.log('updateCandidate() called');
+    this.router.navigate(['updateCandidat/updateCandidate']);
     if (this.myForm.valid) {
-      console.log('Form is valid, submitting...');
-      this.cvCandidatService.addItem(this.myForm.value).subscribe({
+      console.log('Form is valid, updating...');
+      const id = this.myForm.get('id').value; // replace 'id' with the name of the field containing the employee id in your form
+      this.updateCandidatService.updateItem(id, this.myForm.value).subscribe({
         next: (res) => {
-          console.log('Item added successfully', res);
+          console.log('Item updated successfully', res);
           console.log('Form value', this.myForm.value);
           this.submitted = true;
           console.log(this.myForm.get("firstName"))
@@ -226,11 +229,12 @@ export class cvcandidatComponent implements OnInit {
           this.router.navigate(['candidatCrud/CandidatCrud-table']);
         },
         error: (err) => {
-          console.error('Error adding item', err);
+          console.error('Error updating item', err);
         }
       });
     }
   }
+  
   
   public confirmer(){}
 
@@ -315,7 +319,7 @@ handleRemoveRepeatForm(index: number) {
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
   onCountryChange(countryShotName: string) {
-    this.states = this.cvCandidatService.getStatesByCountry(countryShotName);
+    this.states = this.updateCandidatService.getStatesByCountry(countryShotName);
   }
 }
 

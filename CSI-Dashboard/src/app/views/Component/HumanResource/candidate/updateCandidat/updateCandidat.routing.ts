@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 
-import { cvcandidatComponent } from './cv-candidat.component';
+
 import { CandidatCrudTableComponent } from '../CandidatCrud/CandidatCrud-table/candidat-crud-table.component';
+import { cvcandidatComponent } from '../CvCandidat/cv-candidat.component';
+import { updatecandidatComponent } from './updateCandidat.component';
 
 export const CalendarRoutes: Routes = [{ 
     path: 'cvCandidat-crud', 
@@ -12,4 +14,10 @@ data: { title: 'CvCandidat' } },
     component: CandidatCrudTableComponent, 
     data: { title: 'Table', breadcrumb: 'Table' } 
   },
+  {
+    path:'updateCandidate',
+    component:updatecandidatComponent,
+    data:{title: 'update'}
+  }
+
 ];

@@ -26,23 +26,23 @@ export enum Civility{
     MR="Mr"
 }
 export enum Title{
-    FRONT_END_DEVELOPER ="Front end developpeur",
-    BACK_END_DEVELOPER="Back end developpeur",
-    FULLSTACK_DEVELOPER="FullStack developpeur",
+    FRONT_END_DEVELOPER ="FRONT_END_DEVELOPER",
+    BACK_END_DEVELOPER="BACK_END_DEVELOPER",
+    FULLSTACK_DEVELOPER="FULLSTACK_DEVELOPER",
     CRM="CRM",
-     HUMAN_RESOURCE_MANAGER="Manager Ressources Humaines",
-    HUMAN_RESOURCE="Resoources Humaines",
-    PROJECT_MANAGER="Manager Projet",
-    TECH_LEAD="Consultant Technique",
-    UI_UX_DESIGNER="Ui_Ux Designer",
-    QA_ENGINEER="Ingénieur QA",
-    DEVOPS_ENGINEER="Ingénieur DevOps",
-    WEB_DEVELOPER="Developpeur Web",
-    OFFICE_MANAGER="Manager Office",
-     ACCOUNTANT="Financier",
-     SALES_REPRESENTATIVE="Représentant Ventes",
-     CUSTOMER_SUPPORT_SPECIALIST="Spécialiste Support Client",
-      MARKETING_COORDINATOR="Coordinateur Marketing"
+     HUMAN_RESOURCE_MANAGER="HUMAN_RESOURCE_MANAGER",
+    HUMAN_RESOURCE="HUMAN_RESOURCE",
+    PROJECT_MANAGER="PROJECT_MANAGER",
+    TECH_LEAD="TECH_LEAD",
+    UI_UX_DESIGNER="UI_UX_DESIGNER",
+    QA_ENGINEER="QA_ENGINEER",
+    DEVOPS_ENGINEER="DEVOPS_ENGINEER",
+    WEB_DEVELOPER="WEB_DEVELOPER",
+    OFFICE_MANAGER="OFFICE_MANAGER",
+     ACCOUNTANT="ACCOUNTANT",
+     SALES_REPRESENTATIVE="SALES_REPRESENTATIVE",
+     CUSTOMER_SUPPORT_SPECIALIST="CUSTOMER_SUPPORT_SPECIALIST",
+      MARKETING_COORDINATOR="MARKETING_COORDINATOR"
 }
 export enum EmployeeStatus{
     IN_PROCESS, IN_PROGRESS, PRE_QUALIFIED, TOP_PROFILES, CONVERTED_TO_RESOURCE, DO_NOT_CONTACT, ARCHIVE
@@ -256,11 +256,11 @@ export interface Country{
     name?: string;
 }
 export enum MaritalSituation {
-    SINGLE="Célibataire",
-    MARRIED="Marrié",
-    DIVORCED="Divorcé",
-    WIDOWED="veuf / veuve",
-    COMPLICATED="Compliqué"
+    SINGLE="SINGLE",
+    MARRIED="MARRIED",
+    DIVORCED="DIVORCED",
+    WIDOWED="WIDOWED",
+    COMPLICATED="COMPLICATED"
 }
 export enum Provenance {
     LINKEDIN,

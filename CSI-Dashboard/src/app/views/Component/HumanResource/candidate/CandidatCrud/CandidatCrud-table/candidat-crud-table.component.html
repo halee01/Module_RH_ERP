@@ -68,9 +68,9 @@
        <div style="clear: both;"></div>
    
    
-   <mat-card class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
-     <mat-card-content class="p-0">
-       <mat-table [dataSource]="dataSource" matSort>
+       <mat-card  style="border: 5px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
+        <mat-card-content class="p-0">
+          <mat-table [dataSource]="dataSource" matSort  >
         
         <ng-container matColumnDef="firstName">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
@@ -82,9 +82,9 @@
           <mat-cell *matCellDef="let row" data-label="lastName" [style.color]="row.color"> {{row.lastName}} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="postName">
+        <ng-container matColumnDef="title">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Intitulé du poste</mat-header-cell>
-          <mat-cell *matCellDef="let row" data-label="postName" [style.color]="row.color"> {{row.postName}} </mat-cell>
+          <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.title}} </mat-cell>
         </ng-container>
    
     
@@ -99,7 +99,7 @@
          <ng-container matColumnDef="actions">
            <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
            <mat-cell *matCellDef="let row">
-             <button mat-icon-button mat-sm-button color="primary" class="mr-16 " (click)="openPopUp(row)">
+             <button mat-icon-button mat-sm-button color="primary" class="mr-16 " (click)="goToCV()">
                <mat-icon>edit</mat-icon>
              </button>
              <button mat-icon-button mat-sm-button color="accent" class=" mr-16 "  (click)="openAffichage()">

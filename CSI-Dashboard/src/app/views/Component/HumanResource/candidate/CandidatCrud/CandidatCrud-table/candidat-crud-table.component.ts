@@ -43,6 +43,9 @@ export class CandidatCrudTableComponent implements OnInit {
     this.displayedColumns = this.getDisplayedColumns();
     this.getItems()
   }
+  getDisplayedColumns() {
+    return ['firstName', 'lastName', 'title',  'status', 'actions'];
+  }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -53,27 +56,20 @@ export class CandidatCrudTableComponent implements OnInit {
     }
   }
 
-  getDisplayedColumns() {
-    return ['name', 'age', 'balance', 'company', 'status', 'actions'];
-  }
-
   getItems() {    
     this.getItemSub = this.crudService.getItems()
-      .subscribe(data => {
+      .subscribe((data:any)  => {
         this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
       })
+
   }
 
-  applyFilter(event :Event){
-    const FilterValue = (event.target as HTMLInputElement).value ;
-     this.dataSource.filter = FilterValue.trim().toLowerCase();
- 
- }
-
-  openPopUp(data: any = {}, isNew?) {
-    let title = isNew ? 'Add new Candidat' : 'Update Candidat';
+  openPopUp(data:  any , isNew?) {
+    let title = isNew ? 'Nouveau candidat' : 'Modifier candidat';
     let dialogRef: MatDialogRef<any> = this.dialog.open(NgxTablePopupComponent, {
-      width: '720px',
+      width: '1000px',
       disableClose: true,
       data: { title: title, payload: data }
     })
@@ -84,37 +80,62 @@ export class CandidatCrudTableComponent implements OnInit {
           return;
         }
         if (isNew) {
-          this.loader.open('Adding new Candidat');
+          this.loader.open('Ajout en cours');
           this.crudService.addItem(res)
-            .subscribe(data => {
+            .subscribe((data :any)=> {
               this.dataSource = data;
               this.loader.close();
-              this.snack.open('Candidat Added!', 'OK', { duration: 4000 })
+              this.snack.open('Candidat ajouté avec succès!', 'OK', { duration: 2000 });
+              this.getItems();
             })
         } else {
-          this.loader.open('Updating Candidat');
-          this.crudService.updateItem(data._id, res)
-            .subscribe(data => {
-              this.dataSource = data;
+          this.loader.open('modification en cours');
+          this.crudService.updateItem(data.id,res)
+            .subscribe((data:any) => {
+              this.dataSource = data ;
               this.loader.close();
-              this.snack.open('Candidat Updated!', 'OK', { duration: 4000 })
+              this.snack.open('candidat modifié avec succées !', 'OK', { duration: 2000 });
+              this.getItems();
             })
         }
       })
   }
   deleteItem(row) {
-    this.confirmService.confirm({message: `Delete ${row.name}?`})
+    this.confirmService.confirm({message: `Delete ${row.firstName}?`})
       .subscribe(res => {
         if (res) {
-          this.loader.open('Deleting Candidat');
-          this.crudService.removeItem(row)
-            .subscribe(data => {
+          this.loader.open('Supprission du candidat');
+          this.crudService.deleteItem(row)
+            .subscribe((data:any)=> {
               this.dataSource = data;
               this.loader.close();
-              this.snack.open('Candidat deleted!', 'OK', { duration: 4000 })
+              this.snack.open('candidat supprimé!', 'OK', { duration: 20});
+              this.getItems();
             })
         }
       })
   }
+add(){
+  this.router.navigateByUrl('cvCandidat/cvCandidat-crud');
+}
+  applyFilter(event :Event){
+    const FilterValue = (event.target as HTMLInputElement).value ;
+     this.dataSource.filter = FilterValue.trim().toLowerCase();
+ 
+ }
+
+ 
+/*moreAboutItem(itemId: number) {
+    // Open menu and listen for menu item selection
+  }
+
+  handleMenuItemSelection(menuItem: string, itemId: number) {
+    // Redirect to appropriate interface based on menu item selection
+    if (menuItem === 'requirement') {
+      this.router.navigate(['/requirements', itemId]);
+    } else if (menuItem === 'contacts') {
+      this.router.navigate(['/contacts', itemId]);
+    }
+  }*/
 
 }
