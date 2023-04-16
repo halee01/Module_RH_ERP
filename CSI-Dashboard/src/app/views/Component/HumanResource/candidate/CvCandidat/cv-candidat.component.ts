@@ -139,26 +139,25 @@ export class cvcandidatComponent implements OnInit {
       firstName: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(15)
-      ]),
+        Validators.maxLength(15)]),
+      
       lastName: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(9)
-      ]),
-      birthDate: new UntypedFormControl('', [Validators.required]),
-      /*country: new UntypedFormControl('', [Validators.required]),
-      title: new UntypedFormControl('', []),*/
-       address: new UntypedFormControl(''),
-      emailOne: new UntypedFormControl('', [Validators.required, Validators.email]),
-     /* phoneNumberOne: new UntypedFormControl('', [Validators.required]),
-      civility: new UntypedFormControl('', []),
-      maritalSituation: new UntypedFormControl('', []),
-      city: new UntypedFormControl('', []),
+        Validators.maxLength(9)]),
+      birthDate: new UntypedFormControl('', []),
+      country: new UntypedFormControl(''),
+      /* title: new UntypedFormControl('', []),
+       address: new UntypedFormControl('',[]),
+       maritalSituation: new UntypedFormControl('', []),
+       civility: new UntypedFormControl('', []),
+      emailOne: new UntypedFormControl('', [ Validators.email]),
+      phoneNumberOne: new UntypedFormControl('', []),
       postCode: new UntypedFormControl('', []),
       emailTwo: new UntypedFormControl('', [ Validators.email]),
       phoneNumberTwo: new UntypedFormControl('', []),
-      institution: new UntypedFormControl('', []),
+      /*institution: new UntypedFormControl('', []),
+      city: new UntypedFormControl('', []),
       diploma: new UntypedFormControl('', []),
       score: new UntypedFormControl('', []),
       educationStartYear: new UntypedFormControl('', []),
@@ -203,14 +202,21 @@ export class cvcandidatComponent implements OnInit {
   saveCandidate(): void {
     console.log('saveCandidat() called');
     if (this.myForm.valid) {
+      /*
+      console.log('before...');
+      console.log(this.myForm.get("firstName").value)
+      console.log(this.myForm.get("lastName").value)
+      console.log(this.myForm.get("country").value)
+        */
+
       console.log('Form is valid, submitting...');
       this.cvCandidatService.addItem(this.myForm.value).subscribe({
         next: (res) => {
           console.log('Item added successfully', res);
           console.log('Form value', this.myForm.value);
           this.submitted = true;
-          console.log(this.myForm.get("firstName"))
-          console.log(this.myForm.get("lastName"))
+          console.log(this.myForm.get("firstName").value)
+          console.log(this.myForm.get("lastName").value)
           console.log(this.myForm.get("country"))
           console.log(this.myForm.get("title"))
           console.log(this.myForm.get("adress"))
