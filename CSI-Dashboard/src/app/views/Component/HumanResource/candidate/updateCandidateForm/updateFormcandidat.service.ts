@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, delay, map } from 'rxjs/operators';
 import * as countrycitystatejson from 'countrycitystatejson';
+import { map, catchError } from 'rxjs/operators';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Employee } from 'app/shared/models/Employee';
+
 @Injectable()
-export class CrudService {
+export class updateFormService {
   private apiUrl = 'http://localhost:8080/rh/employee';
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
@@ -131,7 +132,7 @@ deleteItem(id: number): Observable<Employee> {
   );
 }
 
-////////////////////////////////////////////////////////
+
 private handleError(error: HttpErrorResponse) {
   if (error.error instanceof ErrorEvent) {
     // A client-side or network error occurred. Handle it accordingly.
@@ -154,4 +155,5 @@ getCountries() {
 getStatesByCountry(name: string) {
   return this.countryData.getStatesByShort(name);
 }
+
 }

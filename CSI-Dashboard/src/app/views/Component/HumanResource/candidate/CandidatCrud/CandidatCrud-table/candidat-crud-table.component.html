@@ -99,13 +99,13 @@
          <ng-container matColumnDef="actions">
            <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
            <mat-cell *matCellDef="let row">
-             <button mat-icon-button mat-sm-button color="primary" class="mr-16 " (click)="goToCV()">
+             <button mat-icon-button mat-sm-button color="primary" class="mr-16 " (click)="updateCandidate()">
                <mat-icon>edit</mat-icon>
              </button>
              <button mat-icon-button mat-sm-button color="accent" class=" mr-16 "  (click)="openAffichage()">
                <mat-icon>remove_red_eye </mat-icon>
              </button>
-             <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row)">
+             <button mat-icon-button mat-sm-button color="warn" (click)="deleteCandidate(row)">
                <mat-icon>delete</mat-icon>
              </button>
              
