@@ -12,230 +12,241 @@
         <mat-divider></mat-divider>
         </mat-card-title>
 
-          <mat-card-content class="container" style="padding-top: 1.5cm;">
-            <div >
-              <mat-grid-list cols="2" rowHeight="100px">
-                <mat-grid-tile>
-                  <div class="pb-16">
-                    <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Prénom</mat-label>
-                        <input
-                        matInput
-                        name="first-name"
-                        formControlName="firstName"
-                        placeholder="Ex.Emmanuel"
-                        value=""
-                        required>
-                    </mat-form-field>
-                    
-                  </div>
-                  </mat-grid-tile>
+      <mat-card-content style="padding-top: 1.5cm;">
+        <mat-grid-list cols="2" rowHeight="100px">
+          <mat-grid-tile>
+            <div class="pb-16">
+              <mat-form-field appearance="outline" [style.width.cm]=10>
+                <mat-label>Prénom</mat-label>
+                  <input
+                  matInput
+                  name="first-name"
+                  formControlName="firstName"
+                  placeholder="Ex.Emmanuel"
+                  value=""
+                  required>
+              </mat-form-field>
               
-                  <mat-grid-tile>
-                    <!--last name-->
-                    <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Nom</mat-label>
-                          <input
-                          matInput
-                          name="lastName"
-                          formControlName="lastName"
-                          placeholder="Ex.Macron"
-                          value=""
-                          >
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                     <!-- civility-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Civilité</mat-label>
-                      <mat-select formControlName="civility">
-                        <mat-option  *ngFor="let civilities of Civility " [value]="civilities">{{civilities}}</mat-option>
-                        
-                      </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                    <!--Maritial Situation -->
-                    <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Situation Maritale</mat-label>
-                      <mat-select formControlName="maritalSituation" >
-                        <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{MaritalSituations}}</mat-option>
-                        
-                      </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                    <!--Birthdate-->
-                    <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Date de naissancee</mat-label>
-                        <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Date de naissance">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                      </mat-form-field>
-                      </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                     <!--intitulé du poste / title-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Intitulè du poste</mat-label>
-                        <mat-select formControlName="title" >
-                          <mat-option  *ngFor="let titles of title " [value]="titles">{{titles}}</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                      </div>
-                  </mat-grid-tile>
-                </mat-grid-list>
-
-      
-                <mat-card-title>
-                  <div class="card-title-text">Indiquez les Coordonnées</div>
-                </mat-card-title>
-                <mat-divider></mat-divider>
-                <div style="padding-bottom: 1.8cm;"></div>
-      
-
-                <mat-grid-list cols="2" rowHeight="100px" >
-                  <mat-grid-tile >
-                     <!--Country-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Pays</mat-label>
-                      <mat-select formControlName="country" placeholder="Ex.France" >
-                        <mat-option *ngFor="let country of countries" [value]="country.shortName">{{country.name}}</mat-option>
-                      </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                     <!--City-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Ville</mat-label>
-                      <mat-select formControlName="city" placeholder="Ex.Lyon" >
-                        <mat-option *ngFor="let state of states"  [value]="state">{{state}}</mat-option>
-                      </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                    <!--Adress-->
-                    <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Adresse</mat-label>
-                      <input
-                          matInput
-                          name="adress"
-                          formControlName="address"
-                          placeholder="Ex.121 Av.des Champs-Élysées"
-                          value=""
-                         >
-                      </mat-form-field>
-                  </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                    <!--PostCode-->
-                    <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Code Postal</mat-label>
-                        <input 
-                        matInput
-                        name="code postal"
-                        formControlName="postCode"
-                        placeholder="Ex.69000"
-                        >
-                      </mat-form-field>
-                     </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                    <!--Email1-->
-                    <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Email 1</mat-label>
-                      <input
-                          matInput
-                          type="email"
-                          name="email"
-                          formControlName="emailOne"
-                          placeholder="Ex.csi.digital@exemple.fr"
-                          value=""
-                          >
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                     <!--Email 2-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Email 2</mat-label>
-                      <input
-                          matInput
-                          type="email"
-                          name="email"
-                          formControlName="emailTwo"
-                          placeholder="Ex.csi.digital@exemple.fr"
-                          value="">
-                      </mat-form-field>
-                      <!--<small 
-                      *ngIf="basicForm.controls['email'].hasError('required') && basicForm.controls['email'].touched" 
-                      class="form-error-msg"> Email is required </small>
-                      <small 
-                      *ngIf="basicForm.controls['email'].hasError('email') && basicForm.controls['email'].touched" 
-                      class="form-error-msg"> Invaild email address </small>-->
-                    </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                     <!--Phone Number 1-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                       <mat-label>Numéro de téléphone 1</mat-label>
-                       <input 
-                       type=""
-                       name="phone-number1"
-                       matInput
-                       formControlName="phoneNumberOne"
-                       placeholder="Ex.+33 801 123 456" 
-                       value=""
-                       >
-                      </mat-form-field>
-                     </div>
-                  </mat-grid-tile>
-                  <mat-grid-tile>
-                     <!--Phone Number 2-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Numéro de téléphone 2</mat-label>
-                      <input 
-                          type=""
-                          name="phone-number2"
-                          matInput
-                          formControlName="phoneNumberTwo"
-                          placeholder="Ex.+33 801 123 456" 
-                          value="">
-                      </mat-form-field>
-                  </div>
-                  </mat-grid-tile>
-              </mat-grid-list>
-             </div>
+            </div>
+            </mat-grid-tile>
         
+            <mat-grid-tile>
+              <!--last name-->
+              <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                  <mat-label>Nom</mat-label>
+                    <input
+                    matInput
+                    name="lastName"
+                    formControlName="lastName"
+                    placeholder="Ex.Macron"
+                    value=""
+                    >
+                </mat-form-field>
+                <!--<small 
+                *ngIf="basicForm.controls['username'].hasError('minlength') && basicForm.controls['username'].touched" 
+                class="form-error-msg"> Le nom nécessite au moins {{basicForm.controls['username'].errors.minlength.requiredLength}} caractères </small>
+                <small 
+                *ngIf="basicForm.controls['username'].hasError('maxlength') && basicForm.controls['username'].touched" 
+                class="form-error-msg"> Le nom ne peut pas contenir plus de  {{basicForm.controls['username'].errors.maxlength.requiredLength}} caractères </small>-->
+              </div>
+            </mat-grid-tile>
         
+            <mat-grid-tile>
+               <!-- civility-->
+               <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                <mat-label>Civilité</mat-label>
+                <mat-select formControlName="civility">
+                  <mat-option  *ngFor="let civilities of Civility " [value]="civilities">{{civilities}}</mat-option>
+                  
+                </mat-select>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+        
+            <mat-grid-tile>
+              <!--Maritial Situation -->
+              <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                <mat-label>Situation Maritale</mat-label>
+                <mat-select formControlName="maritalSituation" >
+                  <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{MaritalSituations}}</mat-option>
+                  
+                </mat-select>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+        
+            <mat-grid-tile>
+              <!--Birthdate-->
+              <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                  <mat-label>Date de naissancee</mat-label>
+                  <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Date de naissance">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                </div>
+            </mat-grid-tile>
+        
+            <mat-grid-tile>
+               <!--intitulé du poste / title-->
+               <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                  <mat-label>Intitulè du poste</mat-label>
+                  <mat-select formControlName="title" >
+                    <mat-option  *ngFor="let titles of title " [value]="titles">{{titles}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+                </div>
+            </mat-grid-tile>
+          </mat-grid-list>
+        </mat-card-content>
+
+        <mat-card-title class="">
+           <mat-divider></mat-divider>
+            <div class="card-title-text">Indiquez les Coordonnées</div>
+            <mat-divider></mat-divider>
+        </mat-card-title>
+
+        <mat-card-content style="padding-top: 1.5cm;">
+          <mat-grid-list cols="2" rowHeight="100px">
+
+            <mat-grid-tile>
+               <!--Country-->
+               <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                <mat-label>Pays</mat-label>
+                <mat-select formControlName="country" placeholder="Ex.France" >
+                  <mat-option *ngFor="let country of countries" [value]="country.shortName">{{country.name}}</mat-option>
+                </mat-select>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+        
+            <mat-grid-tile>
+               <!--City-->
+               <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                <mat-label>Ville</mat-label>
+                <mat-select formControlName="city" placeholder="Ex.Lyon" >
+                  <mat-option *ngFor="let state of states"  [value]="state">{{state}}</mat-option>
+                </mat-select>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+        
+            <mat-grid-tile>
+              <!--Adress-->
+              <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                  <mat-label>Adresse</mat-label>
+                <input
+                    matInput
+                    name="adress"
+                    formControlName="address"
+                    placeholder="Ex.121 Av.des Champs-Élysées"
+                    value=""
+                   >
+                </mat-form-field>
+            </div>
+            </mat-grid-tile>
+        
+            <mat-grid-tile>
+              <!--PostCode-->
+              <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                  <mat-label>Code Postal</mat-label>
+                  <input 
+                  matInput
+                  name="code postal"
+                  formControlName="postCode"
+                  placeholder="Ex.69000"
+                  >
+                </mat-form-field>
+               </div>
+            </mat-grid-tile>
+        
+            <mat-grid-tile>
+              <!--Email1-->
+              <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                  <mat-label>Email 1</mat-label>
+                <input
+                    matInput
+                    type="email"
+                    name="email"
+                    formControlName="emailOne"
+                    placeholder="Ex.csi.digital@exemple.fr"
+                    value=""
+                    >
+                </mat-form-field>
+                <!--
+                  <small 
+                *ngIf="basicForm.controls['email'].hasError('required') && basicForm.controls['email'].touched" 
+                class="form-error-msg"> Email is required </small>
+                <small 
+                *ngIf="basicForm.controls['email'].hasError('email') && basicForm.controls['email'].touched" 
+                class="form-error-msg"> Invaild email address </small>
+                -->
+              </div>
+            </mat-grid-tile>
+        
+            <mat-grid-tile>
+               <!--Email 2-->
+               <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                  <mat-label>Email 2</mat-label>
+                <input
+                    matInput
+                    type="email"
+                    name="email"
+                    formControlName="emailTwo"
+                    placeholder="Ex.csi.digital@exemple.fr"
+                    value="">
+                </mat-form-field>
+                <!--<small 
+                *ngIf="basicForm.controls['email'].hasError('required') && basicForm.controls['email'].touched" 
+                class="form-error-msg"> Email is required </small>
+                <small 
+                *ngIf="basicForm.controls['email'].hasError('email') && basicForm.controls['email'].touched" 
+                class="form-error-msg"> Invaild email address </small>-->
+              </div>
+            </mat-grid-tile>
+        
+            <mat-grid-tile>
+               <!--Phone Number 1-->
+               <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                 <mat-label>Numéro de téléphone 1</mat-label>
+                 <input 
+                 type=""
+                 name="phone-number1"
+                 matInput
+                 formControlName="phoneNumberOne"
+                 placeholder="Ex.+33 801 123 456" 
+                 value=""
+                 >
+                </mat-form-field>
+               </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+               <!--Phone Number 2-->
+               <div class="pb-16">
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                  <mat-label>Numéro de téléphone 2</mat-label>
+                <input 
+                    type=""
+                    name="phone-number2"
+                    matInput
+                    formControlName="phoneNumberTwo"
+                    placeholder="Ex.+33 801 123 456" 
+                    value="">
+                </mat-form-field>
+            </div>
+            </mat-grid-tile>
+        </mat-grid-list>
     </mat-card-content>
 
     <div  fxLayout="row" dir="rtl"  fxLayoutAlign="space-between center">
@@ -248,14 +259,6 @@
       matStepperNext>Suivant : Formation
       </button>
       </div>
-
-      <div>
-        <button  mat-raised-button 
-        color="primary"
-         type="submit" 
-         (click)="saveCandidate()"
-        >Ajouter</button>
-      </div>
     </div>
   </div>
   </mat-step>
@@ -266,11 +269,7 @@
     <div >
       <ng-template matStepLabel>Formation</ng-template>
 
-      <mat-card-title class=""> 
-        <div [style.padding-left.px]=24>
-          <!--<mat-label>{{ lastEmployee?.firstName }} {{ lastEmployee?.lastName }}</mat-label>-->
-
-        </div>
+      <mat-card-title class="">
         <mat-divider></mat-divider>
         <div class="card-title-text">Décrivez votre formation</div>
         <mat-divider></mat-divider>
@@ -740,8 +739,8 @@
         <div>
           <button  mat-raised-button 
           color="primary"
-           type="submit"
-           (click)="saveCv()"
+           type="submit" 
+           (click)="saveCandidate()"
           >Finalisation</button>
         </div>
       </div>

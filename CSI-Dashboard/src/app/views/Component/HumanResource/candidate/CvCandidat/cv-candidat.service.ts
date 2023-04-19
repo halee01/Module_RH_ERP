@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import * as countrycitystatejson from 'countrycitystatejson';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Employee } from 'app/shared/models/Employee';
@@ -75,9 +75,11 @@ export class CvCandidatService {
 
 
   /////////////////////////Back Connection//////////////////////////
+
 //******* Implement your APIs ********
 getItems(): Observable<Employee[]> {
-  return this.http.get<Employee[]>(this.apiUrl).pipe(
+  const apiUrlWithGET = this.apiUrl + '/getEmployees';
+  return this.http.get<any>(apiUrlWithGET).pipe(
     catchError(this.handleError)
   );
 }
@@ -85,19 +87,11 @@ getItems(): Observable<Employee[]> {
 
  // GET an item by id
  getItem(id: number): Observable<Employee> {
-  const url = `${this.apiUrl}/${id}`;
+  const url = `${this.apiUrl+ '/get'}/${id}`;
   return this.http.get<Employee>(url).pipe(
     catchError(this.handleError)
   );
 }
-/*getrequirement(id: number): Observable<req[]> {
-  const url = `${this.apiUrl}/${id}`;
-  return this.http.get<Partner>(url).pipe(map(partner => partner.requirements),
-  catchError(error => {
-    console.error(error);
-    return of([]);
-  }));
-}*/
 
 // POST a new item
 addItem(candidate: any): Observable<any> {
@@ -106,13 +100,7 @@ addItem(candidate: any): Observable<any> {
     catchError(this.handleError)
   );
 }
-/*
-addItem(candidate: any): Observable<any> {
-  
-  return this.http.post<any>(this.apiUrl, candidate).pipe(
-    catchError(this.handleError)
-  );
-}*/
+
 
 // PUT an existing item
 updateItem(id: number, candidate: Employee): Observable<Employee> {
@@ -124,12 +112,24 @@ updateItem(id: number, candidate: Employee): Observable<Employee> {
 
 // DELETE an item by id
 deleteItem(id: number): Observable<Employee> {
-  const url = `${this.apiUrl}/${id}`;
+ 
+  const url = `${this.apiUrl+'/deleterrr/'}${id}`;
   return this.http.delete<Employee>(url).pipe(
     catchError(this.handleError)
   );
 }
 
+/*getLastAddedEmployeeName(): Observable<{ firstName: string, lastName: string }> {
+  return this.http.get<Employee[]>(`${this.apiUrl}/employees?_sort=Id&_order=desc&_limit=1`).pipe(
+    map(employees => {
+      const lastEmployee = employees[0];
+      return {
+        firstName: lastEmployee.firstName,
+        lastName: lastEmployee.lastName
+      };
+    })
+  );
+}*/
 
 private handleError(error: HttpErrorResponse) {
   if (error.error instanceof ErrorEvent) {
@@ -154,5 +154,25 @@ getStatesByCountry(name: string) {
   return this.countryData.getStatesByShort(name);
 }
 
+/*getEmployeeById(id: number): Observable<Employee> {
+  return this.http.get<Employee>(`${this.apiUrl}/${id}`);
+}
+
+getEmployeesSortedByIdDescending(): Observable<Employee[]> {
+  return this.http.get<Employee[]>(`${this.apiUrl}`).pipe(
+    map(employees => {
+      // Sort employees by Id in descending order
+      employees.sort((a, b) => b.Id - a.Id);
+      return employees;
+    })
+  );
+}
+
+getLastEmployee(): Observable<Employee> {
+  return this.getEmployeesSortedByIdDescending().pipe(
+    map(employees => employees[0]), // Retrieve the first employee
+    switchMap(lastEmployee => this.getEmployeeById(lastEmployee.Id)) // Retrieve employee details by Id
+  );
+}*/
 
 }
