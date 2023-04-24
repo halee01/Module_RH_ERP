@@ -104,9 +104,9 @@ export const rootRouterConfig: Routes = [
         data: { title: 'Calendar', breadcrumb: 'CALENDAR'}
       },
       {
-        path: 'candidatCrud',
+        path: 'candidat',
         loadChildren: () => import('./views/Component/HumanResource/candidate/CandidatCrud/candidat-crud.module').then(m => m.CandidatCrudModule),
-        data: { title: 'CandidatCrud', breadcrumb: 'CandidatCrud'}
+        data: { title: 'Candidat', breadcrumb: 'Candidat'}
       },
       {
         path: 'cvCandidat',
@@ -119,11 +119,11 @@ export const rootRouterConfig: Routes = [
         data: { title: 'UpdateCandidat', breadcrumb: 'CVCANDIDAT'}
       },
 
-      {
+      /*{
         path: 'candidatAffichage/:id',
         loadChildren: () => import('./views/Component/HumanResource/candidate/candidatAffichage/candidatAffichage.module').then(m => m.candidatAffichageModule),
         data: { title: 'AffichageCandidat', breadcrumb: 'Candidat'}
-      },
+      },*/
 
       {
         path: 'template1',

@@ -93,6 +93,7 @@ getItems(): Observable<Employee[]> {
     catchError(this.handleError)
   );
 }
+
 /*getrequirement(id: number): Observable<req[]> {
   const url = `${this.apiUrl}/${id}`;
   return this.http.get<Partner>(url).pipe(map(partner => partner.requirements),

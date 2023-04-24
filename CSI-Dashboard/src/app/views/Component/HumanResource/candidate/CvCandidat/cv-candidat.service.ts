@@ -172,7 +172,7 @@ getEmployeesSortedByIdDescending(): Observable<Employee[]> {
   return this.http.get<Employee[]>(`${this.apiUrl}`).pipe(
     map(employees => {
       // Sort employees by Id in descending order
-      employees.sort((a, b) => b.Id - a.Id);
+      employees.sort((a, b) => b.id - a.id);
       return employees;
     })
   );
@@ -185,7 +185,7 @@ getEmployeeById(id: number): Observable<Employee> {
 getLastEmployee(): Observable<Employee> {
   return this.getEmployeesSortedByIdDescending().pipe(
     map(employees => employees[0]), // Retrieve the first employee
-    switchMap(lastEmployee => this.getEmployeeById(lastEmployee.Id)) // Retrieve employee details by Id
+    switchMap(lastEmployee => this.getEmployeeById(lastEmployee.id)) // Retrieve employee details by Id
   );
 }
 

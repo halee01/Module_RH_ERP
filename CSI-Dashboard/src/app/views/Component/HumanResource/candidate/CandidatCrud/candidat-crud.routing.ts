@@ -3,15 +3,17 @@ import { cvcandidatComponent } from './../CvCandidat/cv-candidat.component';
 import { CandidatCrudTableComponent } from './CandidatCrud-table/candidat-crud-table.component';
 import { Routes } from '@angular/router';
 import { CvTemplate1Component } from '../CvTemplate1/CvTemplate1.component';
-import { candidatAffichageComponent } from '../candidatAffichage/candidatAffichage.component';
+
+import { CandidatDetailComponent } from './Candidat-details/candidat-details.component';
 
 
 
-export const CrudsRoutes: Routes = [
+export const CandidatRoutes: Routes = [
   { 
     path: 'CandidatCrud-table', 
     component: CandidatCrudTableComponent, 
-    data: { title: 'Table', breadcrumb: 'Table' } 
+    data: { title: '', breadcrumb: 'Candidat' } 
+    
   },
 
   {
@@ -21,8 +23,9 @@ export const CrudsRoutes: Routes = [
   },
 
   { 
-    path: 'candidatAffichage/:id', 
-   component: candidatAffichageComponent, 
-   data: { title: 'AffichageCandidat' }
+    path: ":id", 
+   component: CandidatDetailComponent, 
+   pathMatch: "full"
+   //data: { title: 'AffichageCandidat' }
   }
 ];

@@ -1,7 +1,7 @@
 import { TechnicalFile } from "./TechnicalFile";
 
 export class Employee {
-    Id?: number;
+    id?: number;
      lastName ?:string;
      firstName?:string;
      birthDate ?:string;
