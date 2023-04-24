@@ -1,3 +1,5 @@
+import { TechnicalFile } from "./TechnicalFile";
+
 export class Employee {
     Id?: number;
      lastName ?:string;
@@ -18,6 +20,7 @@ export class Employee {
      employeeStatus?:EmployeeStatus;
      country?:Country;
      maritalSituation ?:MaritalSituation;
+     technicalFile?: TechnicalFile
 }
 
 export enum Civility{

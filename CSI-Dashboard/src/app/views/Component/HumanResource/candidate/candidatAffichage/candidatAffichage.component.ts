@@ -1,31 +1,41 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormGroup, UntypedFormControl, Validators, UntypedFormArray } from '@angular/forms'; 
-import {FormControl} from '@angular/forms';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { Employee } from 'app/shared/models/Employee';
+import { candidatAffichageService } from './candidatAffichage.service';
 
 
 @Component({
   selector: 'affich-form',
   templateUrl: './candidatAffichage.component.html',
   styleUrls:  ['./candidatAffichage.component.scss']
-  
-  
 })
 
 
 
 export class candidatAffichageComponent  {
   
-  constructor(private router: Router){}
-  @ViewChild('printSection') printSection: ElementRef;
-  print() {
-    
-    window.print();
-    
-  }
+  id: number
+  employee :Employee
 
+    constructor(  private affichageService: candidatAffichageService ,
+      private route: ActivatedRoute) { }
+  
+    ngOnInit(): void {
+     this.id = this.route.snapshot.params['id'];
+      this.getEmployee();
+
+      /*this.route.paramMap.subscribe(params => {
+        this.id = params.get['id'];
+      });*/
+    
+    }
+
+    getEmployee() {
+      this.affichageService.getItem(this.id).subscribe((data: any) => {
+        this.employee = data;
+  
+      });
+    }
 
  
 }

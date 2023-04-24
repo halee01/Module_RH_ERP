@@ -1,7 +1,7 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
-import { Component, Inject, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -17,11 +17,15 @@ import { Title } from 'app/shared/models/Employee';
 import { CvCandidatService } from './cv-candidat.service';
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { catchError, of } from 'rxjs';
+
+
 @Component({
   selector: 'app-basic-form',
   templateUrl: './cv-candidat.component.html',
   styleUrls: ['./cv-candidat.component.css'],
 })
+
+
 export class cvcandidatComponent implements OnInit {
   formData = {}
   console = console;
@@ -64,7 +68,7 @@ export class cvcandidatComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [];
-
+  isPageReloaded = false;
   
  constructor(private _formBuilder: FormBuilder,
   private cvCandidatService: CvCandidatService,
@@ -72,13 +76,19 @@ export class cvcandidatComponent implements OnInit {
   private router:Router,
    private http: HttpClient)
    {  this.countries = this.cvCandidatService.getCountries();}
+  
+   
+     
+    
+ 
+   
   ////////////////////Ajout Candidat///////////////
 
   ngOnInit() {
 
-   /* this.cvCandidatService.getLastEmployee().subscribe(employee => {
+   this.cvCandidatService.getLastEmployee().subscribe(employee => {
       this.lastEmployee = employee;
-    });*/
+    });
     
     this.myForm = new UntypedFormGroup({
       firstName: new UntypedFormControl('', [
@@ -89,16 +99,16 @@ export class cvcandidatComponent implements OnInit {
       lastName: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(9)
+        Validators.maxLength(20)
       ]),
       birthDate: new UntypedFormControl('', [Validators.required]),
       /*country: new UntypedFormControl('', [Validators.required]),*/
-      title: new UntypedFormControl('', []),
-       address: new UntypedFormControl(''),
+      title: new UntypedFormControl('', [Validators.required]),
+      address: new UntypedFormControl(''),
       emailOne: new UntypedFormControl('', [Validators.required, Validators.email]),
       phoneNumberOne: new UntypedFormControl('', [Validators.required]),
-     civility: new UntypedFormControl('', []),
-       maritalSituation: new UntypedFormControl('', []),
+      civility: new UntypedFormControl('', []),
+      maritalSituation: new UntypedFormControl('', []),
      /* city: new UntypedFormControl('', []),
       postCode: new UntypedFormControl('', []),*/
       emailTwo: new UntypedFormControl('', [ Validators.email]),
@@ -134,20 +144,54 @@ export class cvcandidatComponent implements OnInit {
         this.states = this.cvCandidatService.getStatesByCountry(country);
       }
     });
-    ///form submit
+   
   }
 
-
+  /*ngAfterViewInit() {
+    if (!this.isPageReloaded) {
+      this.isPageReloaded = true;
+      window.location.reload();
+    }
+  }*/
   
-  //////////////fonction ghada///////
-  saveCandidate(): void {
+ /* saveCandidate(): void {
     console.log('saveCandidate() called');
+  
+    // Show the loader
+   // this.isLoading = true;
+  
     if (this.myForm.valid) {
       console.log('Form is valid, submitting...');
       this.cvCandidatService.addItem(this.myForm.value).subscribe({
         next: (res) => {
           console.log('Candidate added successfully:', res);
+  
+          // Hide the loader
+          //this.isLoading = false;/
+          //this.submitted = true;
+        },
+
+        error: (err) => {
+          console.error('Error adding item', err);
+  
+          // Hide the loader
+          //this.isLoading = false;
+        }
+      });
+    }
+  }*/
+  
+  saveCandidate(): void {
+    console.log('saveCandidat() called');
+    if (this.myForm.valid) {
+      console.log('Form is valid, submitting...');
+      this.cvCandidatService.addItem(this.myForm.value).subscribe({
+        next: (res) => {
           this.submitted = true;
+          // Retrieve the last added employee
+          this.cvCandidatService.getLastEmployee().subscribe(employee => {
+            this.lastEmployee = employee;
+          });
         },
         error: (err) => {
           console.error('Error adding item', err);
@@ -166,6 +210,21 @@ export class cvcandidatComponent implements OnInit {
           this.submitted = true;
           // Redirect to CandidatCrud-table page
           this.router.navigate(['candidatCrud/CandidatCrud-table']);
+        },
+        error: (err) => {
+          console.error('Error adding item', err);
+        }
+      });
+    }
+  }
+
+  saveTechFile(): void {
+    console.log('saveCandidat() called');
+    if (this.myForm.valid) {
+      console.log('Form is valid, submitting...');
+      this.cvCandidatService.addTF(this.myForm.value).subscribe({
+        next: (res) => {
+          this.submitted = true;
         },
         error: (err) => {
           console.error('Error adding item', err);

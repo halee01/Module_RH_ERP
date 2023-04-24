@@ -244,18 +244,21 @@
       <div>
         <button 
       mat-raised-button 
-      color="primary" 
+      color="primary"  
       matStepperNext>Suivant : Formation
       </button>
       </div>
 
+      <!--Button 1-->
       <div>
-        <button  mat-raised-button 
-        color="primary"
-         type="submit" 
-         (click)="saveCandidate()"
-        >Ajouter</button>
+        <button 
+      mat-raised-button 
+      color="primary" 
+      (click)="saveCandidate()"
+      >Ajouter un Employée</button>
       </div>
+
+      
     </div>
   </div>
   </mat-step>
@@ -268,11 +271,11 @@
 
       <mat-card-title class=""> 
         <div [style.padding-left.px]=24>
-          <!--<mat-label>{{ lastEmployee?.firstName }} {{ lastEmployee?.lastName }}</mat-label>-->
+        <mat-label>{{ lastEmployee?.firstName }} {{ lastEmployee?.lastName }}</mat-label>
 
         </div>
         <mat-divider></mat-divider>
-        <div class="card-title-text">Décrivez votre formation</div>
+        <div class="card-title-text">Décrivez la formation du candidat</div>
         <mat-divider></mat-divider>
         <div class="mat-heading-label" [style.padding-left.px]=24>
           Ajoutez les diplômes ou formations par ordre chronologique, en commençant par le plus récent.
@@ -741,7 +744,7 @@
           <button  mat-raised-button 
           color="primary"
            type="submit"
-           (click)="saveCv()"
+           (click)="saveTechFile()"
           >Finalisation</button>
         </div>
       </div>

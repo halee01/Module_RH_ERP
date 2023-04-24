@@ -101,6 +101,15 @@ addItem(candidate: any): Observable<any> {
   );
 }
 
+//POST TF
+addTF(techfile: any): Observable<any> {
+  const apiUrlWithAdd = this.apiUrl + '/add'; // Append /add to the apiUrl
+  return this.http.post<any>(apiUrlWithAdd, techfile).pipe(
+    catchError(this.handleError)
+  );
+}
+
+
 
 // PUT an existing item
 updateItem(id: number, candidate: Employee): Observable<Employee> {
@@ -146,6 +155,8 @@ private handleError(error: HttpErrorResponse) {
   return throwError(
     'Something bad happened; please try again later.');
 }
+
+
 getCountries() {
   return this.countryData.getCountries();
 }
@@ -154,9 +165,8 @@ getStatesByCountry(name: string) {
   return this.countryData.getStatesByShort(name);
 }
 
-/*getEmployeeById(id: number): Observable<Employee> {
-  return this.http.get<Employee>(`${this.apiUrl}/${id}`);
-}
+
+
 
 getEmployeesSortedByIdDescending(): Observable<Employee[]> {
   return this.http.get<Employee[]>(`${this.apiUrl}`).pipe(
@@ -168,11 +178,15 @@ getEmployeesSortedByIdDescending(): Observable<Employee[]> {
   );
 }
 
+getEmployeeById(id: number): Observable<Employee> {
+  return this.http.get<Employee>(`${this.apiUrl}/${id}`);
+}
+
 getLastEmployee(): Observable<Employee> {
   return this.getEmployeesSortedByIdDescending().pipe(
     map(employees => employees[0]), // Retrieve the first employee
     switchMap(lastEmployee => this.getEmployeeById(lastEmployee.Id)) // Retrieve employee details by Id
   );
-}*/
+}
 
 }

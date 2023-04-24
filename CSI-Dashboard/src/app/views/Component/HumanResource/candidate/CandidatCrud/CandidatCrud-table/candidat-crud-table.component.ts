@@ -27,20 +27,8 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 export class CandidatCrudTableComponent implements OnInit {
   formData = {}
   console = console;
-  repeatForm: FormGroup;
-  myForm: FormGroup;
-  form1: FormGroup;
-  form2: FormGroup;
-  form3: FormGroup;
-  form4: FormGroup;
-  step1:FormGroup;
-  step2:FormGroup;
-  step3:FormGroup;
-  step4:FormGroup;
-
-//////////////Ajout Candidat///////////////
-  public itemForm: FormGroup;;
  
+  public itemForm: FormGroup;;
   Provenance = Object.values(Provenance);
   countries: Country[];
   states: string[];
@@ -51,8 +39,6 @@ export class CandidatCrudTableComponent implements OnInit {
   EmployeeStatus :any= Object.values(EmployeeStatus);
   formWidth = 200; //declare and initialize formWidth property
   formHeight = 700; //declare and initialize formHeight property
-  
-
   Languages : string[] = Object.values(Languages);
   LanguageLevel : string[] = Object.values(LanguageLevel);
 
@@ -80,67 +66,11 @@ export class CandidatCrudTableComponent implements OnInit {
     private router: Router
   ) { }
    
-
-  goToCV() {
-    this.router.navigate(['cvCandidat/cvCandidat-crud']);
-  }
-
-  openAffichage() {
-    this.router.navigate(['template1/cvtemplate1']);
-  }
-
+ 
   ngOnInit() {
+    
     this.displayedColumns = this.getDisplayedColumns();
-    this.getItems()
-    this.myForm = new UntypedFormGroup({
-      firstName: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(15)
-      ]),
-      lastName: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(9)
-      ]),
-      birthDate: new UntypedFormControl('', [Validators.required]),
-      /*country: new UntypedFormControl('', [Validators.required]),*/
-      title: new UntypedFormControl('', []),
-       address: new UntypedFormControl(''),
-      emailOne: new UntypedFormControl('', [Validators.required, Validators.email]),
-      phoneNumberOne: new UntypedFormControl('', [Validators.required]),
-     civility: new UntypedFormControl('', []),
-       maritalSituation: new UntypedFormControl('', []),
-     /* city: new UntypedFormControl('', []),
-      postCode: new UntypedFormControl('', []),*/
-      emailTwo: new UntypedFormControl('', [ Validators.email]),
-      phoneNumberTwo: new UntypedFormControl('', []),
-     /* institution: new UntypedFormControl('', []),
-      diploma: new UntypedFormControl('', []),
-      score: new UntypedFormControl('', []),
-      educationStartYear: new UntypedFormControl('', []),
-      obtainedYear: new UntypedFormControl('', []),
-      experienceCompany: new UntypedFormControl('', []),
-      experiencePost: new UntypedFormControl('', []),
-      experienceTitle: new UntypedFormControl('', []),
-      experienceRole : new UntypedFormControl('', []),
-      experienceStartYear: new UntypedFormControl('', []),
-      experienceStartMonth: new UntypedFormControl('', []),
-      experienceEndYear: new UntypedFormControl('', []),
-      experienceEndMonth: new UntypedFormControl('', []),
-      certification: new UntypedFormControl('', []),
-      certifDate: new UntypedFormControl('', []),
-      language: new UntypedFormControl('', []),
-      languageLevel: new UntypedFormControl('', []),
-      additionalInformation: new UntypedFormControl('', []),
-      skillTitle : new UntypedFormControl('', []),
-      skillCategoryTitle: new UntypedFormControl('', []),*/
-
-    })
-  
-    this.repeatForm = this._formBuilder.group({
-      repeatArray: this._formBuilder.array([this.createRepeatForm()])
-    });
+    this.getItems();
 
     /////Countries////
     this.itemForm.get("country").valueChanges.subscribe((country) => {
@@ -151,18 +81,31 @@ export class CandidatCrudTableComponent implements OnInit {
       }
     });
   }
+
+
+   /*openAffichage() {
+    this.router.navigate(['candidatAffichage/:id/candidatFiche']);
+  }*/
+
+  goToCV() {
+    this.router.navigate(['cvCandidat/cvCandidat-crud']);
+  }
+
   getDisplayedColumns() {
     return ['firstName', 'lastName', 'title',  'status', 'actions'];
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+
   ngOnDestroy() {
     if (this.getItemSub) {
       this.getItemSub.unsubscribe()
     }
   }
+
 
   getItems() {    
     this.getItemSub = this.crudService.getItems()
@@ -190,6 +133,7 @@ export class CandidatCrudTableComponent implements OnInit {
         }
       })
   }
+
 add(){
   this.router.navigateByUrl('cvCandidat/cvCandidat-crud');
 }
@@ -198,51 +142,7 @@ add(){
      this.dataSource.filter = FilterValue.trim().toLowerCase();
  
  }
- /* updateCandidate(): void {
-  console.log('updateCandidate() called');
-  this.router.navigate(['updateCandidat/updateCandidate']);
-  if (this.myForm.valid) {
-    console.log('Form is valid, updating...');
-    const id = this.myForm.get('id').value; // replace 'id' with the name of the field containing the employee id in your form
-    this.crudService.updateItem(id, this.myForm.value).subscribe({
-      next: (res) => {
-        console.log('Item updated successfully', res);
-        console.log('Form value', this.myForm.value);
-        this.submitted = true;
-        console.log(this.myForm.get("firstName"))
-        console.log(this.myForm.get("lastName"))
-        console.log(this.myForm.get("country"))
-        console.log(this.myForm.get("title"))
-        console.log(this.myForm.get("adress"))
-        console.log(this.myForm.get("birthDate"))
-        console.log(this.myForm.get("emailOne"))
-        console.log(this.myForm.get("emailtwo"))
-        console.log(this.myForm.get("phoneNumberOne"))
-        console.log(this.myForm.get("civility"))
-        console.log(this.myForm.get("maritalSituation"))
-        // Redirect to CandidatCrud-table page
-        this.router.navigate(['candidatCrud/CandidatCrud-table']);
-      },
-      error: (err) => {
-        console.error('Error updating item', err);
-      }
-    });
-  }
-}*/
-
  
-/*moreAboutItem(itemId: number) {
-    // Open menu and listen for menu item selection
-  }
-
-  handleMenuItemSelection(menuItem: string, itemId: number) {
-    // Redirect to appropriate interface based on menu item selection
-    if (menuItem === 'requirement') {
-      this.router.navigate(['/requirements', itemId]);
-    } else if (menuItem === 'contacts') {
-      this.router.navigate(['/contacts', itemId]);
-    }
-  }*/
   createRepeatForm(): FormGroup {
     return this._formBuilder.group({
     });

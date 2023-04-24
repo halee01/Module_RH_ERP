@@ -3,6 +3,6 @@ import { candidatAffichageComponent } from './candidatAffichage.component';
 
 
 export const candidatAffichage: Routes = [{ 
-    path: 'candidatAffiche', 
+ path: 'candidatAffichage/:id', 
 component: candidatAffichageComponent, 
-data: { title: 'CandidatAffichage' } }];
+data: { title: 'AffichageCandidat' }}];

@@ -1,13 +1,11 @@
-import { MatChipsModule } from '@angular/material/chips';
-import { candidatAffichageComponent } from './candidatAffichage.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
-import {   MatCardModule, MatCardTitle } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -21,26 +19,31 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { MatStepperModule } from '@angular/material/stepper';
-import { candidatAffichage } from './candidatAffichage.routing';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatChipList, MatChipsModule } from '@angular/material/chips';
+import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
+import { candidatAffichageComponent } from './candidatAffichage.component';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { candidatAffichageService } from './candidatAffichage.service';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
+
   imports: [
     CommonModule,
+    MatMenuModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatStepperModule,
     HttpClientModule,
-    MatIconModule,
-    MatMenuModule,
     MatExpansionModule,
-    MatDialogModule,
+    FormsModule,
+    MatGridListModule,
+    MatIconModule,
     MatChipsModule,
-    
-    MatCardModule,
+    MatDialogModule,
     MatButtonModule,
     MatRadioModule,
     MatCardModule,
@@ -51,17 +54,17 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
     MatInputModule,
     FlexLayoutModule,
     ColorPickerModule,
+    MatCheckboxModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
-    RouterModule.forChild(candidatAffichage)
-  ],
-  providers: [candidatAffichageService],
-  // entryComponents: [CalendarFormDialogComponent],
-  declarations: [
-     candidatAffichageComponent
+      useFactory: adapterFactory}),
     
-  ]
+  ],
+  providers: [candidatAffichageService,{
+    provide: STEPPER_GLOBAL_OPTIONS,
+    useValue: { showError: true }
+  }],
+  // entryComponents: [CalendarFormDialogComponent],
+  declarations: [ candidatAffichageComponent]
 })
 export class candidatAffichageModule { }
