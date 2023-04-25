@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { MaritalSituation } from '../../../../../shared/models/Employee';
+import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
 import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray } from '@angular/forms'; 
 import {FormControl} from '@angular/forms';
@@ -17,17 +17,22 @@ import { Title } from 'app/shared/models/Employee';
 
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { catchError, of } from 'rxjs';
-import { updateCandidateService } from './updateCandidat.service';
+import { updateCandidatService } from './updateCandidat.service';
 
 
 @Component({
-  selector: 'app-basic-form',
+  selector: 'update-form',
   templateUrl: './updateCandidat.component.html',
   styleUrls: ['./updateCandidat.component.css'],
   
 })
  
 export class updatecandidatComponent implements OnInit {
+
+  id: number;
+  employee: Employee;
+  apiResponse:Response;
+
   
   formData = {}
   console = console;
@@ -70,62 +75,18 @@ export class updatecandidatComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [];
-
+  submitBtnLabel = 'Save';
+  editMode = false;
+employeeId: number //| null = null;
  constructor(private _formBuilder: FormBuilder,
-  private updateCandidatService: updateCandidateService,
+  private route:ActivatedRoute,
+  private updateCandidatService: updateCandidatService,
   private formBuilder: FormBuilder,
   private router:Router,
-   private http: HttpClient) 
+   ) 
    {  this.countries = this.updateCandidatService.getCountries();
 
-    /*this.form1 = new FormGroup({
-
-      firstName: new FormControl(''),
-      birthdate: new FormControl(''),
-      title: new FormControl(''),
-      country: new FormControl(''),
-      adress: new FormControl(''),
-      email1: new FormControl(''),
-      phoneNumber1: new FormControl(''),
-      lasttName: new FormControl(''),
-      civility: new FormControl(''),
-      maritalSituation: new FormControl(''),
-      postCode: new FormControl(''),
-      email2: new FormControl(''),
-      phoneNumber2: new FormControl(''),
-      city: new FormControl('')
-
-    });
-
-    this.form2 = new FormGroup({
-      institution: new FormControl(''),
-      diploma: new FormControl(''),
-      score: new FormControl(''),
-      educationStartYear: new FormControl(''),
-      obtainedYear: new FormControl('')
-    });
-
-      this.form3 = new FormGroup({
-      company: new FormControl(''),
-      experiencePost: new FormControl(''),
-      experienceTitle: new FormControl(''),
-      experienceRole: new FormControl(''),
-      experienceStartYear: new FormControl(''),
-      experienceStartMonth: new FormControl(''),
-      experienceEndtYear: new FormControl(''),
-      experienceEndMonth: new FormControl('')
-
-    }); 
-    this.form4 = new FormGroup({
-      certification: new FormControl(''),
-      certifDate: new FormControl(''),
-      language: new FormControl(''),
-      languageLevel: new FormControl(''),
-      languageInfo: new FormControl(''),
-      skillsCategory: new FormControl(''),
-      skills: new FormControl(''),
-    });
-    this.form4.addControl('language', new FormControl(''));*/
+    
   }
 
 
@@ -136,7 +97,14 @@ export class updatecandidatComponent implements OnInit {
 
   ngOnInit() {
     
-    
+    this.employee = new Employee();
+
+    this.id = this.route.snapshot.params['id'];
+    this.updateCandidatService.getItem(this.id)
+      .subscribe(data => {
+        console.log(data)
+        this.employee = data;
+      }, error => console.log(error));
 
     this.myForm = new UntypedFormGroup({
       firstName: new UntypedFormControl('', [
@@ -203,28 +171,18 @@ export class updatecandidatComponent implements OnInit {
 
 
   //////////////fonction ghada///////
-  updateCandidate(): void {
-    console.log('updateCandidate() called');
-    this.router.navigate(['updateCandidat/updateCandidate']);
+  updateCandidat() {
+    console.log('updateCandidat() called');
     if (this.myForm.valid) {
-      console.log('Form is valid, updating...');
-      const id = this.myForm.get('id').value; // replace 'id' with the name of the field containing the employee id in your form
-      this.updateCandidatService.updateItem(id, this.myForm.value).subscribe({
+      console.log('Form is valid, submitting...');
+      this.updateCandidatService.updateItem(this.id,this.myForm.value).subscribe({
         next: (res) => {
           console.log('Item updated successfully', res);
           console.log('Form value', this.myForm.value);
           this.submitted = true;
           console.log(this.myForm.get("firstName"))
           console.log(this.myForm.get("lastName"))
-          console.log(this.myForm.get("country"))
-          console.log(this.myForm.get("title"))
-          console.log(this.myForm.get("adress"))
-          console.log(this.myForm.get("birthDate"))
-          console.log(this.myForm.get("emailOne"))
-          console.log(this.myForm.get("emailtwo"))
-          console.log(this.myForm.get("phoneNumberOne"))
-          console.log(this.myForm.get("civility"))
-          console.log(this.myForm.get("maritalSituation"))
+         
           // Redirect to CandidatCrud-table page
           this.router.navigate(['candidatCrud/CandidatCrud-table']);
         },
@@ -233,11 +191,77 @@ export class updatecandidatComponent implements OnInit {
         }
       });
     }
+  
   }
-  
-  
-  public confirmer(){}
 
+  
+  list(){
+    this.router.navigate(['candidatCrud/CandidatCrud-table']);
+  }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
    ///////Skills chips//////////
    add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -265,28 +289,7 @@ export class updatecandidatComponent implements OnInit {
 
 
   ///// Form Submit///// 
-  onSubmit() {
-    // Get the values of each form
-    const formData = this.myForm.value;
-
-    this.http.post('http://localhost:8080/rh/employee', formData)
-  .pipe(
-    catchError(error => {
-      console.log(error);
-      return of(error);
-    })
-  )
-  .subscribe(response => {
-    console.log(response);
-    // Handle the response, such as displaying a success message
-  });
-  }
-
-
-
-  //Section Supplimentaire button
-  showInput = false;
- 
+  
 createRepeatForm(): FormGroup {
   return this._formBuilder.group({
   });

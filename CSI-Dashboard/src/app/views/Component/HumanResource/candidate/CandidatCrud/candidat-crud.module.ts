@@ -21,7 +21,6 @@ import { SharedModule } from "app/shared/shared.module";
 import { CrudsRoutes } from "./candidat-crud.routing";
 import { CrudService } from "./candidat-crud.service";
 import { CandidatCrudTableComponent } from "./CandidatCrud-table/candidat-crud-table.component";
-import { CandidatCrudTablePopupComponent } from "./CandidatCrud-table/CandidatCrud-table-popup/candidat-crud-table-popup/candidat-crud-table-popup.component";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -29,10 +28,13 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
 import { Ng2TelInputModule } from "ng2-tel-input";
+import { CvCandidatService } from "../CvCandidat/cv-candidat.service";
+
 
 
 @NgModule({
   imports: [
+    
     CommonModule,
     ReactiveFormsModule,
     FlexLayoutModule,
@@ -61,7 +63,7 @@ import { Ng2TelInputModule } from "ng2-tel-input";
     MatTabsModule,
     RouterModule.forChild(CrudsRoutes)
   ],
-  declarations: [CandidatCrudTableComponent, CandidatCrudTablePopupComponent],
-  providers: [CrudService]
+  declarations: [CandidatCrudTableComponent,CandidatCrudTableComponent ],
+  providers: [CrudService,]
 })
 export class CandidatCrudModule { }

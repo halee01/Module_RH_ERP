@@ -114,9 +114,9 @@ export const rootRouterConfig: Routes = [
         data: { title: 'CvCandidat', breadcrumb: 'CVCANDIDAT'}
       },
       {
-        path: 'updateCandidat',
+        path: 'candidatUpdate',
         loadChildren: () => import('./views/Component/HumanResource/candidate/updateCandidat/updateCandidat.module').then(m => m.updateCandidatModule),
-        data: { title: 'CvCandidat', breadcrumb: 'CVCANDIDAT'}
+        data: { title: 'update', breadcrumb: 'update'}
       },
       {
         path: 'affichage',
@@ -131,7 +131,7 @@ export const rootRouterConfig: Routes = [
 
       {
         path: 'entretienTable',
-        loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/crud_entretienRecrutment/crud_entretienRecrutment.module').then(m => m.CrudEntretienRecrutmentModule),
+        loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/crud_table_entretienRecrutment/crud_entretienRecrutment.module').then(m => m.CrudEntretienRecrutmentModule),
         data: { title: 'CrudEvaluation', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
       },
       {

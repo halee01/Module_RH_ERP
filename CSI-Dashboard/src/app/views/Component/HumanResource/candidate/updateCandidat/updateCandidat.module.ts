@@ -20,22 +20,21 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
 
-
 import { MatStepperModule } from '@angular/material/stepper';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChipList, MatChipsModule } from '@angular/material/chips';
 import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
-
-import { CalendarFormDialogComponent } from '../CvCandidat/calendar-form-dialog/calendar-form-dialog.component';
 import { updatecandidatComponent } from './updateCandidat.component';
-import { CalendarRoutes } from './updateCandidat.routing';
-import { updateCandidateService } from './updateCandidat.service';
+import { update } from './updateCandidat.routing';
+import { updateCandidatService } from './updateCandidat.service';
+import { CrudsRoutes } from '../CandidatCrud/candidat-crud.routing';
 
 
 @NgModule({
   imports: [
+    
     CommonModule,
     MatSelectModule,
     ReactiveFormsModule,
@@ -62,16 +61,15 @@ import { updateCandidateService } from './updateCandidat.service';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    RouterModule.forChild(CalendarRoutes)
+    RouterModule.forChild(CrudsRoutes)
   ],
-  providers: [updateCandidateService,{
+  providers: [updateCandidatService,{
     provide: STEPPER_GLOBAL_OPTIONS,
     useValue: { showError: true }
   }],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    updatecandidatComponent, 
-
+   updatecandidatComponent,
   ]
 })
 export class updateCandidatModule { }

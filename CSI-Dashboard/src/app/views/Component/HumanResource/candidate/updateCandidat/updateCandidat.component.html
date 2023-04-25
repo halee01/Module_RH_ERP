@@ -1,6 +1,6 @@
 <mat-card class="p-0">
   <mat-horizontal-stepper linear #stepper>
-    <form [formGroup]="myForm" >
+    <form [formGroup]="myForm"  >
 
     <!---------------------------COORDONNES-------------------------->
   <mat-step [stepControl]="step1" errorMessage="Tous les champs sont obligatoires.">
@@ -740,7 +740,7 @@
           <button  mat-raised-button 
           color="primary"
            type="submit" 
-           (click)="updateCandidate()"
+           (click)="updateCandidat()"
           >Finalisation</button>
         </div>
       </div>

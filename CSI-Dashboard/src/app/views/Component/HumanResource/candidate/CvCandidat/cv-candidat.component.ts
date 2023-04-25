@@ -69,7 +69,9 @@ export class cvcandidatComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [];
-
+  submitBtnLabel = 'Save';
+  editMode = false;
+employeeId: number //| null = null;
  constructor(private _formBuilder: FormBuilder,
   private cvCandidatService: CvCandidatService,
   private formBuilder: FormBuilder,
@@ -213,15 +215,7 @@ export class cvcandidatComponent implements OnInit {
           this.submitted = true;
           console.log(this.myForm.get("firstName"))
           console.log(this.myForm.get("lastName"))
-          console.log(this.myForm.get("country"))
-          console.log(this.myForm.get("title"))
-          console.log(this.myForm.get("adress"))
-          console.log(this.myForm.get("birthDate"))
-          console.log(this.myForm.get("emailOne"))
-          console.log(this.myForm.get("emailtwo"))
-          console.log(this.myForm.get("phoneNumberOne"))
-          console.log(this.myForm.get("civility"))
-          console.log(this.myForm.get("maritalSituation"))
+         
           // Redirect to CandidatCrud-table page
           this.router.navigate(['candidatCrud/CandidatCrud-table']);
         },
