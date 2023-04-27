@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
 import { AfterViewChecked, Component, Inject, OnInit } from '@angular/core';
-import { UntypedFormGroup, UntypedFormControl, Validators, FormArray } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
@@ -33,12 +33,11 @@ export class cvcandidatComponent implements OnInit {
   myForm: FormGroup;
   form1: FormGroup;
   form2: FormGroup;
-  form3: FormGroup;
-  form4: FormGroup;
   step1:FormGroup;
   step2:FormGroup;
   step3:FormGroup;
   step4:FormGroup;
+  stepOffres:FormGroup;
   lastEmployee: Employee;
 //////////////Ajout Candidat///////////////
   public itemForm: FormGroup;;
@@ -94,12 +93,14 @@ export class cvcandidatComponent implements OnInit {
       firstName: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(15)
+        Validators.maxLength(15),
+        this.capitalLetterValidator
       ]),
       lastName: new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(2),
-        Validators.maxLength(20)
+        Validators.maxLength(20),
+        this.capitalLetterValidator
       ]),
       birthDate: new UntypedFormControl('', [Validators.required]),
       /*country: new UntypedFormControl('', [Validators.required]),*/
@@ -145,6 +146,14 @@ export class cvcandidatComponent implements OnInit {
       }
     });
    
+  }
+
+  capitalLetterValidator(control: FormControl): { [key: string]: boolean } | null {
+    const firstLetter = control.value.charAt(0);
+    if (firstLetter && firstLetter !== firstLetter.toUpperCase()) {
+      return { 'capitalLetter': true };
+    }
+    return null;
   }
 
   /*ngAfterViewInit() {

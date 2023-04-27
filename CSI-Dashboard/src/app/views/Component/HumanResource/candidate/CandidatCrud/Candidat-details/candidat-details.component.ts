@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Partner } from 'app/shared/models/Partner';
 import { CrudService } from '../candidat-crud.service';
@@ -9,10 +9,14 @@ import { Skills } from 'app/shared/models/Skills';
 import { SkillsCategory } from 'app/shared/models/SkillsCategory';
 import { Certification } from 'app/shared/models/Certification';
 import { Experience } from 'app/shared/models/Experience';
+
 @Component({
   selector: 'app-details-candidat',
-  templateUrl: './candidat-details.component.html'
+  templateUrl: './candidat-details.component.html',
+  styleUrls:  ['./candidat-details.component.scss']
 })
+
+
 export class CandidatDetailComponent implements OnInit {
 id: number
 employee : Employee
@@ -21,6 +25,7 @@ skills : Skills
 skillsCategory : SkillsCategory
 certification : Certification
 experience : Experience
+private router: Router
   constructor(    private route: ActivatedRoute,
     private candidatService: CrudService,) { }
 
@@ -37,5 +42,9 @@ experience : Experience
       this.employee = data;
 
     });
+  }
+
+  openEvaluationCandidat(){
+    this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
   }
 }

@@ -5,6 +5,7 @@ import { Routes } from '@angular/router';
 import { CvTemplate1Component } from '../CvTemplate1/CvTemplate1.component';
 
 import { CandidatDetailComponent } from './Candidat-details/candidat-details.component';
+import { entretienRecrutmentComponent } from '../../entretienRecrutment/entretienRecrutment.component';
 
 
 
@@ -27,5 +28,10 @@ export const CandidatRoutes: Routes = [
    component: CandidatDetailComponent, 
    pathMatch: "full"
    //data: { title: 'AffichageCandidat' }
-  }
+  },
+
+  { 
+    path: 'evaluationCandidat', 
+component: entretienRecrutmentComponent, 
+data: { title: 'EntretienRecrutment' } }
 ];

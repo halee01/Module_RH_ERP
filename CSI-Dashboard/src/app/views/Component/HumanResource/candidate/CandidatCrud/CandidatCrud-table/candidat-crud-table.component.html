@@ -88,16 +88,16 @@
         </ng-container>
    
     
-         <ng-container matColumnDef="status" >
-           <mat-header-cell *matHeaderCellDef mat-sort-header> Statut </mat-header-cell>
-           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="status">
-             <mat-chip mat-sm-chip [color]="'primary'">{{row.employeeStatus}}
-             </mat-chip>
-           </mat-cell>
-         </ng-container>
+        <ng-container matColumnDef="status" >
+          <mat-header-cell *matHeaderCellDef mat-sort-header style="padding-left: 2cm;"> Statut </mat-header-cell>
+          <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="status" style="padding-left: 2cm;" >
+            <mat-chip mat-sm-chip [color]="'primary'">{{defaultStatus}}
+            </mat-chip>
+          </mat-cell>
+        </ng-container>
    
          
-         <ng-container matColumnDef="actions">
+         <ng-container matColumnDef="actions" >
            <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
            <mat-cell *matCellDef="let row">
              <button mat-icon-button mat-sm-button color="primary" class="mr-16 " (click)="updateCandidate()">

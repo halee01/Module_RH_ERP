@@ -35,6 +35,7 @@
             </mat-card>
         </div>
 
+        <div style="padding-top: 50px;"></div>
          <!-- <div fxFlex="100" fxFlex.gt-sm="50">
             <mat-card class="p-0">
               <mat-card-title class="">
@@ -82,11 +83,9 @@
           </div>
         </div>
         
-       
-        
-        
+         
               <mat-accordion multi="false" style="padding-top: 50px;">
-                  <mat-expansion-panel style="padding: 10px;" expanded="true">
+                  <!--<mat-expansion-panel style="padding: 10px;" expanded="true">
                     <mat-expansion-panel-header>
                       <mat-panel-title>
                         <mat-icon color="primary">location_on </mat-icon>
@@ -129,7 +128,7 @@
                             <small class="text-green">Adresse Actuelle</small>
                           </div>
                     </div>
-                  </mat-expansion-panel>
+                  </mat-expansion-panel>-->
                   <mat-expansion-panel style="padding: 10px;">
                     <mat-expansion-panel-header>
                       <mat-panel-title>
@@ -169,7 +168,6 @@
                           </div>
                     </div>
                   </mat-expansion-panel>
-                  
                 </mat-accordion>
       </mat-card-content>
     </mat-card>
@@ -181,18 +179,18 @@
         <div fxLyout="row wrap" >
           <div class="card-title-text">
           <span class="mat-heading-label" style=" padding-right: 5px;">Dossier Technique de </span><span class="mat-heading-label" style="font-size: 22px;">{{ employee.firstName }} {{ employee.lastName }}</span>
-        </div>
+          </div>
           <span fxFlex></span>
-          <span style=" padding-top: 30px;"><mat-icon class="mr-16" title="Add a new Contact">add_circle</mat-icon></span>
-          <span style=" padding-top: 30px;"><mat-icon class="mr-16" title="See My Calendar">perm_contact_calendar</mat-icon></span>
+            <span style=" padding-top: 30px;"><mat-icon color="primary" class="mr-16" title="Voir l'évaluation">create</mat-icon></span>
+            <div style="padding-top: 20px; padding-right: 20px;"><button  mat-raised-button  color="primary" (click)="openEvaluationCandidat()" >Voir l'évaluation</button></div>
         </div>
         <mat-divider></mat-divider>
       </mat-card-title>
 
       <mat-card-content>
-        <div fxLayout="column">
-          <div fxFlex="100" fxFlex.gt-sm="60">
-            <mat-card class="p-0">
+        <div fxLayout="row">
+          <div fxFlex="100" fxFlex.gt-sm="60" >
+            <mat-card class="p-0" >
               <mat-card-title class="">
                 <div class="card-title-text">Education</div>
                 <mat-divider></mat-divider>
@@ -200,18 +198,18 @@
               
               <mat-card-content>
                 <mat-list>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">cake</mat-icon><strong style="padding-right: 10px;">Diplome : </strong> </mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">people_outline</mat-icon> <strong style="padding-right: 10px;">Institution : </strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">face</mat-icon> <strong style="padding-right: 10px;">Date d'inscription : </strong> </mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">public</mat-icon> <strong style="padding-right: 10px;">Date d'obtention : </strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">location_city</mat-icon> <strong style="padding-right: 10px;">Score : </strong></mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">school</mat-icon><strong style="padding-right: 10px;">Diplome : </strong> </mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">business</mat-icon> <strong style="padding-right: 10px;">Institution : </strong></mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date d'inscription : </strong> </mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date d'obtention : </strong></mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">border_color</mat-icon> <strong style="padding-right: 10px;">Score : </strong></mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">add_locationgit </mat-icon> <strong style="padding-right: 10px;" >Actuellement inscri : </strong></mat-list-item>
                 </mat-list>
               </mat-card-content>
             </mat-card>
           </div>
           
-          <div fxFlex="100" fxFlex.gt-sm="60">
+          <div fxFlex="100" fxFlex.gt-sm="60"  >
             <mat-card class="p-0">
               <mat-card-title class="">
                 <div class="card-title-text">Expérience </div>
@@ -219,21 +217,23 @@
               </mat-card-title>
               <mat-card-content>
                 <mat-list>
-                  <mat-list-item><mat-icon  color="primary"class="mr-16">email</mat-icon> <strong style="padding-right: 10px;">Société : </strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">email</mat-icon> <strong style="padding-right: 10px;">Intitulé du poste : </strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">phone</mat-icon><strong style="padding-right: 10px;">Role : </strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">phone</mat-icon><strong style="padding-right: 10px;">Technologies: </strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Année de début : </strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Mois de début : </strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Année de fin : </strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Mois de fin : </strong></mat-list-item>
+                  <mat-list-item><mat-icon  color="primary"class="mr-16">business</mat-icon> <strong style="padding-right: 10px;">Société : </strong></mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">person</mat-icon> <strong style="padding-right: 10px;">Intitulé du poste : </strong></mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">keyboard</mat-icon><strong style="padding-right: 10px;">Technologies: </strong></mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de début : </strong></mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de fin : </strong></mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Actuellement employé : </strong></mat-list-item>
 
                 </mat-list>
               </mat-card-content>
             </mat-card>
           </div>
-          <div fxFlex="100" fxFlex.gt-sm="50">
+        </div>
+
+
+        
+        <div fxLayout="column">
+          <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
             <mat-card class="p-0">
               <mat-card-title class="">
                 <div class="card-title-text">Compétances</div>
@@ -241,13 +241,12 @@
               </mat-card-title>
               <mat-card-content>
                 <mat-list>
-                  <span class="mat-heading-label">Compétences linguistiques :</span>
-                  <mat-list-item><mat-icon  color="primary"class="mr-16">email</mat-icon> <strong style="padding-right: 10px;">Langue : </strong></mat-list-item>
+                  <span class="mat-heading-label"> Compétences linguistiques :</span>
+                  <mat-list-item style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">language</mat-icon><strong style="padding-right: 10px;">Langue : </strong></mat-list-item>
                   <span class="mat-heading-label">Certifications :</span>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">phone</mat-icon><strong style="padding-right: 10px;">Certification :  Année d'obtention : </strong></mat-list-item> 
+                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Certification :  Année d'obtention : </strong></mat-list-item> 
                   <span class="mat-heading-label">Compétences :</span>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">(categorie) : </strong><span class="mat-body-1">   </span></mat-list-item>
-
+                  <mat-list-item  style="padding-bottom: 20px;"> <mat-icon color="primary" class="mr-16">extension</mat-icon><strong style="padding-right: 10px;">(categorie) : </strong><span class="mat-body-1">   </span></mat-list-item>
                 </mat-list>
               </mat-card-content>
             </mat-card>
@@ -260,7 +259,81 @@
         
       </mat-card-content>
     </mat-card> </mat-tab>
-  <mat-tab label="Résumé"> </mat-tab>
+
+
+  <mat-tab label="Résumé"> 
+    <div style="padding-top: 20px; padding-left: 20px;">
+      <button mat-raised-button color="primary" (click)="openEvaluationCandidat()" style="display: block;">
+        Imprimer le Cv
+      </button>
+      <div style="padding-top: 20px;">
+        <button  mat-raised-button color="primary" (click)="openEvaluationCandidat()" style="display: block;">
+        Convertir en PDF
+      </button>
+      </div>
+      
+    </div>
+    
+
+    <div class="cv-container">
+      <div class="cv-header">
+        <div class="cv-name">John Doe</div>
+        <div class="cv-title">Front-End Developer</div>
+        <div class="cv-contact">
+          <div class="cv-contact-item"><i class="fas fa-phone"></i> (123) 456-7890</div>
+          <div class="cv-contact-item"><i class="fas fa-envelope"></i> john.doe@email.com</div>
+          <div class="cv-contact-item"><i class="fas fa-map-marker-alt"></i> 123 Main St, Anytown USA</div>
+        </div>
+      </div>
+      <div class="cv-body">
+        <div class="cv-section">
+          <div class="cv-section-title">Education</div>
+          <div class="cv-section-content">
+            <div class="cv-subsection">
+              <div class="cv-subsection-title">Bachelor of Science in Computer Science</div>
+              <div class="cv-subsection-info">
+                <div class="cv-subsection-info-item">University of Anytown, Anytown USA</div>
+                <div class="cv-subsection-info-item">Graduated May 2021</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cv-section">
+          <div class="cv-section-title">Experience</div>
+          <div class="cv-section-content">
+            <div class="cv-subsection">
+              <div class="cv-subsection-title">Front-End Developer</div>
+              <div class="cv-subsection-info">
+                <div class="cv-subsection-info-item">Acme Corporation, Anytown USA</div>
+                <div class="cv-subsection-info-item">January 2021 - Present</div>
+              </div>
+              <ul class="cv-subsection-list">
+                <li>Develop and maintain front-end of company website</li>
+                <li>Collaborate with back-end developers to implement new features</li>
+                <li>Optimize website for performance and search engines</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="cv-section">
+          <div class="cv-section-title">Skills</div>
+          <div class="cv-section-content">
+            <div class="cv-subsection">
+              <ul class="cv-subsection-list">
+                <li>HTML5</li>
+                <li>CSS3</li>
+                <li>JavaScript</li>
+                <li>Angular</li>
+                <li>React</li>
+                <li>Vue</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </mat-tab>
 </mat-tab-group>
 
 

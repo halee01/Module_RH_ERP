@@ -27,29 +27,21 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 export class CandidatCrudTableComponent implements OnInit {
   formData = {}
   console = console;
- 
-  public itemForm: FormGroup;;
-  Provenance = Object.values(Provenance);
-  countries: Country[];
-  states: string[];
-  selectedFile: File;
-  title :string[]= Object.values(Title);
-  Civility :string []= Object.values(Civility);
-  MaritalSituation :string []= Object.values(MaritalSituation);
-  EmployeeStatus :any= Object.values(EmployeeStatus);
-  formWidth = 200; //declare and initialize formWidth property
-  formHeight = 700; //declare and initialize formHeight property
-  Languages : string[] = Object.values(Languages);
-  LanguageLevel : string[] = Object.values(LanguageLevel);
-
   submitted = false;
   visible = true;
   selectable = true;
   removable = true;
   addOnBlur = true;
+  public itemForm: FormGroup;;
+  selectedFile: File;
+  formWidth = 200; //declare and initialize formWidth property
+  formHeight = 700; //declare and initialize formHeight property
+  title :string[]= Object.values(Title);
+  EmployeeStatus :any= Object.values(EmployeeStatus);
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [];
-
+  defaultStatus = EmployeeStatus.PRE_QUALIFIED;
+  
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
@@ -72,14 +64,7 @@ export class CandidatCrudTableComponent implements OnInit {
     this.displayedColumns = this.getDisplayedColumns();
     this.getItems();
 
-    /////Countries////
-    this.itemForm.get("country").valueChanges.subscribe((country) => {
-      this.itemForm.get("city").reset();
-      if (country) {
-        this.states = this.crudService.getStatesByCountry(country);
-   
-      }
-    });
+  
   }
 
 
