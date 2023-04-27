@@ -17,6 +17,7 @@ import { Title } from 'app/shared/models/Employee';
 import { CvCandidatService } from './cv-candidat.service';
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { catchError, of } from 'rxjs';
+import { Education } from 'app/shared/models/Education';
 
 
 @Component({
@@ -61,7 +62,7 @@ export class cvcandidatComponent implements OnInit {
   RequirementType : string[] = Object.values(RequirementType);
   Languages : string[] = Object.values(Languages);
   LanguageLevel : string[] = Object.values(LanguageLevel);
-
+  education : Education[]
   submitted = false;
   visible = true;
   selectable = true;
@@ -137,7 +138,7 @@ employeeId: number //| null = null;
 
   ngOnInit() {
     
-    
+  
 
     this.myForm = new UntypedFormGroup({
       firstName: new UntypedFormControl('', [
@@ -183,7 +184,8 @@ employeeId: number //| null = null;
       skillTitle : new UntypedFormControl('', []),
       skillCategoryTitle: new UntypedFormControl('', []),*/
 
-    })
+    }),
+    
   
     this.repeatForm = this._formBuilder.group({
       repeatArray: this._formBuilder.array([this.createRepeatForm()])
@@ -213,8 +215,6 @@ employeeId: number //| null = null;
           console.log('Item added successfully', res);
           console.log('Form value', this.myForm.value);
           this.submitted = true;
-          console.log(this.myForm.get("firstName"))
-          console.log(this.myForm.get("lastName"))
          
           // Redirect to CandidatCrud-table page
           this.router.navigate(['candidatCrud/CandidatCrud-table']);

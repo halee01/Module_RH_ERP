@@ -1,4 +1,5 @@
-import { crudEntretien } from './crud_entretienRecrutment.routing';
+import { entretienRecrutmentService } from './../entretienRecrutment.service';
+import { crudEntretien } from '../crud_entretienRecrutment.routing';
 
 
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -14,7 +15,6 @@ import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.serv
 import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
 import { Subscription } from 'rxjs';
 import { CrudService } from '../../candidate/CandidatCrud/candidat-crud.service';
-import { crud_entretienRecrutmentService } from './crud_entretienRecrutment.service';
 
 
 @Component({
@@ -32,7 +32,7 @@ export class crudEntretienRecrutmentComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private snack: MatSnackBar,
-    private crudEntretien: crud_entretienRecrutmentService,
+    private crudEntretien: entretienRecrutmentService,
     private confirmService: AppConfirmService,
     private loader: AppLoaderService,
     private router: Router
@@ -61,12 +61,15 @@ export class crudEntretienRecrutmentComponent implements OnInit {
     return ['name', 'last name', 'offre', 'note globale', 'status', 'actions'];
   }
 
-  getItems() {    
-    this.getItemSub = this.crudEntretien.getItems()
-      .subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-      })
-  }
+    
+    getItems() {    
+      this.getItemSub = this.crudEntretien.getItems()
+        .subscribe((data:any)  => {
+          this.dataSource = new MatTableDataSource(data);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        })    
+         }
 
   applyFilter(event :Event){
     const FilterValue = (event.target as HTMLInputElement).value ;
@@ -111,7 +114,7 @@ export class crudEntretienRecrutmentComponent implements OnInit {
       .subscribe(res => {
         if (res) {
           this.loader.open('Deleting Candidat');
-          this.crudEntretien.removeItem(row)
+          this.crudEntretien.deleteItem(row)
             .subscribe(data => {
               this.dataSource = data;
               this.loader.close();
@@ -120,6 +123,7 @@ export class crudEntretienRecrutmentComponent implements OnInit {
         }
       })
   }
+  
   openEvaluationCandidat(){
     this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
   }

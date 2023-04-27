@@ -1,13 +1,31 @@
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
+import { id } from 'date-fns/locale';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
+import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
+import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
+import { Subscription } from 'rxjs';
 
-import {FormControl} from '@angular/forms';
+import { Router } from '@angular/router';
+import { Fruit } from 'assets/examples/material/input-chip/input-chip.component';
+import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { CompanyStatus, Country } from 'app/shared/models/Partner';
+import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
+import { Service } from 'app/shared/models/contact';
+import { LanguageLevel, Languages } from 'app/shared/models/Language';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { entretienRecrutmentService } from '../entretienRecrutment.service';
 
 @Component({
-  selector: 'evaluation-form',
-  templateUrl: './entretienRecrutment.component.html',
-  styleUrls: ['./entretienRecrutment.component.css']
+  selector: 'app-candidat-crud',
+  templateUrl: './affichage_entretienRecrutment.component.html'
 })
+
+
 export class entretienRecrutmentComponent implements OnInit {
   formData = {}
   console = console;
@@ -135,17 +153,14 @@ export class entretienRecrutmentComponent implements OnInit {
           columnWidth: '20px',
         },
       },
-
       dataLabels: {
         enabled: false,
       },
-
       colors: ['#0081ff', '#e95455', '#e97d23'],
       xaxis: {
         axisBorder: {
           show: false,
         },
-
         categories: ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thur'],
       },
       yaxis: {
@@ -171,13 +186,9 @@ export class entretienRecrutmentComponent implements OnInit {
     },
     
   ];
-
   
   
   constructor() { }
-
   ngOnInit
 
-
 }
-

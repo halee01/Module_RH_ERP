@@ -21,11 +21,11 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { crud_entretienRecrutmentService } from './crud_entretienRecrutment.service';
-import { crudEntretien } from './crud_entretienRecrutment.routing';
+import { crudEntretien } from '../crud_entretienRecrutment.routing';
 import { crudEntretienRecrutmentComponent } from './crud_entretienRecrutment.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
+import { entretienRecrutmentService } from '../entretienRecrutment.service';
 
 
 
@@ -57,7 +57,7 @@ import { MatTableModule } from '@angular/material/table';
     }),
     RouterModule.forChild(crudEntretien)
   ],
-  providers: [crud_entretienRecrutmentService],
+  providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
     crudEntretienRecrutmentComponent

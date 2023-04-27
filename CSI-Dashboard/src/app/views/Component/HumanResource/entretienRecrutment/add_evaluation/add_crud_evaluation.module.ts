@@ -24,11 +24,12 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { crudEvaluationService } from './crud_evaluation.service';
-import { crudEvaluationComponent } from './crud_evaluation.component';
-import { crudEvalu } from './crud_evaluation.routing';
+
 import { SharedComponentsModule } from 'app/shared/components/shared-components.module';
 import { SharedMaterialModule } from 'app/shared/shared-material.module';
+import { crudEntretien } from '../crud_entretienRecrutment.routing';
+import { entretienRecrutmentService } from '../entretienRecrutment.service';
+import { crudEvaluationComponent } from './add_crud_evaluation.component';
 
 
 
@@ -63,9 +64,9 @@ import { SharedMaterialModule } from 'app/shared/shared-material.module';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    RouterModule.forChild(crudEvalu)
+    RouterModule.forChild(crudEntretien)
   ],
-  providers: [crudEvaluationService],
+  providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
     crudEvaluationComponent

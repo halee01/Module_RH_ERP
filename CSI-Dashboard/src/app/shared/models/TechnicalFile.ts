@@ -1,3 +1,4 @@
+import { Employee } from './Employee';
 import { Education } from './Education';
 import { Certification } from './Certification';
 import { Language } from './Language';
@@ -16,6 +17,7 @@ export interface TechnicalFile{
     languages ?: Language[];
     certifications?: Certification[];
     education?: Education[];
+    employee ?: Employee
 }
 
 export enum Nationality{

@@ -124,8 +124,13 @@ export const rootRouterConfig: Routes = [
         data: { title: 'CandidatAffichage', breadcrumb: 'Candidat'}
       },
       {
+        path: 'tableOffer',
+        loadChildren: () => import('./views/Component/HumanResource/offer/offer-crud.module').then(m => m.OfferCrudModule),
+        data: { title: 'CandidatAffichage', breadcrumb: 'Candidat'}
+      },
+      {
         path: 'CandidatEvaluation',
-        loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/entretienRecrutment.module').then(m => m.EntretienRecrutmentModule),
+        loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/affichage_entreteinrecrutment/affichage_entretienRecrutment.module').then(m => m.EntretienRecrutmentModule),
         data: { title: 'EntretienRecrutment', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
       },
 
@@ -136,7 +141,7 @@ export const rootRouterConfig: Routes = [
       },
       {
         path: 'evaluationCrud',
-        loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/crud_evaluation/crud_evaluation.module').then(m => m.CrudEvaluationModule),
+        loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/add_evaluation/add_crud_evaluation.module').then(m => m.CrudEvaluationModule),
         data: { title: 'Evaluation', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
       },
       

@@ -84,12 +84,12 @@
    
          <ng-container matColumnDef="name">
            <mat-header-cell *matHeaderCellDef mat-sort-header > Prénom </mat-header-cell>
-           <mat-cell *matCellDef="let row" data-label="name"> {{row.name}} </mat-cell>
+           <mat-cell *matCellDef="let row" data-label="name"> {{row.firstName}} </mat-cell>
          </ng-container>
    
          <ng-container matColumnDef="last name">
            <mat-header-cell *matHeaderCellDef mat-sort-header>  Nom </mat-header-cell>
-           <mat-cell *matCellDef="let row" data-label="age"> {{row.last_name}} </mat-cell>
+           <mat-cell *matCellDef="let row" data-label="age"> {{row.lastName}} </mat-cell>
          </ng-container>
    
          <ng-container matColumnDef="note globale">
@@ -99,7 +99,7 @@
    
          <ng-container matColumnDef="offre">
            <mat-header-cell *matHeaderCellDef mat-sort-header>Offre</mat-header-cell>
-           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.offre}} </mat-cell>
+           <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.offer}} </mat-cell>
          </ng-container>
    
          <ng-container matColumnDef="status">

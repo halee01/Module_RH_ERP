@@ -14,13 +14,12 @@ import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.serv
 import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
 import { Subscription } from 'rxjs';
 import { CrudService } from '../../candidate/CandidatCrud/candidat-crud.service';
-import { crudEvaluationService } from './crud_evaluation.service';
 import { MatSlider } from '@angular/material/slider';
 
 
 @Component({
   selector: 'evaluation-form',
-  templateUrl: './crud_evaluation.component.html'
+  templateUrl: './add_evaluation.component.html'
 })
 export class crudEvaluationComponent implements OnInit {
 

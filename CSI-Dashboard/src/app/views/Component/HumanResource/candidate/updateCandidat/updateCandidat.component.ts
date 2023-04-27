@@ -1,6 +1,7 @@
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
+import {  Employee, MaritalSituation } from '../../../../../shared/models/Employee';
 import { Component, Inject, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray } from '@angular/forms'; 
 import {FormControl} from '@angular/forms';
@@ -170,7 +171,7 @@ employeeId: number //| null = null;
   }
 
 
-  //////////////fonction ghada///////
+  //////////////fonction sarra///////
   updateCandidat() {
     console.log('updateCandidat() called');
     if (this.myForm.valid) {

@@ -1,5 +1,4 @@
 import { NgApexchartsModule } from 'ng-apexcharts';
-import { EntretienRecru } from './entretienRecrutment.routing';
 
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -20,10 +19,14 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { entretienRecrutmentService } from './entretienRecrutment.service';
 import {  MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { entretienRecrutmentComponent } from './entretienRecrutment.component';
+import { entretienRecrutmentComponent } from './affichage_entretienRecrutment.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { crudEntretien } from '../crud_entretienRecrutment.routing';
+import { entretienRecrutmentService } from '../entretienRecrutment.service';
+
 
 
 
@@ -34,9 +37,11 @@ import { entretienRecrutmentComponent } from './entretienRecrutment.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressBarModule,
+    MatPaginatorModule,
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
+    MatTableModule,
     MatExpansionModule,
     MatRadioModule,
     MatCardModule,
@@ -52,7 +57,7 @@ import { entretienRecrutmentComponent } from './entretienRecrutment.component';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    RouterModule.forChild(EntretienRecru)
+    RouterModule.forChild(crudEntretien)
   ],
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
