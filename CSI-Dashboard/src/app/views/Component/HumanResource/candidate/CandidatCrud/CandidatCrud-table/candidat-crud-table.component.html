@@ -91,7 +91,7 @@
          <ng-container matColumnDef="status" >
            <mat-header-cell *matHeaderCellDef mat-sort-header> Statut </mat-header-cell>
            <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="status">
-             <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.isActive">{{row.employeeStatus}}
+             <mat-chip mat-sm-chip [color]="'primary'">{{row.employeeStatus}}
              </mat-chip>
            </mat-cell>
          </ng-container>
