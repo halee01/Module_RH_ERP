@@ -16,16 +16,16 @@
   
   <ng-container matColumnDef="offerId">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Offre Id </mat-header-cell>
-    <mat-cell *matCellDef="let row" data-label="firstName" [style.color]="row.color"> {{row.firstName}} </mat-cell>
+    <mat-cell *matCellDef="let row" data-label="firstName" [style.color]="row.color"> {{row.id}} </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="candidatId">
+  <ng-container matColumnDef="reference">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Référance </mat-header-cell>
-    <mat-cell *matCellDef="let row" data-label="lastName" [style.color]="row.color"> {{row.lastName}} </mat-cell>
+    <mat-cell *matCellDef="let row" data-label="lastName" [style.color]="row.color"> {{row.reference}} </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="dateApplication">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Description</mat-header-cell>
+  <ng-container matColumnDef="title">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Title</mat-header-cell>
     <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.title}} </mat-cell>
   </ng-container>
 
@@ -41,13 +41,13 @@
    <ng-container matColumnDef="actions">
      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
      <mat-cell *matCellDef="let row">
-       <button mat-icon-button mat-sm-button color="primary" class="mr-16 "  (click)="updateEmployee(row.id)">
+       <button mat-icon-button mat-sm-button color="primary" class="mr-16 "  (click)="openPopUp(row)">
          <mat-icon>edit</mat-icon>
        </button>
-       <button mat-icon-button mat-sm-button color="accent" class=" mr-16 "  (click)="openAffichage()">
+       <button mat-icon-button mat-sm-button color="accent" class=" mr-16 "  (click)="Affiche(row.id)">
          <mat-icon>remove_red_eye </mat-icon>
        </button>
-       <button mat-icon-button mat-sm-button color="warn" (click)="deleteCandidate(row)">
+       <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row.id)">
          <mat-icon>delete</mat-icon>
        </button>
        

@@ -1,3 +1,4 @@
+import { affichageOfferComponent } from './affichage_offer.component';
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -26,12 +27,9 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
 import { Ng2TelInputModule } from "ng2-tel-input";
-import { OfferRoutes } from "./offer.routing";
-import { OfferService } from "./offer.service";
-import { OfferCrudTableComponent } from "./offer_data_table/offer-crud-table.component";
-import { DetailCrudComponent } from "./offer-detail-crud/detail-crud.component";
-import { OfferPopupComponent } from "./offer-popup/offer-popup.component";
-import { affichageOfferComponent } from "./affichage_offer/affichage_offer.component";
+
+import { OfferRoutes } from "../offer.routing";
+import { OfferService } from "../offer.service";
 
 
 
@@ -66,8 +64,8 @@ import { affichageOfferComponent } from "./affichage_offer/affichage_offer.compo
     MatTabsModule,
     RouterModule.forChild(OfferRoutes)
   ],
-  declarations: [ OfferCrudTableComponent,DetailCrudComponent,OfferPopupComponent],
+  declarations: [ affichageOfferComponent],
   providers: [
     OfferService,]
 })
-export class OfferCrudModule { }
+export class OfferAffichageModule { }

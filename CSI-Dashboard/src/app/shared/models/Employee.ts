@@ -12,18 +12,22 @@ export class Employee {
      phoneNumberTwo ?: number;
      address?:string;
      postCode ?: number;
-     city ?: number;
+     city ?: string;
      recommendationMark ?: number;
      experience ?: number;
      experienceDetails ?:string;
      civility?: Civility;
      title?: Title;
      employeeStatus?:EmployeeStatus;
-     country?:Country;
+     country?:string;
      maritalSituation ?:MaritalSituation;
      technicalfile ?:TechnicalFile ;
  
 }
+export interface Country {
+    shortName?: string;
+    name?: string;
+  }
 
 export enum Civility{
     MRS="Mme",

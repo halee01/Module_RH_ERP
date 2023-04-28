@@ -36,9 +36,8 @@ export class OfferPopupComponent implements OnInit {
   buildItemForm(item){
     this.offerForm = this.fb.group({
       reference : [item.reference || '', Validators.required],
-     
       title : [item.title || '', Validators.required],
-     
+      description : [item.description || '', Validators.required]
     });
 
   }
@@ -59,23 +58,7 @@ export class OfferPopupComponent implements OnInit {
     this.dialogRef.close(this.offerForm.value)
   }
 
-  saveCandidate(): void {
-    console.log('saveCandidat() called');
-    if (this.offerForm.valid) {
-      console.log('Form is valid, submitting...');
-      this.offerService.addItem(this.offerForm.value).subscribe({
-        next: (res) => {
-          console.log('Item added successfully', res);
-          console.log('Form value', this.offerForm.value);
-          this.submitted = true;
-        },
-
-        error: (err) => {
-          console.error('Error adding item', err);
-        }
-      });
-    }
-  }
+ 
   ///// Form Submit///// 
   onSubmit() {
     // Get the values of each form

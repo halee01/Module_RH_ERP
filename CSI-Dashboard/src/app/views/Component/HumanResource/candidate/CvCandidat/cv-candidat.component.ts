@@ -138,7 +138,8 @@ employeeId: number //| null = null;
 
   ngOnInit() {
     
-  
+   /////Countries////
+   
 
     this.myForm = new UntypedFormGroup({
       firstName: new UntypedFormControl('', [
@@ -155,6 +156,8 @@ employeeId: number //| null = null;
       /*country: new UntypedFormControl('', [Validators.required]),*/
       title: new UntypedFormControl('', []),
        address: new UntypedFormControl(''),
+      // country: new UntypedFormControl(''),
+      // city: new UntypedFormControl(''),
       emailOne: new UntypedFormControl('', [Validators.required, Validators.email]),
       phoneNumberOne: new UntypedFormControl('', [Validators.required]),
      civility: new UntypedFormControl('', []),
@@ -191,9 +194,8 @@ employeeId: number //| null = null;
       repeatArray: this._formBuilder.array([this.createRepeatForm()])
     });
 
-    /////Countries////
-    this.itemForm.get("country").valueChanges.subscribe((country) => {
-      this.itemForm.get("city").reset();
+    this.myForm.get("country").valueChanges.subscribe((country) => {
+      this.myForm.get("city").reset();
       if (country) {
         this.states = this.cvCandidatService.getStatesByCountry(country);
    

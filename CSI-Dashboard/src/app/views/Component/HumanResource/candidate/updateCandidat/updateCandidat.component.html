@@ -17,13 +17,13 @@
           <mat-grid-tile>
             <div class="pb-16">
               <mat-form-field appearance="outline" [style.width.cm]=10>
-                <mat-label>Prénom</mat-label>
-                  <input
+                <mat-label>Prénom </mat-label>
+                  <input 
                   matInput
                   name="first-name"
                   formControlName="firstName"
-                  placeholder="Ex.Emmanuel"
-                  value=""
+                  placeholder=""
+                  value={{employee.firstName}}
                   required>
               </mat-form-field>
               
@@ -40,7 +40,7 @@
                     name="lastName"
                     formControlName="lastName"
                     placeholder="Ex.Macron"
-                    value=""
+                    value={{employee.lastName}}
                     >
                 </mat-form-field>
                 <!--<small 
@@ -58,7 +58,7 @@
                 <mat-form-field appearance="outline" [style.width.cm]=10>
                 <mat-label>Civilité</mat-label>
                 <mat-select formControlName="civility">
-                  <mat-option  *ngFor="let civilities of Civility " [value]="civilities">{{civilities}}</mat-option>
+                  <mat-option value={{employee.civility}}>{{employee.civility}}</mat-option>
                   
                 </mat-select>
                 </mat-form-field>
@@ -71,7 +71,7 @@
                 <mat-form-field appearance="outline" [style.width.cm]=10>
                 <mat-label>Situation Maritale</mat-label>
                 <mat-select formControlName="maritalSituation" >
-                  <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{MaritalSituations}}</mat-option>
+                  <mat-option  value={{employee.maritalSituation}}>{{employee.maritalSituation}}</mat-option>
                   
                 </mat-select>
                 </mat-form-field>

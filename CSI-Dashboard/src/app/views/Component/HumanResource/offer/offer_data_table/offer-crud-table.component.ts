@@ -67,7 +67,7 @@ export class OfferCrudTableComponent implements OnInit {
   }
 
   getDisplayedColumns() {
-    return ['offerId','candidatId','dateApplication' ];
+    return ['offerId','reference','title','actions' ];
   }
 
 
@@ -149,4 +149,7 @@ export class OfferCrudTableComponent implements OnInit {
      this.dataSource.filter = FilterValue.trim().toLowerCase();
  
  }
+ Affiche(id: number){
+  this.router.navigate(["affichageOffer/affichageOffer", id]);
+}
 }

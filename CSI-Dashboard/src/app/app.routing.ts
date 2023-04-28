@@ -129,6 +129,12 @@ export const rootRouterConfig: Routes = [
         data: { title: 'CandidatAffichage', breadcrumb: 'Candidat'}
       },
       {
+        path: 'affichageOffer',
+        loadChildren: () => import('./views/Component/HumanResource/offer/affichage_offer/affichage_offer.module').then(m => m.OfferAffichageModule),
+        data: { title: 'offerAffichage', breadcrumb: 'Candidat'}
+      },
+
+      {
         path: 'CandidatEvaluation',
         loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/affichage_entreteinrecrutment/affichage_entretienRecrutment.module').then(m => m.EntretienRecrutmentModule),
         data: { title: 'EntretienRecrutment', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
