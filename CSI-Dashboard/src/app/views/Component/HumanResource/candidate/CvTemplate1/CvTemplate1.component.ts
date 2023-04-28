@@ -8,15 +8,13 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'affich-form',
-  templateUrl: './candidatAffichage.component.html',
-  styleUrls:  ['./candidatAffichage.component.scss']
+  templateUrl: './CvTemplate1.component.html',
+  styleUrls:  ['./CvTemplate1.component.scss']
   
   
 })
 
-
-
-export class candidatAffichageComponent  {
+export class CvTemplate1Component  {
   
   constructor(private router: Router){}
   @ViewChild('printSection') printSection: ElementRef;
@@ -26,7 +24,5 @@ export class candidatAffichageComponent  {
     
   }
 
-
- 
 }
 

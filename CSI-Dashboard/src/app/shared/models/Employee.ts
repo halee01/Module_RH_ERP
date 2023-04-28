@@ -1,8 +1,6 @@
 import { TechnicalFile } from "./TechnicalFile";
-
-
 export class Employee {
-    Id?: number;
+    id?: number;
      lastName ?:string;
      firstName?:string;
      birthDate ?:string;
@@ -22,7 +20,7 @@ export class Employee {
      country?:string;
      maritalSituation ?:MaritalSituation;
      technicalfile ?:TechnicalFile ;
- 
+
 }
 export interface Country {
     shortName?: string;
@@ -54,7 +52,13 @@ export enum Title{
       MARKETING_COORDINATOR="MARKETING_COORDINATOR"
 }
 export enum EmployeeStatus{
-    IN_PROCESS, IN_PROGRESS, PRE_QUALIFIED, TOP_PROFILES, CONVERTED_TO_RESOURCE, DO_NOT_CONTACT, ARCHIVE
+    IN_PROCESS="IN_PROCESS",
+     IN_PROGRESS="IN_PROGRESS",
+      PRE_QUALIFIED="PRE_QUALIFIED",
+       TOP_PROFILES="TOP_PROFILES",
+        CONVERTED_TO_RESOURCE=" CONVERTED_TO_RESOURCE",
+         DO_NOT_CONTACT=" DO_NOT_CONTACT",
+          ARCHIVE="ARCHIVE"
 }
 /*export enum Country{
     USA,

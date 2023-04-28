@@ -6,11 +6,14 @@ import * as countrycitystatejson from 'countrycitystatejson';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Employee } from 'app/shared/models/Employee';
+
 @Injectable()
+
 export class CrudService {
   private apiUrl = 'http://localhost:8080/rh/employee';
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
+
   constructor(private http: HttpClient) {}
 
   public getEvents(): Observable<EgretCalendarEvent[]> {
@@ -84,12 +87,13 @@ getItems(): Observable<Employee[]> {
 
 
  // GET an item by id
- getItem(id: number): Observable<Employee> {
+ getItemById(id: number): Observable<Employee> {
   const url = `${this.apiUrl+ '/get'}/${id}`;
   return this.http.get<Employee>(url).pipe(
     catchError(this.handleError)
   );
 }
+
 /*getrequirement(id: number): Observable<req[]> {
   const url = `${this.apiUrl}/${id}`;
   return this.http.get<Partner>(url).pipe(map(partner => partner.requirements),

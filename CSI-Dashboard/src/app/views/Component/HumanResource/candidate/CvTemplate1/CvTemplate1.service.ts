@@ -6,7 +6,7 @@ import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 
 @Injectable()
-export class candidatAffichageService {
+export class CvTemplate1Service {
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
 

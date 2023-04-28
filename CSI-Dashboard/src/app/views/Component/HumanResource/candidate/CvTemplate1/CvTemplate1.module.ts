@@ -1,5 +1,5 @@
 import { MatChipsModule } from '@angular/material/chips';
-import { candidatAffichageComponent } from './candidatAffichage.component';
+import { CvTemplate1Component,} from './CvTemplate1.component';
 import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -21,10 +21,10 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
 import { MatStepperModule } from '@angular/material/stepper';
-import { candidatAffichage } from './candidatAffichage.routing';
-import { candidatAffichageService } from './candidatAffichage.service';
+import { CvTemplate1Service} from './CvTemplate1.service';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { CvTemplate1 } from './CvTemplate1.routing';
 
 
 @NgModule({
@@ -55,13 +55,13 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    RouterModule.forChild(candidatAffichage)
+    RouterModule.forChild(CvTemplate1)
   ],
-  providers: [candidatAffichageService],
+  providers: [CvTemplate1Service],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-     candidatAffichageComponent
+    CvTemplate1Component
     
   ]
 })
-export class candidatAffichageModule { }
+export class CvTemplate1Module { }

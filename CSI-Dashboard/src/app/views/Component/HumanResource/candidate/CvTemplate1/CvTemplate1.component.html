@@ -1,14 +1,21 @@
-<button mat-raised-button class="print-button" color="primary" (click)="print()">Print CV</button>
+ <button mat-raised-button class="print-button" color="primary" (click)="print()">Print CV</button>
 <mat-card class="cv-card">
   <div class="header">
-    <img src="assets/images/faces/10.jpg" alt="John Doe" class="photo" />
     <div class="info">
       <mat-card-title>John Doe</mat-card-title>
       <mat-card-subtitle>Frontend Developer</mat-card-subtitle>
     </div>
   </div>
+  <div style="margin-top: 20px;"></div>
+<div class="border-top"></div>
   <div class="main-content">
-    <div class="column">
+    <div class="right-content">
+      <div class="border-right" style="margin-right: 5cm;">
+
+      </div>
+    </div>
+    <div class="left-content">
+      <div class="column">
       <h3 class="section-title">Summary</h3>
       <p class="summary-text">
         A frontend developer with experience in Angular, React, and Vue.js. Skilled in responsive web design and user interface development.
@@ -50,6 +57,8 @@
         <p class="education-period">Bachelor of Science in Computer Science, Sep 2014 - May 2018</p>
       </div>
     </div>
+    </div>
+    
   
   </div>
 </mat-card>
