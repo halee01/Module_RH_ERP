@@ -121,7 +121,7 @@ export const rootRouterConfig: Routes = [
 
       {
         path: 'candidatAffichage/:id',
-        loadChildren: () => import('./views/Component/HumanResource/candidate/candidatAffichage/').then(m => m.candidatAffichageModule),
+        loadChildren: () => import('./views/Component/HumanResource/candidate/CandidatCrud/candidat-crud.module').then(m => m.CandidatCrudModule),
         data: { title: 'CandidatAffichage', breadcrumb: 'Candidat'}
       },
       {

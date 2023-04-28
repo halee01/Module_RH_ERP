@@ -58,7 +58,7 @@
                 <mat-form-field appearance="outline" [style.width.cm]=10>
                 <mat-label>Civilité</mat-label>
                 <mat-select formControlName="civility">
-                  <mat-option value={{employee.civility}}>{{employee.civility}}</mat-option>
+                  <mat-option *ngFor="let civilities of Civility " [value]="civilities">{{civilities}}</mat-option>
                   
                 </mat-select>
                 </mat-form-field>
@@ -71,7 +71,7 @@
                 <mat-form-field appearance="outline" [style.width.cm]=10>
                 <mat-label>Situation Maritale</mat-label>
                 <mat-select formControlName="maritalSituation" >
-                  <mat-option  value={{employee.maritalSituation}}>{{employee.maritalSituation}}</mat-option>
+                  <mat-option  *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{MaritalSituations}}</mat-option>
                   
                 </mat-select>
                 </mat-form-field>

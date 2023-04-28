@@ -185,7 +185,7 @@ employeeId: number //| null = null;
           console.log(this.myForm.get("lastName"))
          
           // Redirect to CandidatCrud-table page
-          this.router.navigate(['candidatCrud/CandidatCrud-table']);
+          this.router.navigate(['candidat/CandidatCrud-table']);
         },
         error: (err) => {
           console.error('Error updating item', err);

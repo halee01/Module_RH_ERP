@@ -29,7 +29,7 @@ import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { updatecandidatComponent } from './updateCandidat.component';
 import { update } from './updateCandidat.routing';
 import { updateCandidatService } from './updateCandidat.service';
-import { CrudsRoutes } from '../CandidatCrud/candidat-crud.routing';
+import { CandidatRoutes } from '../CandidatCrud/candidat-crud.routing';
 
 
 @NgModule({
@@ -61,7 +61,7 @@ import { CrudsRoutes } from '../CandidatCrud/candidat-crud.routing';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    RouterModule.forChild(CrudsRoutes)
+    RouterModule.forChild(CandidatRoutes)
   ],
   providers: [updateCandidatService,{
     provide: STEPPER_GLOBAL_OPTIONS,
