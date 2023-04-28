@@ -1,4 +1,3 @@
-
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -63,7 +62,7 @@ import { CandidatDetailComponent } from "./Candidat-details/candidat-details.com
     MatTabsModule,
     RouterModule.forChild(CandidatRoutes)
   ],
-  declarations: [CandidatCrudTableComponent, CandidatCrudTablePopupComponent, CandidatDetailComponent],
+  declarations: [CandidatCrudTableComponent,  CandidatDetailComponent],
   providers: [CrudService]
 })
 export class CandidatCrudModule { }

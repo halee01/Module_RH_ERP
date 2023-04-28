@@ -119,9 +119,9 @@ export const rootRouterConfig: Routes = [
         data: { title: 'update', breadcrumb: 'update'}
       },
 
-      /*{
+      {
         path: 'candidatAffichage/:id',
-        loadChildren: () => import('./views/Component/HumanResource/candidate/candidatAffichage/candidatAffichage.module').then(m => m.candidatAffichageModule),
+        loadChildren: () => import('./views/Component/HumanResource/candidate/candidatAffichage/').then(m => m.candidatAffichageModule),
         data: { title: 'CandidatAffichage', breadcrumb: 'Candidat'}
       },
       {
@@ -243,5 +243,4 @@ export const rootRouterConfig: Routes = [
     path: '**',
     redirectTo: 'sessions/404'
   }
-];
-
+]
