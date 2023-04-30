@@ -6,10 +6,12 @@ import { map, catchError, switchMap } from 'rxjs/operators';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Employee } from 'app/shared/models/Employee';
+import { TechnicalFile } from 'app/shared/models/TechnicalFile';
 
 @Injectable()
 export class CvCandidatService {
   private apiUrl = 'http://localhost:8080/rh/employee';
+  private apiTechFile = 'http://localhost:8080/rh/technicalFile';
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -93,6 +95,7 @@ getItems(): Observable<Employee[]> {
   );
 }
 
+
 // POST a new item
 addItem(candidate: any): Observable<any> {
   const apiUrlWithAdd = this.apiUrl + '/add'; // Append /add to the apiUrl
@@ -102,13 +105,16 @@ addItem(candidate: any): Observable<any> {
 }
 
 //POST TF
-addTF(techfile: any): Observable<any> {
-  const apiUrlWithAdd = this.apiUrl + '/add'; // Append /add to the apiUrl
-  return this.http.post<any>(apiUrlWithAdd, techfile).pipe(
+addTechFile(techfile: any): Observable<any> {
+  const apiTechFileWithAdd = this.apiTechFile + '/addTechnicalFile'; // Append /add to the apiUrl
+  return this.http.post<any>(apiTechFileWithAdd, techfile).pipe(
     catchError(this.handleError)
   );
 }
 
+/*getLastEmployeeBack(): Observable<Employee> {
+  return this.http.get<Employee>(`${this.apiUrl}/employees/last`);
+}*/
 
 
 // PUT an existing item

@@ -1,0 +1,24 @@
+.example-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.example-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content:center;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.example-field {
+  width: calc(50% - 8px);
+}
+
+@media (max-width: 600px) {
+  .example-field {
+    width: 100%;
+  }
+}
+
+  

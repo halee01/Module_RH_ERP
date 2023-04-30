@@ -4,6 +4,7 @@ import { Certification } from './Certification';
 import { Language } from './Language';
 import { Experience } from './Experience';
 import { Skills } from './Skills';
+
 export interface TechnicalFile{
     id ?:number;
     reference?: string;

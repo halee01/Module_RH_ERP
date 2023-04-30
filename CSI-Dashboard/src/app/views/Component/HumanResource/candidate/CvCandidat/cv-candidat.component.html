@@ -1,9 +1,9 @@
 <mat-card class="p-0">
   <mat-horizontal-stepper linear #stepper>
-    <form [formGroup]="myForm" >
-
+    
     <!---------------------------COORDONNES-------------------------->
   <mat-step [stepControl]="step1" errorMessage="Tous les champs sont obligatoires.">
+    <form [formGroup]="myForm" >
     <div>
       <ng-template matStepLabel>Coordonnées</ng-template>
       <mat-card-title class="">
@@ -239,8 +239,6 @@
                   </mat-grid-tile>
               </mat-grid-list>
              </div>
-        
-        
     </mat-card-content>
 
     <div  fxLayout="row" dir="rtl"  fxLayoutAlign="space-between center">
@@ -250,7 +248,7 @@
         <button 
       mat-raised-button 
       color="primary"  
-      matStepperNext>Suivant : Formation
+      matStepperNext>Suivant : Informations Générales
       </button>
       </div>
 
@@ -263,14 +261,113 @@
       >Ajouter un Employée</button>
       </div>
 
-      
     </div>
   </div>
+    </form>
   </mat-step>
+  
+
+  <!-----------------------Info techniques----------------------------->
+  
+  <mat-step [stepControl]="stepTechFile" >
+    <form [formGroup]="techFileForm" >
+    <div>
+      <ng-template matStepLabel>Informations Générales </ng-template>
+      <mat-card-title class="">
+        <mat-divider></mat-divider>
+        <div class="card-title-text">Remplissez les informations générales du dossier technique </div>
+        <mat-divider></mat-divider>
+        </mat-card-title>
+        <mat-card-content style="padding-top: 1.5cm;">
+          <div class="example-form">
+            <div class="example-grid">
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 [style.padding-right.cm]=3.5>
+                <mat-label>Référence</mat-label>
+                <input 
+                type="text"
+                matInput
+                formControlName="reference"
+                placeholder="Ex."  >
+              </mat-form-field>
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
+                <mat-label>Titre du poste</mat-label>
+                <input 
+                type="text"
+                matInput
+                formControlName=""
+                placeholder="Ex.Développeur Front-End"  >
+              </mat-form-field>
+              
+            </div>
+            <div class="example-grid">
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 [style.padding-right.cm]=3.5>
+                <mat-label>Déscription</mat-label>
+                <input 
+                type="text"
+                matInput
+                formControlName="description"
+                placeholder="Ex."  >
+              </mat-form-field>
+              
+              
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
+                <mat-label>Objectif</mat-label>
+                <input 
+                type="text"
+                matInput
+                formControlName="objective"
+                placeholder="Ex."  >
+              </mat-form-field>
+            </div>
+            <div class="example-grid">
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 [style.padding-right.cm]=3.5>
+                <mat-label>Permit de conduire</mat-label>
+                <input 
+                type="text"
+                matInput
+                formControlName="driverLicense"  >
+              </mat-form-field>
+              
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
+                <mat-label>Nationalité</mat-label>
+                <input 
+                type="text"
+                matInput
+                formControlName="nationality"
+                placeholder="Ex.Français"  >
+              </mat-form-field>
+              </div>
+          </div>
+        </mat-card-content>
+        
+        <div  fxLayout="row" fxLayoutAlign="space-between center">
+          <!--Button 2-->
+          <div>
+            <button 
+          mat-raised-button 
+          color="primary" 
+          matStepperPrevious>Précédent : Coordonnées
+          </button>
+          </div>
+  
+          <!--Button 1-->
+          <div>
+            <button 
+          mat-raised-button 
+          color="primary" 
+          matStepperNext>Suivant : Formation
+          </button>
+          </div>
+        </div>
+  
+      </div>
+  </form> 
+ </mat-step>
 
   <!--------------------------------FORMATION------------------------------->
-
+<form [formGroup]="cvForm">
   <mat-step [stepControl]="step2" errorMessage="Tous les champs sont obligatoires.">
+    
     <div >
       <ng-template matStepLabel>Formation</ng-template>
 
@@ -377,7 +474,7 @@
           <button 
         mat-raised-button 
         color="primary" 
-        matStepperPrevious>Précédent : Coordonnées
+        matStepperPrevious>Précédent : Informations Générales
         </button>
         </div>
 
@@ -755,11 +852,10 @@
       </div>
     </div>
     </mat-step>
-    </form>
-
+ </form>
     <mat-step [stepControl]="stepOffres" >
       <div>
-        <ng-template matStepLabel>Offres</ng-template>
+        <ng-template matStepLabel>Candidature</ng-template>
         <mat-card-title class="">
           <mat-divider></mat-divider>
           <div class="card-title-text">Indiquez les offres auxquelles le candidat a postulé </div>
