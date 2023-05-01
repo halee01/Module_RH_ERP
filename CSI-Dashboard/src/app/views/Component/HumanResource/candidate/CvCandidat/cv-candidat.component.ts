@@ -1,29 +1,26 @@
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
-import { AfterViewChecked, Component, Inject, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { Fruit } from 'assets/examples/material/input-chip/input-chip.component';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CompanyStatus, LegalStatus, Provenance, Country } from 'app/shared/models/Partner';
-import { Privilege, Civility, Service } from 'app/shared/models/contact';
+import {  Civility, Service } from 'app/shared/models/contact';
 import { WorkField, Availability, RequirementStatus, RequirementType } from 'app/shared/models/req';
 import { Title } from 'app/shared/models/Employee';
 import { CvCandidatService } from './cv-candidat.service';
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { catchError, of } from 'rxjs';
-import { Education } from 'app/shared/models/Education';
 
 
 @Component({
   selector: 'app-basic-form',
   templateUrl: './cv-candidat.component.html',
-  styleUrls: ['./cv-candidat.component.css'],
+  styleUrls: ['./cv-candidat.component.scss'],
 })
 
 
@@ -32,14 +29,17 @@ export class cvcandidatComponent implements OnInit {
   console = console;
   repeatForm: FormGroup;
   myForm: FormGroup;
-  form1: FormGroup;
-  form2: FormGroup;
+  techFileForm: FormGroup;
+  cvForm: FormGroup;
   step1:FormGroup;
   step2:FormGroup;
   step3:FormGroup;
   step4:FormGroup;
+  stepIG:FormGroup;
+  stepTechFile:FormGroup;
   stepOffres:FormGroup;
   lastEmployee: Employee;
+  
 //////////////Ajout Candidat///////////////
   public itemForm: FormGroup;;
   CompanyStatus = Object.values(CompanyStatus);
@@ -76,45 +76,43 @@ export class cvcandidatComponent implements OnInit {
   private router:Router,
    private http: HttpClient)
    {  this.countries = this.cvCandidatService.getCountries();}
-  
-   
-     
-    
- 
-   
-  ////////////////////Ajout Candidat///////////////
+
 
   ngOnInit() {
 
    this.cvCandidatService.getLastEmployee().subscribe(employee => {
       this.lastEmployee = employee;
     });
-    
+
+  
     this.myForm = new UntypedFormGroup({
       firstName: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(15),
-        this.capitalLetterValidator
+        //Validators.required,
+        //Validators.minLength(2),
+        //Validators.maxLength(15),
+        //this.capitalLetterValidator
       ]),
       lastName: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-        this.capitalLetterValidator
+       // Validators.required,
+       // Validators.minLength(2),
+       // Validators.maxLength(20),
+        //this.capitalLetterValidator
       ]),
-      birthDate: new UntypedFormControl('', [Validators.required]),
-      /*country: new UntypedFormControl('', [Validators.required]),*/
-      title: new UntypedFormControl('', [Validators.required]),
-      address: new UntypedFormControl(''),
-      emailOne: new UntypedFormControl('', [Validators.required, Validators.email]),
-      phoneNumberOne: new UntypedFormControl('', [Validators.required]),
+      birthDate: new UntypedFormControl('', ),
+      title: new UntypedFormControl('', ),
+     /* address: new UntypedFormControl(''),
+      emailOne: new UntypedFormControl('', ),
+      phoneNumberOne: new UntypedFormControl('', ),
       civility: new UntypedFormControl('', []),
       maritalSituation: new UntypedFormControl('', []),
+      country: new UntypedFormControl('', ),
      /* city: new UntypedFormControl('', []),
-      postCode: new UntypedFormControl('', []),*/
-      emailTwo: new UntypedFormControl('', [ Validators.email]),
-      phoneNumberTwo: new UntypedFormControl('', []),
+      postCode: new UntypedFormControl('', []),
+      emailTwo: new UntypedFormControl('', ),
+      phoneNumberTwo: new UntypedFormControl('', []),*/
+
+    })
+      this.cvForm = new UntypedFormGroup({
      /* institution: new UntypedFormControl('', []),
       diploma: new UntypedFormControl('', []),
       score: new UntypedFormControl('', []),
@@ -136,6 +134,17 @@ export class cvcandidatComponent implements OnInit {
       skillTitle : new UntypedFormControl('', []),
       skillCategoryTitle: new UntypedFormControl('', []),*/
     })
+
+      this.techFileForm = new UntypedFormGroup({
+      reference: new UntypedFormControl('', []),
+      description: new UntypedFormControl('', []),
+      objective: new UntypedFormControl('', []),
+      driverLicense: new UntypedFormControl('', []),
+      //nationality: new UntypedFormControl('', []),
+    })
+
+
+    /////FormDuplicate///
     this.repeatForm = this._formBuilder.group({
       repeatArray: this._formBuilder.array([this.createRepeatForm()])
     });
@@ -149,6 +158,7 @@ export class cvcandidatComponent implements OnInit {
    
   }
 
+  /////Make first letter capital//////
   capitalLetterValidator(control: FormControl): { [key: string]: boolean } | null {
     const firstLetter = control.value.charAt(0);
     if (firstLetter && firstLetter !== firstLetter.toUpperCase()) {
@@ -163,33 +173,7 @@ export class cvcandidatComponent implements OnInit {
       window.location.reload();
     }
   }*/
-  
- /* saveCandidate(): void {
-    console.log('saveCandidate() called');
-  
-    // Show the loader
-   // this.isLoading = true;
-  
-    if (this.myForm.valid) {
-      console.log('Form is valid, submitting...');
-      this.cvCandidatService.addItem(this.myForm.value).subscribe({
-        next: (res) => {
-          console.log('Candidate added successfully:', res);
-  
-          // Hide the loader
-          //this.isLoading = false;/
-          //this.submitted = true;
-        },
 
-        error: (err) => {
-          console.error('Error adding item', err);
-  
-          // Hide the loader
-          //this.isLoading = false;
-        }
-      });
-    }
-  }*/
   
   saveCandidate(): void {
     console.log('saveCandidat() called');
@@ -218,8 +202,10 @@ export class cvcandidatComponent implements OnInit {
       this.cvCandidatService.addItem(this.myForm.value).subscribe({
         next: (res) => {
           this.submitted = true;
-          // Redirect to CandidatCrud-table page
-          this.router.navigate(['candidatCrud/CandidatCrud-table']);
+          // Retrieve the last added employee
+          this.cvCandidatService.getLastEmployee().subscribe(employee => {
+            this.lastEmployee = employee;
+          });
         },
         error: (err) => {
           console.error('Error adding item', err);
@@ -229,13 +215,18 @@ export class cvcandidatComponent implements OnInit {
   }
 
   saveTechFile(): void {
-    console.log('saveCandidat() called');
-    if (this.myForm.valid) {
+    console.log('saveTechFile() called');
+    if (this.techFileForm.valid) {
       console.log('Form is valid, submitting...');
-      this.cvCandidatService.addTF(this.myForm.value).subscribe({
+      this.cvCandidatService.addTechFile(this.techFileForm.value).subscribe({
         next: (res) => {
           this.submitted = true;
+          // Retrieve the last added employee
+          this.cvCandidatService.getLastEmployee().subscribe(employee => {
+            this.lastEmployee = employee;
+          });
         },
+
         error: (err) => {
           console.error('Error adding item', err);
         }
@@ -243,7 +234,36 @@ export class cvcandidatComponent implements OnInit {
     }
   }
   
-
+/*saveTechFile(): void {
+    console.log('saveTechFile() called');
+    if (this.techFileForm.valid) {
+      console.log('Form is valid, submitting...');
+      this.cvCandidatService.addTechFile(this.techFileForm.value).subscribe({
+        next: (res) => {
+          this.submitted = true;
+          this.cvCandidatService.getLastEmployeeBack().subscribe(employee => {
+            this.lastEmployee = employee;
+            const techFile = {
+              ...this.techFileForm.value,
+              employeeId: employee.id
+            };
+            // Save the technical file
+            this.cvCandidatService.addTechFile(techFile).subscribe({
+              next: (res) => {
+                console.log('TechnicalFile added successfully');
+              },
+              error: (err) => {
+                console.error('Error adding TechnicalFile', err);
+              }
+            });
+          });
+        },
+        error: (err) => {
+          console.error('Error adding item', err);
+        }
+      });
+    }
+  }*/
 
 
   public confirmer(){}
@@ -279,6 +299,24 @@ export class cvcandidatComponent implements OnInit {
       console.log(error);
       return of(error);
     })
+  )
+  .subscribe(response => {
+    console.log(response);
+    // Handle the response, such as displaying a success message
+  });
+  }
+
+
+   ///// TF Form Submit/////
+   onSubmitTF() {
+    // Get the values of each form
+    const formData2 = this.techFileForm.value;
+    this.http.post('http://localhost:8080/rh/technicalFile', formData2)
+  .pipe(
+    catchError(error => {
+      console.log(error);
+      return of(error);
+    })  
   )
   .subscribe(response => {
     console.log(response);

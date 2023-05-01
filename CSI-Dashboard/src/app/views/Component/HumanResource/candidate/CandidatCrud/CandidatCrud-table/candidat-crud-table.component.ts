@@ -81,6 +81,9 @@ employeeId: number //| null = null;
   goToCV() {
     this.router.navigate(['cvCandidat/cvCandidat-crud']);
   }
+  /*goToTemplate() {
+    this.router.navigate(['templcv/templateDuCv']);
+  }*/
 
   getDisplayedColumns() {
     return ['firstName', 'lastName', 'title',  'status', 'actions'];

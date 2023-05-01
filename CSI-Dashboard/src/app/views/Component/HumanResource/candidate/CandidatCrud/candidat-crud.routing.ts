@@ -39,5 +39,13 @@ export const CandidatRoutes: Routes = [
   { 
     path: 'evaluationCandidat', 
 component: entretienRecrutmentComponent, 
-data: { title: 'EntretienRecrutment' } }
+data: { title: 'EntretienRecrutment' } },
+
+
+/*{ 
+  path: ":templateDuCv", 
+ component: templateDuCvComponent, 
+ pathMatch: "full"
+ //data: { title: 'AffichageCandidat' }
+}*/
 ];
