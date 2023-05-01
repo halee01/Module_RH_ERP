@@ -749,7 +749,7 @@
           <button  mat-raised-button 
           color="primary"
            type="submit"
-           (click)="saveTechFile()"
+           (click)="saveCandidate()"
           >Finalisation</button>
         </div>
       </div>
@@ -759,10 +759,18 @@
 
     <mat-step [stepControl]="stepOffres" >
       <div>
-        <ng-template matStepLabel>Offres</ng-template>
+        <ng-template matStepLabel>Candidature</ng-template>
         <mat-card-title class="">
           <mat-divider></mat-divider>
-          <div class="card-title-text">Indiquez les offres auxquelles le candidat a postulé </div>
+          <mat-selection-list #shoes>
+            <mat-list-option *ngFor="let shoe of typesOfShoes">
+              {{shoe}}
+            </mat-list-option>
+          </mat-selection-list>
+          
+          <p>
+            Options selected: {{shoes.selectedOptions.selected.length}}
+          </p>
           <mat-divider></mat-divider>
           </mat-card-title>
       </div>    

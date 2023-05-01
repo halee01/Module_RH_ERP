@@ -323,6 +323,7 @@ handleRemoveRepeatForm(index: number) {
   onCountryChange(countryShotName: string) {
     this.states = this.cvCandidatService.getStatesByCountry(countryShotName);
   }
+  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   
 
   

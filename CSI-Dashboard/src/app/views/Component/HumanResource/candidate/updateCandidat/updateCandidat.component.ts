@@ -108,28 +108,20 @@ employeeId: number //| null = null;
       }, error => console.log(error));
 
     this.myForm = new UntypedFormGroup({
-      firstName: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(15)
-      ]),
-      lastName: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(9)
-      ]),
-      birthDate: new UntypedFormControl('', [Validators.required]),
+      firstName: new FormControl,
+      lastName: new FormControl,
+      birthDate: new FormControl,
       /*country: new UntypedFormControl('', [Validators.required]),*/
-      title: new UntypedFormControl('', []),
-       address: new UntypedFormControl(''),
-      emailOne: new UntypedFormControl('', [Validators.required, Validators.email]),
-      phoneNumberOne: new UntypedFormControl('', [Validators.required]),
-     civility: new UntypedFormControl('', []),
-       maritalSituation: new UntypedFormControl('', []),
+      title: new FormControl(),
+       address: new FormControl,
+      emailOne: new FormControl,
+      phoneNumberOne: new FormControl,
+     civility: new FormControl(''),
+       maritalSituation: new FormControl(''),
      /* city: new UntypedFormControl('', []),
       postCode: new UntypedFormControl('', []),*/
-      emailTwo: new UntypedFormControl('', [ Validators.email]),
-      phoneNumberTwo: new UntypedFormControl('', []),
+      emailTwo: new UntypedFormControl,
+      phoneNumberTwo: new UntypedFormControl,
      /* institution: new UntypedFormControl('', []),
       diploma: new UntypedFormControl('', []),
       score: new UntypedFormControl('', []),
@@ -156,6 +148,13 @@ employeeId: number //| null = null;
     this.repeatForm = this._formBuilder.group({
       repeatArray: this._formBuilder.array([this.createRepeatForm()])
     });
+    // Disable all validators
+Object.keys(this.myForm.controls).forEach(key => {
+  this.myForm.get(key).clearValidators();
+  this.myForm.get(key).updateValueAndValidity();
+});
+
+// Enable validators one by one to debug the issue
 
     /////Countries////
     this.itemForm.get("country").valueChanges.subscribe((country) => {
@@ -174,7 +173,7 @@ employeeId: number //| null = null;
   //////////////fonction sarra///////
   updateCandidat() {
     console.log('updateCandidat() called');
-    if (this.myForm.valid) {
+    
       console.log('Form is valid, submitting...');
       this.updateCandidatService.updateItem(this.id,this.myForm.value).subscribe({
         next: (res) => {
@@ -186,12 +185,9 @@ employeeId: number //| null = null;
          
           // Redirect to CandidatCrud-table page
           this.router.navigate(['candidat/CandidatCrud-table']);
-        },
-        error: (err) => {
-          console.error('Error updating item', err);
         }
       });
-    }
+    
   
   }
 
