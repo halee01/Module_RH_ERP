@@ -307,27 +307,6 @@ export class cvcandidatComponent implements OnInit {
     
 
 
-/*
-  saveTechFile(): void {
-    console.log('saveTechFile() called');
-    if (this.techFileForm.valid) {
-      console.log('Form is valid, submitting...');
-      this.cvCandidatService.addTechFile(this.techFileForm.value).subscribe({
-        next: (res) => {
-          this.submitted = true;
-          // Retrieve the last added employee
-          this.cvCandidatService.getLastEmployee().subscribe(employee => {
-            this.lastEmployee = employee;
-          });
-        },
-
-        error: (err) => {
-          console.error('Error adding item', err);
-        }
-      });
-    }
-  }
-  */
 
 
   public confirmer(){}

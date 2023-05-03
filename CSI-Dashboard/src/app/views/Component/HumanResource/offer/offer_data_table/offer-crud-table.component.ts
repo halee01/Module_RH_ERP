@@ -67,10 +67,30 @@ export class OfferCrudTableComponent implements OnInit {
   }
 
   getDisplayedColumns() {
-    return ['offerId','reference','title','actions' ];
+    return ['reference','title','actions' ];
   }
 
 
+  applyFilterReference(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+    this.dataSource.filterPredicate = (data, filter) => {
+      return data.reference.trim().toLowerCase().indexOf(filter) !== -1;
+    };
+  }
+  applyFilterTitle(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+    this.dataSource.filterPredicate = (data, filter) => {
+      return data.title.trim().toLowerCase().indexOf(filter) !== -1;
+    };
+  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

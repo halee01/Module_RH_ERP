@@ -71,23 +71,43 @@
         Temporary button</button>
        <div style="clear: both;"></div>-->
    
+       
 
        <mat-card  style="border: 5px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
         <mat-card-content class="p-0">
           <mat-table [dataSource]="dataSource" matSort >
         
         <ng-container matColumnDef="firstName">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Prénom </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header > Prénom 
+            <div style="padding-left: 20px;">
+               <mat-form-field style="width:1.5cm;" >
+                <input matInput (input)="applyFilterFirstName($event)" placeholder="Filtrer">
+              </mat-form-field>
+              </div>
+          </mat-header-cell> 
           <mat-cell *matCellDef="let row" data-label="firstName" [style.color]="row.color"> {{row.firstName}} </mat-cell>
         </ng-container>
+        
    
         <ng-container matColumnDef="lastName">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Nom 
+            <div style="padding-left: 20px;">
+              <mat-form-field style="width:1.5cm;" >
+               <input matInput (input)="applyFilterLastName($event)" placeholder="Filtrer">
+             </mat-form-field>
+             </div>
+          </mat-header-cell>
           <mat-cell *matCellDef="let row" data-label="lastName" [style.color]="row.color"> {{row.lastName}} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="title" >
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Intitulé du poste</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Intitulé du poste
+            <div style="padding-left: 20px;">
+              <mat-form-field style="width:1.5cm;" >
+               <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
+             </mat-form-field>
+             </div>
+          </mat-header-cell>
           <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.title}} </mat-cell>
         </ng-container>
    

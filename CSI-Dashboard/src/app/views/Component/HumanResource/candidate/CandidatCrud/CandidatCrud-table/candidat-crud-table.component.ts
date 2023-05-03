@@ -17,6 +17,7 @@ import { Civility, Employee, EmployeeStatus, MaritalSituation, Provenance, Title
 import { Service } from 'app/shared/models/contact';
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Invoice } from 'app/shared/models/invoice.model';
 
 @Component({
   selector: 'app-candidat-crud',
@@ -51,7 +52,8 @@ export class CandidatCrudTableComponent implements OnInit {
   submitBtnLabel = 'Save';
   editMode = false;
 employeeId: number //| null = null;
-
+employeeList: Employee[];
+filteredEmployees: Employee[] = [];
   constructor(
     private _formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -96,6 +98,8 @@ employeeId: number //| null = null;
     }
   }
 
+  
+  
 
   getItems() {    
     this.getItemSub = this.crudService.getItems()
@@ -106,7 +110,37 @@ employeeId: number //| null = null;
       })
 
   }
-
+  applyFilterFirstName(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+    this.dataSource.filterPredicate = (data, filter) => {
+      return data.firstName.trim().toLowerCase().indexOf(filter) !== -1;
+    };
+  }
+  applyFilterLastName(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+    this.dataSource.filterPredicate = (data, filter) => {
+      return data.lastName.trim().toLowerCase().indexOf(filter) !== -1;
+    };
+  }
+  applyFilterTitle(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+    this.dataSource.filterPredicate = (data, filter) => {
+      return data.title.trim().toLowerCase().indexOf(filter) !== -1;
+    };
+  }
+  
   
   deleteCandidate(row) {
     this.confirmService.confirm({message: `Delete ${row.firstName}?`})
@@ -127,7 +161,7 @@ employeeId: number //| null = null;
 add(){
   this.router.navigateByUrl('cvCandidat/cvCandidat-crud');
 }
-  applyFilter(event :Event){
+ applyFilter(event :Event){
     const FilterValue = (event.target as HTMLInputElement).value ;
      this.dataSource.filter = FilterValue.trim().toLowerCase();
  
