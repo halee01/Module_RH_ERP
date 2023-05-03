@@ -18,7 +18,7 @@ export interface TechnicalFile{
     languages ?: Language[];
     certifications?: Certification[];
     education?: Education[];
-    employee ?: Employee
+    employeeId ?: number;
 }
 
 export enum Nationality{

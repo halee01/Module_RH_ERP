@@ -12,6 +12,12 @@ import { TechnicalFile } from 'app/shared/models/TechnicalFile';
 export class CvCandidatService {
   private apiUrl = 'http://localhost:8080/rh/employee';
   private apiTechFile = 'http://localhost:8080/rh/technicalFile';
+  private apiEducation = 'http://localhost:8080/rh/education';
+  private apiExperience = 'http://localhost:8080/rh/experience';
+  private apiLanguage = 'http://localhost:8080/rh/Language';
+  private apiSkillCategory = 'http://localhost:8080/rh/skillsCategory';
+  private apiSkill = 'http://localhost:8080/rh/skills';
+  private apiCertification = 'http://localhost:8080/rh/certification';
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -111,6 +117,57 @@ addTechFile(techfile: any): Observable<any> {
     catchError(this.handleError)
   );
 }
+
+//POST education
+addEducation(education: any): Observable<any> {
+  const apiEducationWithAdd = this.apiEducation + '/add'; // Append /add to the apiUrl
+  return this.http.post<any>(apiEducationWithAdd, education).pipe(
+    catchError(this.handleError)
+  );
+}
+
+//POST experience
+addExperience(exp: any): Observable<any> {
+  const apiExperienceWithAdd = this.apiExperience + '/add'; // Append /add to the apiUrl
+  return this.http.post<any>(apiExperienceWithAdd, exp).pipe(
+    catchError(this.handleError)
+  );
+}
+
+//POST Certif
+addCertif(certif: any): Observable<any> {
+  const  apiCertificationWithAdd = this.apiCertification + '/addCertification'; // Append /add to the apiUrl
+  return this.http.post<any>( apiCertificationWithAdd, certif).pipe(
+    catchError(this.handleError)
+  );
+}
+
+//POST langugae
+addLanguage(lang: any): Observable<any> {
+  const  apiLanguageWithAdd = this.apiLanguage + '/add'; // Append /add to the apiUrl
+  return this.http.post<any>(apiLanguageWithAdd, lang).pipe(
+    catchError(this.handleError)
+  );
+}
+
+//POST skill
+addSkill(skill: any): Observable<any> {
+  const apiSkillWithAdd = this.apiSkill + '/addSkills'; // Append /add to the apiUrl
+  return this.http.post<any>(apiSkillWithAdd, skill).pipe(
+    catchError(this.handleError)
+  );
+}
+
+//POST skill category
+addSkillCategory(skillCat: any): Observable<any> {
+  const apiSkillCategoryWithAdd = this.apiSkillCategory + '/addSkillsCategory'; // Append /add to the apiUrl
+  return this.http.post<any>(apiSkillCategoryWithAdd, skillCat).pipe(
+    catchError(this.handleError)
+  );
+}
+
+
+
 
 /*getLastEmployeeBack(): Observable<Employee> {
   return this.http.get<Employee>(`${this.apiUrl}/employees/last`);

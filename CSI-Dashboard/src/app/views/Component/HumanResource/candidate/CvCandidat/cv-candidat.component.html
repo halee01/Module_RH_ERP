@@ -279,6 +279,17 @@
         <mat-divider></mat-divider>
         </mat-card-title>
         <mat-card-content style="padding-top: 1.5cm;">
+          <div class="form-group mb-1 col-sm-12 col-md-3">
+            <mat-form-field appearance="outline" [style.width.cm]=5 style="padding-right: 1cm;">
+              <mat-label>Candidat</mat-label>
+              <input
+                matInput
+                value="{{selectedEmplyee.id}}"
+                placeholder="Candidat"
+                formControlName="employeeId"
+                disabled="true" />
+            </mat-form-field>
+          </div>
           <div class="example-form">
             <div class="example-grid">
                 <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 [style.padding-right.cm]=3.5>
@@ -355,6 +366,7 @@
             <button 
           mat-raised-button 
           color="primary" 
+          (click)="saveTechFile()"
           matStepperNext>Suivant : Formation
           </button>
           </div>
@@ -386,11 +398,22 @@
         </mat-card-title>
 
         <mat-card-content style="padding-top: 2cm;">
-          <div [formGroup]="repeatForm" class="repeat-form">
+          <div class="form-group mb-1 col-sm-12 col-md-3">
+            <mat-form-field appearance="outline" [style.width.cm]=5 style="padding-right: 1cm;">
+              <mat-label>Technical File</mat-label>
+              <input
+                matInput
+                value="{{selectedTechFile.id}}"
+                placeholder="Technical File"
+                formControlName="technicalFileId"
+                disabled="true" />
+            </mat-form-field>
+          </div>
+          <!--<div [formGroup]="repeatForm" class="repeat-form">
             <div class="card-body" formArrayName="repeatArray">
                 <div class="col-12 align-items-center" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                   <div class="repeater-default" style="display: flex;justify-content: center;align-items: center;">
-                    <div [formGroupName]="i" >
+                    <div [formGroupName]="i" >-->
                       <div class="form-group mb-1 col-sm-12 col-md-3">
                         <mat-form-field appearance="outline" [style.width.cm]=15>
                           <mat-label>Nom de l'établissement</mat-label>
@@ -399,7 +422,7 @@
                             name="institution"
                             formControlName="institution"
                             placeholder="Ex. Université de paris"
-                            value="">
+                            >
                         </mat-form-field>
                       </div>
 
@@ -412,7 +435,7 @@
                               name="diploma"
                               formControlName="diploma"
                               placeholder="Ex. Licence en arts"
-                              value=""
+                              
                               >
                           </mat-form-field>
                         </div>
@@ -422,10 +445,9 @@
                               <mat-label>Mention</mat-label>
                               <input
                               matInput
-                              name="score"
                               formControlName="score"
                               placeholder="Ex. mention bien"
-                              value="">
+                             >
                             </mat-form-field>
                       </div>
                       </div> 
@@ -434,7 +456,7 @@
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                         <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
                           <mat-label>Date de dèbut</mat-label>
-                          <input matInput [matDatepicker]="picker" formControlName="EducationstartYear" placeholder="Date de dèbut" >
+                          <input matInput [matDatepicker]="picker" formControlName="startYear" placeholder="Date de dèbut" >
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -452,7 +474,8 @@
                       <div class="pb-16">
                         <mat-checkbox>En cours</mat-checkbox>
                       </div>
-                    </div>
+                   <!-- </div>
+
                       <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
                         <button mat-icon-button color="warn" type="button"  [disabled]="i === 0" (click)="handleRemoveRepeatForm(i)">
                           <mat-icon>delete</mat-icon>
@@ -464,7 +487,7 @@
                     </div>
                   </div>
               </div>
-            </div>
+            </div>-->
       </mat-card-content>
 
 
@@ -483,6 +506,7 @@
           <button 
         mat-raised-button 
         color="primary" 
+        (click)="saveFormation()"
         matStepperNext>Suivant : Expérience
         </button>
         </div>
@@ -509,11 +533,11 @@
         </mat-card-title>
 
         <mat-card-content style="padding-top: 2cm;">
-          <div [formGroup]="repeatForm" class="repeat-form">
+         <!--<div [formGroup]="repeatForm" class="repeat-form">
             <div class="card-body" formArrayName="repeatArray">
                 <div class="col-12 align-items-center" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                   <div class="repeater-default" style="display: flex;justify-content: center;align-items: center;">
-                    <div [formGroupName]="i" >
+                    <div [formGroupName]="i" >--> 
                       <div class="d-flex ">
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <!--Institution-->
@@ -613,7 +637,7 @@
                         <mat-checkbox>En cours</mat-checkbox>
                       </div>
 
-                    </div>
+                   <!-- </div>
                       <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
                         <button mat-icon-button color="warn" type="button"  [disabled]="i === 0" (click)="handleRemoveRepeatForm(i)">
                           <mat-icon>delete</mat-icon>
@@ -625,7 +649,7 @@
                     </div>
                   </div>
               </div>
-            </div>
+            </div>-->
       </mat-card-content>
       <div  fxLayout="row" fxLayoutAlign="space-between center">
         <!--Button 2-->
@@ -642,6 +666,7 @@
           <button 
         mat-raised-button 
         color="primary" 
+        (click)="saveExperience()"
          matStepperNext>Suivant : Compétances
         </button>
         </div>
@@ -672,11 +697,11 @@
                   ...
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <div [formGroup]="repeatForm" class="repeat-form">
+              <!--<div [formGroup]="repeatForm" class="repeat-form">
                 <div class="card-body" formArrayName="repeatArray">
                   <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                     <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
-                      <div [formGroupName]="i" class="d-flex align-items-center">
+                      <div [formGroupName]="i" class="d-flex align-items-center">-->
                         <!--Certif-->
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field [style.width.cm]=8 appearance="outline" style="margin-right: 2cm;">
@@ -693,7 +718,7 @@
                             <mat-datepicker #picker></mat-datepicker>
                           </mat-form-field>
                         </div>
-                        <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+                        <!--<div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
                           <button mat-icon-button color="warn" type="button" [disabled]="i === 0"  (click)="handleRemoveRepeatForm(i)">
                             <mat-icon>delete</mat-icon>
                           </button>
@@ -705,7 +730,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>-->
             </mat-expansion-panel>
              <!-----------------------Languages------------------------>
             <mat-expansion-panel  >
@@ -714,11 +739,11 @@
                  Langues
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <div [formGroup]="repeatForm" class="repeat-form">
+              <!--<div [formGroup]="repeatForm" class="repeat-form">
                 <div class="card-body" formArrayName="repeatArray">
                   <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                     <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
-                      <div [formGroupName]="i" class="d-flex align-items-center">
+                      <div [formGroupName]="i" class="d-flex align-items-center">-->
                        
                         <!--languages-->
                         <div class="form-group mb-1 col-sm-12 col-md-3">
@@ -745,7 +770,7 @@
                             <textarea matInput placeholder="Listez ici les technologies utilisées." formControlName="additionalInformation"></textarea>
                           </mat-form-field>
                         </div>
-                        <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+                        <!--<div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
                           <button mat-icon-button color="warn" type="button" [disabled]="i === 0"  (click)="handleRemoveRepeatForm(i)">
                             <mat-icon>delete</mat-icon>
                           </button>
@@ -757,7 +782,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>-->
             </mat-expansion-panel>
             <!---------------------Compétances-------------------->
             <mat-expansion-panel  >
@@ -766,11 +791,11 @@
                  Compétances
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <div [formGroup]="repeatForm" class="repeat-form">
+              <!--<div [formGroup]="repeatForm" class="repeat-form">
                 <div class="card-body" formArrayName="repeatArray">
                   <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
                     <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
-                      <div [formGroupName]="i" class="d-flex align-items-center">
+                      <div [formGroupName]="i" class="d-flex align-items-center">-->
                         <!--Skills Category-->
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field appearance="outline" [style.width.cm]=7>
@@ -803,7 +828,7 @@
                           </div>
                         </div>
 
-                        <div class="form-group col-sm-12 col-md-3 " style="margin-left: 1cm;">
+                        <!--<div class="form-group col-sm-12 col-md-3 " style="margin-left: 1cm;">
                           <button mat-icon-button color="warn" type="button" [disabled]="i === 0"  (click)="handleRemoveRepeatForm(i)">
                             <mat-icon>delete</mat-icon>
                           </button>
@@ -815,7 +840,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>-->
             </mat-expansion-panel>
 
             <!--Sections supplémentaires-->
@@ -846,7 +871,7 @@
           <button  mat-raised-button 
           color="primary"
            type="submit"
-           (click)="saveTechFile()"
+           (click)="saveRest()"
           >Finalisation</button>
         </div>
       </div>
