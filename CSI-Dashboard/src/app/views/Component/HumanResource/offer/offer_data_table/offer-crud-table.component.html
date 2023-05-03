@@ -29,15 +29,6 @@
     <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.title}} </mat-cell>
   </ng-container>
 
-
-   <!--<ng-container matColumnDef="experience">
-     <mat-header-cell *matHeaderCellDef mat-sort-header> Experience </mat-header-cell>
-     <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="status">
-       <mat-chip mat-sm-chip [color]="'primary'" [selected]="row.isActive">{{row.isActive ? 'active' : 'inactive'}}
-       </mat-chip>
-     </mat-cell>
-   </ng-container>-->
-
    <ng-container matColumnDef="actions">
      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
      <mat-cell *matCellDef="let row">

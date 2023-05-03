@@ -28,6 +28,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChipList, MatChipsModule } from '@angular/material/chips';
 import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 
 
 @NgModule({
@@ -55,6 +57,8 @@ import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
     FlexLayoutModule,
     ColorPickerModule,
     MatCheckboxModule,
+    MatTableModule,
+    MatPaginatorModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory

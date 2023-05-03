@@ -854,25 +854,28 @@
     </mat-step>
  </form>
     <mat-step [stepControl]="stepOffres" >
+      <form>
       <div>
         <ng-template matStepLabel>Candidature</ng-template>
-        <mat-card-title class="">
-          <mat-divider></mat-divider>
-          <mat-selection-list #shoes>
-            <mat-list-option *ngFor="let shoe of typesOfShoes">
-              {{shoe}}
+        <mat-card  style="border: 5px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
+          <mat-selection-list >
+            <mat-list-option *ngFor="let offer of offers">
+              {{offer.title }}
             </mat-list-option>
           </mat-selection-list>
           
-          <p>
-            Options selected: {{shoes.selectedOptions.selected.length}}
-          </p>
-          <mat-divider></mat-divider>
-          </mat-card-title>
-      </div>    
-   </mat-step>
-</mat-horizontal-stepper>
-</mat-card>
+          </mat-card>
+          
+        </div>      
+        <div>
+            <button 
+          mat-raised-button 
+          color="primary" 
+          matStepperNext>Enregistrer
+          </button>
+          </div>
+      </form>
+        </mat-step>
 
    
 

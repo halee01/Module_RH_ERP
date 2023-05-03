@@ -1,7 +1,8 @@
+import { Offer } from './../../../../../shared/models/Offer';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
-import {  Component, OnInit } from '@angular/core';
+import {  Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -14,7 +15,10 @@ import { WorkField, Availability, RequirementStatus, RequirementType } from 'app
 import { Title } from 'app/shared/models/Employee';
 import { CvCandidatService } from './cv-candidat.service';
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
-import { catchError, of } from 'rxjs';
+import { Subscription, catchError, of } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -69,7 +73,12 @@ export class cvcandidatComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   fruits: Fruit[] = [];
   isPageReloaded = false;
-  
+  public dataSource: any;
+  public displayedColumns: any;
+  public getItemSub: Subscription;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+   offers: Offer[];
  constructor(private _formBuilder: FormBuilder,
   private cvCandidatService: CvCandidatService,
   private formBuilder: FormBuilder,
@@ -77,8 +86,16 @@ export class cvcandidatComponent implements OnInit {
    private http: HttpClient)
    {  this.countries = this.cvCandidatService.getCountries();}
 
-
   ngOnInit() {
+   
+    this.cvCandidatService.getOfferItems().subscribe(
+      offers => this.offers = offers,
+      error => console.log(error)
+    );
+
+    
+    this.displayedColumns = this.getDisplayedColumns();
+    this.getOfferItems()
 
    this.cvCandidatService.getLastEmployee().subscribe(employee => {
       this.lastEmployee = employee;
@@ -363,6 +380,17 @@ handleRemoveRepeatForm(index: number) {
   }
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   
+  getOfferItems() {    
+    this.getItemSub = this.cvCandidatService.getOfferItems()
+      .subscribe((data:any)  => {
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      })
 
+  }
+  getDisplayedColumns() {
+    return ['reference','title','actions' ];
+  }
   
 }

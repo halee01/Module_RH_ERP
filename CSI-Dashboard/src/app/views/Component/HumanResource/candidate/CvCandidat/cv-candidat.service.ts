@@ -7,11 +7,13 @@ import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Employee } from 'app/shared/models/Employee';
 import { TechnicalFile } from 'app/shared/models/TechnicalFile';
+import { Offer } from 'app/shared/models/Offer';
 
 @Injectable()
 export class CvCandidatService {
   private apiUrl = 'http://localhost:8080/rh/employee';
   private apiTechFile = 'http://localhost:8080/rh/technicalFile';
+  private apiOffer='http://localhost:8080/rh/Offer'
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -81,6 +83,12 @@ export class CvCandidatService {
 //******* Implement your APIs ********
 getItems(): Observable<Employee[]> {
   const apiUrlWithGET = this.apiUrl + '/getEmployees';
+  return this.http.get<any>(apiUrlWithGET).pipe(
+    catchError(this.handleError)
+  );
+}
+getOfferItems(): Observable<Offer[]> {
+  const apiUrlWithGET = this.apiOffer +'/getAll';
   return this.http.get<any>(apiUrlWithGET).pipe(
     catchError(this.handleError)
   );

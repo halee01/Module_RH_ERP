@@ -173,87 +173,51 @@ Object.keys(this.myForm.controls).forEach(key => {
   //////////////fonction sarra///////
   updateCandidat() {
     console.log('updateCandidat() called');
-    
-      console.log('Form is valid, submitting...');
-      this.updateCandidatService.updateItem(this.id,this.myForm.value).subscribe({
-        next: (res) => {
-          console.log('Item updated successfully', res);
-          console.log('Form value', this.myForm.value);
-          this.submitted = true;
-          console.log(this.myForm.get("firstName"))
-          console.log(this.myForm.get("lastName"))
-         
-          // Redirect to CandidatCrud-table page
-          this.router.navigate(['candidat/CandidatCrud-table']);
-        }
-      });
-    
   
+    // Retrieve current values of candidate to be updated
+    this.updateCandidatService.getItem(this.id).subscribe({
+      next: (res) => {
+        const emloyeeData = res; // Assuming that the response contains the candidate object
+        console.log('Current candidate', emloyeeData);
+        
+        // Set initial values of form controls
+        this.myForm.setValue({
+          firstName: emloyeeData.firstName,
+          lastName: emloyeeData.lastName,
+          // Set other form controls here
+        });
+      
+        console.log('Form is valid, submitting...');
+          
+        this.updateCandidatService.updateItem(this.id,this.myForm.value).subscribe({
+          next: (res) => {
+            console.log('Item updated successfully', res);
+            console.log('Form value', this.myForm.value);
+            this.submitted = true;
+            console.log(this.myForm.get("firstName"))
+            console.log(this.myForm.get("lastName"))
+           
+            // Redirect to CandidatCrud-table page
+            this.router.navigate(['candidat/CandidatCrud-table']);
+          },
+          error: (err) => {
+            console.log('Error updating item', err);
+          }
+        });
+      },
+      error: (err) => {
+        console.log('Error retrieving current candidate', err);
+      }
+    }).unsubscribe();
   }
-
+  
   
   list(){
     this.router.navigate(['candidatCrud/CandidatCrud-table']);
   }
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  getDisplayedColumns() {
+    return ['reference','title','actions' ];
+  }
 
 
 
