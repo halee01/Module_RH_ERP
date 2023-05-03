@@ -67,20 +67,16 @@ employeeId: number //| null = null;
     
     this.displayedColumns = this.getDisplayedColumns();
     this.getItems();
-
-  
   }
 
 
-   /*openAffichage() {
-    this.router.navigate(['candidatAffichage/:id/candidatFiche']);
-  }*/
   updateEmployee(id: number){
     this.router.navigate(["candidatUpdate/updateCandidat", id]);
   }
   goToCV() {
     this.router.navigate(['cvCandidat/cvCandidat-crud']);
   }
+  
   /*goToTemplate() {
     this.router.navigate(['templcv/templateDuCv']);
   }*/
