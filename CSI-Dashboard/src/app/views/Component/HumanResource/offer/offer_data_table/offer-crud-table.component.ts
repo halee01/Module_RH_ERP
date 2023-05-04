@@ -60,9 +60,7 @@ export class OfferCrudTableComponent implements OnInit {
   ) {     this.dataSource = new MatTableDataSource<Offer>([]);}
 
   ngOnInit() {
-
-
-    this.displayedColumns = this.getDisplayedColumns();
+   this.displayedColumns = this.getDisplayedColumns();
     this.getItems()  
   }
 
