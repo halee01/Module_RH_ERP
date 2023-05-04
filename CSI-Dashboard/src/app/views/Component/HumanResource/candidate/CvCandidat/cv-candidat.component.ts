@@ -137,6 +137,7 @@ export class cvcandidatComponent implements OnInit {
       phoneNumberTwo: new UntypedFormControl('', [])
 
     })
+
       this.cvForm = new UntypedFormGroup({
       institution: new UntypedFormControl('', []),
       diploma: new UntypedFormControl('', []),
@@ -289,18 +290,18 @@ export class cvcandidatComponent implements OnInit {
       });
     }
 
-    /* saveRest(): void {
+    saveRest(): void {
       console.log('Submitting cv form...');
          
       //Save Formation 
       this.cvCandidatService.addEducation({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
         next: (res) => {
-          console.log('Item added successfully', res);
+          console.log('formation added successfully', res);
           console.log('Form value', this.cvForm.value);
           this.submitted = true;
         },   
         error: (e) => {
-          console.error('Error adding item', e);
+          console.error('Error adding formation', e);
           console.log('cv Form is invalid');
           console.log(this.cvForm.errors);
         }
@@ -309,12 +310,12 @@ export class cvcandidatComponent implements OnInit {
       // Save Expérience 
       this.cvCandidatService.addExperience({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
         next: (res) => {
-          console.log('Item added successfully', res);
+          console.log('Experience added successfully', res);
           console.log('Form value', this.cvForm.value);
           this.submitted = true;
         },   
         error: (e) => {
-          console.error('Error adding item', e);
+          console.error('Error adding experience', e);
           console.log('cv Form is invalid');
           console.log(this.cvForm.errors);
         }
@@ -335,12 +336,12 @@ export class cvcandidatComponent implements OnInit {
       });
     
       // Save certif
-      this.cvCandidatService.addCertif({...this.cvForm.value, technicalFileId: this.selectedTechFile.id}).subscribe({
+      this.cvCandidatService.addCertif({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
         next: (res) => {
           console.log('certif added successfully', res);
           console.log('Form value', this.cvForm.value);
           this.submitted = true;
-        },
+        },   
         error: (e) => {
           console.error('Error adding certif', e);
           console.log('cv Form is invalid');
@@ -367,21 +368,18 @@ export class cvcandidatComponent implements OnInit {
       // Save skills category
       this.cvCandidatService.addSkillCategory({...this.cvForm.value, technicalFileId: this.selectedTechFile.id}).subscribe({
         next: (res) => {
-          console.log('skill cat added successfully', res);
+          console.log('skill category added successfully', res);
           console.log('Form value', this.cvForm.value);
           this.submitted = true;
         },
         error: (e) => {
           console.error('Error adding skill cat', e);
-          console.log('cv Form is invalid');
+          console.log('skill cat is invalid');
           console.log(this.cvForm.errors);
         }
       });
-    }*/
+    }
     
-
-
-
 
   public confirmer(){}
    ///////Skills chips//////////

@@ -605,17 +605,17 @@
                           <!--Dates-->
                           <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
                             <mat-hint>Date Début</mat-hint>
-                            <input matInput [matDatepicker]="picker1" formControlName="experienceStartDate" placeholder="Année">
-                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                            <mat-datepicker #picker1></mat-datepicker>
+                            <input matInput [matDatepicker]="picker11" formControlName="experienceStartDate" placeholder="Année Début ">
+                            <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
+                            <mat-datepicker #picker11></mat-datepicker>
                           </mat-form-field>
                           </div>
                           <div class="form-group mb-1 col-sm-12 col-md-3">
                             <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
                               <mat-hint>Date Fin</mat-hint>
-                              <input matInput [matDatepicker]="picker3" formControlName="experienceEndDate" placeholder="Année" >
-                              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                              <mat-datepicker #picker3></mat-datepicker>
+                              <input matInput [matDatepicker]="picker10" formControlName="experienceEndDate" placeholder="Année Fin ">
+                              <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
+                              <mat-datepicker #picker10></mat-datepicker>
                             </mat-form-field>
                           </div>
                           </div>
@@ -839,8 +839,7 @@
                   <mat-icon color="primary"class="mr-16">info</mat-icon>
                  Sections Supplémentaires
                 </mat-panel-title>
-              </mat-expansion-panel-header>
-                
+              </mat-expansion-panel-header> 
             </mat-expansion-panel>
           </mat-accordion>
       </mat-card-content>
@@ -861,7 +860,7 @@
           <button  mat-raised-button 
           color="primary"
            type="submit"
-           (click)="saveCertif()"
+           (click)="saveRest()"
           >Finalisation</button>
         </div>
       </div>
