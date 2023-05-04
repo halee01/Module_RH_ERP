@@ -7,11 +7,13 @@ import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Employee } from 'app/shared/models/Employee';
 import { TechnicalFile } from 'app/shared/models/TechnicalFile';
+import { Offer } from 'app/shared/models/Offer';
 
 @Injectable()
 export class CvCandidatService {
   private apiUrl = 'http://localhost:8080/rh/employee';
   private apiTechFile = 'http://localhost:8080/rh/technicalFile';
+  private apiOffer='http://localhost:8080/rh/Offer'
   private apiEducation = 'http://localhost:8080/rh/education';
   private apiExperience = 'http://localhost:8080/rh/experience';
   private apiLanguage = 'http://localhost:8080/rh/Language';
@@ -91,6 +93,12 @@ getItems(): Observable<Employee[]> {
     catchError(this.handleError)
   );
 }
+getOfferItems(): Observable<Offer[]> {
+  const apiUrlWithGET = this.apiOffer +'/getAll';
+  return this.http.get<any>(apiUrlWithGET).pipe(
+    catchError(this.handleError)
+  );
+}
 
 
  // GET an item by id
@@ -151,9 +159,9 @@ addLanguage(lang: any): Observable<any> {
 }
 
 //POST skill
-addSkill(skill: any): Observable<any> {
+addSkill(skil: any): Observable<any> {
   const apiSkillWithAdd = this.apiSkill + '/addSkills'; // Append /add to the apiUrl
-  return this.http.post<any>(apiSkillWithAdd, skill).pipe(
+  return this.http.post<any>(apiSkillWithAdd, skil).pipe(
     catchError(this.handleError)
   );
 }

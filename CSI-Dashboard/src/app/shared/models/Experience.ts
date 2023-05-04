@@ -1,9 +1,7 @@
 export interface Experience {
     Id ?:number;
-    experienceStartMonth ?:string;
-    experienceEndMonth ?:string;
-    experienceStartYear ?:string;
-    experienceEndYear ?:string;
+    experienceStartDate ?:string;
+    experienceEndDate ?:string;
     actualEmployment?: boolean;
     experienceCompany?: string;
     experienceRole?: string;
