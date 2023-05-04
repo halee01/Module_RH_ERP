@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Partner } from 'app/shared/models/Partner';
 import { CrudService } from '../candidat-crud.service';
 import { Employee } from 'app/shared/models/Employee';
 import { Education } from 'app/shared/models/Education';
@@ -9,6 +8,8 @@ import { Skills } from 'app/shared/models/Skills';
 import { SkillsCategory } from 'app/shared/models/SkillsCategory';
 import { Certification } from 'app/shared/models/Certification';
 import { Experience } from 'app/shared/models/Experience';
+import { TechnicalFile } from 'app/shared/models/TechnicalFile';
+import { Language } from 'app/shared/models/Language';
 
 @Component({
   selector: 'app-details-candidat',
@@ -19,8 +20,11 @@ import { Experience } from 'app/shared/models/Experience';
 
 export class CandidatDetailComponent implements OnInit {
 id: number
+idTechnicalFile:number
 employee : Employee
 education : Education
+language: Language
+technicalFile: TechnicalFile
 skills : Skills
 skillsCategory : SkillsCategory
 certification : Certification
@@ -32,19 +36,62 @@ private router: Router
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.getemployee();
-
-    console.log(this.id)
-  
+   console.log(this.id);
+   this.getTechnicalFile();
+   this.getEducation();
+   this.getExperience();
+   this.getCertification();
+   this.getlanguage();
+   this.getSkills();
 
   }
+
+  
   getemployee() {
     this.candidatService.getItemById(this.id).subscribe((data: any) => {
       this.employee = data;
 
     });
   }
+  getTechnicalFile() {
+    this.candidatService.getTechnicalFileById(this.id).subscribe((data: any) => {
+      this.technicalFile = data;
+
+    });
+  }
+  getEducation() {
+    this.candidatService.getEducationById(this.id).subscribe((data: any) => {
+      this.education = data;
+      console.log(this.education);
+    });
+  }
+  getExperience(){
+    this.candidatService.getExperienceById(this.id).subscribe((data : any)=>{
+      this.experience = data;
+      console.log(this.experience);
+    })
+  }
+  getCertification(){
+    this.candidatService.getCertificationById(this.id).subscribe((data : any)=>{
+      this.certification = data;
+      console.log(this.certification);
+    })
+  }
+  getlanguage(){
+    this.candidatService.getLanguageById(this.id).subscribe((data : any)=>{
+      this.language = data;
+      console.log(this.language);
+    })
+  }
+  getSkills(){
+    this.candidatService.getSkillsById(this.id).subscribe((data : any)=>{
+      this.skills = data;
+      console.log(this.skills);
+    })
+  }
 
   openEvaluationCandidat(){
     this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
   }
+
 }

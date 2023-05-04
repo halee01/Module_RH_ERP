@@ -8,16 +8,11 @@
     </mat-form-field> 
  
 
-
-
 <mat-card  style="border: 5px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
   <mat-card-content class="p-0">
     <mat-table [dataSource]="dataSource" matSort  >
   
-  <ng-container matColumnDef="offerId">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Offre Id </mat-header-cell>
-    <mat-cell *matCellDef="let row" data-label="firstName" [style.color]="row.color"> {{row.id}} </mat-cell>
-  </ng-container>
+  
 
   <ng-container matColumnDef="reference">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Référance </mat-header-cell>

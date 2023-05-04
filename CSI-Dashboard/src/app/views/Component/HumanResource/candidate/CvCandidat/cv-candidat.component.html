@@ -879,6 +879,16 @@
     </mat-step>
  </form>
     <mat-step [stepControl]="stepOffres" >
+      <mat-card-title class="">
+        <mat-divider></mat-divider>
+        <div class="card-title-text"></div>
+        <mat-divider></mat-divider>
+      </mat-card-title>
+        <div class="mat-heading-label" [style.padding-left.px]=24>
+          Indiquez les offres auxquelles le candidat a postulé.
+        </div>
+        <mat-divider></mat-divider>
+          <mat-card-content style="padding-top: 2cm;">
       <form>
       <div>
         <ng-template matStepLabel>Candidature</ng-template>
@@ -900,7 +910,8 @@
           </button>
           </div>
       </form>
-        </mat-step>
+      </mat-card-content>
+     </mat-step>
 
    
 

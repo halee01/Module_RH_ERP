@@ -108,29 +108,29 @@ export class cvcandidatComponent implements OnInit {
   
     this.myForm = new UntypedFormGroup({
       firstName: new UntypedFormControl('', [
-        //Validators.required,
-        //Validators.minLength(2),
-        //Validators.maxLength(15),
-        //this.capitalLetterValidator
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(15),
+        this.capitalLetterValidator
       ]),
       lastName: new UntypedFormControl('', [
-       // Validators.required,
-       // Validators.minLength(2),
-       // Validators.maxLength(20),
-        //this.capitalLetterValidator
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20),
+        this.capitalLetterValidator
       ]),
       birthDate: new UntypedFormControl('', ),
       title: new UntypedFormControl('', ),
-     /* address: new UntypedFormControl(''),
+      address: new UntypedFormControl(''),
       emailOne: new UntypedFormControl('', ),
       phoneNumberOne: new UntypedFormControl('', ),
       civility: new UntypedFormControl('', []),
       maritalSituation: new UntypedFormControl('', []),
-      country: new UntypedFormControl('', ),
-     /* city: new UntypedFormControl('', []),
+     // country: new UntypedFormControl('', ),
+     // city: new UntypedFormControl('', []),
       postCode: new UntypedFormControl('', []),
       emailTwo: new UntypedFormControl('', ),
-      phoneNumberTwo: new UntypedFormControl('', []),*/
+      phoneNumberTwo: new UntypedFormControl('', []),
 
     })
       this.cvForm = new UntypedFormGroup({
