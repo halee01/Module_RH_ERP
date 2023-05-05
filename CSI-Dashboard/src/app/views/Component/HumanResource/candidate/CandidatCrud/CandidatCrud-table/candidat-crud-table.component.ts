@@ -110,7 +110,7 @@ filteredEmployees: Employee[] = [];
       })
 
   }
-  applyFilterFirstName(event: Event) {
+  /*applyFilterFirstName(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
     if (this.dataSource.paginator) {
@@ -139,7 +139,21 @@ filteredEmployees: Employee[] = [];
     this.dataSource.filterPredicate = (data, filter) => {
       return data.title.trim().toLowerCase().indexOf(filter) !== -1;
     };
+  }*/
+
+
+  applyFilterr(event: Event, key: string) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+    this.dataSource.filterPredicate = (data, filter) => {
+      return data[key].trim().toLowerCase().indexOf(filter) !== -1;
+    };
   }
+  
+  
   
   
   deleteCandidate(row) {

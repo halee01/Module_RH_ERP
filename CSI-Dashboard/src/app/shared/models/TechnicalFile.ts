@@ -9,10 +9,8 @@ export interface TechnicalFile{
     id ?:number;
     reference?: string;
     description?: string;
-    title?: string;
     objective?: string;
     driverLicense?: string;
-    nationality?: Nationality;
     skills?: Skills[];
     experiences?: Experience[];
     languages ?: Language[];
