@@ -91,7 +91,6 @@ export class cvcandidatComponent implements OnInit {
    private http: HttpClient)
    {  this.countries = this.cvCandidatService.getCountries();}
 
-
   ngOnInit() {
    
     this.cvCandidatService.getOfferItems().subscribe(
@@ -112,16 +111,16 @@ export class cvcandidatComponent implements OnInit {
   
     this.myForm = new UntypedFormGroup({
       firstName: new UntypedFormControl('', [
-        //Validators.required,
-        //Validators.minLength(2),
-        //Validators.maxLength(15),
-        //this.capitalLetterValidator
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(15),
+        this.capitalLetterValidator
       ]),
       lastName: new UntypedFormControl('', [
-       // Validators.required,
-       // Validators.minLength(2),
-       // Validators.maxLength(20),
-        //this.capitalLetterValidator
+        Validators.required,
+        Validators.minLength(2),
+        Validators.maxLength(20),
+        this.capitalLetterValidator
       ]),
       birthDate: new UntypedFormControl('', ),
       title: new UntypedFormControl('', ),
@@ -463,6 +462,7 @@ handleRemoveRepeatForm(index: number) {
     this.states = this.cvCandidatService.getStatesByCountry(countryShotName);
    
   }
+  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   
   getOfferItems() {    
     this.getItemSub = this.cvCandidatService.getOfferItems()

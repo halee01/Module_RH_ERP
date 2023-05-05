@@ -1,12 +1,13 @@
+import { MatChipsModule } from '@angular/material/chips';
+import { CvTemplate1Component,} from './CvTemplate1.component';
 import { MatSelectModule } from '@angular/material/select';
-import { cvcandidatComponent } from './cv-candidat.component';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import {   MatCardModule, MatCardTitle } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -19,33 +20,24 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { CalendarRoutes } from "./cv-candidat.routing";
-import { CalendarFormDialogComponent } from './calendar-form-dialog/calendar-form-dialog.component';
-import { CvCandidatService } from './cv-candidat.service';
 import { MatStepperModule } from '@angular/material/stepper';
-import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { MatChipList, MatChipsModule } from '@angular/material/chips';
-import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
-
-
+import { CvTemplate1Service} from './CvTemplate1.service';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { CvTemplate1 } from './CvTemplate1.routing';
 @NgModule({
   imports: [
-    
     CommonModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatStepperModule,
     HttpClientModule,
-    MatExpansionModule,
-    FormsModule,
-    MatGridListModule,
     MatIconModule,
-    MatChipsModule,
+    MatMenuModule,
+    MatExpansionModule,
     MatDialogModule,
+    MatChipsModule,
+    MatCardModule,
     MatButtonModule,
     MatRadioModule,
     MatCardModule,
@@ -56,23 +48,16 @@ import { MatTableModule } from '@angular/material/table';
     MatInputModule,
     FlexLayoutModule,
     ColorPickerModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatPaginatorModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
-    RouterModule.forChild(CalendarRoutes)
+    RouterModule.forChild(CvTemplate1)
   ],
-  providers: [CvCandidatService,{
-    provide: STEPPER_GLOBAL_OPTIONS,
-    useValue: { showError: true }
-  }],
+  providers: [CvTemplate1Service],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    cvcandidatComponent, 
-    CalendarFormDialogComponent
+    CvTemplate1Component
   ]
 })
-export class CvCandidatModule { }
+export class CvTemplate1Module { }

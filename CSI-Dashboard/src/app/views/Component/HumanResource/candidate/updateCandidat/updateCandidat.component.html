@@ -23,8 +23,8 @@
                   name="first-name"
                   formControlName="firstName"
                   placeholder=""
-                  value={{employee.firstName}}
-                  required>
+                  
+                  >
               </mat-form-field>
               
             </div>
@@ -40,7 +40,7 @@
                     name="lastName"
                     formControlName="lastName"
                     placeholder="Ex.Macron"
-                    value={{employee.lastName}}
+                    value=""
                     >
                 </mat-form-field>
                 <!--<small 
@@ -58,7 +58,7 @@
                 <mat-form-field appearance="outline" [style.width.cm]=10>
                 <mat-label>Civilité</mat-label>
                 <mat-select formControlName="civility">
-                  <mat-option *ngFor="let civilities of Civility " [value]="civilities">{{civilities}}</mat-option>
+                  <mat-option *ngFor="let civilities of Civility " value={{employee.civility}}>{{civilities}}</mat-option>
                   
                 </mat-select>
                 </mat-form-field>
@@ -71,7 +71,7 @@
                 <mat-form-field appearance="outline" [style.width.cm]=10>
                 <mat-label>Situation Maritale</mat-label>
                 <mat-select formControlName="maritalSituation" >
-                  <mat-option  *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{MaritalSituations}}</mat-option>
+                  <mat-option  *ngFor="let MaritalSituations of MaritalSituation " value={{employee.maritalSituation}}>{{MaritalSituations}}</mat-option>
                   
                 </mat-select>
                 </mat-form-field>
@@ -83,7 +83,7 @@
               <div class="pb-16">
                 <mat-form-field appearance="outline" [style.width.cm]=10>
                   <mat-label>Date de naissancee</mat-label>
-                  <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Date de naissance">
+                  <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Date de naissance" value={{employee.birthDate}}>
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -96,7 +96,7 @@
                 <mat-form-field appearance="outline" [style.width.cm]=10>
                   <mat-label>Intitulè du poste</mat-label>
                   <mat-select formControlName="title" >
-                    <mat-option  *ngFor="let titles of title " [value]="titles">{{titles}}</mat-option>
+                    <mat-option  *ngFor="let titles of title " value={{employee.title}}>{{titles}}</mat-option>
                   </mat-select>
                 </mat-form-field>
                 </div>
