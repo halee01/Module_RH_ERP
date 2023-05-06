@@ -597,7 +597,7 @@
                         <!--Technologies-->
                         <mat-form-field appearance="outline"  [style.width.cm]=20 class="example-full-width">
                           <mat-label>Technologies</mat-label>
-                          <textarea matInput placeholder="Listez ici les technologies utilisées."></textarea>
+                          <textarea matInput formControlName="technology" placeholder="Listez ici les technologies utilisées."></textarea>
                         </mat-form-field>
                       </div>
                       <div class="d-flex ">
@@ -861,7 +861,7 @@
           <button  mat-raised-button 
           color="primary"
            type="submit"
-           (click)="saveCertif()"
+           (click)="saveRest()"
           >Finalisation</button>
         </div>
       </div>
@@ -872,14 +872,60 @@
       <form>
       <div>
         <ng-template matStepLabel>Candidature</ng-template>
-        <mat-card  style="border: 5px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
-          <mat-selection-list >
+        
+          <!----<mat-selection-list >
             <mat-list-option *ngFor="let offer of offers">
               {{offer.title }}
             </mat-list-option>
-          </mat-selection-list>
+          </mat-selection-list>--->
+          <mat-card  style="border: 5px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
+            <mat-card-content class="p-0">
+              <mat-table [dataSource]="dataSource" matSort  >
+            
+            <ng-container matColumnDef="reference">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Référance
+                <div style="padding-left: 20px;">
+                  <mat-form-field style="width:1.5cm;" >
+                   <input matInput (input)="applyFilterReference($event)" placeholder="Filtrer">
+                 </mat-form-field>
+                 </div> </mat-header-cell>
+              <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.reference}} </mat-cell>
+            </ng-container>
           
+            <ng-container matColumnDef="title">
+              <mat-header-cell *matHeaderCellDef mat-sort-header> Title
+                <div style="padding-left: 20px;">
+                  <mat-form-field style="width:1.5cm;" >
+                   <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
+                 </mat-form-field>
+                 </div>
+              </mat-header-cell>
+              <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.title}} </mat-cell>
+            </ng-container>
+          
+          
+             <ng-container matColumnDef="actions">
+               <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
+               <mat-cell *matCellDef="let row">
+                 <button mat-icon-button mat-sm-button color="primary" class="mr-16 "  (click)="saveOfferCandidat(row.id)">
+                   <mat-icon>check</mat-icon>
+                 </button>
+                 
+                 <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row.id)">
+                   <mat-icon>close</mat-icon>
+                 </button>
+                 
+               </mat-cell>
+             </ng-container>
+          
+             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+             <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+           </mat-table>
+           <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+          
+          </mat-card-content>
           </mat-card>
+        
           
         </div>      
         <div>

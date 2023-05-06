@@ -5,7 +5,7 @@
         <div class="card-title-text">
           <mat-list role="list">
         <mat-list-item role="listitem" style="padding-top: 40px; padding-bottom: 20px;"><span class="mat-display-2">{{ employee.firstName }} {{ employee.lastName }}</span></mat-list-item>
-        <mat-list-item role="listitem"><span class="mat-display-1">Developpeur Front-End </span></mat-list-item>
+        <mat-list-item role="listitem"><span class="mat-display-1"> </span></mat-list-item>
        </mat-list>
         </div>
         <mat-divider></mat-divider>
@@ -152,8 +152,8 @@
                   <mat-list-item><mat-icon  color="primary"class="mr-16">business</mat-icon> <strong style="padding-right: 10px;">Société : </strong>{{experiences.experienceCompany}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">person</mat-icon> <strong style="padding-right: 10px;">Intitulé du poste : </strong>{{experiences.experienceTitle}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">keyboard</mat-icon><strong style="padding-right: 10px;">Technologies: </strong>{{experiences.technology}}</mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de début : </strong>{{experiences.experienceStartYear}}</mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de fin : </strong>{{experiences.experienceEndYear}}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de début : </strong>{{experiences.experienceStartDate}}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de fin : </strong>{{experiences.experienceEndDate}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Actuellement employé : </strong>{{experiences.actualEmployment}}</mat-list-item>
 
                 </mat-list>
@@ -183,8 +183,8 @@
                 </mat-list>
                   <mat-list *ngFor="let certifications of certification" >
                   <span class="mat-heading-label">Certifications :</span>
-                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Certification :   </strong>{{certifications.title}}</mat-list-item> 
-                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Année d'obtention : </strong>{{certifications.obtainedDate}}</mat-list-item> 
+                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Certification :   </strong>{{certifications.certificationTitle}}</mat-list-item> 
+                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Année d'obtention : </strong>{{certifications.certificationObtainedDate}}</mat-list-item> 
 
                 </mat-list>
                 <mat-list *ngFor="let skill of skills">
@@ -193,7 +193,7 @@
                 </mat-list>
                 </mat-list>
               </mat-card-content>
-            </mat-card>
+            </mat-card> 
           </div>
 
           <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">

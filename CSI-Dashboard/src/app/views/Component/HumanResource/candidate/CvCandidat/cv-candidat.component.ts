@@ -235,6 +235,24 @@ export class cvcandidatComponent implements OnInit {
         }
       });
     }
+    ///////////ajoutCandidature////////////////////////
+    saveOfferCandidat(id :number): void {
+      console.log('ajout...');
+      this.cvCandidatService.addOfferCandidate({employeeNum:this.selectedEmplyee.id ,offerNum:id}).subscribe({
+        next: (res) => {
+          console.log('Item added successfully', res);
+          this.selectedTechFile = res;
+          console.log('Selected technical file ID:', this.selectedTechFile.id);
+         console.log('Form value', this.techFileForm.value);
+          this.submitted = true;
+        },
+        error: (e) => {
+          console.error('Error adding item', e);
+          console.log('Form is invalid');
+          console.log(this.techFileForm.errors);
+        }
+      });
+    }
   
 
     /*saveFormation(): void {
@@ -288,7 +306,7 @@ export class cvcandidatComponent implements OnInit {
       });
     }
 
-    /* saveRest(): void {
+     saveRest(): void {
       console.log('Submitting cv form...');
          
       //Save Formation 
@@ -376,7 +394,7 @@ export class cvcandidatComponent implements OnInit {
           console.log(this.cvForm.errors);
         }
       });
-    }*/
+    }
     
 
 

@@ -8,6 +8,7 @@ import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Employee } from 'app/shared/models/Employee';
 import { TechnicalFile } from 'app/shared/models/TechnicalFile';
 import { Offer } from 'app/shared/models/Offer';
+import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
 
 @Injectable()
 export class CvCandidatService {
@@ -20,6 +21,7 @@ export class CvCandidatService {
   private apiSkillCategory = 'http://localhost:8080/rh/skillsCategory';
   private apiSkill = 'http://localhost:8080/rh/skills';
   private apiCertification = 'http://localhost:8080/rh/certification';
+  private apiAssOffreCandidat = 'http://localhost:8080/rh/AssOfferCandidate';
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -125,9 +127,14 @@ addTechFile(techfile: any): Observable<any> {
     catchError(this.handleError)
   );
 }
-
+addOfferCandidate(offerCandidate : any){
+  const url = this.apiAssOffreCandidat + '/add';
+  return this.http.post<any>(url,offerCandidate).pipe(
+    catchError(this.handleError)
+  );
+}
 //POST education
-addEducation(education: any): Observable<any> {
+addEducation(education: any): Observable<any>  {
   const apiEducationWithAdd = this.apiEducation + '/add'; // Append /add to the apiUrl
   return this.http.post<any>(apiEducationWithAdd, education).pipe(
     catchError(this.handleError)
