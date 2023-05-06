@@ -28,9 +28,9 @@ export interface Country {
   }
 
 export enum Civility{
-    MRS="Mme",
-    MS="Mlle",
-    MR="Mr"
+    MRS="MRS",
+    MS="MS",
+    MR="MR"
 }
 export enum Title{
     FRONT_END_DEVELOPER ="FRONT_END_DEVELOPER",

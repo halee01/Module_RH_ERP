@@ -51,7 +51,7 @@
                       <mat-form-field appearance="outline" [style.width.cm]=10>
                       <mat-label>Civilité</mat-label>
                       <mat-select formControlName="civility">
-                        <mat-option  *ngFor="let civilities of Civility " [value]="civilities">{{civilities}}</mat-option>
+                        <mat-option  *ngFor="let civilities of Civility " [value]="civilities">{{civilityMap[civilities]}}</mat-option>
                       </mat-select>
                       </mat-form-field>
                     </div>
@@ -63,7 +63,9 @@
                       <mat-form-field appearance="outline" [style.width.cm]=10>
                       <mat-label>Situation Maritale</mat-label>
                       <mat-select formControlName="maritalSituation" >
-                        <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{MaritalSituations}}</mat-option>
+                        <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{maritalSituationMap[MaritalSituations]}}</mat-option>
+                        
+
                         
                       </mat-select>
                       </mat-form-field>
@@ -90,7 +92,7 @@
                       <mat-form-field appearance="outline" [style.width.cm]=10>
                         <mat-label>Intitulè du poste</mat-label>
                         <mat-select formControlName="title" >
-                          <mat-option  *ngFor="let titles of title " [value]="titles">{{titles}}</mat-option>
+                          <mat-option  *ngFor="let titles of title " [value]="titles">{{employeeTitleMap[titles]}}</mat-option>
                         </mat-select>
                         <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
                           L'Intitulè du poste est requis.</mat-error>
@@ -292,7 +294,7 @@
           </div>
           <div class="example-form">
             <div class="example-grid">
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 [style.padding-right.cm]=3.5>
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
                 <mat-label>Référence</mat-label>
                 <input 
                 type="text"
@@ -300,18 +302,8 @@
                 formControlName="reference"
                 placeholder="Ex."  >
               </mat-form-field>
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
-                <mat-label>Titre du poste</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName=""
-                placeholder="Ex.Développeur Front-End"  >
-              </mat-form-field>
-              
-            </div>
-            <div class="example-grid">
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 [style.padding-right.cm]=3.5>
+
+              <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
                 <mat-label>Déscription</mat-label>
                 <input 
                 type="text"
@@ -319,33 +311,24 @@
                 formControlName="description"
                 placeholder="Ex."  >
               </mat-form-field>
-              
-              
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
+            </div>
+
+            <div class="example-grid">
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
+                <mat-label>Permis de conduire</mat-label>
+                <input 
+                type="text"
+                matInput
+                formControlName="driverLicense"  
+                placeholder="Ex.Permis Auto">
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
                 <mat-label>Objectif</mat-label>
                 <input 
                 type="text"
                 matInput
                 formControlName="objective"
-                placeholder="Ex."  >
-              </mat-form-field>
-            </div>
-            <div class="example-grid">
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 [style.padding-right.cm]=3.5>
-                <mat-label>Permit de conduire</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName="driverLicense"  >
-              </mat-form-field>
-              
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
-                <mat-label>Nationalité</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName="nationality"
-                placeholder="Ex.Français"  >
+                placeholder="Ex.">
               </mat-form-field>
               </div>
           </div>
@@ -726,52 +709,53 @@
                  Langues
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <!--<div [formGroup]="repeatForm" class="repeat-form">
-                <div class="card-body" formArrayName="repeatArray">
-                  <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
-                    <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
-                      <div [formGroupName]="i" class="d-flex align-items-center">-->
-                       
-                        <!--languages-->
-                        <div class="form-group mb-1 col-sm-12 col-md-3">
-                          <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
-                            <mat-label>Language</mat-label>
-                            <mat-select  placeholder="Ex. Français" formControlName="language">
-                              <mat-option *ngFor="let Language of Languages" [value]="Language">{{Language}}</mat-option>
-                            </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <!--language Level-->
-                        <div class="form-group mb-1 col-sm-12 col-md-3">
-                          <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
-                            <mat-label>Niveau</mat-label>
-                            <mat-select  placeholder="Ex. Courant" formControlName="languageLevel">
-                              <mat-option *ngFor="let LanguageLevels of LanguageLevel" [value]="LanguageLevels">{{LanguageLevels}}</mat-option>
-                            </mat-select>
-                            </mat-form-field>
-                        </div>
-                        <!--Langauage Info-->
-                        <div class="form-group mb-1 col-sm-12 col-md-3">
-                          <mat-form-field appearance="outline"  [style.width.cm]=8 class="example-full-width">
-                            <mat-label>Informations supplémentaires</mat-label>
-                            <textarea matInput placeholder="Listez ici les technologies utilisées." formControlName="technology"></textarea>
-                          </mat-form-field>
-                        </div>
-                        <!--<div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
-                          <button mat-icon-button color="warn" type="button" [disabled]="i === 0"  (click)="handleRemoveRepeatForm(i)">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                          <button mat-icon-button color="primary" type="button" (click)="handleAddRepeatForm()">
-                            <mat-icon>add</mat-icon>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>-->
+             <form [formGroup]="languageForm">
+  <div formArrayName="languages">
+    <div class="card-body" *ngFor="let language of languages.controls; let i = index;">
+      <div class="repeater-default">
+        <div [formGroupName]="i">
+          <!-- Language -->
+          <div class="form-group mb-1 col-sm-12 col-md-3">
+            <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
+              <mat-label>Language</mat-label>
+              <mat-select placeholder="Ex. Français" formControlName="language">
+                <mat-option *ngFor="let Language of Languages" [value]="Language">{{Language}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Language Level -->
+          <div class="form-group mb-1 col-sm-12 col-md-3">
+            <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
+              <mat-label>Niveau</mat-label>
+              <mat-select placeholder="Ex. Courant" formControlName="languageLevel">
+                <mat-option *ngFor="let LanguageLevels of LanguageLevel" [value]="LanguageLevels">{{LanguageLevelMap[LanguageLevels]}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <!-- Additional Information -->
+          <div class="form-group mb-1 col-sm-12 col-md-3">
+            <mat-form-field appearance="outline" [style.width.cm]=8 class="example-full-width">
+              <mat-label>Informations supplémentaires</mat-label>
+              <textarea matInput placeholder="Ex. Réussir le TOEFL avec un score de 95" formControlName="additionalInformation"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+            <button mat-icon-button color="warn" type="button" [disabled]="i === 0" (click)="handleRemoveRepeatForm(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button mat-icon-button color="primary" type="button" (click)="addLanguage()">
+    <mat-icon>add</mat-icon>
+  </button>
+</form>
+
             </mat-expansion-panel>
 
+            
             <!---------------------Compétances-------------------->
             <mat-expansion-panel  >
               <mat-expansion-panel-header  style="height: 2cm;">
@@ -860,7 +844,7 @@
           <button  mat-raised-button 
           color="primary"
            type="submit"
-           (click)="saveRest()"
+           (click)="onSubmitLanguage()"
           >Finalisation</button>
         </div>
       </div>
