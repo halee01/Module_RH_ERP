@@ -221,7 +221,7 @@
 
   <mat-tab label="Résumé"> 
     <div style="padding-top: 20px; padding-left: 20px;">
-      <button mat-raised-button color="primary" (click)="openEvaluationCandidat()" style="display: block;">
+      <button mat-raised-button color="primary" (click)=" print() " style="display: block;">
         Imprimer le Cv
       </button>
       <div style="padding-top: 20px;">
@@ -231,66 +231,78 @@
       </div>
       
     </div>
-    
-
-    <div class="cv-container">
-      <div class="cv-header">
-        <div class="cv-name">John Doe</div>
-        <div class="cv-title">Front-End Developer</div>
-        <div class="cv-contact">
-          <div class="cv-contact-item"><i class="fas fa-phone"></i> (123) 456-7890</div>
-          <div class="cv-contact-item"><i class="fas fa-envelope"></i> john.doe@email.com</div>
-          <div class="cv-contact-item"><i class="fas fa-map-marker-alt"></i> 123 Main St, Anytown USA</div>
+    <!------Start CV-->
+   <div id="CV">
+    <mat-card class="cv-card">
+      <div class="header">
+        <div class="info">
+          <mat-card-title>{{ employee.firstName }} {{ employee.lastName }}</mat-card-title>
+          <mat-card-subtitle>Frontend Developer</mat-card-subtitle>
         </div>
       </div>
-      <div class="cv-body">
-        <div class="cv-section">
-          <div class="cv-section-title">Education</div>
-          <div class="cv-section-content">
-            <div class="cv-subsection">
-              <div class="cv-subsection-title">Bachelor of Science in Computer Science</div>
-              <div class="cv-subsection-info">
-                <div class="cv-subsection-info-item">University of Anytown, Anytown USA</div>
-                <div class="cv-subsection-info-item">Graduated May 2021</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="cv-section">
-          <div class="cv-section-title">Experience</div>
-          <div class="cv-section-content">
-            <div class="cv-subsection">
-              <div class="cv-subsection-title">Front-End Developer</div>
-              <div class="cv-subsection-info">
-                <div class="cv-subsection-info-item">Acme Corporation, Anytown USA</div>
-                <div class="cv-subsection-info-item">January 2021 - Present</div>
-              </div>
-              <ul class="cv-subsection-list">
-                <li>Develop and maintain front-end of company website</li>
-                <li>Collaborate with back-end developers to implement new features</li>
-                <li>Optimize website for performance and search engines</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="cv-section">
-          <div class="cv-section-title">Skills</div>
-          <div class="cv-section-content">
-            <div class="cv-subsection">
-              <ul class="cv-subsection-list">
-                <li>HTML5</li>
-                <li>CSS3</li>
-                <li>JavaScript</li>
-                <li>Angular</li>
-                <li>React</li>
-                <li>Vue</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      <div style="margin-top: 20px;"></div>
+    <div class="border-top"></div>
+      <div class="main-content">
+        <div class="right-content">
+          <div class="border-right" style="margin-right: 5cm;">
     
+          </div>
+        </div>
+        <div class="left-content">
+          <div class="column">
+          <h3 class="section-title">Summary</h3>
+          <p class="summary-text">
+            A frontend developer with experience in Angular, React, and Vue.js. Skilled in responsive web design and user interface development.
+          </p>
+          <h3 class="section-title">Skills</h3>
+          <ul class="skills-list">
+            <li>Angular</li>
+            <li>React</li>
+            <li>Vue.js</li>
+            <li>Responsive web design</li>
+            <li>User interface development</li>
+            <li>HTML/CSS</li>
+            <li>JavaScript</li>
+          </ul>
+        </div>
+        <div class="column">
+          <h3 class="section-title">Experience</h3>
+          <div class="experience-item">
+            <h4 class="experience-title">ABC Company</h4>
+            <p class="experience-period">Frontend Developer, Jan 2020 - Present</p>
+            <ul class="experience-duties">
+              <li>Developed and maintained the company's Angular-based web application.</li>
+              <li>Implemented new features and resolved bugs.</li>
+              <li>Collaborated with designers and backend developers to ensure seamless integration of frontend and backend components.</li>
+            </ul>
+          </div>
+          <div class="experience-item">
+            <h4 class="experience-title">XYZ Agency</h4>
+            <p class="experience-period">Web Developer, Oct 2018 - Dec 2019</p>
+            <ul class="experience-duties">
+              <li>Developed and maintained several React-based web applications for clients.</li>
+              <li>Managed project timelines and worked with clients to ensure their requirements were met.</li>
+              <li>Provided technical support to clients and resolved issues as they arose.</li>
+            </ul>
+          </div>
+          <h3 class="section-title">Education</h3>
+          <div class="education-item">
+            <mat-list *ngFor="let educations of education">
+              <mat-list-item><strong style="padding-right: 10px;">Diplome : </strong>{{educations?.diploma}}</mat-list-item>
+              <mat-list-item> <strong style="padding-right: 10px;">Institution : </strong>{{educations?.institution}}</mat-list-item>
+              <mat-list-item> <strong style="padding-right: 10px;">Date d'inscription : </strong> {{educations?.startYear}}</mat-list-item>
+              <mat-list-item> <strong style="padding-right: 10px;">Date d'obtention : </strong>{{educations?.obtainedDate}}</mat-list-item>
+              <mat-list-item> <strong style="padding-right: 10px;">Score : </strong>{{educations?.score}}</mat-list-item>
+              <mat-list-item> <strong style="padding-right: 10px;" >Actuellement inscri : </strong>{{educations?.actual}}</mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+        </div>
+        
+      
+      </div>
+    </mat-card>
+  </div>
   </mat-tab>
 </mat-tab-group>
 

@@ -19,6 +19,7 @@ import { Language } from 'app/shared/models/Language';
 
 
 export class CandidatDetailComponent implements OnInit {
+cvHtml = '';
 id: number
 idTechnicalFile:number
 employee : Employee
@@ -43,6 +44,10 @@ private router: Router
    this.getCertification();
    this.getlanguage();
    this.getSkills();
+   /*const cv = document.getElementById('CV');
+    if (cv) {
+      this.cvHtml = cv.innerHTML;
+    }*/
 
   }
 
@@ -93,5 +98,15 @@ private router: Router
   openEvaluationCandidat(){
     this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
   }
-
+  print() {
+    const printableArea = document.getElementById('CV');
+   
+    
+    var originalContents = document.body.innerHTML;
+    var printContents = document.getElementById('CV').innerHTML;
+    document.body.innerHTML = "<h1>CV</h1>" + printContents + "<hr><h2>Contact Information</h2><div class='cv-contact'><div class='cv-contact-item'><i class='fas fa-phone'></i> (123) 456-7890</div><div class='cv-contact-item'><i class='fas fa-envelope'></i> john.doe@email.com</div><div class='cv-contact-item'><i class='fas fa-map-marker-alt'></i> 123 Main St, Anytown USA</div></div>";
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
+ 
 }
