@@ -127,12 +127,24 @@ addTechFile(techfile: any): Observable<any> {
     catchError(this.handleError)
   );
 }
+/////ajout candidature//
 addOfferCandidate(offerCandidate : any){
   const url = this.apiAssOffreCandidat + '/add';
   return this.http.post<any>(url,offerCandidate).pipe(
     catchError(this.handleError)
   );
 }
+//deletecandidature
+deleteOfferCandidate(id: number): Observable<AssOfferCandidate> {
+ 
+  const url = `${this.apiAssOffreCandidat+'/delete/'}${id}`;
+  return this.http.delete<AssOfferCandidate>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+
+
+
 //POST education
 addEducation(education: any): Observable<any>  {
   const apiEducationWithAdd = this.apiEducation + '/add'; // Append /add to the apiUrl
@@ -200,7 +212,7 @@ updateItem(id: number, candidate: Employee): Observable<Employee> {
 // DELETE an item by id
 deleteItem(id: number): Observable<Employee> {
  
-  const url = `${this.apiUrl+'/deleterrr/'}${id}`;
+  const url = `${this.apiUrl+'/delete/'}${id}`;
   return this.http.delete<Employee>(url).pipe(
     catchError(this.handleError)
   );

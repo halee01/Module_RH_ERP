@@ -1,3 +1,4 @@
+import { id } from 'date-fns/locale';
 import { Offer } from './../../../../../shared/models/Offer';
 import { Experience } from 'app/shared/models/Experience';
 import { Router } from '@angular/router';
@@ -253,6 +254,19 @@ export class cvcandidatComponent implements OnInit {
         }
       });
     }
+    ///delete Candidature////
+    deleteOfferCandidat(row) {
+      this.cvCandidatService.deleteOfferCandidate(row.id)
+        .subscribe(res => {
+          if (res) {
+         
+            this.cvCandidatService.deleteItem(row.id)
+              .subscribe((data:any)=> {
+                this.dataSource = data;
+              })
+          }
+        })
+    }
   
 
     /*saveFormation(): void {
@@ -493,6 +507,7 @@ handleRemoveRepeatForm(index: number) {
       })
 
   }
+
   getDisplayedColumns() {
     return ['reference','title','actions' ];
   }

@@ -1,11 +1,11 @@
 <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
   <mat-tab label="Informations Générales"> 
-    <mat-card class="p-0">
+    <mat-card class="p-0" >
       <mat-card-title class="">
         <div class="card-title-text">
           <mat-list role="list">
         <mat-list-item role="listitem" style="padding-top: 40px; padding-bottom: 20px;"><span class="mat-display-2">{{ employee.firstName }} {{ employee.lastName }}</span></mat-list-item>
-        <mat-list-item role="listitem"><span class="mat-display-1"> </span></mat-list-item>
+        <mat-list-item role="listitem"><span class="mat-display-1">Developpeur Front-End </span></mat-list-item>
        </mat-list>
         </div>
         <mat-divider></mat-divider>
@@ -13,8 +13,8 @@
       <mat-card-content>
         <div div fxLayout="row" fxLayoutAlign="space-evenly center" >
           <div fxFlex="100" fxFlex.gt-sm="60">
-          <mat-card class="p-0">
-              <mat-card-title class="">
+          <mat-card class="p-0" >
+              <mat-card-title class="cardColor">
                 <div class="card-title-text">Informations Personelles </div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -34,39 +34,11 @@
               </mat-card-content>
             </mat-card>
         </div>
-
         <div style="padding-top: 50px;"></div>
-         <!-- <div fxFlex="100" fxFlex.gt-sm="50">
-            <mat-card class="p-0">
-              <mat-card-title class="">
-                <div class="card-title-text">Informations  Administratives
-                  <a href="" class="toolbar-avatar sm mr-16"><img [src]="user.photo" alt=""></a>
-                  <span fxFlex></span>
-                      <button mat-icon-button [matMenuTriggerFor]="userMenu" class="">
-                          <mat-icon class="text-muted text-18">more_vert</mat-icon>
-                      </button>
-                      <mat-menu #userMenu="matMenu">
-                          <button mat-menu-item>Ajout</button>
-                          <button mat-menu-item>Edit</button>
-                      </mat-menu>
-                <mat-divider></mat-divider>
-                </div>
-              </mat-card-title>
-              <mat-card-content>
-                <mat-list>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">content_paste</mat-icon> <strong>Type de contrat</strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">monetization_on</mat-icon> <strong>Salaire souhaité :</strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16"></mat-icon> <strong>Salaire actuel:</strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">schedule</mat-icon>  <strong>Disponibilité:</strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16"></mat-icon> <strong>Date de disponibilité:</strong></mat-list-item>
-                </mat-list>
-              </mat-card-content>
-            </mat-card>
-          </div>-->
-
+         
            <div fxFlex="100" fxFlex.gt-sm="50">
-            <mat-card class="p-0">
-              <mat-card-title class="">
+            <mat-card class="p-0" >
+              <mat-card-title class="cardColor">
                 <div class="card-title-text">Info de Contact du Candiadat </div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -83,26 +55,9 @@
           </div>
         </div>
         
-         <!-----------------technicalFile------------->
-        <mat-card-title class="">
-          <div class="card-title-text">
-            <mat-card-content>
-              <mat-list>
-                <mat-list-item><mat-icon  color="primary"class="mr-16">bookmark</mat-icon> <strong style="padding-right: 10px;">Référence  : </strong> {{ technicalFile.reference}}</mat-list-item>
-                <mat-list-item><mat-icon color="primary" class="mr-16">border_color</mat-icon> <strong style="padding-right: 10px;">Titre du poste : </strong> {{ technicalFile.title}}</mat-list-item>
-                <mat-list-item><mat-icon color="primary" class="mr-16">description</mat-icon><strong style="padding-right: 10px;">Déscription : </strong>{{ technicalFile.description }}</mat-list-item>
-                <mat-list-item><mat-icon color="primary" class="mr-16">check</mat-icon><strong style="padding-right: 10px;">Objectif : </strong> {{ technicalFile.objective }}</mat-list-item>
-                <mat-list-item><mat-icon color="primary" class="mr-16">directions_car</mat-icon> <strong style="padding-right: 10px;">Permit de conduire : </strong>{{ technicalFile.driverLicense}}</mat-list-item>
-
-              </mat-list>
-            </mat-card-content>
-          </div>
-          <mat-divider></mat-divider>
-        </mat-card-title>
       </mat-card-content>
     </mat-card>
      </mat-tab>
-
   <mat-tab label="Dossier Technique"> 
     <mat-card class="p-0">
       <mat-card-title class="">
@@ -116,12 +71,11 @@
         </div>
         <mat-divider></mat-divider>
       </mat-card-title>
-
       <mat-card-content>
         <div fxLayout="row">
           <div fxFlex="100" fxFlex.gt-sm="60" >
             <mat-card  class="p-0" >
-              <mat-card-title class="">
+              <mat-card-title class="cardColor">
                 <div class="card-title-text">Education</div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -141,7 +95,7 @@
           
           <div fxFlex="100" fxFlex.gt-sm="60"  >
             <mat-card class="p-0">
-              <mat-card-title  class="">
+              <mat-card-title  class="cardColor">
                 <div class="card-title-text">Expérience </div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -152,24 +106,21 @@
                   <mat-list-item><mat-icon  color="primary"class="mr-16">business</mat-icon> <strong style="padding-right: 10px;">Société : </strong>{{experiences.experienceCompany}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">person</mat-icon> <strong style="padding-right: 10px;">Intitulé du poste : </strong>{{experiences.experienceTitle}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">keyboard</mat-icon><strong style="padding-right: 10px;">Technologies: </strong>{{experiences.technology}}</mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de début : </strong>{{experiences.experienceStartDate}}</mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de fin : </strong>{{experiences.experienceEndDate}}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de début : </strong>{{experiences.experienceStartYear}}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de fin : </strong>{{experiences.experienceEndYear}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Actuellement employé : </strong>{{experiences.actualEmployment}}</mat-list-item>
-
                 </mat-list>
               </mat-list>
               </mat-card-content>
             </mat-card>
           </div>
         </div>
-
-
         
         <div fxLayout="column">
           <div fxLayout="row">
           <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
             <mat-card class="p-0">
-              <mat-card-title class=""> 
+              <mat-card-title class="cardColor"> 
                 <div class="card-title-text">Compétances</div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -183,9 +134,8 @@
                 </mat-list>
                   <mat-list *ngFor="let certifications of certification" >
                   <span class="mat-heading-label">Certifications :</span>
-                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Certification :   </strong>{{certifications.certificationTitle}}</mat-list-item> 
-                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Année d'obtention : </strong>{{certifications.certificationObtainedDate}}</mat-list-item> 
-
+                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Certification :   </strong>{{certifications.title}}</mat-list-item> 
+                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Année d'obtention : </strong>{{certifications.obtainedDate}}</mat-list-item> 
                 </mat-list>
                 <mat-list *ngFor="let skill of skills">
                   <span class="mat-heading-label">Compétences :</span>
@@ -193,31 +143,46 @@
                 </mat-list>
                 </mat-list>
               </mat-card-content>
-            </mat-card> 
+            </mat-card>
           </div>
-
           <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
             <mat-card class="p-0">
-              <mat-card-title class=""> 
-                <div class="card-title-text">Offres</div>
+              <mat-card-title class="cardColor"> 
+                <div class="card-title-text">Informations Administratives</div>
                 <mat-divider></mat-divider>
               </mat-card-title>
               <mat-card-content>
                 <mat-list>
-                  <mat-list-item style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Titre de l'offre : </strong></mat-list-item>
+                  <mat-list-item><mat-icon  color="primary"class="mr-16">bookmark</mat-icon> <strong style="padding-right: 10px;">Référence  : </strong> {{ technicalFile.reference}}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">description</mat-icon><strong style="padding-right: 10px;">Déscription : </strong>{{ technicalFile.description }}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">check</mat-icon><strong style="padding-right: 10px;">Objectif : </strong> {{ technicalFile.objective }}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">directions_car</mat-icon> <strong style="padding-right: 10px;">Permit de conduire : </strong>{{ technicalFile.driverLicense}}</mat-list-item>
+  
+                </mat-list>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          </div> 
+          
+          <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
+            <mat-card class="p-0">
+              <mat-card-title class="cardColor"> 
+                <div class="card-title-text">Offres</div>
+                <mat-divider></mat-divider>
+              </mat-card-title>
+              <mat-card-content>
+                <mat-list *ngFor="let Candidatures of candidature" >
+                  <mat-list-item style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Titre de l'offre : </strong>{{Candidatures.id}}</mat-list-item>
                   <mat-list-item  style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Déscription de l'offre: </strong></mat-list-item>
                 </mat-list>
               </mat-card-content>
             </mat-card>
           </div>
-          </div>
         </div>
           
-
       </mat-card-content>
     </mat-card> 
-  </mat-tab>
-                                                                                           
+  </mat-tab>                                                                                
 
   <mat-tab label="Résumé"> 
     <div style="padding-top: 20px; padding-left: 20px;">

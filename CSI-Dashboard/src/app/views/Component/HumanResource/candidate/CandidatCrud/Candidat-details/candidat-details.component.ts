@@ -13,6 +13,7 @@ import { Language } from 'app/shared/models/Language';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import html2pdf from 'html2pdf.js';
+import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
 
 
 
@@ -35,6 +36,7 @@ skills : Skills
 skillsCategory : SkillsCategory
 certification : Certification
 experience : Experience
+candidature : AssOfferCandidate
 private router: Router
   constructor(    private route: ActivatedRoute,
     private candidatService: CrudService,
@@ -50,6 +52,7 @@ private router: Router
    this.getCertification();
    this.getlanguage();
    this.getSkills();
+   this.getCandidature();
    /*const cv = document.getElementById('CV');
     if (cv) {
       this.cvHtml = cv.innerHTML;
@@ -98,6 +101,12 @@ private router: Router
     this.candidatService.getSkillsById(this.id).subscribe((data : any)=>{
       this.skills = data;
       console.log(this.skills);
+    })
+  }
+  getCandidature(){
+    this.candidatService.getCandiatureById(this.id).subscribe((data : any)=>{
+      this.candidature =data;
+      console.log(this.candidature);
     })
   }
 

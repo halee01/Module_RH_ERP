@@ -1,123 +1,97 @@
+@media print {
+  .resume {
+    width: 210mm; /* A4 paper width */
+    height: 297mm; /* A4 paper height */
+    margin: 0; /* Remove default page margins */
+  }
+}
 .cv-container {
-    max-width: 800px;
+    max-width: 25cm;
     margin: 0 auto;
     font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+    background-color: #F2F2F2;
+  }
+  header {
+    background-color: #4D528C;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
     padding: 20px;
   }
-  
-  .cv-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-  
-  .cv-name {
+  h1 {
+    margin: 0;
     font-size: 36px;
-    font-weight: bold;
-    margin-bottom: 10px;
   }
-  
-  .cv-title {
+  hr {
+    border: none;
+    border-top: 2px solid #4D528C;
+    margin: 40px 0;
+  }
+  .container {
+    display: flex;
+  }
+  .left {
+    flex: 1;
+    padding: 40px;
+  }
+  .right {
+    width:225px;
+    padding: 30px;
+    border-left: 2px solid #4D528C;
+  }
+  .right h2::after {
+    content: '';
+    display: block;
+    border-top: 1px solid #ccc;
+    margin-top: 8px;
+    width: 100%;
+  }
+  h2 {
     font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
   }
-  
-  .cv-contact {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  p {
+    margin: 0 0 10px 0;
   }
-  @media print {
-    /* Hide the header and footer */
-    .cv-header, .cv-footer {
-      display: none;
-    }
+ .body-list {
+    margin: 1;
+    padding: 1;
   }
-
-
-  ////////////
-  
-  .cv-card {
-    margin: 0 auto;
-    width: 800px;
-    background-color: #E8F1FA;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 16px;
-  }
-  
-  .header {
-    display: flex;
-    align-items: center;
-  }
-  
-  .photo {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-right: 16px;
-  }
-  
-  .info {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .mat-card-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #225BAA;
+  .side-list {
     margin: 0;
-  }
-  
-  .mat-card-subtitle {
-   
-    color: #225BAA;
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
-    font-size: 16px;
-  }
-  
-  .mat-card-content {
-    margin-top: 24px;
-  }
-  
-  h3 {
-    color: #225BAA;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  
-  ul {
-  
-    list-style-type: none;
     padding: 0;
-    margin: 0;
+    list-style-type: none;
   }
-  
   li {
-    margin-bottom: 8px;
-    color: #555;
+    margin-bottom: 10px;
   }
-  
-  button {
-    margin-top: 24px;
-  }
-  .skills-list {
+  list-container {
     display: flex;
-    flex-wrap: wrap;
   }
-  
-  .skills-list li {
-    margin-right: 10px;
-    margin-bottom: 5px;
-    padding: 5px 10px;
-    background-color: #225BAA;
-    color: #fff;
-    border-radius: 20px;
-    font-size: 14px;
+  .list-section {
+    flex: 1;
   }
+    .cardColor{
+      background-color: #EEEEE4;
+    }
+    .profile{
+      padding-bottom: 30px;
+    }
+    .experince-body{padding-top: 25px;}
+    .skills{
+      padding-bottom: 25px;
+    }
+    .chip-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .chip {
+      display: inline-block;
+      padding: 8px;
+      background-color: #E1E1E1;
+      border-radius: 16px;
+      font-size: 14px;
+      color: #333;
+    }
