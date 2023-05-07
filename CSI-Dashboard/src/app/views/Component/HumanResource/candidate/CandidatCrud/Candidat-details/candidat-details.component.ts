@@ -10,6 +10,11 @@ import { Certification } from 'app/shared/models/Certification';
 import { Experience } from 'app/shared/models/Experience';
 import { TechnicalFile } from 'app/shared/models/TechnicalFile';
 import { Language } from 'app/shared/models/Language';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import html2pdf from 'html2pdf.js';
+
+
 
 @Component({
   selector: 'app-details-candidat',
@@ -32,7 +37,8 @@ certification : Certification
 experience : Experience
 private router: Router
   constructor(    private route: ActivatedRoute,
-    private candidatService: CrudService,) { }
+    private candidatService: CrudService,
+    private routerPdf: Router ,) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -108,5 +114,18 @@ private router: Router
     window.print();
     document.body.innerHTML = originalContents;
   }
- 
-}
+  
+ downloadCV() {
+    const element = document.getElementById("CV");
+    html2pdf()
+      .from(element)
+      .save('my-cv.pdf');
+  }
+
+    
+  }
+  
+  
+  
+  
+  
