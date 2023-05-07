@@ -1,6 +1,6 @@
 <mat-tab-group dynamicHeight mat-stretch-tabs="false" mat-align-tabs="start">
   <mat-tab label="Informations Générales"> 
-    <mat-card class="p-0">
+    <mat-card class="p-0" >
       <mat-card-title class="">
         <div class="card-title-text">
           <mat-list role="list">
@@ -13,8 +13,8 @@
       <mat-card-content>
         <div div fxLayout="row" fxLayoutAlign="space-evenly center" >
           <div fxFlex="100" fxFlex.gt-sm="60">
-          <mat-card class="p-0">
-              <mat-card-title class="">
+          <mat-card class="p-0" >
+              <mat-card-title class="cardColor">
                 <div class="card-title-text">Informations Personelles </div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -36,37 +36,10 @@
         </div>
 
         <div style="padding-top: 50px;"></div>
-         <!-- <div fxFlex="100" fxFlex.gt-sm="50">
-            <mat-card class="p-0">
-              <mat-card-title class="">
-                <div class="card-title-text">Informations  Administratives
-                  <a href="" class="toolbar-avatar sm mr-16"><img [src]="user.photo" alt=""></a>
-                  <span fxFlex></span>
-                      <button mat-icon-button [matMenuTriggerFor]="userMenu" class="">
-                          <mat-icon class="text-muted text-18">more_vert</mat-icon>
-                      </button>
-                      <mat-menu #userMenu="matMenu">
-                          <button mat-menu-item>Ajout</button>
-                          <button mat-menu-item>Edit</button>
-                      </mat-menu>
-                <mat-divider></mat-divider>
-                </div>
-              </mat-card-title>
-              <mat-card-content>
-                <mat-list>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">content_paste</mat-icon> <strong>Type de contrat</strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">monetization_on</mat-icon> <strong>Salaire souhaité :</strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16"></mat-icon> <strong>Salaire actuel:</strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">schedule</mat-icon>  <strong>Disponibilité:</strong></mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16"></mat-icon> <strong>Date de disponibilité:</strong></mat-list-item>
-                </mat-list>
-              </mat-card-content>
-            </mat-card>
-          </div>-->
-
+         
            <div fxFlex="100" fxFlex.gt-sm="50">
-            <mat-card class="p-0">
-              <mat-card-title class="">
+            <mat-card class="p-0" >
+              <mat-card-title class="cardColor">
                 <div class="card-title-text">Info de Contact du Candiadat </div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -83,21 +56,6 @@
           </div>
         </div>
         
-         <!-----------------technicalFile------------->
-        <mat-card-title class="">
-          <div class="card-title-text">
-            <mat-card-content>
-              <mat-list>
-                <mat-list-item><mat-icon  color="primary"class="mr-16">bookmark</mat-icon> <strong style="padding-right: 10px;">Référence  : </strong> {{ technicalFile.reference}}</mat-list-item>
-                <mat-list-item><mat-icon color="primary" class="mr-16">description</mat-icon><strong style="padding-right: 10px;">Déscription : </strong>{{ technicalFile.description }}</mat-list-item>
-                <mat-list-item><mat-icon color="primary" class="mr-16">check</mat-icon><strong style="padding-right: 10px;">Objectif : </strong> {{ technicalFile.objective }}</mat-list-item>
-                <mat-list-item><mat-icon color="primary" class="mr-16">directions_car</mat-icon> <strong style="padding-right: 10px;">Permit de conduire : </strong>{{ technicalFile.driverLicense}}</mat-list-item>
-
-              </mat-list>
-            </mat-card-content>
-          </div>
-          <mat-divider></mat-divider>
-        </mat-card-title>
       </mat-card-content>
     </mat-card>
      </mat-tab>
@@ -120,7 +78,7 @@
         <div fxLayout="row">
           <div fxFlex="100" fxFlex.gt-sm="60" >
             <mat-card  class="p-0" >
-              <mat-card-title class="">
+              <mat-card-title class="cardColor">
                 <div class="card-title-text">Education</div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -140,7 +98,7 @@
           
           <div fxFlex="100" fxFlex.gt-sm="60"  >
             <mat-card class="p-0">
-              <mat-card-title  class="">
+              <mat-card-title  class="cardColor">
                 <div class="card-title-text">Expérience </div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -168,7 +126,7 @@
           <div fxLayout="row">
           <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
             <mat-card class="p-0">
-              <mat-card-title class=""> 
+              <mat-card-title class="cardColor"> 
                 <div class="card-title-text">Compétances</div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -197,7 +155,26 @@
 
           <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
             <mat-card class="p-0">
-              <mat-card-title class=""> 
+              <mat-card-title class="cardColor"> 
+                <div class="card-title-text">Informations Administratives</div>
+                <mat-divider></mat-divider>
+              </mat-card-title>
+              <mat-card-content>
+                <mat-list>
+                  <mat-list-item><mat-icon  color="primary"class="mr-16">bookmark</mat-icon> <strong style="padding-right: 10px;">Référence  : </strong> {{ technicalFile.reference}}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">description</mat-icon><strong style="padding-right: 10px;">Déscription : </strong>{{ technicalFile.description }}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">check</mat-icon><strong style="padding-right: 10px;">Objectif : </strong> {{ technicalFile.objective }}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">directions_car</mat-icon> <strong style="padding-right: 10px;">Permit de conduire : </strong>{{ technicalFile.driverLicense}}</mat-list-item>
+  
+                </mat-list>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          </div> 
+          
+          <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
+            <mat-card class="p-0">
+              <mat-card-title class="cardColor"> 
                 <div class="card-title-text">Offres</div>
                 <mat-divider></mat-divider>
               </mat-card-title>
@@ -208,7 +185,6 @@
                 </mat-list>
               </mat-card-content>
             </mat-card>
-          </div>
           </div>
         </div>
           
@@ -228,68 +204,103 @@
         Convertir en PDF
       </button>
       </div>
+    </div>
+    
+    <div class="resume">
+      <div class="cv-container">
+      <header>
+        <span class="mat-display-2">Jhon Doe</span>
+        <h2>Job Title</h2>
+    </header>
+    
+    <div class="container">
+      <div class="left">
+        <div class="profile">
+          <h2>Profil</h2>
+          <div>
+            Sérieuse, dynamique et dotée d’un bon relationnel, je souhaite mettre à profit mes compétences et ma motivation au sein de votre entreprise en tant que [PRÉCISER]. Disponible à partir de [PRÉCISER], je suis prête à relever le défi !
+          </div>
+        </div>
+        <div class="skills">
+          <h2>Compétances</h2>
+          <hr style="width: 100%; margin: 0 auto;">
+          <div class="skills-body">
+            <div class="chip-container" *ngFor="let skill of skills">
+              <div class="chip">{{skill.skillTitle}}</div>
+            </div>
+         </div>
+        </div>
+        <div class="Edcuation">
+          <h2>Parcours éducatif</h2>
+          <hr style="width: 100%; margin: 0 auto;">
+          <div class="education-body">
+            <ul class="body-list" *ngFor="let educations of education">
+              <li style="padding-bottom:15px">
+                  <h3>{{educations?.institution}}</h3>
+                  <p>{{educations?.diploma}}</p><p>{{educations?.score}}</p>
+                  <p> {{educations?.startYear}} | {{educations?.obtainedDate}}</p>
+                  <ul>
+                      <li>Developed and maintained various web applications using ReactJS, AngularJS, and VueJS</li>
+                  </ul>
+              </li>
+          </ul>
+         </div>
+        </div>
+        <div class="experince">
+          <h2>Expérience professionnelle</h2>
+          <hr style="width: 100%; margin: 0 auto;">
+          <div class="experince-body">
+            <ul>
+              <li>
+                  <h3>Senior Frontend Developer</h3>
+                  <p>ABC Company</p>
+                  <p>January 2019 - Present</p>
+                  <ul>
+                      <li>Developed and maintained various web applications using ReactJS, AngularJS, and VueJS</li>
+                      <li>Collaborated with the design team to create user-friendly interfaces and seamless user experiences </li>
+                      <li>Optimized website performance by implementing best practices and reducing load times</li>
+                  </ul>
+              </li>
+              <li>
+                  <h3>Frontend Developer</h3>
+                  <p>XYZ Company</p>
+                  <p>June 2015 - December 2018</p>
+                  <ul>
+                      <li>Created responsive websites using HTML5, CSS3, and JavaScript</li>
+                      <li>Worked with the design team to ensure consistency and coherence across all projects</li>
+                      <li>Participated in code reviews and provided constructive feedback to other developers</li>
+                  </ul>
+              </li>
+          </ul>
+          </div>
+        </div>
+      </div>
+      <div class="right">
+        <h2>Contact</h2>
+        <ul class="side-list">
+          <li>{{ employee.country }}</li>
+          <li>{{employee.city}}</li>
+          <li>{{employee.postCode}}</li>
+          <li>{{employee.address}}</li>
+          <li> {{ employee.emailOne}}</li>
+          <li> {{ employee.emailTwo}}</li>
+          <li>{{ employee.phoneNumberOne }}</li>
+          <li>{{ employee.phoneNumberTwo }}</li>
+        </ul>
+        <h2 style="padding-top:20px">Languages</h2>
+        <ul *ngFor="let languages of language" class="side-list">
+          <li>{{languages.language}}</li>
+        </ul>
+        <h2 style="padding-top:20px">Certifications</h2>
+        <ul *ngFor="let certifications of certification" class="side-list">
+          <li>{{certifications.title}}  {{certifications.obtainedDate}}</li>
+        </ul>
+      </div>
       
+  </div>
+  
     </div>
-    
-
-    <div class="cv-container">
-      <div class="cv-header">
-        <div class="cv-name">John Doe</div>
-        <div class="cv-title">Front-End Developer</div>
-        <div class="cv-contact">
-          <div class="cv-contact-item"><i class="fas fa-phone"></i> (123) 456-7890</div>
-          <div class="cv-contact-item"><i class="fas fa-envelope"></i> john.doe@email.com</div>
-          <div class="cv-contact-item"><i class="fas fa-map-marker-alt"></i> 123 Main St, Anytown USA</div>
-        </div>
-      </div>
-      <div class="cv-body">
-        <div class="cv-section">
-          <div class="cv-section-title">Education</div>
-          <div class="cv-section-content">
-            <div class="cv-subsection">
-              <div class="cv-subsection-title">Bachelor of Science in Computer Science</div>
-              <div class="cv-subsection-info">
-                <div class="cv-subsection-info-item">University of Anytown, Anytown USA</div>
-                <div class="cv-subsection-info-item">Graduated May 2021</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="cv-section">
-          <div class="cv-section-title">Experience</div>
-          <div class="cv-section-content">
-            <div class="cv-subsection">
-              <div class="cv-subsection-title">Front-End Developer</div>
-              <div class="cv-subsection-info">
-                <div class="cv-subsection-info-item">Acme Corporation, Anytown USA</div>
-                <div class="cv-subsection-info-item">January 2021 - Present</div>
-              </div>
-              <ul class="cv-subsection-list">
-                <li>Develop and maintain front-end of company website</li>
-                <li>Collaborate with back-end developers to implement new features</li>
-                <li>Optimize website for performance and search engines</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <div class="cv-section">
-          <div class="cv-section-title">Skills</div>
-          <div class="cv-section-content">
-            <div class="cv-subsection">
-              <ul class="cv-subsection-list">
-                <li>HTML5</li>
-                <li>CSS3</li>
-                <li>JavaScript</li>
-                <li>Angular</li>
-                <li>React</li>
-                <li>Vue</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-    
   </mat-tab>
 </mat-tab-group>
 

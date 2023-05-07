@@ -36,7 +36,6 @@ export class cvcandidatComponent implements OnInit {
   myForm: FormGroup;
   techFileForm: FormGroup;
   cvForm: FormGroup;
-  languageForm: FormGroup;
   step1:FormGroup;
   step2:FormGroup;
   step3:FormGroup;
@@ -85,33 +84,21 @@ export class cvcandidatComponent implements OnInit {
 
 
 
- constructor(
-  private formBuilder: FormBuilder,
-  private _formBuilder: FormBuilder,
-  private fb: FormBuilder,
+ constructor(private _formBuilder: FormBuilder,
   private cvCandidatService: CvCandidatService,
+  private formBuilder: FormBuilder,
   private router:Router,
    private http: HttpClient)
    {  this.countries = this.cvCandidatService.getCountries();}
 
-
-
   ngOnInit() {
-
-    this.languageForm = new UntypedFormGroup({
-      languages: new UntypedFormArray([
-        this.createLanguage()
-      ]) });
-   
-    /*this.languageForm = this.fb.group({
-      languages: this.fb.array([])
-    });*/
    
     this.cvCandidatService.getOfferItems().subscribe(
       offers => this.offers = offers,
       error => console.log(error)
     );
 
+    
     this.displayedColumns = this.getDisplayedColumns();
     this.getOfferItems()
     this.repeatForm= new FormGroup({
@@ -149,7 +136,6 @@ export class cvcandidatComponent implements OnInit {
       phoneNumberTwo: new UntypedFormControl('', [])
 
     })
-
       this.cvForm = new UntypedFormGroup({
       institution: new UntypedFormControl('', []),
       diploma: new UntypedFormControl('', []),
@@ -167,13 +153,13 @@ export class cvcandidatComponent implements OnInit {
       technology: new UntypedFormControl('', []),
       certificationTitle: new UntypedFormControl('', []),
       certificationObtainedDate: new UntypedFormControl('', []),
-     /* language: new UntypedFormControl('', []),
+      language: new UntypedFormControl('', []),
       languageLevel: new UntypedFormControl('', []),
-      additionalInformation: new UntypedFormControl('', []),*/
+      additionalInformation: new UntypedFormControl('', []),
       skillTitle : new UntypedFormControl('', []),
       skillCategoryTitle: new UntypedFormControl('', []),
     })
-    
+
       this.techFileForm = new UntypedFormGroup({
       reference: new UntypedFormControl('', []),
       description: new UntypedFormControl('', []),
@@ -197,53 +183,6 @@ export class cvcandidatComponent implements OnInit {
       }
     });
   }
-
-  
-  /*addLanguage() {
-    this.languages.push(this.createLanguage());
-  }*/
-
-  get languages(): FormArray {
-    return this.languageForm.get('languages') as FormArray;
-  }
-
-  addLanguage() {
-    this.languages.push(this.createLanguage());
-    this.languageForm.patchValue({
-      languages: this.languages.getRawValue()
-    });
-  }
-
-  createLanguage(): UntypedFormGroup {
-    return new UntypedFormGroup({
-      languageLevel: new UntypedFormControl('', []),
-      additionalInformation: new UntypedFormControl('',[]),
-      language: new UntypedFormControl('',[])
-    });
-  }
-
-  onSubmitLanguage() {
-    console.log(this.languageForm.getRawValue());
-    this.cvCandidatService.addLanguage({...this.languageForm.getRawValue(), technicalFileId: this.selectedTechFile.id}).subscribe({
-      next: (res) => {
-        console.log('Language added successfully', res);
-        console.log('Form value', this.languageForm.getRawValue());
-        this.submitted = true;
-      },
-      error: (e) => {
-        console.error('Error adding Language', e);
-        console.log('Language Form is invalid');
-        console.log(this.languageForm.getRawValue());
-      }
-    });
-  }
-  /*createLanguage(): FormGroup {
-    return this.fb.group({
-      languageLevel: ['', Validators.required],
-      additionalInformation: '',
-      languages: ''
-    });
-  }*/
 
   /////Make first letter capital//////
   capitalLetterValidator(control: FormControl): { [key: string]: boolean } | null {
@@ -296,6 +235,25 @@ export class cvcandidatComponent implements OnInit {
         }
       });
     }
+
+    ///////////ajoutCandidature////////////////////////
+    /*saveOfferCandidat(id :number): void {
+      console.log('ajout...');
+      this.cvCandidatService.addOfferCandidate({employeeNum:this.selectedEmplyee.id ,offerNum:id}).subscribe({
+        next: (res) => {
+          console.log('Item added successfully', res);
+          this.selectedTechFile = res;
+          console.log('Selected technical file ID:', this.selectedTechFile.id);
+         console.log('Form value', this.techFileForm.value);
+          this.submitted = true;
+        },
+        error: (e) => {
+          console.error('Error adding item', e);
+          console.log('Form is invalid');
+          console.log(this.techFileForm.errors);
+        }
+      });
+    }*/
   
 
     /*saveFormation(): void {
@@ -349,18 +307,18 @@ export class cvcandidatComponent implements OnInit {
       });
     }
 
-    saveRest(): void {
+     saveRest(): void {
       console.log('Submitting cv form...');
          
       //Save Formation 
       this.cvCandidatService.addEducation({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
         next: (res) => {
-          console.log('formation added successfully', res);
+          console.log('Item added successfully', res);
           console.log('Form value', this.cvForm.value);
           this.submitted = true;
         },   
         error: (e) => {
-          console.error('Error adding formation', e);
+          console.error('Error adding item', e);
           console.log('cv Form is invalid');
           console.log(this.cvForm.errors);
         }
@@ -369,12 +327,12 @@ export class cvcandidatComponent implements OnInit {
       // Save Expérience 
       this.cvCandidatService.addExperience({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
         next: (res) => {
-          console.log('Experience added successfully', res);
+          console.log('Item added successfully', res);
           console.log('Form value', this.cvForm.value);
           this.submitted = true;
         },   
         error: (e) => {
-          console.error('Error adding experience', e);
+          console.error('Error adding item', e);
           console.log('cv Form is invalid');
           console.log(this.cvForm.errors);
         }
@@ -395,12 +353,12 @@ export class cvcandidatComponent implements OnInit {
       });
     
       // Save certif
-      this.cvCandidatService.addCertif({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
+      this.cvCandidatService.addCertif({...this.cvForm.value, technicalFileId: this.selectedTechFile.id}).subscribe({
         next: (res) => {
           console.log('certif added successfully', res);
           console.log('Form value', this.cvForm.value);
           this.submitted = true;
-        },   
+        },
         error: (e) => {
           console.error('Error adding certif', e);
           console.log('cv Form is invalid');
@@ -427,38 +385,21 @@ export class cvcandidatComponent implements OnInit {
       // Save skills category
       this.cvCandidatService.addSkillCategory({...this.cvForm.value, technicalFileId: this.selectedTechFile.id}).subscribe({
         next: (res) => {
-          console.log('skill category added successfully', res);
+          console.log('skill cat added successfully', res);
           console.log('Form value', this.cvForm.value);
           this.submitted = true;
         },
         error: (e) => {
           console.error('Error adding skill cat', e);
-          console.log('skill cat is invalid');
+          console.log('cv Form is invalid');
           console.log(this.cvForm.errors);
         }
       });
     }
-
-
-    /*onSubmitLanguage() {
-      console.log(this.languageForm.value);
-      this.cvCandidatService.addLanguage({...this.languageForm.value, technicalFileId: this.selectedTechFile.id}).subscribe({
-          next: (res) => {
-            console.log('Language added successfully', res);
-            console.log('Form value', this.languageForm.value);
-            this.submitted = true;
-          },
-          error: (e) => {  
-            console.error('Error adding Language', e);
-            console.log('Language Form is invalid');
-            console.log(this.languageForm.errors);
-          }
-        });
-    }*/
-
-   
     
-    
+
+
+
 
   public confirmer(){}
    ///////Skills chips//////////
@@ -522,7 +463,7 @@ handleAddRepeatForm() {
 }
 
 handleRemoveRepeatForm(index: number) {
-  this.languages.removeAt(index);
+  this.repeatFormGroup.removeAt(index);
  /* if (index > 0) { // check if the index is greater than 0
     const repeatArray = this.repeatForm.get('repeatArray') as FormArray;
     repeatArray.removeAt(index);
@@ -540,7 +481,6 @@ handleRemoveRepeatForm(index: number) {
 
   onCountryChange(countryShotName: string) {
     this.states = this.cvCandidatService.getStatesByCountry(countryShotName);
-   
   }
   
   getOfferItems() {    
@@ -555,8 +495,8 @@ handleRemoveRepeatForm(index: number) {
   getDisplayedColumns() {
     return ['reference','title','actions' ];
   }
-  
-   maritalSituationMap = {
+
+  maritalSituationMap = {
     [MaritalSituation.SINGLE]:'Célibatire',
     [MaritalSituation.MARRIED]:'Marrié',
    [MaritalSituation.DIVORCED]:'Divorvé',
@@ -605,5 +545,4 @@ handleRemoveRepeatForm(index: number) {
     [LanguageLevel.BILINGUAL]: 'Bilingue'
   };
   
-
 }
