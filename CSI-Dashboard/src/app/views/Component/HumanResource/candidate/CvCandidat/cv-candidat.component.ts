@@ -158,7 +158,7 @@ export class cvcandidatComponent implements OnInit {
       languageLevel: new UntypedFormControl('', []),
       additionalInformation: new UntypedFormControl('', []),
       skillTitle : new UntypedFormControl('', []),
-      skillCategoryTitle: new UntypedFormControl('', []),
+      //skillCategoryTitle: new UntypedFormControl('', []),
     })
 
       this.techFileForm = new UntypedFormGroup({
