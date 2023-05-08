@@ -135,7 +135,7 @@
               </mat-card-title>
               <mat-card-content>
                 <mat-list>
-                  <mat-list  >
+                  <mat-list >
                   <mat-icon color="primary"></mat-icon><span class="mat-heading-label">Compétences linguistiques:</span>
                   <mat-list *ngFor="let languages of language">
                   <mat-list-item ><strong style="padding-right: 10px;">Langue : </strong>{{languages.language}} | {{ LanguageLevelMap[languages.languageLevel]}}</mat-list-item>
@@ -143,19 +143,22 @@
                 </mat-list>
                 </mat-list>
 
+                <mat-icon  color="primary"></mat-icon>
+                <span class="mat-heading-label">Certifications :</span>
                   <mat-list *ngFor="let certifications of certification" >
-                    <mat-icon  color="primary"></mat-icon><span class="mat-heading-label">Certifications :</span>
-                    <mat-list-item  style="padding-bottom: 10px;"><strong style="padding-right: 10px;">Certification :   </strong>{{certifications.certificationTitle}}</mat-list-item> 
-                    <mat-list-item  style="padding-bottom: 10px;"><strong style="padding-right: 10px;">Année d'obtention : </strong>{{certifications.certificationObtainedDate}}</mat-list-item> 
+                    <mat-list-item ><strong style="padding-right: 10px;">Certification :   </strong>{{certifications.certificationTitle}}</mat-list-item> 
+                    <mat-list-item ><strong style="padding-right: 10px;">Année d'obtention : </strong>{{certifications.certificationObtainedDate}}</mat-list-item> 
                 </mat-list>
-                <mat-list *ngFor="let skill of skills">
-                  <span class="mat-heading-label">Compétences :</span>
-                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">extension</mat-icon><strong style="padding-right: 10px;">Certification :   </strong>{{skill.skillTitle}}</mat-list-item> 
+
+                <mat-icon  color="primary"></mat-icon><span class="mat-heading-label">Compétences :</span>
+                  <mat-list  *ngFor="let skill of skills" >
+                    <mat-list-item ><strong style="padding-right: 10px;">Compétences : </strong>{{skill.skillTitle}}</mat-list-item> 
                 </mat-list>
                 </mat-list>
               </mat-card-content>
             </mat-card>
           </div>
+
 
           <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
             <mat-card class="p-0">
@@ -197,14 +200,14 @@
     </mat-card> 
   </mat-tab>
 
-              <mat-tab label="Résumé"> 
+    <mat-tab label="Résumé"> 
     <div style="padding-top: 20px; padding-left: 20px;">
       <button mat-raised-button color="primary" (click)="printCv()" style="display: block;">
         Imprimer le Cv
       </button>
       <div style="padding-top: 20px;">
-        <button  mat-raised-button color="primary" (click)="openEvaluationCandidat()" style="display: block;">
-        Convertir en PDF
+        <button  mat-raised-button color="primary" (click)="downloadCV()" style="display: block;">
+        Téléchargement en PDF
       </button>
       </div>
     </div>
@@ -221,7 +224,8 @@
         <div class="profile">
           <h2>Profil</h2>
            <hr style="width: 100%; margin: 0 auto;">
-          <p>{{ technicalFile.objective }}</p>
+          <p>{{ technicalFile.description}}</p>
+          <strong style="padding-right: 10px;">Objectives: </strong><p>{{ technicalFile.objective}}</p>
           <div>
             
           </div>

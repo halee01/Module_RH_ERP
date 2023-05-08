@@ -1,7 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { CrudService } from '../candidat-crud.service';
 import { Employee, MaritalSituation, Title } from 'app/shared/models/Employee';
 import { Education } from 'app/shared/models/Education';
@@ -12,6 +11,7 @@ import { Experience } from 'app/shared/models/Experience';
 import { TechnicalFile } from 'app/shared/models/TechnicalFile';
 import { Language, LanguageLevel } from 'app/shared/models/Language';
 import { Civility } from 'app/shared/models/contact';
+import html2pdf from 'html2pdf.js';
 
 @Component({
   selector: 'app-details-candidat',
@@ -64,12 +64,12 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
     document.body.innerHTML = originalContents;
   }
   
- /*downloadCV() {
-    const element = document.getElementById("CV");
-   // html2pdf()
+ downloadCV() {
+    const element = document.getElementById("resume");
+    html2pdf()
       .from(element)
       .save('my-cv.pdf');
-  }  */  
+  }  
 
 
 

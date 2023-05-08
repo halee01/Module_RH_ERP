@@ -136,8 +136,8 @@ export class cvcandidatComponent implements OnInit {
       phoneNumberOne: new UntypedFormControl('', []),
       civility: new UntypedFormControl('', []),
       maritalSituation: new UntypedFormControl('', []),
-      //country: new UntypedFormControl('', ),
-      //city: new UntypedFormControl('', []),
+      country: new UntypedFormControl('', []),
+      city: new UntypedFormControl('', []),
       postCode: new UntypedFormControl('', []),
       emailTwo: new UntypedFormControl('', ),
       phoneNumberTwo: new UntypedFormControl('', [])
@@ -163,7 +163,7 @@ export class cvcandidatComponent implements OnInit {
       language: new UntypedFormControl('', []),
       languageLevel: new UntypedFormControl('', []),
       additionalInformation: new UntypedFormControl('', []),
-      skillTitle : new UntypedFormControl('', [])
+      skillsTitle : new UntypedFormControl('', [])
     })
 
     /*this.languageForm = new UntypedFormGroup({
@@ -172,7 +172,6 @@ export class cvcandidatComponent implements OnInit {
       additionalInformation: new UntypedFormControl('', []),
 
     })*/
-
 
       this.techFileForm = new UntypedFormGroup({
       reference: new UntypedFormControl('', []),
@@ -190,12 +189,12 @@ export class cvcandidatComponent implements OnInit {
 
 
     /////Countries////
-    this.itemForm.get("country").valueChanges.subscribe((country) => {
-      this.itemForm.get("city").reset();
+    this.myForm.get("country").valueChanges.subscribe((country) => {
+      this.myForm.get("city").reset();
       if (country) {
         this.states = this.cvCandidatService.getStatesByCountry(country);
       }
-    });
+    })
   }
 
   
@@ -339,8 +338,6 @@ export class cvcandidatComponent implements OnInit {
     }*/
 
 
-
-
     saveCertif(): void {
       console.log('Submitting cv form...');
       this.cvCandidatService.addCertif({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
@@ -356,6 +353,7 @@ export class cvcandidatComponent implements OnInit {
         }
       });
     }
+
 
      saveRest(): void {
       console.log('Submitting cv form...');
@@ -458,7 +456,7 @@ export class cvcandidatComponent implements OnInit {
     const value = event.value;
     // Add skill
     if ((value || '').trim()) {
-      this.skills.push({skillTitle: value.trim()});
+      this.skills.push({skillsTitle: value.trim()});
       this.cvForm.controls['skillTitle'].setValue(this.skills);// update the form control with the new skills array
     }
     // Reset the input value
@@ -553,6 +551,7 @@ handleRemoveRepeatForm(index: number) {
    [MaritalSituation.WIDOWED] :'Veuf/Veuve',
    [MaritalSituation.COMPLICATED] :'Compliqué'
   };
+
   civilityMap = {
     [Civility.MRS]:'Mme',
     [Civility.MS]:'Mlle',
@@ -567,6 +566,7 @@ handleRemoveRepeatForm(index: number) {
     [Title.HUMAN_RESOURCE_MANAGER]: 'Responsable des Ressources Humaines',
     [Title.HUMAN_RESOURCE]: 'Ressources Humaines',
     [Title.PROJECT_MANAGER]: 'Chef de Projet',
+    [Title.TECH_LEAD]: 'Chef de Projet',
     [Title.UI_UX_DESIGNER]: 'Concepteur UI/UX',
     [Title.QA_ENGINEER]: 'Ingénieur QA',
     [Title.DEVOPS_ENGINEER]: 'Ingénieur DevOps',
