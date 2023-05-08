@@ -403,7 +403,7 @@ export class updatecandidatComponent implements OnInit {
     const value = event.value;
     // Add skill
     if ((value || '').trim()) {
-      this.skills.push({skillTitle: value.trim()});
+      this.skills.push({skillsTitle: value.trim()});
       this.cvForm.controls['skillTitle'].setValue(this.skills);// update the form control with the new skills array
     }
     // Reset the input value

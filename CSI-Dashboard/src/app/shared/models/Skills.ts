@@ -1,6 +1,5 @@
 export interface Skills{
     Id ?:number;
-    skillTitle ?:string;
-    technicalFileId ?: number ;
+    skillsTitle ?:string;
     
 }

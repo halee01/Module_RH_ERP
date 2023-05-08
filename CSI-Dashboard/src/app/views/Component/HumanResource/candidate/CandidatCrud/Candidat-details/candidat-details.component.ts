@@ -1,7 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { CrudService } from '../candidat-crud.service';
 import { Employee, MaritalSituation, Title } from 'app/shared/models/Employee';
 import { Education } from 'app/shared/models/Education';
@@ -12,8 +11,8 @@ import { Experience } from 'app/shared/models/Experience';
 import { TechnicalFile } from 'app/shared/models/TechnicalFile';
 import { Language, LanguageLevel } from 'app/shared/models/Language';
 import { Civility } from 'app/shared/models/contact';
-import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
 import html2pdf from 'html2pdf.js';
+import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
 
 @Component({
   selector: 'app-details-candidat',
@@ -75,11 +74,11 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
   }
   
  downloadCV() {
-    const element = document.getElementById("CV");
+    const element = document.getElementById("resume");
     html2pdf()
       .from(element)
       .save('my-cv.pdf');
-  }   
+  }  
 
 
 
@@ -163,6 +162,7 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
    [MaritalSituation.WIDOWED] :'Veuf/Veuve',
    [MaritalSituation.COMPLICATED] :'Compliqué'
   };
+  
   civilityMap = {
     [Civility.MRS]:'Mme',
     [Civility.MS]:'Mlle',
