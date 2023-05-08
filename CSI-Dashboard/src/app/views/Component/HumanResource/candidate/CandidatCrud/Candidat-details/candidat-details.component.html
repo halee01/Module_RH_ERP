@@ -163,7 +163,7 @@
           <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
             <mat-card class="p-0">
               <mat-card-title class="cardColor"> 
-                <div class="card-title-text">Informations Administratives</div>
+                <div class="card-title-text">Informations Générales</div>
                 <mat-divider></mat-divider>
               </mat-card-title>
               <mat-card-content>
@@ -281,10 +281,10 @@
         <h2>Contact</h2>
         <span class="mat-heading-label">Adresse</span>
         <ul class="side-list">
-          <li>{{ employee.country }}</li>
-          <li>{{employee.city}}</li>
-          <li>{{employee.postCode}}</li>
-          <li>{{employee.address}}</li>
+          <li><strong style="padding-right: 10px;">Pays: </strong>{{ employee.country }}</li>
+          <li><strong style="padding-right: 10px;">Ville: </strong>{{employee.city}}{{employee.postCode}}</li>
+          
+          <li><strong style="padding-right: 10px;">Adresse: </strong>{{employee.address}}</li>
           </ul>
 
           <span class="mat-heading-label">Emails</span>
@@ -315,7 +315,7 @@
           <li>
             <ul>
               <li>
-                {{certifications.certificationTitle}}
+                {{certifications.certificationTitle}} |
                 {{certifications.certificationObtainedDate}}
               </li>
             </ul>

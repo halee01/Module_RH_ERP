@@ -28,7 +28,6 @@ import { Skills } from 'app/shared/models/Skills';
   styleUrls: ['./cv-candidat.component.scss'],
 })
 
-
 export class cvcandidatComponent implements OnInit {
   formData = {}
   console = console;
@@ -47,6 +46,7 @@ export class cvcandidatComponent implements OnInit {
   lastEmployee: Employee;
   selectedEmplyee= {firstName :'', id:null};
   selectedTechFile= { id:null};
+
 //////////////Ajout Candidat///////////////
   public itemForm: FormGroup;;
   CompanyStatus = Object.values(CompanyStatus);
@@ -250,7 +250,6 @@ export class cvcandidatComponent implements OnInit {
     }
   }*/
 
-
   saveCandidate(): void {
     console.log('Submitting form...');
   //  if (this.myForm.valid) {
@@ -446,9 +445,6 @@ export class cvcandidatComponent implements OnInit {
     }
     
 
-
-
-
   public confirmer(){}
    ///////Skills chips//////////
    add(event: MatChipInputEvent): void {
@@ -538,8 +534,8 @@ handleRemoveRepeatForm(index: number) {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
-
   }
+
   getDisplayedColumns() {
     return ['reference','title','actions' ];
   }

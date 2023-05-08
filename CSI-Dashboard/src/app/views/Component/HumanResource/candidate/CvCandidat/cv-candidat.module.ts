@@ -34,7 +34,7 @@ import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
-    
+    MatDialogModule,
     CommonModule,
     MatSelectModule,
     ReactiveFormsModule,
@@ -65,6 +65,7 @@ import { MatTableModule } from '@angular/material/table';
     }),
     RouterModule.forChild(CalendarRoutes)
   ],
+  exports: [MatDialogModule],
   providers: [CvCandidatService,{
     provide: STEPPER_GLOBAL_OPTIONS,
     useValue: { showError: true }
