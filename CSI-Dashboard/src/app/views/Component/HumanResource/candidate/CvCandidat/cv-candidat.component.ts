@@ -288,7 +288,7 @@ export class cvcandidatComponent implements OnInit {
     }
 
     ///////////ajoutCandidature////////////////////////
-    /*saveOfferCandidat(id :number): void {
+    saveOfferCandidat(id :number): void {
       console.log('ajout...');
       this.cvCandidatService.addOfferCandidate({employeeNum:this.selectedEmplyee.id ,offerNum:id}).subscribe({
         next: (res) => {
@@ -304,7 +304,7 @@ export class cvcandidatComponent implements OnInit {
           console.log(this.techFileForm.errors);
         }
       });
-    }*/
+    }
   
 
     /*saveFormation(): void {

@@ -13,6 +13,7 @@ import { TechnicalFile } from 'app/shared/models/TechnicalFile';
 import { Language, LanguageLevel } from 'app/shared/models/Language';
 import { Civility } from 'app/shared/models/contact';
 import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
+import html2pdf from 'html2pdf.js';
 
 @Component({
   selector: 'app-details-candidat',
@@ -73,12 +74,12 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
     document.body.innerHTML = originalContents;
   }
   
- /*downloadCV() {
+ downloadCV() {
     const element = document.getElementById("CV");
-   // html2pdf()
+    html2pdf()
       .from(element)
       .save('my-cv.pdf');
-  }  */  
+  }   
 
 
 

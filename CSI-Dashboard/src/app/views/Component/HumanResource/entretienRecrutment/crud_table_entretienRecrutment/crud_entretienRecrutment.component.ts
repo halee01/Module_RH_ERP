@@ -15,6 +15,7 @@ import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.serv
 import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
 import { Subscription } from 'rxjs';
 import { CrudService } from '../../candidate/CandidatCrud/candidat-crud.service';
+import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
 
 
 @Component({
@@ -77,38 +78,7 @@ export class crudEntretienRecrutmentComponent implements OnInit {
  
  }
 
-  openPopUp(data: any = {}, isNew?) {
-    let title = isNew ? 'Add new Candidat' : 'Update Candidat';
-    let dialogRef: MatDialogRef<any> = this.dialog.open(NgxTablePopupComponent, {
-      width: '720px',
-      disableClose: true,
-      data: { title: title, payload: data }
-    })
-    dialogRef.afterClosed()
-      .subscribe(res => {
-        if(!res) {
-          // If user press cancel
-          return;
-        }
-        if (isNew) {
-          this.loader.open('Adding new Candidat');
-          this.crudEntretien.addItem(res)
-            .subscribe(data => {
-              this.dataSource = data;
-              this.loader.close();
-              this.snack.open('Candidat Added!', 'OK', { duration: 4000 })
-            })
-        } else {
-          this.loader.open('Updating Candidat');
-          this.crudEntretien.updateItem(data._id, res)
-            .subscribe(data => {
-              this.dataSource = data;
-              this.loader.close();
-              this.snack.open('Candidat Updated!', 'OK', { duration: 4000 })
-            })
-        }
-      })
-  }
+
   deleteItem(row) {
     this.confirmService.confirm({message: `Delete ${row.name}?`})
       .subscribe(res => {
@@ -131,6 +101,41 @@ export class crudEntretienRecrutmentComponent implements OnInit {
     this.router.navigate(['evaluationCrud/crudEvaluation'])
   }
   
-  
+  openPopUp(data:  any , isNew?) {
+    let title = isNew ? 'Nouvelle offre' : 'Modifier offre';
+    let dialogRef: MatDialogRef<any> = this.dialog.open(ajoutEntretienPopupComponent, {
+      width: '1000px',
+      disableClose: true,
+      data: { title: title, payload: data }
+    })
+    dialogRef.afterClosed()
+      .subscribe(res => {
+        if(!res) {
+          // If user press cancel
+          return;
+        }
+        if (isNew) {
+          this.loader.open('Ajout en cours');
+          this.crudEntretien.addItem(res)
+            .subscribe((data :any)=> {
+              this.dataSource = data;
+              this.loader.close();
+              this.snack.open('Offre ajoutée avec succès!', 'OK', { duration: 2000 });
+              this.getItems();
+            })
+        } else {
+          this.loader.open('modification en cours');
+          this.crudEntretien.updateItem(data.id,res)
+            .subscribe((data:any) => {
+              this.dataSource = data ;
+              this.loader.close();
+              this.snack.open('Offre modifiée avec succées !', 'OK', { duration: 2000 });
+              this.getItems();
+            })
+        }
+      })
+  }
+
+
 }
 
