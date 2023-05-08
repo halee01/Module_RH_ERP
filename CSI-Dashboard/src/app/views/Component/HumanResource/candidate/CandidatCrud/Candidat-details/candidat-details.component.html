@@ -152,7 +152,7 @@
 
                 <mat-icon  color="primary"></mat-icon><span class="mat-heading-label">Compétences :</span>
                   <mat-list  *ngFor="let skill of skills" >
-                    <mat-list-item ><strong style="padding-right: 10px;">Compétences : </strong>{{skill.skillTitle}}</mat-list-item> 
+                    <mat-list-item ><strong style="padding-right: 10px;">Compétences : </strong>{{skill.skillsTitle}}</mat-list-item> 
                 </mat-list>
                 </mat-list>
               </mat-card-content>
@@ -224,17 +224,20 @@
         <div class="profile">
           <h2>Profil</h2>
            <hr style="width: 100%; margin: 0 auto;">
-          <p>{{ technicalFile.description}}</p>
-          <strong style="padding-right: 10px;">Objectives: </strong><p>{{ technicalFile.objective}}</p>
+           <div class="profile-body">
+            <p>{{ technicalFile.description}}</p>
+          <strong style="padding-right: 10px;">Objectifs: </strong><p>{{ technicalFile.objective}}</p>
           <div>
-            
           </div>
+           </div>
         </div>
+
         <div class="skills">
           <h2>Compétances</h2>
+          <hr style="width: 100%; margin: 0 auto;">
           <div class="skills-body">
             <div class="chip-container" *ngFor="let skill of skills">
-              <div class="chip">{{skill.skillTitle}}</div>
+              <div class="chip">{{skill.skillsTitle}}</div>
             </div>
          </div>
         </div>

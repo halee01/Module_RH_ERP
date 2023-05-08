@@ -344,7 +344,7 @@ export class cvcandidatComponent implements OnInit {
         next: (res) => {
           console.log('Item added successfully', res);
           console.log('Form value', this.cvForm.value);
-          this.submitted = true;
+          this.submitted = true; 
         },   
         error: (e) => {
           console.error('Error adding item', e);
@@ -416,7 +416,7 @@ export class cvcandidatComponent implements OnInit {
 
     
       // Save skills
-      this.cvCandidatService.addSkill({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
+      this.cvCandidatService.addSkill({...this.cvForm.value, technicalFileNum:this.selectedTechFile.id}).subscribe({
         next: (res) => {
           console.log('skill added successfully', res);
           console.log('Form value', this.cvForm.value);
