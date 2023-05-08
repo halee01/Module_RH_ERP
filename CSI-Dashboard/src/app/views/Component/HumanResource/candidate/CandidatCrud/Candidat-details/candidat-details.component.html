@@ -136,24 +136,17 @@
               <mat-card-content>
                 <mat-list>
                   <mat-list  >
-                  <mat-icon color="primary"class="mr-16"></mat-icon>
-                  <span class="mat-heading-label">Compétences linguistiques:</span>
+                  <mat-icon color="primary"></mat-icon><span class="mat-heading-label">Compétences linguistiques:</span>
                   <mat-list *ngFor="let languages of language">
-                  <mat-list-item style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Langue : </strong>
-                    <div style="display: flex; justify-content: space-between;">
-                      <h3> {{languages.language}}</h3>
-                      <p>{{ LanguageLevelMap[languages.languageLevel]}}</p>
-                  </div>
-                     </mat-list-item>
-                  <mat-list-item></mat-list-item>
+                  <mat-list-item ><strong style="padding-right: 10px;">Langue : </strong>{{languages.language}} | {{ LanguageLevelMap[languages.languageLevel]}}</mat-list-item>
+                  <mat-list-item><strong style="padding-right: 10px;">Informations supplémentaire : </strong>{{languages.additionalInformation}}</mat-list-item>
                 </mat-list>
                 </mat-list>
 
                   <mat-list *ngFor="let certifications of certification" >
-                  <span class="mat-heading-label">Certifications :</span>
-                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Certification :   </strong>{{certifications.title}}</mat-list-item> 
-                  <mat-list-item  style="padding-bottom: 20px;"><mat-icon  color="primary"class="mr-16">assignment_turned_in</mat-icon><strong style="padding-right: 10px;">Année d'obtention : </strong>{{certifications.obtainedDate}}</mat-list-item> 
-
+                    <mat-icon  color="primary"></mat-icon><span class="mat-heading-label">Certifications :</span>
+                    <mat-list-item  style="padding-bottom: 10px;"><strong style="padding-right: 10px;">Certification :   </strong>{{certifications.certificationTitle}}</mat-list-item> 
+                    <mat-list-item  style="padding-bottom: 10px;"><strong style="padding-right: 10px;">Année d'obtention : </strong>{{certifications.certificationObtainedDate}}</mat-list-item> 
                 </mat-list>
                 <mat-list *ngFor="let skill of skills">
                   <span class="mat-heading-label">Compétences :</span>
@@ -315,8 +308,8 @@
           <li>
             <ul>
               <li>
-                {{certifications.title}}
-                {{certifications.obtainedDate}}
+                {{certifications.certificationTitle}}
+                {{certifications.certificationObtainedDate}}
               </li>
             </ul>
           </li>

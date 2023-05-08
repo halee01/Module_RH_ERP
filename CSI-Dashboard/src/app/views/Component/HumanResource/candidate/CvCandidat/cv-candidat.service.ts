@@ -160,7 +160,7 @@ addLanguage(lang: any): Observable<any> {
 
 //POST skill
 addSkill(skil: any): Observable<any> {
-  const apiSkillWithAdd = this.apiSkill + '/addSkills'; // Append /add to the apiUrl
+  const apiSkillWithAdd = this.apiSkill + '/add'; // Append /add to the apiUrl
   return this.http.post<any>(apiSkillWithAdd, skil).pipe(
     catchError(this.handleError)
   );
