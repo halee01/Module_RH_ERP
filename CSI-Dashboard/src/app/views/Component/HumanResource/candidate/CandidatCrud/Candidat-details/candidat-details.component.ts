@@ -3,14 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { CrudService } from '../candidat-crud.service';
-import { Employee } from 'app/shared/models/Employee';
+import { Employee, MaritalSituation, Title } from 'app/shared/models/Employee';
 import { Education } from 'app/shared/models/Education';
 import { Skills } from 'app/shared/models/Skills';
 import { SkillsCategory } from 'app/shared/models/SkillsCategory';
 import { Certification } from 'app/shared/models/Certification';
 import { Experience } from 'app/shared/models/Experience';
 import { TechnicalFile } from 'app/shared/models/TechnicalFile';
-import { Language } from 'app/shared/models/Language';
+import { Language, LanguageLevel } from 'app/shared/models/Language';
+import { Civility } from 'app/shared/models/contact';
 
 @Component({
   selector: 'app-details-candidat',
@@ -31,6 +32,12 @@ skillsCategory : SkillsCategory
 certification : Certification
 experience : Experience
 private router: Router
+title :string[]= Object.values(Title);
+Civility :string []= Object.values(Civility);
+MaritalSituation :string []= Object.values(MaritalSituation);
+LanguageLevel : string[] = Object.values(LanguageLevel);
+
+
   constructor(    private route: ActivatedRoute,
     private candidatService: CrudService,) { }
 
@@ -49,10 +56,10 @@ private router: Router
 
   //////////////////CV Print///////////////////
   printCv() {
-    const printableArea = document.getElementById('CV');
+    const printableArea = document.getElementById('resume');
     var originalContents = document.body.innerHTML;
-    var printContents = document.getElementById('CV').innerHTML;
-    document.body.innerHTML = "<h1>CV</h1>" + printContents  + "<hr><h2>Contact Information</h2><div class='cv-contact'><div class='cv-contact-item'><i class='fas fa-phone'></i> (123) 456-7890</div><div class='cv-contact-item'><i class='fas fa-envelope'></i> john.doe@email.com</div><div class='cv-contact-item'><i class='fas fa-map-marker-alt'></i> 123 Main St, Anytown USA</div></div>";
+    var printContents = document.getElementById('resume').innerHTML;
+    document.body.innerHTML = printContents ;
     window.print();
     document.body.innerHTML = originalContents;
   }
@@ -113,4 +120,53 @@ private router: Router
     this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
   }
 
+  employeeTitleMap = {
+    [Title.FRONT_END_DEVELOPER]: 'Développeur Front-End',
+    [Title.BACK_END_DEVELOPER]: 'Développeur Back-End',
+    [Title.FULLSTACK_DEVELOPER]: 'Développeur Full-Stack',
+    [Title.CRM]: 'CRM',
+    [Title.HUMAN_RESOURCE_MANAGER]: 'Responsable des Ressources Humaines',
+    [Title.HUMAN_RESOURCE]: 'Ressources Humaines',
+    [Title.PROJECT_MANAGER]: 'Chef de Projet',
+    [Title.UI_UX_DESIGNER]: 'Concepteur UI/UX',
+    [Title.QA_ENGINEER]: 'Ingénieur QA',
+    [Title.DEVOPS_ENGINEER]: 'Ingénieur DevOps',
+    [Title.WEB_DEVELOPER]: 'Développeur Web',
+    [Title.OFFICE_MANAGER]: 'Responsable d Agence',
+    [Title.ACCOUNTANT]: 'Comptable',
+    [Title.SALES_REPRESENTATIVE]: 'Représentant Commercial',
+    [Title.CUSTOMER_SUPPORT_SPECIALIST]: 'Spécialiste du Support Client',
+    [Title.MARKETING_COORDINATOR]: 'Coordinateur Marketing'
+    
+  };
+
+  maritalSituationMap = {
+    [MaritalSituation.SINGLE]:'Célibatire',
+    [MaritalSituation.MARRIED]:'Marrié',
+   [MaritalSituation.DIVORCED]:'Divorvé',
+   [MaritalSituation.WIDOWED] :'Veuf/Veuve',
+   [MaritalSituation.COMPLICATED] :'Compliqué'
+  };
+  civilityMap = {
+    [Civility.MRS]:'Mme',
+    [Civility.MS]:'Mlle',
+   [Civility.MR]:'Mr'
+  };
+
+  LanguageLevelMap = {
+    [LanguageLevel.BEGINNER_A1]: 'Niveau Débutant A1',
+    [LanguageLevel.BEGINNER]: 'Niveau Débutant',
+    [LanguageLevel.ELEMENTARY_A2]: 'Niveau Elémentaire A2',
+    [LanguageLevel.BASIC]: 'Niveau de Base',
+    [LanguageLevel.INTERMEDIATE_B1]: 'Niveau Intermédiaire B1',
+    [LanguageLevel.INTERMEDIATE]: 'Niveau Intermédiaire',
+    [LanguageLevel.UPPER_INTERMEDIATE_B2]: 'Niveau Intermédiaire Supérieur B2',
+    [LanguageLevel.PROFESSIONAL]: 'Niveau Professionnel',
+    [LanguageLevel.ADVANCED_C1]: 'Niveau Avancé C1',
+    [LanguageLevel.FLUENT]: 'Courant',
+    [LanguageLevel.PROFICIENT_C2]: 'Niveau Expert C2',
+    [LanguageLevel.NATIVE_LANGUAGE]: 'Langue Maternelle',
+    [LanguageLevel.BILINGUAL]: 'Bilingue'
+  };
+  
 }

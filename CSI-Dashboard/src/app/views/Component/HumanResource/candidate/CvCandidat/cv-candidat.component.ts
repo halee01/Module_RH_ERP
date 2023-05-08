@@ -35,6 +35,7 @@ export class cvcandidatComponent implements OnInit {
   repeatForm: FormGroup;
   myForm: FormGroup;
   techFileForm: FormGroup;
+  languageForm: FormGroup;
   cvForm: FormGroup;
   step1:FormGroup;
   step2:FormGroup;
@@ -87,11 +88,17 @@ export class cvcandidatComponent implements OnInit {
  constructor(private _formBuilder: FormBuilder,
   private cvCandidatService: CvCandidatService,
   private formBuilder: FormBuilder,
+  private fb: FormBuilder,
   private router:Router,
    private http: HttpClient)
    {  this.countries = this.cvCandidatService.getCountries();}
 
   ngOnInit() {
+
+   /* this.languageForm = new UntypedFormGroup({
+      languages: new UntypedFormArray([
+        this.createLanguage()
+      ]) });*/
    
     this.cvCandidatService.getOfferItems().subscribe(
       offers => this.offers = offers,
@@ -156,9 +163,16 @@ export class cvcandidatComponent implements OnInit {
       language: new UntypedFormControl('', []),
       languageLevel: new UntypedFormControl('', []),
       additionalInformation: new UntypedFormControl('', []),
-      skillTitle : new UntypedFormControl('', []),
-      skillCategoryTitle: new UntypedFormControl('', []),
+      skillTitle : new UntypedFormControl('', [])
     })
+
+    /*this.languageForm = new UntypedFormGroup({
+      language: new UntypedFormControl('', []),
+      languageLevel: new UntypedFormControl('', []),
+      additionalInformation: new UntypedFormControl('', []),
+
+    })*/
+
 
       this.techFileForm = new UntypedFormGroup({
       reference: new UntypedFormControl('', []),
@@ -183,6 +197,42 @@ export class cvcandidatComponent implements OnInit {
       }
     });
   }
+
+  
+  /*get languages(): FormArray {
+    return this.languageForm.get('languages') as FormArray;
+  }
+
+  addLanguage() {
+    this.languages.push(this.createLanguage());
+    this.languageForm.patchValue({
+      languages: this.languages.getRawValue()
+    });
+  }
+
+  createLanguage(): UntypedFormGroup {
+    return new UntypedFormGroup({
+      languageLevel: new UntypedFormControl('', []),
+      additionalInformation: new UntypedFormControl('',[]),
+      language: new UntypedFormControl('',[])
+    });
+  }
+
+  onSubmitLanguage() {
+    console.log(this.languageForm.getRawValue());
+    this.cvCandidatService.addLanguage({...this.languageForm.getRawValue(), technicalFileId: this.selectedTechFile.id}).subscribe({
+      next: (res) => {
+        console.log('Language added successfully', res);
+        console.log('Form value', this.languageForm.getRawValue());
+        this.submitted = true;
+      },
+      error: (e) => {
+        console.error('Error adding Language', e);
+        console.log('Language Form is invalid');
+        console.log(this.languageForm.getRawValue());
+      }
+    });
+  }*/
 
   /////Make first letter capital//////
   capitalLetterValidator(control: FormControl): { [key: string]: boolean } | null {

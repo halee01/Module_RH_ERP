@@ -336,13 +336,13 @@
         
         <div  fxLayout="row" fxLayoutAlign="space-between center">
           <!--Button 2-->
-          <div>
+         <!-- <div>
             <button 
           mat-raised-button 
           color="primary" 
           matStepperPrevious>Précédent : Coordonnées
           </button>
-          </div>
+          </div>-->
   
           <!--Button 1-->
           <div>
@@ -449,7 +449,7 @@
                       <div class="form-group mb-1 col-sm-12 col-md-3">
                         <mat-form-field appearance="outline" [style.width.cm]=7>
                           <mat-label>Date d'obtention</mat-label>
-                          <input matInput [matDatepicker]="picker2" formControlName="obtainedYear" placeholder="Date d'obtention" >
+                          <input matInput [matDatepicker]="picker2" formControlName="obtainedDate" placeholder="Date d'obtention" >
                           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                           <mat-datepicker #picker2></mat-datepicker>
                         </mat-form-field>
@@ -478,13 +478,13 @@
 
       <div  fxLayout="row" fxLayoutAlign="space-between center">
         <!--Button 2-->
-        <div>
+        <!--<div>
           <button 
         mat-raised-button 
         color="primary" 
         matStepperPrevious>Précédent : Informations Générales
         </button>
-        </div>
+        </div>-->
 
         <!--Button 1-->
         <div>
@@ -623,13 +623,13 @@
       </mat-card-content>
       <div  fxLayout="row" fxLayoutAlign="space-between center">
         <!--Button 2-->
-        <div>
+       <!-- <div>
           <button 
         mat-raised-button 
         color="primary" 
          matStepperPrevious>Précédent : Formation
         </button>
-        </div>
+        </div>-->
 
         <!--Button 1-->
         <div>
@@ -702,7 +702,7 @@
               </div>-->
             </mat-expansion-panel>
              <!-----------------------Languages------------------------>
-            <mat-expansion-panel  >
+             <mat-expansion-panel  >
               <mat-expansion-panel-header  style="height: 2cm;">
                 <mat-panel-title>
                   <mat-icon color="primary"class="mr-16">language</mat-icon>
@@ -729,7 +729,7 @@
                           <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
                             <mat-label>Niveau</mat-label>
                             <mat-select  placeholder="Ex. Courant" formControlName="languageLevel">
-                              <mat-option *ngFor="let LanguageLevels of LanguageLevel" [value]="LanguageLevels">{{LanguageLevelMap[LanguageLevels]}}</mat-option>
+                              <mat-option *ngFor="let LanguageLevels of LanguageLevel" [value]="LanguageLevels">{{LanguageLevels}}</mat-option>
                             </mat-select>
                             </mat-form-field>
                         </div>
@@ -830,14 +830,14 @@
 
       <div  fxLayout="row" fxLayoutAlign="space-between center">
         <!--Button 2-->
-        <div>
+       <!--<div>
           <button 
         mat-raised-button 
         color="primary" 
         matStepperPrevious>
         Précédent : Expérience
         </button>
-        </div>
+        </div>-->
 
         <!--Button 1-->
         <div>
