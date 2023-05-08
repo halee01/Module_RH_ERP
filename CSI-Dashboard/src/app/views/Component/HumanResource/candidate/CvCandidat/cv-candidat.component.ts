@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
 import {  Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormGroup, UntypedFormControl, Validators, FormArray, AbstractControl } from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, FormArray, AbstractControl, UntypedFormArray } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
@@ -36,6 +36,7 @@ export class cvcandidatComponent implements OnInit {
   repeatForm: FormGroup;
   myForm: FormGroup;
   techFileForm: FormGroup;
+  languageForm: FormGroup;
   cvForm: FormGroup;
   step1:FormGroup;
   step2:FormGroup;
@@ -88,11 +89,17 @@ export class cvcandidatComponent implements OnInit {
  constructor(private _formBuilder: FormBuilder,
   private cvCandidatService: CvCandidatService,
   private formBuilder: FormBuilder,
+  private fb: FormBuilder,
   private router:Router,
    private http: HttpClient)
    {  this.countries = this.cvCandidatService.getCountries();}
 
   ngOnInit() {
+
+   /* this.languageForm = new UntypedFormGroup({
+      languages: new UntypedFormArray([
+        this.createLanguage()
+      ]) });*/
    
     this.cvCandidatService.getOfferItems().subscribe(
       offers => this.offers = offers,
@@ -157,9 +164,16 @@ export class cvcandidatComponent implements OnInit {
       language: new UntypedFormControl('', []),
       languageLevel: new UntypedFormControl('', []),
       additionalInformation: new UntypedFormControl('', []),
-      skillTitle : new UntypedFormControl('', []),
-      //skillCategoryTitle: new UntypedFormControl('', []),
+      skillTitle : new UntypedFormControl('', [])
     })
+
+    /*this.languageForm = new UntypedFormGroup({
+      language: new UntypedFormControl('', []),
+      languageLevel: new UntypedFormControl('', []),
+      additionalInformation: new UntypedFormControl('', []),
+
+    })*/
+
 
       this.techFileForm = new UntypedFormGroup({
       reference: new UntypedFormControl('', []),
@@ -184,6 +198,42 @@ export class cvcandidatComponent implements OnInit {
       }
     });
   }
+
+  
+  /*get languages(): FormArray {
+    return this.languageForm.get('languages') as FormArray;
+  }
+
+  addLanguage() {
+    this.languages.push(this.createLanguage());
+    this.languageForm.patchValue({
+      languages: this.languages.getRawValue()
+    });
+  }
+
+  createLanguage(): UntypedFormGroup {
+    return new UntypedFormGroup({
+      languageLevel: new UntypedFormControl('', []),
+      additionalInformation: new UntypedFormControl('',[]),
+      language: new UntypedFormControl('',[])
+    });
+  }
+
+  onSubmitLanguage() {
+    console.log(this.languageForm.getRawValue());
+    this.cvCandidatService.addLanguage({...this.languageForm.getRawValue(), technicalFileId: this.selectedTechFile.id}).subscribe({
+      next: (res) => {
+        console.log('Language added successfully', res);
+        console.log('Form value', this.languageForm.getRawValue());
+        this.submitted = true;
+      },
+      error: (e) => {
+        console.error('Error adding Language', e);
+        console.log('Language Form is invalid');
+        console.log(this.languageForm.getRawValue());
+      }
+    });
+  }*/
 
   /////Make first letter capital//////
   capitalLetterValidator(control: FormControl): { [key: string]: boolean } | null {
@@ -236,8 +286,9 @@ export class cvcandidatComponent implements OnInit {
         }
       });
     }
+
     ///////////ajoutCandidature////////////////////////
-    saveOfferCandidat(id :number): void {
+    /*saveOfferCandidat(id :number): void {
       console.log('ajout...');
       this.cvCandidatService.addOfferCandidate({employeeNum:this.selectedEmplyee.id ,offerNum:id}).subscribe({
         next: (res) => {
@@ -253,20 +304,7 @@ export class cvcandidatComponent implements OnInit {
           console.log(this.techFileForm.errors);
         }
       });
-    }
-    ///delete Candidature////
-    deleteOfferCandidat(row) {
-      this.cvCandidatService.deleteOfferCandidate(row.id)
-        .subscribe(res => {
-          if (res) {
-         
-            this.cvCandidatService.deleteItem(row.id)
-              .subscribe((data:any)=> {
-                this.dataSource = data;
-              })
-          }
-        })
-    }
+    }*/
   
 
     /*saveFormation(): void {
@@ -494,9 +532,7 @@ handleRemoveRepeatForm(index: number) {
 
   onCountryChange(countryShotName: string) {
     this.states = this.cvCandidatService.getStatesByCountry(countryShotName);
-   
   }
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   
   getOfferItems() {    
     this.getItemSub = this.cvCandidatService.getOfferItems()
@@ -511,5 +547,54 @@ handleRemoveRepeatForm(index: number) {
   getDisplayedColumns() {
     return ['reference','title','actions' ];
   }
+
+  maritalSituationMap = {
+    [MaritalSituation.SINGLE]:'Célibatire',
+    [MaritalSituation.MARRIED]:'Marrié',
+   [MaritalSituation.DIVORCED]:'Divorvé',
+   [MaritalSituation.WIDOWED] :'Veuf/Veuve',
+   [MaritalSituation.COMPLICATED] :'Compliqué'
+  };
+  civilityMap = {
+    [Civility.MRS]:'Mme',
+    [Civility.MS]:'Mlle',
+   [Civility.MR]:'Mr'
+  };
+
+  employeeTitleMap = {
+    [Title.FRONT_END_DEVELOPER]: 'Développeur Front-End',
+    [Title.BACK_END_DEVELOPER]: 'Développeur Back-End',
+    [Title.FULLSTACK_DEVELOPER]: 'Développeur Full-Stack',
+    [Title.CRM]: 'CRM',
+    [Title.HUMAN_RESOURCE_MANAGER]: 'Responsable des Ressources Humaines',
+    [Title.HUMAN_RESOURCE]: 'Ressources Humaines',
+    [Title.PROJECT_MANAGER]: 'Chef de Projet',
+    [Title.UI_UX_DESIGNER]: 'Concepteur UI/UX',
+    [Title.QA_ENGINEER]: 'Ingénieur QA',
+    [Title.DEVOPS_ENGINEER]: 'Ingénieur DevOps',
+    [Title.WEB_DEVELOPER]: 'Développeur Web',
+    [Title.OFFICE_MANAGER]: 'Responsable d Agence',
+    [Title.ACCOUNTANT]: 'Comptable',
+    [Title.SALES_REPRESENTATIVE]: 'Représentant Commercial',
+    [Title.CUSTOMER_SUPPORT_SPECIALIST]: 'Spécialiste du Support Client',
+    [Title.MARKETING_COORDINATOR]: 'Coordinateur Marketing'
+    
+  };
+
+  LanguageLevelMap = {
+    [LanguageLevel.BEGINNER_A1]: 'Niveau Débutant A1',
+    [LanguageLevel.BEGINNER]: 'Niveau Débutant',
+    [LanguageLevel.ELEMENTARY_A2]: 'Niveau Elémentaire A2',
+    [LanguageLevel.BASIC]: 'Niveau de Base',
+    [LanguageLevel.INTERMEDIATE_B1]: 'Niveau Intermédiaire B1',
+    [LanguageLevel.INTERMEDIATE]: 'Niveau Intermédiaire',
+    [LanguageLevel.UPPER_INTERMEDIATE_B2]: 'Niveau Intermédiaire Supérieur B2',
+    [LanguageLevel.PROFESSIONAL]: 'Niveau Professionnel',
+    [LanguageLevel.ADVANCED_C1]: 'Niveau Avancé C1',
+    [LanguageLevel.FLUENT]: 'Courant',
+    [LanguageLevel.PROFICIENT_C2]: 'Niveau Expert C2',
+    [LanguageLevel.NATIVE_LANGUAGE]: 'Langue Maternelle',
+    [LanguageLevel.BILINGUAL]: 'Bilingue'
+  };
   
 }

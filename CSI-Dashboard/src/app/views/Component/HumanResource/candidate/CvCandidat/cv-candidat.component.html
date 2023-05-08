@@ -46,29 +46,31 @@
                   </mat-grid-tile>
               
                   <mat-grid-tile>
-                     <!-- civility-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Civilité</mat-label>
-                      <mat-select formControlName="civility">
-                        <mat-option  *ngFor="let civilities of Civility " [value]="civilities">{{civilities}}</mat-option>
-                      </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                    <!--Maritial Situation -->
+                    <!-- civility-->
                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Situation Maritale</mat-label>
-                      <mat-select formControlName="maritalSituation" >
-                        <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{MaritalSituations}}</mat-option>
-                        
-                      </mat-select>
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
+                     <mat-form-field appearance="outline" [style.width.cm]=10>
+                     <mat-label>Civilité</mat-label>
+                     <mat-select formControlName="civility">
+                       <mat-option  *ngFor="let civilities of Civility " [value]="civilities">{{civilityMap[civilities]}}</mat-option>
+                     </mat-select>
+                     </mat-form-field>
+                   </div>
+                 </mat-grid-tile>
+              
+                 <mat-grid-tile>
+                  <!--Maritial Situation -->
+                  <div class="pb-16">
+                    <mat-form-field appearance="outline" [style.width.cm]=10>
+                    <mat-label>Situation Maritale</mat-label>
+                    <mat-select formControlName="maritalSituation" >
+                      <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{maritalSituationMap[MaritalSituations]}}</mat-option>
+                      
+
+                      
+                    </mat-select>
+                    </mat-form-field>
+                  </div>
+                </mat-grid-tile>
               
                   <mat-grid-tile>
                     <!--Birthdate-->
@@ -85,18 +87,18 @@
                   </mat-grid-tile>
               
                   <mat-grid-tile>
-                     <!--intitulé du poste / title-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Intitulè du poste</mat-label>
-                        <mat-select formControlName="title" >
-                          <mat-option  *ngFor="let titles of title " [value]="titles">{{titles}}</mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
-                          L'Intitulè du poste est requis.</mat-error>
-                      </mat-form-field>
-                      </div>
-                  </mat-grid-tile>
+                    <!--intitulé du poste / title-->
+                    <div class="pb-16">
+                     <mat-form-field appearance="outline" [style.width.cm]=10>
+                       <mat-label>Intitulè du poste</mat-label>
+                       <mat-select formControlName="title" >
+                         <mat-option  *ngFor="let titles of title " [value]="titles">{{employeeTitleMap[titles]}}</mat-option>
+                       </mat-select>
+                       <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                         L'Intitulè du poste est requis.</mat-error>
+                     </mat-form-field>
+                     </div>
+                 </mat-grid-tile>
                 </mat-grid-list>
 
       
@@ -292,7 +294,7 @@
           </div>
           <div class="example-form">
             <div class="example-grid">
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 [style.padding-right.cm]=3.5>
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
                 <mat-label>Référence</mat-label>
                 <input 
                 type="text"
@@ -300,18 +302,8 @@
                 formControlName="reference"
                 placeholder="Ex."  >
               </mat-form-field>
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
-                <mat-label>Titre du poste</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName=""
-                placeholder="Ex.Développeur Front-End"  >
-              </mat-form-field>
-              
-            </div>
-            <div class="example-grid">
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 [style.padding-right.cm]=3.5>
+
+              <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
                 <mat-label>Déscription</mat-label>
                 <input 
                 type="text"
@@ -319,33 +311,24 @@
                 formControlName="description"
                 placeholder="Ex."  >
               </mat-form-field>
-              
-              
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
+            </div>
+
+            <div class="example-grid">
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
+                <mat-label>Permis de conduire</mat-label>
+                <input 
+                type="text"
+                matInput
+                formControlName="driverLicense"  
+                placeholder="Ex.Permis Auto">
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
                 <mat-label>Objectif</mat-label>
                 <input 
                 type="text"
                 matInput
                 formControlName="objective"
-                placeholder="Ex."  >
-              </mat-form-field>
-            </div>
-            <div class="example-grid">
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 [style.padding-right.cm]=3.5>
-                <mat-label>Permit de conduire</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName="driverLicense"  >
-              </mat-form-field>
-              
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
-                <mat-label>Nationalité</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName="nationality"
-                placeholder="Ex.Français"  >
+                placeholder="Ex.">
               </mat-form-field>
               </div>
           </div>
@@ -353,13 +336,13 @@
         
         <div  fxLayout="row" fxLayoutAlign="space-between center">
           <!--Button 2-->
-          <div>
+         <!-- <div>
             <button 
           mat-raised-button 
           color="primary" 
           matStepperPrevious>Précédent : Coordonnées
           </button>
-          </div>
+          </div>-->
   
           <!--Button 1-->
           <div>
@@ -466,7 +449,7 @@
                       <div class="form-group mb-1 col-sm-12 col-md-3">
                         <mat-form-field appearance="outline" [style.width.cm]=7>
                           <mat-label>Date d'obtention</mat-label>
-                          <input matInput [matDatepicker]="picker2" formControlName="obtainedYear" placeholder="Date d'obtention" >
+                          <input matInput [matDatepicker]="picker2" formControlName="obtainedDate" placeholder="Date d'obtention" >
                           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                           <mat-datepicker #picker2></mat-datepicker>
                         </mat-form-field>
@@ -495,13 +478,13 @@
 
       <div  fxLayout="row" fxLayoutAlign="space-between center">
         <!--Button 2-->
-        <div>
+        <!--<div>
           <button 
         mat-raised-button 
         color="primary" 
         matStepperPrevious>Précédent : Informations Générales
         </button>
-        </div>
+        </div>-->
 
         <!--Button 1-->
         <div>
@@ -595,7 +578,7 @@
                       </div>
                       <div class="form-group mb-1 col-sm-12 col-md-3">
                         <!--Technologies-->
-                        <mat-form-field appearance="outline"  [style.width.cm]=20 class="example-full-width">
+                        <mat-form-field appearance="outline"  [style.width.cm]=15 class="example-full-width">
                           <mat-label>Technologies</mat-label>
                           <textarea matInput formControlName="technology" placeholder="Listez ici les technologies utilisées."></textarea>
                         </mat-form-field>
@@ -605,17 +588,17 @@
                           <!--Dates-->
                           <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
                             <mat-hint>Date Début</mat-hint>
-                            <input matInput [matDatepicker]="picker1" formControlName="experienceStartDate" placeholder="Année">
-                            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                            <mat-datepicker #picker1></mat-datepicker>
+                            <input matInput [matDatepicker]="picker11" formControlName="experienceStartDate" placeholder="Année Début ">
+                            <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
+                            <mat-datepicker #picker11></mat-datepicker>
                           </mat-form-field>
                           </div>
                           <div class="form-group mb-1 col-sm-12 col-md-3">
                             <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
                               <mat-hint>Date Fin</mat-hint>
-                              <input matInput [matDatepicker]="picker3" formControlName="experienceEndDate" placeholder="Année" >
-                              <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
-                              <mat-datepicker #picker3></mat-datepicker>
+                              <input matInput [matDatepicker]="picker10" formControlName="experienceEndDate" placeholder="Année Fin ">
+                              <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
+                              <mat-datepicker #picker10></mat-datepicker>
                             </mat-form-field>
                           </div>
                           </div>
@@ -640,13 +623,13 @@
       </mat-card-content>
       <div  fxLayout="row" fxLayoutAlign="space-between center">
         <!--Button 2-->
-        <div>
+       <!-- <div>
           <button 
         mat-raised-button 
         color="primary" 
          matStepperPrevious>Précédent : Formation
         </button>
-        </div>
+        </div>-->
 
         <!--Button 1-->
         <div>
@@ -719,7 +702,7 @@
               </div>-->
             </mat-expansion-panel>
              <!-----------------------Languages------------------------>
-            <mat-expansion-panel  >
+             <mat-expansion-panel  >
               <mat-expansion-panel-header  style="height: 2cm;">
                 <mat-panel-title>
                   <mat-icon color="primary"class="mr-16">language</mat-icon>
@@ -777,7 +760,7 @@
               <mat-expansion-panel-header  style="height: 2cm;">
                 <mat-panel-title>
                   <mat-icon color="primary"class="mr-16">construction</mat-icon>
-                 Compétances
+                 Skills
                 </mat-panel-title>
               </mat-expansion-panel-header>
               <!--<div [formGroup]="repeatForm" class="repeat-form">
@@ -788,16 +771,16 @@
                         <!--Skills Category-->
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field appearance="outline" [style.width.cm]=7>
-                            <mat-label>Type de Compétance</mat-label>
+                            <mat-label>Skills</mat-label>
                               <input
                               matInput
                               formControlName="skillTitle"
-                              placeholder="Ex.Soft Skills / Hard Skills">
+                              placeholder="Ex. Soft Skills / Hard Skills">
                           </mat-form-field>
                         </div>
                         
                         <!--Skills Chips -->
-                       <!----- <div class="form-group mb-1 col-sm-12 col-md-3">
+                       <!--<div class="form-group mb-1 col-sm-12 col-md-3">
                           <div class=" pb-16">
                             <mat-form-field  class="example-chip-list" style="width:10cm; margin-left: 1.5cm;">
                               <mat-label>Compétances</mat-label>
@@ -815,7 +798,7 @@
                               </mat-chip-list>
                             </mat-form-field>
                           </div>
-                        </div>-->
+                        </div>--> 
 
                         <!--<div class="form-group col-sm-12 col-md-3 " style="margin-left: 1cm;">
                           <button mat-icon-button color="warn" type="button" [disabled]="i === 0"  (click)="handleRemoveRepeatForm(i)">
@@ -847,14 +830,14 @@
 
       <div  fxLayout="row" fxLayoutAlign="space-between center">
         <!--Button 2-->
-        <div>
+       <!--<div>
           <button 
         mat-raised-button 
         color="primary" 
         matStepperPrevious>
         Précédent : Expérience
         </button>
-        </div>
+        </div>-->
 
         <!--Button 1-->
         <div>
@@ -911,7 +894,7 @@
                    <mat-icon>check</mat-icon>
                  </button>
                  
-                 <button mat-icon-button mat-sm-button color="warn" (click)="deleteOfferCandidat(row.id)">
+                 <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row.id)">
                    <mat-icon>close</mat-icon>
                  </button>
                  
@@ -939,4 +922,3 @@
         </mat-step>
 
    
-
