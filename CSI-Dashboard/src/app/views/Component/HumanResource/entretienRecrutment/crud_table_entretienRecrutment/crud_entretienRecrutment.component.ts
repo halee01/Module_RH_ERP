@@ -26,10 +26,10 @@ export class crudEntretienRecrutmentComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
   public dataSource: any;
   public displayedColumns: any;
   public getItemSub: Subscription;
+  classAdded = false;
   constructor(
     private dialog: MatDialog,
     private snack: MatSnackBar,
@@ -100,40 +100,36 @@ export class crudEntretienRecrutmentComponent implements OnInit {
   goToEvaluer(){
     this.router.navigate(['evaluationCrud/crudEvaluation'])
   }
+
   
-  openPopUp(data:  any , isNew?) {
-    let title = isNew ? 'Nouvelle offre' : 'Modifier offre';
-    let dialogRef: MatDialogRef<any> = this.dialog.open(ajoutEntretienPopupComponent, {
-      width: '1000px',
-      disableClose: true,
-      data: { title: title, payload: data }
-    })
-    dialogRef.afterClosed()
-      .subscribe(res => {
-        if(!res) {
-          // If user press cancel
-          return;
-        }
-        if (isNew) {
-          this.loader.open('Ajout en cours');
-          this.crudEntretien.addItem(res)
-            .subscribe((data :any)=> {
-              this.dataSource = data;
-              this.loader.close();
-              this.snack.open('Offre ajoutée avec succès!', 'OK', { duration: 2000 });
-              this.getItems();
-            })
-        } else {
-          this.loader.open('modification en cours');
-          this.crudEntretien.updateItem(data.id,res)
-            .subscribe((data:any) => {
-              this.dataSource = data ;
-              this.loader.close();
-              this.snack.open('Offre modifiée avec succées !', 'OK', { duration: 2000 });
-              this.getItems();
-            })
-        }
-      })
+   openPopUp(): void {
+    const dialogRef = this.dialog.open(ajoutEntretienPopupComponent, {
+      width: '900px',
+      data: { /* any data you want to pass */ }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log('Result:', result);
+    });
+  }
+
+  /*onShowEvaluation() {
+    if (this.classAdded) {
+      // Class has already been added, so just open the view
+      this.openView();
+    } else {
+      // Class hasn't been added, so create a new class, add it, and open the view
+      const newClass = new MyClass();
+      this.myClassService.addClass(newClass).subscribe(() => {
+        this.classAdded = true;
+        this.openView();
+      });
+    }
+  }*/
+  
+  openView(row: any) {
+    this.router.navigate(['/CandidatEvaluation', row.id]);
   }
 
 

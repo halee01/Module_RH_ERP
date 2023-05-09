@@ -135,6 +135,11 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
     this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
   }
 
+
+  openViewById(id: number) {
+  this.router.navigate(['/CandidatEvaluation', id]);
+}
+
   employeeTitleMap = {
     [Title.FRONT_END_DEVELOPER]: 'Développeur Front-End',
     [Title.BACK_END_DEVELOPER]: 'Développeur Back-End',

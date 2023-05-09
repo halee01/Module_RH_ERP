@@ -25,6 +25,7 @@ import { Skills } from 'app/shared/models/Skills';
 import { cvDialog1Component } from './CvCandidatDialog/dialog1.component';
 
 
+
 @Component({
   selector: 'app-basic-form',
   templateUrl: './cv-candidat.component.html',
@@ -49,8 +50,23 @@ export class cvcandidatComponent implements OnInit {
   lastEmployee: Employee;
   selectedEmplyee= {firstName :'', id:null};
   selectedTechFile= { id:null};
+  submitted = false;
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  isPageReloaded = false;
+  public dataSource: any;
+  public displayedColumns: any;
+  public getItemSub: Subscription;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  formWidth = 200; //declare and initialize formWidth property
+  formHeight = 700; //declare and initialize formHeight property
 
-//////////////Ajout Candidat///////////////
+
+//////////////Form Candidate///////////////
   public itemForm: FormGroup;;
   CompanyStatus = Object.values(CompanyStatus);
   WorkField :string []= Object.values(WorkField);
@@ -68,23 +84,11 @@ export class cvcandidatComponent implements OnInit {
   RequirementType : string[] = Object.values(RequirementType);
   Languages : string[] = Object.values(Languages);
   LanguageLevel : string[] = Object.values(LanguageLevel);
-  employee: Employee;
-  submitted = false;
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
   skills: Skills[] = [];
-  offers: Offer[];
-  isPageReloaded = false;
-  public dataSource: any;
-  public displayedColumns: any;
-  public getItemSub: Subscription;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  formWidth = 200; //declare and initialize formWidth property
-  formHeight = 700; //declare and initialize formHeight property
+  employee: Employee;
+ offers: Offer[];
+
+ 
 
 
 
@@ -96,6 +100,7 @@ export class cvcandidatComponent implements OnInit {
    private http: HttpClient,
    public dialog: MatDialog)
    {  this.countries = this.cvCandidatService.getCountries();}
+   
 
   ngOnInit() {
 
@@ -136,15 +141,15 @@ export class cvcandidatComponent implements OnInit {
       birthDate: new UntypedFormControl('', [Validators.required]),
       title: new UntypedFormControl('',[Validators.required] ),
       address: new UntypedFormControl(''),
-      emailOne: new UntypedFormControl('',[Validators.required] ),
-      phoneNumberOne: new UntypedFormControl('', [Validators.required]),
+      emailOne: new UntypedFormControl('',[Validators.required,Validators.email] ),
+      phoneNumberOne: new UntypedFormControl('', [Validators.required,Validators.pattern(/^[\d\s\-+]*$/)]),
       civility: new UntypedFormControl('', []),
       maritalSituation: new UntypedFormControl('', []),
       country: new UntypedFormControl('', [Validators.required]),
       city: new UntypedFormControl('', []),
-      postCode: new UntypedFormControl('', []),
-      emailTwo: new UntypedFormControl('', ),
-      phoneNumberTwo: new UntypedFormControl('', [])
+      postCode: new UntypedFormControl('', [ Validators.pattern(/^[0-9]*$/)]),
+      emailTwo: new UntypedFormControl('', [Validators.email]),
+      phoneNumberTwo: new UntypedFormControl('', [Validators.pattern(/^[\d\s\-+]*$/)])
 
     })
       this.cvForm = new UntypedFormGroup({
@@ -268,7 +273,7 @@ export class cvcandidatComponent implements OnInit {
         },
         error: (e) => console.error('Error adding item', e)
       });
-      this.dialog.open(cvDialog1Component);
+      //this.dialog.open(cvDialog1Component);
     }
 
     saveTechFile(): void {

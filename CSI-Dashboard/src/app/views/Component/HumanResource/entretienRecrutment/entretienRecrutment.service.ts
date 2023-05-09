@@ -7,10 +7,12 @@ import { catchError, map } from 'rxjs/operators';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Employee } from 'app/shared/models/Employee';
+import { Interview } from 'app/shared/models/Interview';
 
 @Injectable()
 export class entretienRecrutmentService {
   private apiUrl = 'http://localhost:8080/rh/employee';
+  private apiUrlInterview = 'http://localhost:8080/rh/Interview';
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -92,14 +94,6 @@ getItems(): Observable<Employee[]> {
     catchError(this.handleError)
   );
 }
-/*getrequirement(id: number): Observable<req[]> {
-  const url = `${this.apiUrl}/${id}`;
-  return this.http.get<Partner>(url).pipe(map(partner => partner.requirements),
-  catchError(error => {
-    console.error(error);
-    return of([]);
-  }));
-}*/
 
 // POST a new item
 addItem(candidate: any): Observable<any> {
@@ -108,13 +102,20 @@ addItem(candidate: any): Observable<any> {
     catchError(this.handleError)
   );
 }
-/*
-addItem(candidate: any): Observable<any> {
-  
-  return this.http.post<any>(this.apiUrl, candidate).pipe(
+
+addInterview(interview: any): Observable<any> {
+  const apiUrlInterviewWithAdd = this.apiUrlInterview + '/add'; // Append /add to the apiUrl
+  return this.http.post<any>(apiUrlInterviewWithAdd, interview).pipe(
     catchError(this.handleError)
   );
-}*/
+}
+
+getInterview(id: number): Observable<Interview> {
+  const url = `${this.apiUrlInterview+ '/getBy'}/${id}`;
+  return this.http.get<Interview>(url).pipe(
+    catchError(this.handleError)
+  );
+  }
 
 // PUT an existing item
 updateItem(id: number, candidate: Employee): Observable<Employee> {
@@ -149,11 +150,5 @@ private handleError(error: HttpErrorResponse) {
   return throwError(
     'Something bad happened; please try again later.');
 }
-getCountries() {
-  return this.countryData.getCountries();
-}
 
-getStatesByCountry(name: string) {
-  return this.countryData.getStatesByShort(name);
-}
 }

@@ -1,5 +1,5 @@
 
-<form [formGroup]="offerForm" (ngSubmit)="submit()" >
+<form [formGroup]="offerForm" >
     
 
   <mat-card class="p-0">
@@ -13,18 +13,18 @@
     <div fxLayout="row wrap" fxLayout.lt-sm="column" style="padding-top: 25px;">
       <div fxFlex="30" class="pr-16">
         <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Type d'entretien</mat-label>
-          <mat-select formControlName="interviewType">
-            <mat-option *ngFor="let interviewModes of interviewMode" [value]="interviewModes">{{interviewModes}}</mat-option>
+          <mat-label>Mode d'entretien</mat-label>
+          <mat-select formControlName="interviewMode">
+            <mat-option *ngFor="let interviewModes of interviewMode" [value]="interviewModes">{{InterviewModeMap[interviewModes]}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       
       <div fxFlex="30" class="pr-16">
         <mat-form-field class="full-width" appearance="outline">
-          <mat-label>Mode d'entretien</mat-label>
-          <mat-select formControlName="interviewMode">
-            <mat-option *ngFor="let interviewTypes of interviewType" [value]="interviewTypes">{{interviewTypes}}</mat-option>
+          <mat-label>Type d'entretien</mat-label>
+          <mat-select formControlName="interviewType">
+            <mat-option *ngFor="let interviewTypes of interviewType" [value]="interviewTypes">{{InterviewTypeMap[interviewTypes]}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -32,7 +32,7 @@
             <div fxFlex="30" class="pr-16">
               <mat-form-field appearance="outline" [style.width.cm]=10>
                 <mat-label>Date de l'entretien</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="" placeholder="Date de l'entretien">
+                <input matInput [matDatepickerFilter]="weekendFilter" [matDatepicker]="picker" formControlName="interviewDate" placeholder="Date de l'entretien">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
@@ -42,7 +42,7 @@
             <div fxFlex="30" class="pr-16">
               <mat-form-field appearance="outline" [style.width.cm]=10>
                 <mat-label>Durée</mat-label>
-                <input matInput formControlName="" placeholder="Ex.Macron">
+                <input matInput formControlName="duration" placeholder="Ex.Macron">
               </mat-form-field>
             </div>
       
@@ -52,16 +52,14 @@
       <div fxFlex="80" class="pr-16">
         <mat-form-field [style.width.cm]=14 class="example-full-width" appearance="outline">
           <mat-label>Description</mat-label>
-          <textarea matInput placeholder="Description" [formControlName]="'description'"></textarea>
+          <textarea matInput placeholder="Description" formControlName="comment"></textarea>
         </mat-form-field>
       </div>
-      
-    
 
     <div fxFlex="100" class="mt-16">
-      <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Ignorer</button>
+      <button mat-raised-button color="warn" type="button" (click)="dialogRef.close(false)">Ignorer</button>
       <span fxFlex></span>
-      <button mat-raised-button color="primary" >save</button>
+      <button mat-raised-button color="primary" (click)="saveInterview()">save</button>
     </div>
   </div>
   </mat-card-content>
