@@ -1,9 +1,10 @@
 import { Offer } from './../../../../../shared/models/Offer';
 import { Experience } from 'app/shared/models/Experience';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
-import {  Component, OnInit, ViewChild } from '@angular/core';
+import { Inject, Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray, AbstractControl, UntypedFormArray } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -20,6 +21,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Skills } from 'app/shared/models/Skills';
+import { cvDialog1Component } from './CvCandidatDialog/dialog1.component';
 
 
 @Component({
@@ -90,7 +92,8 @@ export class cvcandidatComponent implements OnInit {
   private formBuilder: FormBuilder,
   private fb: FormBuilder,
   private router:Router,
-   private http: HttpClient)
+   private http: HttpClient,
+   public dialog: MatDialog)
    {  this.countries = this.cvCandidatService.getCountries();}
 
   ngOnInit() {
@@ -264,6 +267,7 @@ export class cvcandidatComponent implements OnInit {
         },
         error: (e) => console.error('Error adding item', e)
       });
+      /*this.dialog.open(cvDialog1Component);*/
     }
 
     saveTechFile(): void {
@@ -590,5 +594,8 @@ handleRemoveRepeatForm(index: number) {
     [LanguageLevel.NATIVE_LANGUAGE]: 'Langue Maternelle',
     [LanguageLevel.BILINGUAL]: 'Bilingue'
   };
+
+  
+  
   
 }

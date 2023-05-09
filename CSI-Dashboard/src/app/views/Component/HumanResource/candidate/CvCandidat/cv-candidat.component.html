@@ -24,8 +24,6 @@
                         Le prénom est requis et doit commencer par une majuscule.
                       </mat-error>
                     </mat-form-field>
-                    
-                    
                   </div>
                   </mat-grid-tile>
               
@@ -250,19 +248,10 @@
         <button 
       mat-raised-button 
       color="primary"  
-      matStepperNext>Suivant : Informations Générales
+      (click)="saveCandidate()"
+      matStepperNext>Création du Cv
       </button>
       </div>
-
-      <!--Button 1-->
-      <div>
-        <button 
-      mat-raised-button 
-      color="primary" 
-      (click)="saveCandidate()"
-      >Ajouter un Employée</button>
-      </div>
-
     </div>
   </div>
     </form>
@@ -281,7 +270,8 @@
         <mat-divider></mat-divider>
         </mat-card-title>
         <mat-card-content style="padding-top: 1.5cm;">
-          <div class="form-group mb-1 col-sm-12 col-md-3">
+
+          <!--<div class="form-group mb-1 col-sm-12 col-md-3">
             <mat-form-field appearance="outline" [style.width.cm]=5 style="padding-right: 1cm;">
               <mat-label>Candidat</mat-label>
               <input
@@ -291,50 +281,37 @@
                 formControlName="employeeId"
                 disabled="true" />
             </mat-form-field>
-          </div>
+          </div>-->
+
           <div class="example-form">
             <div class="example-grid">
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
+              <mat-form-field appearance="outline" class="example-field" fxFlex.gt-sm="50" fxFlex="50" [style.width.cm]=5>
                 <mat-label>Référence</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName="reference"
-                placeholder="Ex."  >
+                <input type="text" matInput formControlName="reference" placeholder="Ex.">
               </mat-form-field>
 
-              <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
-                <mat-label>Déscription</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName="description"
-                placeholder="Ex."  >
+              <mat-form-field appearance="outline" class="example-field" fxFlex.gt-sm="50" fxFlex="50" [style.width.cm]=5>
+                <mat-label>Permis de conduire</mat-label>
+                <input type="text" matInput formControlName="driverLicense" placeholder="Ex.Permis Auto">
               </mat-form-field>
             </div>
-
             <div class="example-grid">
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
-                <mat-label>Permis de conduire</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName="driverLicense"  
-                placeholder="Ex.Permis Auto">
+              <mat-form-field appearance="outline" class="example-full-width" fxFlex.gt-sm="50" fxFlex="50" [style.width.cm]=5>
+                <mat-label>Déscription</mat-label>
+                <textarea matInput formControlName="description" placeholder="Decrivez içi le profil du candidat."></textarea>
               </mat-form-field>
-              <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10>
+
+              <mat-form-field appearance="outline" class="example-full-width" fxFlex.gt-sm="50" fxFlex="50" [style.width.cm]=5>
                 <mat-label>Objectif</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName="objective"
-                placeholder="Ex.">
+                <textarea matInput formControlName="objective" placeholder="Decrivez içi les objectifs du candidat."></textarea>
               </mat-form-field>
-              </div>
+            </div>
           </div>
+          
+          
         </mat-card-content>
         
-        <div  fxLayout="row" fxLayoutAlign="space-between center">
+        <div  fxLayout="row" dir="rtl" fxLayoutAlign="space-between center">
           <!--Button 2-->
          <!-- <div>
             <button 
@@ -476,7 +453,7 @@
       </mat-card-content>
 
 
-      <div  fxLayout="row" fxLayoutAlign="space-between center">
+      <div  fxLayout="row" dir="rtl" fxLayoutAlign="space-between center">
         <!--Button 2-->
         <!--<div>
           <button 
@@ -621,7 +598,7 @@
               </div>
             </div>-->
       </mat-card-content>
-      <div  fxLayout="row" fxLayoutAlign="space-between center">
+      <div  fxLayout="row" dir="rtl" fxLayoutAlign="space-between center">
         <!--Button 2-->
        <!-- <div>
           <button 
@@ -729,7 +706,7 @@
                           <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
                             <mat-label>Niveau</mat-label>
                             <mat-select  placeholder="Ex. Courant" formControlName="languageLevel">
-                              <mat-option *ngFor="let LanguageLevels of LanguageLevel" [value]="LanguageLevels">{{LanguageLevels}}</mat-option>
+                              <mat-option *ngFor="let LanguageLevels of LanguageLevel" [value]="LanguageLevels">{{LanguageLevelMap[LanguageLevels]}}</mat-option>
                             </mat-select>
                             </mat-form-field>
                         </div>
@@ -828,7 +805,7 @@
           </mat-accordion>
       </mat-card-content>
 
-      <div  fxLayout="row" fxLayoutAlign="space-between center">
+      <div  fxLayout="row" dir="rtl" fxLayoutAlign="space-between center">
         <!--Button 2-->
        <!--<div>
           <button 

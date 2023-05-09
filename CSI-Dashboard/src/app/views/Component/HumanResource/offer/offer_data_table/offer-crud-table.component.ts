@@ -122,7 +122,8 @@ export class OfferCrudTableComponent implements OnInit {
         if(!res) {
           // If user press cancel
           return;
-        }
+        
+         }
         if (isNew) {
           this.loader.open('Ajout en cours');
           this.crudService.addItem(res)
