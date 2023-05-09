@@ -63,8 +63,6 @@
                     <mat-select formControlName="maritalSituation" >
                       <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{maritalSituationMap[MaritalSituations]}}</mat-option>
                       
-
-                      
                     </mat-select>
                     </mat-form-field>
                   </div>
@@ -218,7 +216,7 @@
                        formControlName="phoneNumberOne"
                        placeholder="Ex.+33 801 123 456"  >
                        <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
-                        Le numéro de téléphone 1 est requis.</mat-error>
+                        Le numéro du téléphone 1 est requis.</mat-error>
                       </mat-form-field>
                      </div>
                   </mat-grid-tile>
@@ -270,7 +268,6 @@
         <mat-divider></mat-divider>
         </mat-card-title>
         <mat-card-content style="padding-top: 1.5cm;">
-
           <!--<div class="form-group mb-1 col-sm-12 col-md-3">
             <mat-form-field appearance="outline" [style.width.cm]=5 style="padding-right: 1cm;">
               <mat-label>Candidat</mat-label>
@@ -282,33 +279,40 @@
                 disabled="true" />
             </mat-form-field>
           </div>-->
-
           <div class="example-form">
             <div class="example-grid">
-              <mat-form-field appearance="outline" class="example-field" fxFlex.gt-sm="50" fxFlex="50" [style.width.cm]=5>
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
                 <mat-label>Référence</mat-label>
-                <input type="text" matInput formControlName="reference" placeholder="Ex.">
+                <input 
+                type="text"
+                matInput
+                formControlName="reference"
+                placeholder="Ex."  >
               </mat-form-field>
-
-              <mat-form-field appearance="outline" class="example-field" fxFlex.gt-sm="50" fxFlex="50" [style.width.cm]=5>
-                <mat-label>Permis de conduire</mat-label>
-                <input type="text" matInput formControlName="driverLicense" placeholder="Ex.Permis Auto">
+             
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
+                <mat-label>Permit de conduire</mat-label>
+                <input 
+                type="text"
+                matInput
+                formControlName="driverLicense"  >
               </mat-form-field>
             </div>
+
             <div class="example-grid">
-              <mat-form-field appearance="outline" class="example-full-width" fxFlex.gt-sm="50" fxFlex="50" [style.width.cm]=5>
-                <mat-label>Déscription</mat-label>
-                <textarea matInput formControlName="description" placeholder="Decrivez içi le profil du candidat."></textarea>
-              </mat-form-field>
 
-              <mat-form-field appearance="outline" class="example-full-width" fxFlex.gt-sm="50" fxFlex="50" [style.width.cm]=5>
-                <mat-label>Objectif</mat-label>
-                <textarea matInput formControlName="objective" placeholder="Decrivez içi les objectifs du candidat."></textarea>
+              <mat-form-field appearance="outline"  [style.width.cm]=10 [style.padding-right.cm]=3.5 class="example-full-width">
+                <mat-label>Déscription</mat-label>
+                <textarea matInput formControlName="description" placeholder="Décrivez içi le parcours du candidat."></textarea>
+              </mat-form-field>
+              
+              <mat-form-field appearance="outline"  [style.width.cm]=10  class="example-full-width">
+                <mat-label>Objectifs</mat-label>
+                <textarea matInput formControlName="objective" placeholder="Décrivez içi les Objectifs du candidat."></textarea>
               </mat-form-field>
             </div>
+            
           </div>
-          
-          
         </mat-card-content>
         
         <div  fxLayout="row" dir="rtl" fxLayoutAlign="space-between center">
@@ -382,21 +386,23 @@
                             name="institution"
                             formControlName="institution"
                             placeholder="Ex. Université de paris"
-                            >
+                            ><mat-error *ngIf="cvForm.get('institution').invalid && cvForm.get('institution').touched">
+                              Le nom de l'institution est requis.</mat-error>
                         </mat-form-field>
                       </div>
 
                       <div class="d-flex ">
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
-                            <mat-label>Diplome</mat-label>
+                            <mat-label>Diplôme</mat-label>
                               <input
                               matInput
                               name="diploma"
                               formControlName="diploma"
                               placeholder="Ex. Licence en arts"
-                              
                               >
+                              <mat-error *ngIf="cvForm.get('diploma').invalid && cvForm.get('diploma').touched">
+                                La diplôme est requise.</mat-error>
                           </mat-form-field>
                         </div>
                        <div class="form-group mb-1 col-sm-12 col-md-3">

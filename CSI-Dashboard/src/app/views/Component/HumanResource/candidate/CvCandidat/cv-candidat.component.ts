@@ -132,14 +132,14 @@ export class cvcandidatComponent implements OnInit {
         Validators.maxLength(20),
         this.capitalLetterValidator
       ]),
-      birthDate: new UntypedFormControl('', ),
-      title: new UntypedFormControl('', ),
+      birthDate: new UntypedFormControl('', [Validators.required]),
+      title: new UntypedFormControl('',[Validators.required] ),
       address: new UntypedFormControl(''),
-      emailOne: new UntypedFormControl('',[] ),
-      phoneNumberOne: new UntypedFormControl('', []),
+      emailOne: new UntypedFormControl('',[Validators.required] ),
+      phoneNumberOne: new UntypedFormControl('', [Validators.required]),
       civility: new UntypedFormControl('', []),
       maritalSituation: new UntypedFormControl('', []),
-      country: new UntypedFormControl('', []),
+      country: new UntypedFormControl('', [Validators.required]),
       city: new UntypedFormControl('', []),
       postCode: new UntypedFormControl('', []),
       emailTwo: new UntypedFormControl('', ),
@@ -147,8 +147,8 @@ export class cvcandidatComponent implements OnInit {
 
     })
       this.cvForm = new UntypedFormGroup({
-      institution: new UntypedFormControl('', []),
-      diploma: new UntypedFormControl('', []),
+      institution: new UntypedFormControl('', [Validators.required]),
+      diploma: new UntypedFormControl('', [Validators.required]),
       score: new UntypedFormControl('', []),
       startYear: new UntypedFormControl('', []),
       obtainedDate: new UntypedFormControl('', []),
@@ -267,7 +267,7 @@ export class cvcandidatComponent implements OnInit {
         },
         error: (e) => console.error('Error adding item', e)
       });
-      /*this.dialog.open(cvDialog1Component);*/
+      this.dialog.open(cvDialog1Component);
     }
 
     saveTechFile(): void {
