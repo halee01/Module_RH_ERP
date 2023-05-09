@@ -51,9 +51,9 @@ export class CandidatCrudTableComponent implements OnInit {
   public getItemSub: Subscription;
   submitBtnLabel = 'Save';
   editMode = false;
-employeeId: number //| null = null;
-employeeList: Employee[];
-filteredEmployees: Employee[] = [];
+  employeeId: number //| null = null;
+  employeeList: Employee[];
+  filteredEmployees: Employee[] = [];
   constructor(
     private _formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -185,4 +185,6 @@ add(){
     return this._formBuilder.group({
     });
   }
+
+  
 }

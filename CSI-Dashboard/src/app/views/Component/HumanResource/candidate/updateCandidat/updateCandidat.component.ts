@@ -6,14 +6,10 @@ import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray } from '@angular/forms'; 
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
-import { Fruit } from 'assets/examples/material/input-chip/input-chip.component';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CompanyStatus, LegalStatus, Provenance, Country } from 'app/shared/models/Partner';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Privilege, Civility, Service } from 'app/shared/models/contact';
-import { WorkField, Availability, RequirementStatus, RequirementType } from 'app/shared/models/req';
 import { Title } from 'app/shared/models/Employee';
 
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
@@ -24,6 +20,13 @@ import { Offer } from 'app/shared/models/Offer';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Language } from 'highlight.js';
+import { TechnicalFile } from 'app/shared/models/TechnicalFile';
+import { Certification } from 'app/shared/models/Certification';
+import { Experience } from 'app/shared/models/Experience';
+import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
+import { Education } from 'app/shared/models/Education';
+import { employeePopupComponent } from './updateEmployeePopup/employee-popup.component';
 
 
 @Component({
@@ -34,7 +37,8 @@ import { MatTableDataSource } from '@angular/material/table';
 })
  
 export class updatecandidatComponent implements OnInit {
-
+  
+  popup: MatDialogRef<any>;
   formData = {}
   console = console;
   repeatForm: FormGroup;
@@ -52,23 +56,8 @@ export class updatecandidatComponent implements OnInit {
   selectedEmplyee= {firstName :'', id:null};
   selectedTechFile= { id:null};
 //////////////Ajout Candidat///////////////
-  public itemForm: FormGroup;;
-  CompanyStatus = Object.values(CompanyStatus);
-  WorkField :string []= Object.values(WorkField);
-  LegalStatus = Object.values(LegalStatus);
-  Provenance = Object.values(Provenance);
-  countries: Country[];
-  states: string[];
-  selectedFile: File;
-  title :string[]= Object.values(Title);
-  Civility :string []= Object.values(Civility);
-  MaritalSituation :string []= Object.values(MaritalSituation);
-  Service :string []= Object.values(Service);
-  Availability : string [] = Object.values(Availability);
-  RequirementStatus  :string []= Object.values(RequirementStatus);
-  RequirementType : string[] = Object.values(RequirementType);
-  Languages : string[] = Object.values(Languages);
-  LanguageLevel : string[] = Object.values(LanguageLevel);
+loader: any;
+snack: any;
   employee: Employee;
   submitted = false;
   visible = true;
@@ -78,7 +67,9 @@ export class updatecandidatComponent implements OnInit {
   skills: Skills[] = [];
   offers: Offer[];
   isPageReloaded = false;
+  public emplyeeDataSource: any;
   public dataSource: any;
+
   public displayedColumns: any;
   public getItemSub: Subscription;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -86,18 +77,33 @@ export class updatecandidatComponent implements OnInit {
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   formWidth = 200; //declare and initialize formWidth property
   formHeight = 700; //declare and initialize formHeight property
+  cvHtml = '';
+  id: number
+  idTechnicalFile:number
+  education : Education 
+  language: Language
+  technicalFile: TechnicalFile
+  certification : Certification
+  experience : Experience
+  candidature : AssOfferCandidate
+  private router: Router
+  itemForm: any;
+  states: any;
+
 
 
  constructor(private _formBuilder: FormBuilder,
   private route:ActivatedRoute,
   private updateCandidatService: updateCandidatService,
   private formBuilder: FormBuilder,
-  private router:Router,
-  private http:HttpClient
+  private http:HttpClient,
+  //public dialogRef: MatDialogRef<employeePopupComponent>,
+  private dialog: MatDialog
    ) 
-   {  this.countries = this.updateCandidatService.getCountries();
+   {  
 
-    
+    this.emplyeeDataSource = new MatTableDataSource<Employee>([]);
+
   }
 
 
@@ -107,6 +113,22 @@ export class updatecandidatComponent implements OnInit {
   
 
   ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+    this.getemployee();
+   console.log(this.id);
+   this.getTechnicalFile();
+   this.getEducation();
+   this.getExperience();
+   this.getCertification();
+   this.getlanguage();
+   this.getSkills();
+   this.getCandidature();
+   this.displayedColumns = this.getExperienceDisplayedColumns();
+    this.getExperience();
+   /*const cv = document.getElementById('CV');
+    if (cv) {
+      this.cvHtml = cv.innerHTML;
+    }*/
     
     this.updateCandidatService.getOfferItems().subscribe(
       offers => this.offers = offers,
@@ -206,6 +228,9 @@ export class updatecandidatComponent implements OnInit {
       return { 'capitalLetter': true };
     }
     return null;
+  }
+  getExperienceDisplayedColumns() {
+    return ['experienceTitle', 'experiencePost', 'experienceCompany'];
   }
 
 
@@ -492,6 +517,188 @@ handleRemoveRepeatForm(index: number) {
   getDisplayedColumns() {
     return ['reference','title','actions' ];
   }
+
+  ///------------partiedetails-----------/////////////////////
+
+  getemployee() {
+    this.updateCandidatService.getItemById(this.id).subscribe((data: any) => {
+      this.employee = data;
+
+    });
+  }
+  getTechnicalFile() {
+    this.updateCandidatService.getTechnicalFileById(this.id).subscribe((data: any) => {
+      this.technicalFile = data;
+
+    });
+  }
+  getEducation() {
+    this.updateCandidatService.getEducationById(this.id).subscribe((data: any) => {
+      this.education = data;
+      console.log(this.education);
+    });
+  }
+  getExperience(){
+    this.updateCandidatService.getExperienceById(this.id).subscribe((data : any)=>{
+      this.experience = data;
+      console.log(this.experience);
+    })
+  }
+  getCertification(){
+    this.updateCandidatService.getCertificationById(this.id).subscribe((data : any)=>{
+      this.certification = data;
+      console.log(this.certification);
+    })
+  }
+  getlanguage(){
+    this.updateCandidatService.getLanguageById(this.id).subscribe((data : any)=>{
+      this.language = data;
+      console.log(this.language);
+    })
+  }
+  getSkills(){
+    this.updateCandidatService.getSkillsById(this.id).subscribe((data : any)=>{
+      this.skills = data;
+      console.log(this.skills);
+    })
+  }
+  getCandidature(){
+    this.updateCandidatService.getCandiatureById(this.id).subscribe((data : any)=>{
+      this.candidature =data;
+      console.log(this.candidature);
+    })
+  }
+
+  openEvaluationCandidat(){
+    this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
+  }
+
+  employeeTitleMap = {
+    [Title.FRONT_END_DEVELOPER]: 'Développeur Front-End',
+    [Title.BACK_END_DEVELOPER]: 'Développeur Back-End',
+    [Title.FULLSTACK_DEVELOPER]: 'Développeur Full-Stack',
+    [Title.CRM]: 'CRM',
+    [Title.HUMAN_RESOURCE_MANAGER]: 'Responsable des Ressources Humaines',
+    [Title.HUMAN_RESOURCE]: 'Ressources Humaines',
+    [Title.PROJECT_MANAGER]: 'Chef de Projet',
+    [Title.UI_UX_DESIGNER]: 'Concepteur UI/UX',
+    [Title.QA_ENGINEER]: 'Ingénieur QA',
+    [Title.DEVOPS_ENGINEER]: 'Ingénieur DevOps',
+    [Title.WEB_DEVELOPER]: 'Développeur Web',
+    [Title.OFFICE_MANAGER]: 'Responsable d Agence',
+    [Title.ACCOUNTANT]: 'Comptable',
+    [Title.SALES_REPRESENTATIVE]: 'Représentant Commercial',
+    [Title.CUSTOMER_SUPPORT_SPECIALIST]: 'Spécialiste du Support Client',
+    [Title.MARKETING_COORDINATOR]: 'Coordinateur Marketing'
+    
+  };
+
+  maritalSituationMap = {
+    [MaritalSituation.SINGLE]:'Célibatire',
+    [MaritalSituation.MARRIED]:'Marrié',
+   [MaritalSituation.DIVORCED]:'Divorvé',
+   [MaritalSituation.WIDOWED] :'Veuf/Veuve',
+   [MaritalSituation.COMPLICATED] :'Compliqué'
+  };
   
+  civilityMap = {
+    [Civility.MRS]:'Mme',
+    [Civility.MS]:'Mlle',
+   [Civility.MR]:'Mr'
+  };
+
+  LanguageLevelMap = {
+    [LanguageLevel.BEGINNER_A1]: 'Niveau Débutant A1',
+    [LanguageLevel.BEGINNER]: 'Niveau Débutant',
+    [LanguageLevel.ELEMENTARY_A2]: 'Niveau Elémentaire A2',
+    [LanguageLevel.BASIC]: 'Niveau de Base',
+    [LanguageLevel.INTERMEDIATE_B1]: 'Niveau Intermédiaire B1',
+    [LanguageLevel.INTERMEDIATE]: 'Niveau Intermédiaire',
+    [LanguageLevel.UPPER_INTERMEDIATE_B2]: 'Niveau Intermédiaire Supérieur B2',
+    [LanguageLevel.PROFESSIONAL]: 'Niveau Professionnel',
+    [LanguageLevel.ADVANCED_C1]: 'Niveau Avancé C1',
+    [LanguageLevel.FLUENT]: 'Courant',
+    [LanguageLevel.PROFICIENT_C2]: 'Niveau Expert C2',
+    [LanguageLevel.NATIVE_LANGUAGE]: 'Langue Maternelle',
+    [LanguageLevel.BILINGUAL]: 'Bilingue'
+  };
+///////////-------updatePopup------------///////////////
+getItems() {    
+  this.getItemSub = this.updateCandidatService.getItems()
+    .subscribe((data:any)  => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+
+}
+
+
+/*openPopUp6(data: any = {} , isNew?) {
+  let title = isNew ? 'Ajouter compte bancaire' : 'Modifier compte bancaire';
+  let dialogRef: MatDialogRef<any> = this.dialog.open(employeePopupComponent, {
+    width: '1000px',
+    disableClose: true,
+    data: { title: title, payload: data , employeeId: this.employee.id}
+  })
+  dialogRef.afterClosed()
+    .subscribe(res => {
+      if(!res) {
+        // If user press cancel
+        return;
+      }
+     
+        this.loader.open('modification en cours');
+        console.log(data.id)
+        this.updateCandidatService.updateItem( this.id, res)
+          .subscribe((data:any) => {
+            this.emplyeeDataSource = data ;
+            this.loader.close();
+            this.snack.open('Compte bancaire modifié avec succés!', 'OK', { duration: 2000 });
+            this.getItems();
+          })
+       
+    })
+}*/
+openPopUpEmployee(data: any = {}) {
+  const title = 'Modifier compte bancaire';
+  const dialogRef: MatDialogRef<any> = this.dialog.open(employeePopupComponent, {
+    width: '1000px',
+    disableClose: true,
+    data: { title: title, payload: data }
+  });
+
+  dialogRef.afterClosed().subscribe(res => {
+    if (res) {
+      const updatedData = { ...data, ...res };
+      this.updateCandidatService.updateEmployee(data.id, res).subscribe(
+        (response) => {
+          console.log('Item updated successfully', response);
+          this.snack.open('Compte bancaire modifié avec succès!', 'OK', { duration: 2000 });
+          this.getItems();
+        },
+        (error) => {
+          console.error('Error updating item', error);
+          this.snack.open('Une erreur est survenue lors de la modification du compte bancaire.', 'OK', { duration: 2000 });
+        }
+      );
+    }
+  });
+}
+
+////////*-----------------------------
+open(Id: number) {
+  // show popup and set employeeId
+  Id = this.id; // set employeeId to the desired value
+  let dialogRef: MatDialogRef<any> = this.dialog.open(employeePopupComponent) ;
+  
+    this.updateCandidatService.getItemById(Id).subscribe((data: any) => {
+      this.employee = data;
+
+    });
+  
+}
+
+
 }
 

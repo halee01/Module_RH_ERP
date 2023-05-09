@@ -15,7 +15,7 @@
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Type d'entretien</mat-label>
           <mat-select formControlName="interviewType">
-            <mat-option *ngFor="let interviewModes of interviewMode" [value]="interviewModes">{{interviewModes}}</mat-option>
+            <mat-option *ngFor="let interviewModes of interviewMode" [value]="">{{interviewModes}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -24,7 +24,7 @@
         <mat-form-field class="full-width" appearance="outline">
           <mat-label>Mode d'entretien</mat-label>
           <mat-select formControlName="interviewMode">
-            <mat-option *ngFor="let interviewTypes of interviewType" [value]="interviewTypes">{{interviewTypes}}</mat-option>
+            <mat-option *ngFor="let interviewTypes of interviewType" [value]="">{{interviewTypes}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -32,7 +32,7 @@
             <div fxFlex="30" class="pr-16">
               <mat-form-field appearance="outline" [style.width.cm]=10>
                 <mat-label>Date de l'entretien</mat-label>
-                <input matInput [matDatepicker]="picker" formControlName="" placeholder="Date de l'entretien">
+                <input matInput [matDatepicker]="picker" formControlName="interviewDate" placeholder="Date de l'entretien">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
@@ -42,7 +42,7 @@
             <div fxFlex="30" class="pr-16">
               <mat-form-field appearance="outline" [style.width.cm]=10>
                 <mat-label>Durée</mat-label>
-                <input matInput formControlName="" placeholder="Ex.Macron">
+                <input matInput formControlName="duration" placeholder="Ex.Macron">
               </mat-form-field>
             </div>
       

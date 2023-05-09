@@ -7,6 +7,12 @@ import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Employee } from 'app/shared/models/Employee';
 import { Offer } from 'app/shared/models/Offer';
+import { Skills } from 'app/shared/models/Skills';
+import { Language } from 'highlight.js';
+import { Certification } from 'app/shared/models/Certification';
+import { Experience } from 'app/shared/models/Experience';
+import { Education } from 'app/shared/models/Education';
+import { TechnicalFile } from 'app/shared/models/TechnicalFile';
 
 @Injectable()
 export class updateCandidatService {
@@ -178,6 +184,8 @@ getCountries() {
 getStatesByCountry(name: string) {
   return this.countryData.getStatesByShort(name);
 }
+
+
 addTechFile(techfile: any): Observable<any> {
   const apiTechFileWithAdd = this.apiTechFile + '/addTechnicalFile'; // Append /add to the apiUrl
   return this.http.post<any>(apiTechFileWithAdd, techfile).pipe(
@@ -263,6 +271,55 @@ getOfferItems(): Observable<Offer[]> {
     catchError(this.handleError)
   );
 }
+getTechnicalFileById(id: number): Observable<TechnicalFile> {
+  const url = `${this.apiUrl+ '/get'}/${id}`+ '/technicalFile';
+  return this.http.get<TechnicalFile>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+getEducationById(id: number): Observable<Education> {
+  const url = `${this.apiUrl+ '/get'}/${id}`+ '/education';
+  return this.http.get<Education>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+getExperienceById(id: number): Observable<Experience>{
+  const url = `${this.apiUrl+ '/get'}/${id}`+ '/experience';
+  return this.http.get<Experience>(url).pipe(
+    catchError(this.handleError)
+  )
+}
+getCertificationById(id: number): Observable<Certification>{
+  const url = `${this.apiUrl+ '/get'}/${id}`+ '/certificaton';
+  return this.http.get<Certification>(url).pipe(
+    catchError(this.handleError)
+  )
+}
+getLanguageById(id: number): Observable<Language>{
+  const url = `${this.apiUrl+ '/get'}/${id}`+ '/language';
+  return this.http.get<Language>(url).pipe(
+    catchError(this.handleError)
+  )
+}
 
+getSkillsById(id: number): Observable<Skills>{
+  const url = `${this.apiUrl+ '/get'}/${id}`+ '/skills';
+  return this.http.get<Skills>(url).pipe(
+    catchError(this.handleError)
+  )
+}
+getCandiatureById(id: number): Observable<Employee>{
+  const url = `${this.apiUrl+ '/get'}/${id}`+ '/candidature';
+  return this.http.get<Employee>(url).pipe(
+    catchError(this.handleError)
+  )
+}
+// GET an item by id
+getItemById(id: number): Observable<Employee> {
+  const url = `${this.apiUrl+ '/get'}/${id}`;
+  return this.http.get<Employee>(url).pipe(
+    catchError(this.handleError)
+  );
+}
 
 }
