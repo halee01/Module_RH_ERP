@@ -38,7 +38,6 @@
               </mat-card-content>
             </mat-card>
         </div>
-
         <div style="padding-top: 50px;"></div>
          
            <div fxFlex="100" fxFlex.gt-sm="50">
@@ -76,7 +75,6 @@
         </div>
         <mat-divider></mat-divider>
       </mat-card-title>
-
       <mat-card-content>
         <div fxLayout="row">
           <div fxFlex="100" fxFlex.gt-sm="60" >
@@ -115,15 +113,12 @@
                   <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de début : </strong>{{experiences.experienceStartDate}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de fin : </strong>{{experiences.experienceEndDate}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Actuellement employé : </strong>{{experiences.actualEmployment}}</mat-list-item>
-
                 </mat-list>
               </mat-list>
               </mat-card-content>
             </mat-card>
           </div>
         </div>
-
-
         
         <div fxLayout="column">
           <div fxLayout="row">
@@ -186,8 +181,8 @@
                 <mat-divider></mat-divider>
               </mat-card-title>
               <mat-card-content>
-                <mat-list>
-                  <mat-list-item style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Titre de l'offre : </strong></mat-list-item>
+                <mat-list *ngFor="let Candidatures of candidature" >
+                  <mat-list-item style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Titre de l'offre : </strong>{{Candidatures.id}}</mat-list-item>
                   <mat-list-item  style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Déscription de l'offre: </strong></mat-list-item>
                 </mat-list>
               </mat-card-content>
@@ -195,7 +190,6 @@
           </div>
         </div>
           
-
       </mat-card-content>
     </mat-card> 
   </mat-tab>
@@ -304,9 +298,8 @@
           <li>
             <ul>
               <li>
-                {{languages.language}}
-                {{LanguageLevelMap[languages.languageLevel]}}
-              </li>
+                {{languages.language}} {{LanguageLevelMap[languages.languageLevel]}}</li>
+              <li>{{languages.additionalInformation}}</li>
             </ul>
           </li>
         </ul>

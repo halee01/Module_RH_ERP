@@ -1,3 +1,4 @@
+import { id } from 'date-fns/locale';
 import { Offer } from './../../../../../shared/models/Offer';
 import { Experience } from 'app/shared/models/Experience';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -289,7 +290,7 @@ export class cvcandidatComponent implements OnInit {
     }
 
     ///////////ajoutCandidature////////////////////////
-    /*saveOfferCandidat(id :number): void {
+    saveOfferCandidat(id :number): void {
       console.log('ajout...');
       this.cvCandidatService.addOfferCandidate({employeeNum:this.selectedEmplyee.id ,offerNum:id}).subscribe({
         next: (res) => {
@@ -305,7 +306,7 @@ export class cvcandidatComponent implements OnInit {
           console.log(this.techFileForm.errors);
         }
       });
-    }*/
+    }
   
 
     /*saveFormation(): void {
@@ -411,7 +412,7 @@ export class cvcandidatComponent implements OnInit {
           this.submitted = true;
         },
         error: (e) => {
-          console.error('Error adding certif', e);
+          console.error('Error adding certif',e);
           console.log('cv Form is invalid');
           console.log(this.cvForm.errors);
         }
@@ -419,7 +420,7 @@ export class cvcandidatComponent implements OnInit {
 
     
       // Save skills
-      this.cvCandidatService.addSkill({...this.cvForm.value, technicalFileNum:this.selectedTechFile.id}).subscribe({
+      this.cvCandidatService.addSkill({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
         next: (res) => {
           console.log('skill added successfully', res);
           console.log('Form value', this.cvForm.value);

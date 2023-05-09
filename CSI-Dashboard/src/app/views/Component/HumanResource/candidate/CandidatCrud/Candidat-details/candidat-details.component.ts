@@ -12,6 +12,7 @@ import { TechnicalFile } from 'app/shared/models/TechnicalFile';
 import { Language, LanguageLevel } from 'app/shared/models/Language';
 import { Civility } from 'app/shared/models/contact';
 import html2pdf from 'html2pdf.js';
+import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
 
 @Component({
   selector: 'app-details-candidat',
@@ -21,6 +22,7 @@ import html2pdf from 'html2pdf.js';
 
 
 export class CandidatDetailComponent implements OnInit {
+cvHtml = '';
 id: number
 idTechnicalFile:number
 employee : Employee
@@ -31,6 +33,7 @@ skills : Skills
 skillsCategory : SkillsCategory
 certification : Certification
 experience : Experience
+candidature : AssOfferCandidate
 private router: Router
 title :string[]= Object.values(Title);
 Civility :string []= Object.values(Civility);
@@ -39,7 +42,8 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
 
 
   constructor(    private route: ActivatedRoute,
-    private candidatService: CrudService,) { }
+    private candidatService: CrudService,
+    private routerPdf: Router ,) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -51,6 +55,11 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
    this.getCertification();
    this.getlanguage();
    this.getSkills();
+   this.getCandidature();
+   /*const cv = document.getElementById('CV');
+    if (cv) {
+      this.cvHtml = cv.innerHTML;
+    }*/
 
   }
 
@@ -115,6 +124,12 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
       console.log(this.skills);
     })
   }
+  getCandidature(){
+    this.candidatService.getCandiatureById(this.id).subscribe((data : any)=>{
+      this.candidature =data;
+      console.log(this.candidature);
+    })
+  }
 
   openEvaluationCandidat(){
     this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
@@ -147,6 +162,7 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
    [MaritalSituation.WIDOWED] :'Veuf/Veuve',
    [MaritalSituation.COMPLICATED] :'Compliqué'
   };
+  
   civilityMap = {
     [Civility.MRS]:'Mme',
     [Civility.MS]:'Mlle',

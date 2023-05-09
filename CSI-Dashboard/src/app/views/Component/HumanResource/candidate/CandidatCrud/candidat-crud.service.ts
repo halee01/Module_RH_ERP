@@ -13,12 +13,15 @@ import { Experience } from 'app/shared/models/Experience';
 import { Certification } from 'app/shared/models/Certification';
 import { Language } from 'highlight.js';
 import { Skills } from 'app/shared/models/Skills';
+import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
 
 @Injectable()
 
 export class CrudService {
   private apiUrl = 'http://localhost:8080/rh/employee';
   private technicalFileApi='http://localhost:8080/rh/technicalFile'
+  private apiAssOffreCandidat = 'http://localhost:8080/rh/AssOfferCandidate';
+
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
 
@@ -143,6 +146,12 @@ getLanguageById(id: number): Observable<Language>{
 getSkillsById(id: number): Observable<Skills>{
   const url = `${this.apiUrl+ '/get'}/${id}`+ '/skills';
   return this.http.get<Skills>(url).pipe(
+    catchError(this.handleError)
+  )
+}
+getCandiatureById(id: number): Observable<Employee>{
+  const url = `${this.apiUrl+ '/get'}/${id}`+ '/candidature';
+  return this.http.get<Employee>(url).pipe(
     catchError(this.handleError)
   )
 }
