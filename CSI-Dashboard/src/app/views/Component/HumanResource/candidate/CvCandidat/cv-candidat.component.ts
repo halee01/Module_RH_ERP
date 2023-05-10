@@ -22,7 +22,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Skills } from 'app/shared/models/Skills';
-import { cvDialog1Component } from './CvCandidatDialog/dialog1.component';
 
 
 
@@ -86,11 +85,10 @@ export class cvcandidatComponent implements OnInit {
   LanguageLevel : string[] = Object.values(LanguageLevel);
   skills: Skills[] = [];
   employee: Employee;
- offers: Offer[];
+  offers: Offer[];
+  isLinear = false;
 
  
-
-
 
  constructor(private _formBuilder: FormBuilder,
   private cvCandidatService: CvCandidatService,
@@ -183,7 +181,7 @@ export class cvcandidatComponent implements OnInit {
     })*/
 
       this.techFileForm = new UntypedFormGroup({
-      reference: new UntypedFormControl('', []),
+      reference: new UntypedFormControl('', [Validators.required]),
       description: new UntypedFormControl('', []),
       objective: new UntypedFormControl('', []),
       driverLicense: new UntypedFormControl('', []),
@@ -270,12 +268,25 @@ export class cvcandidatComponent implements OnInit {
           console.log('Selected candidat ID:', this.selectedEmplyee.id);
           console.log('Form value', this.myForm.value);
           this.submitted = true;
+         // this.openPopUp();
         },
         error: (e) => console.error('Error adding item', e)
       });
       //this.dialog.open(cvDialog1Component);
     }
 
+   /* openPopUp(): void {
+      const dialogRef = this.dialog.open(cvDialog1Component, {
+        width: '600px',
+        data: { /* any data you want to pass  }
+      });*/
+    
+      /*dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log('Result:', result);
+      });}*/
+
+    
     saveTechFile(): void {
       console.log('Submitting form...');
       this.cvCandidatService.addTechFile({...this.techFileForm.value, employeeId:this.selectedEmplyee.id}).subscribe({
@@ -602,6 +613,7 @@ handleRemoveRepeatForm(index: number) {
   };
 
   
+
   
   
 }

@@ -1,3 +1,4 @@
+import { Evaluation } from 'app/shared/models/Evaluation';
 import { entretienRecrutmentService } from './../entretienRecrutment.service';
 import { crudEntretien } from '../crud_entretienRecrutment.routing';
 
@@ -30,6 +31,7 @@ export class crudEntretienRecrutmentComponent implements OnInit {
   public displayedColumns: any;
   public getItemSub: Subscription;
   classAdded = false;
+  evaluation :Evaluation;
   constructor(
     private dialog: MatDialog,
     private snack: MatSnackBar,
@@ -132,6 +134,26 @@ export class crudEntretienRecrutmentComponent implements OnInit {
     this.router.navigate(['/CandidatEvaluation', row.id]);
   }
 
+
+
+
+  saveEvaluation1(): void {
+    this.crudEntretien.addEvaluation(this.evaluation).subscribe(
+      response => console.log('Evaluation added successfully'),
+      error => console.error('Error adding evaluation:', error)
+    );
+  }
+
+  saveEvaluation(row: any): void {
+    // Set the ID of the evaluation to the selected row ID
+    this.evaluation.id = row.id;
+    
+    // Call the addEvaluation() method with the evaluation object as a parameter
+    this.crudEntretien.addEvaluation(this.evaluation).subscribe(
+      response => console.log('Evaluation added successfully'),
+      error => console.error('Error adding evaluation:', error)
+    );
+  }
 
 }
 

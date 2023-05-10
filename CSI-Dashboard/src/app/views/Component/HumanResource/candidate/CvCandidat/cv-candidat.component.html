@@ -1,5 +1,5 @@
 <mat-card class="p-0">
-  <mat-horizontal-stepper linear #stepper>
+  <mat-horizontal-stepper  #stepper>
     
     <!---------------------------COORDONNES-------------------------->
   <mat-step [stepControl]="step1" errorMessage="Tous les champs sont obligatoires.">
@@ -19,7 +19,11 @@
                   <div class="pb-16">
                     <mat-form-field appearance="outline" [style.width.cm]=10>
                       <mat-label>Prénom</mat-label>
-                      <input matInput name="first-name" formControlName="firstName" placeholder="Ex.Emmanuel" required>
+                      <input matInput
+                        name="first-name"
+                        formControlName="firstName"
+                         placeholder="Ex.Emmanuel" 
+                         required>
                       <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
                         Le prénom est requis et doit commencer par une majuscule.
                       </mat-error>
@@ -34,6 +38,7 @@
                         <mat-label>Nom</mat-label>
                           <input
                           matInput
+                          required
                           name="lastName"
                           formControlName="lastName"
                           placeholder="Ex.Macron">
@@ -87,7 +92,7 @@
                     <div class="pb-16">
                      <mat-form-field appearance="outline" [style.width.cm]=10>
                        <mat-label>Intitulè du poste</mat-label>
-                       <mat-select formControlName="title" >
+                       <mat-select required formControlName="title" >
                          <mat-option  *ngFor="let titles of title " [value]="titles">{{employeeTitleMap[titles]}}</mat-option>
                        </mat-select>
                        <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
@@ -112,7 +117,7 @@
                      <div class="pb-16">
                       <mat-form-field appearance="outline" [style.width.cm]=10>
                       <mat-label>Pays</mat-label>
-                      <mat-select formControlName="country" placeholder="Ex.France" >
+                      <mat-select required formControlName="country" placeholder="Ex.France" >
                         <mat-option *ngFor="let country of countries" [value]="country.shortName">{{country.name}}</mat-option>
                       </mat-select>
                       <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
@@ -126,7 +131,7 @@
                      <div class="pb-16">
                       <mat-form-field appearance="outline" [style.width.cm]=10>
                       <mat-label>Ville</mat-label>
-                      <mat-select formControlName="city" placeholder="Ex.Lyon" >
+                      <mat-select required formControlName="city" placeholder="Ex.Lyon" >
                         <mat-option *ngFor="let state of states"  [value]="state">{{state}}</mat-option>
                       </mat-select>
                       <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
@@ -173,10 +178,11 @@
                         <mat-label>Email 1</mat-label>
                       <input
                           matInput
+                          required
                           type="email"
                           name="email"
                           formControlName="emailOne"
-                          placeholder="Ex.csi.digital@exemple.fr">
+                          placeholder="Ex. csi.digital1@exemple.fr">
                           <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
                             L'email 1 est requis.</mat-error>
                       </mat-form-field>
@@ -193,7 +199,7 @@
                           type="email"
                           name="email"
                           formControlName="emailTwo"
-                          placeholder="Ex.csi.digital@exemple.fr"
+                          placeholder="Ex. csi.digital2@exemple.fr"
                           value="">
                       </mat-form-field>
                       <!--<small 
@@ -211,11 +217,12 @@
                       <mat-form-field appearance="outline" [style.width.cm]=10>
                        <mat-label>Numéro de téléphone 1</mat-label>
                        <input 
+                       required
                        type=""
                        name="phone-number1"
                        matInput
                        formControlName="phoneNumberOne"
-                       placeholder="Ex.+33 801 123 456"  >
+                       placeholder="Ex. +33 801 123 456"  >
                        <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
                         Le numéro du téléphone 1 est requis.</mat-error>
                       </mat-form-field>
@@ -231,7 +238,7 @@
                           name="phone-number2"
                           matInput
                           formControlName="phoneNumberTwo"
-                          placeholder="Ex.+33 801 123 456" 
+                          placeholder="Ex. +33 801 123 457" 
                           value="">
                       </mat-form-field>
                   </div>
@@ -251,6 +258,7 @@
       matStepperNext>Création du Cv
       </button>
       </div>
+      
     </div>
   </div>
     </form>
@@ -285,10 +293,13 @@
                 <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
                 <mat-label>Référence</mat-label>
                 <input 
+                required
                 type="text"
                 matInput
                 formControlName="reference"
                 placeholder="Ex."  >
+                <mat-error *ngIf="techFileForm.get('reference').invalid && techFileForm.get('reference').touched">
+                  Ce champ est obligatoire.</mat-error>
               </mat-form-field>
              
                 <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
@@ -383,6 +394,7 @@
                         <mat-form-field appearance="outline" [style.width.cm]=15>
                           <mat-label>Nom de l'établissement</mat-label>
                             <input
+                            required
                             matInput
                             name="institution"
                             formControlName="institution"
@@ -397,6 +409,7 @@
                           <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
                             <mat-label>Diplôme</mat-label>
                               <input
+                              required
                               matInput
                               name="diploma"
                               formControlName="diploma"
@@ -478,6 +491,7 @@
         matStepperNext>Suivant : Expérience
         </button>
         </div>
+      
       </div>
 
     </div>
