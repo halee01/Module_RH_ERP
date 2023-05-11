@@ -893,7 +893,7 @@
              <ng-container matColumnDef="actions">
                <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
                <mat-cell *matCellDef="let row">
-                 <button mat-icon-button mat-sm-button color="primary" class="mr-16 "  (click)="saveOfferCandidat(row.id)">
+                 <button mat-icon-button mat-sm-button color="primary" class="mr-16 "   (click)="openDialogOffer()">
                    <mat-icon>check</mat-icon>
                  </button>
                  
@@ -911,8 +911,6 @@
           
           </mat-card-content>
           </mat-card>
-        
-          
         </div>      
         <div>
             <button 

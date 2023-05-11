@@ -1,7 +1,7 @@
 import { id } from 'date-fns/locale';
 import { Offer } from './../../../../../shared/models/Offer';
 import { Experience } from 'app/shared/models/Experience';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
@@ -22,6 +22,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Skills } from 'app/shared/models/Skills';
+import { OfferPopupComponent } from './cv-popups/offerPopup.component';
 
 
 
@@ -105,7 +106,7 @@ export class cvcandidatComponent implements OnInit {
   private fb: FormBuilder,
   private router:Router,
    private http: HttpClient,
-   public dialog: MatDialog)
+   public dialog: MatDialog,)
    {  this.countries = this.cvCandidatService.getCountries();}
    
 
@@ -593,7 +594,13 @@ handleRemoveRepeatForm(index: number) {
   };
 
   
+  openDialogOffer() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = '500px'; // set the width
+    dialogConfig.height = '350px'; // set the height
 
+    const dialogRef = this.dialog.open(OfferPopupComponent, dialogConfig);
+  }
   
   
 }
