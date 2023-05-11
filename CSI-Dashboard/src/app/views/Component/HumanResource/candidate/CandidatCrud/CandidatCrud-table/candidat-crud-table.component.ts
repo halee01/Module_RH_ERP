@@ -12,12 +12,12 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { Fruit } from 'assets/examples/material/input-chip/input-chip.component';
 import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { CompanyStatus, Country } from 'app/shared/models/Partner';
 import { Civility, Employee, EmployeeStatus, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
-import { Service } from 'app/shared/models/contact';
+
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Invoice } from 'app/shared/models/invoice.model';
+import { Observable } from 'rxjs-compat';
+
 
 @Component({
   selector: 'app-candidat-crud',
@@ -186,5 +186,60 @@ add(){
     });
   }
 
-  
+
+  getStatusColor(employeeStatus: string): { color: string, displayText: string } {
+    const STATUS_DATA = {
+      IN_PROCESS: { color: 'primary', displayText: 'En processus' },
+      /*IN_PROGRESS: { color: 'primary', displayText: 'En progrès' },*/
+      PRE_QUALIFIED: { color: 'red', displayText: 'Non qualifié' },
+      TOP_PROFILES: { color: 'purple', displayText: 'Top profiles' },
+      CONVERTED_TO_RESOURCE: { color: 'purple', displayText: 'Converti en ressource ' },
+      DO_NOT_CONTACT : { color:'red', displayText: 'A ne plus contacter' },
+      ARCHIVE: { color: 'gray', displayText: 'Archivé' }
+    };
+    return STATUS_DATA[employeeStatus] || { color: 'primary', displayText: 'En processus' };
+}
+
+changeEmployeeStatus(employeeStatus: string, employeeId: number): void {
+  console.log('Changing employee status to:', employeeStatus);
+  let updateObservable: Observable<any>;
+  switch (employeeStatus) {
+    case 'employeeStatus.IN_PROCESS':
+      updateObservable = this.crudService.updateToInProcessById(employeeId);
+      break;
+    /*case 'employeeStatus.IN_PROGRESS':
+      updateObservable = this.crudService.updateToInProgressById(employeeId);
+      break;*/
+    case 'employeeStatus.PRE_QUALIFIED':
+      updateObservable = this.crudService.updateToPreQualifiedById(employeeId);
+      break;
+    case 'employeeStatus.TOP_PROFILES':
+      updateObservable = this.crudService.updateToTopProfilesById(employeeId);
+      break;
+      case 'employeeStatus.DO_NOT_CONTACT':
+        updateObservable = this.crudService.updateToDoNotContactById(employeeId);
+        break;
+    case 'employeeStatus.CONVERTED_TO_RESOURCE':
+      updateObservable = this.crudService.updateToConvertedToResourceById(employeeId);
+      break;
+    case 'employeeStatus.ARCHIVE':
+      updateObservable = this.crudService.updateToArchiveById(employeeId);
+      break;
+    default:
+      // Cas de statut de contrat non géré
+      console.error('Statut de candidat non géré');
+      return;
+  }
+  updateObservable.subscribe(
+    (data) => {
+      // handle success
+      console.log('Mise à jour effectuée avec succès');
+      this.getItems();    
+    },
+    (error) => {
+      console.error('Erreur lors de la mise à jour : ', error);
+    }
+  );
+}
+
 }

@@ -1,10 +1,11 @@
 import { id } from 'date-fns/locale';
 import { Offer } from './../../../../../shared/models/Offer';
 import { Experience } from 'app/shared/models/Experience';
+import {MatDialog, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
-import {  Component, OnInit, ViewChild } from '@angular/core';
+import { Inject, Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray, AbstractControl, UntypedFormArray } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -23,18 +24,19 @@ import { MatSort } from '@angular/material/sort';
 import { Skills } from 'app/shared/models/Skills';
 
 
+
 @Component({
   selector: 'app-basic-form',
   templateUrl: './cv-candidat.component.html',
   styleUrls: ['./cv-candidat.component.scss'],
 })
 
-
 export class cvcandidatComponent implements OnInit {
   formData = {}
   console = console;
   repeatForm: FormGroup;
   myForm: FormGroup;
+  formCertif: FormGroup;
   techFileForm: FormGroup;
   languageForm: FormGroup;
   cvForm: FormGroup;
@@ -48,7 +50,24 @@ export class cvcandidatComponent implements OnInit {
   lastEmployee: Employee;
   selectedEmplyee= {firstName :'', id:null};
   selectedTechFile= { id:null};
-//////////////Ajout Candidat///////////////
+  submitted = false;
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  isPageReloaded = false;
+  public dataSource: any;
+  public displayedColumns: any;
+  public getItemSub: Subscription;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  formWidth = 200; //declare and initialize formWidth property
+  formHeight = 700; //declare and initialize formHeight property
+  certificationId:number;
+
+
+//////////////Form Candidate///////////////
   public itemForm: FormGroup;;
   CompanyStatus = Object.values(CompanyStatus);
   WorkField :string []= Object.values(WorkField);
@@ -66,40 +85,43 @@ export class cvcandidatComponent implements OnInit {
   RequirementType : string[] = Object.values(RequirementType);
   Languages : string[] = Object.values(Languages);
   LanguageLevel : string[] = Object.values(LanguageLevel);
-  employee: Employee;
-  submitted = false;
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
   skills: Skills[] = [];
+  employee: Employee;
   offers: Offer[];
-  isPageReloaded = false;
-  public dataSource: any;
-  public displayedColumns: any;
-  public getItemSub: Subscription;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  formWidth = 200; //declare and initialize formWidth property
-  formHeight = 700; //declare and initialize formHeight property
+  isLinear = false;
 
-
+ 
 
  constructor(private _formBuilder: FormBuilder,
   private cvCandidatService: CvCandidatService,
   private formBuilder: FormBuilder,
   private fb: FormBuilder,
   private router:Router,
-   private http: HttpClient)
+   private http: HttpClient,
+   public dialog: MatDialog)
    {  this.countries = this.cvCandidatService.getCountries();}
+   
 
   ngOnInit() {
+
+    this.formCertif = this.fb.group({
+      // contractId:new FormControl({value:'' , disabled:true}),
+      value : new FormArray([])
+     });
+     (this.formCertif.get('value') as FormArray).push(this.fb.group({
+      certificationTitle: new UntypedFormControl('', []),
+      certificationObtainedDate: new UntypedFormControl('', [])
+    }));
+
 
    /* this.languageForm = new UntypedFormGroup({
       languages: new UntypedFormArray([
         this.createLanguage()
       ]) });*/
+
+      //repeatForm-----------------
+      
+      //-----------------------------
    
     this.cvCandidatService.getOfferItems().subscribe(
       offers => this.offers = offers,
@@ -130,23 +152,23 @@ export class cvcandidatComponent implements OnInit {
         Validators.maxLength(20),
         this.capitalLetterValidator
       ]),
-      birthDate: new UntypedFormControl('', ),
-      title: new UntypedFormControl('', ),
+      birthDate: new UntypedFormControl('', [Validators.required]),
+      title: new UntypedFormControl('',[Validators.required] ),
       address: new UntypedFormControl(''),
-      emailOne: new UntypedFormControl('',[] ),
-      phoneNumberOne: new UntypedFormControl('', []),
+      emailOne: new UntypedFormControl('',[Validators.required,Validators.email] ),
+      phoneNumberOne: new UntypedFormControl('', [Validators.required,Validators.pattern(/^[\d\s\-+]*$/)]),
       civility: new UntypedFormControl('', []),
       maritalSituation: new UntypedFormControl('', []),
-      country: new UntypedFormControl('', []),
+      country: new UntypedFormControl('', [Validators.required]),
       city: new UntypedFormControl('', []),
-      postCode: new UntypedFormControl('', []),
-      emailTwo: new UntypedFormControl('', ),
-      phoneNumberTwo: new UntypedFormControl('', [])
+      postCode: new UntypedFormControl('', [ Validators.pattern(/^[0-9]*$/)]),
+      emailTwo: new UntypedFormControl('', [Validators.email]),
+      phoneNumberTwo: new UntypedFormControl('', [Validators.pattern(/^[\d\s\-+]*$/)])
 
     })
       this.cvForm = new UntypedFormGroup({
-      institution: new UntypedFormControl('', []),
-      diploma: new UntypedFormControl('', []),
+      institution: new UntypedFormControl('', [Validators.required]),
+      diploma: new UntypedFormControl('', [Validators.required]),
       score: new UntypedFormControl('', []),
       startYear: new UntypedFormControl('', []),
       obtainedDate: new UntypedFormControl('', []),
@@ -175,7 +197,7 @@ export class cvcandidatComponent implements OnInit {
     })*/
 
       this.techFileForm = new UntypedFormGroup({
-      reference: new UntypedFormControl('', []),
+      reference: new UntypedFormControl('', [Validators.required]),
       description: new UntypedFormControl('', []),
       objective: new UntypedFormControl('', []),
       driverLicense: new UntypedFormControl('', []),
@@ -197,6 +219,33 @@ export class cvcandidatComponent implements OnInit {
       }
     })
   }
+
+
+  get getCert() {
+    return (this.formCertif.get('value') as FormArray).controls;
+  }
+
+  addCert(i:any): void {
+    console.log('Submitting form...');
+      this.cvCandidatService.addCertif({...this.formCertif.get('value.'+i).value, technicalFileNum:this.selectedTechFile.id}).subscribe({
+      next: (res) => {
+        console.log('Item added successfully', res);
+       console.log('Form value', this.formCertif.value);
+        this.submitted = true;
+        (this.formCertif.get('value') as FormArray).push(this.fb.group({
+          certificationTitle: new UntypedFormControl('', []),
+          certificationObtainedDate: new UntypedFormControl('', [])
+        }));
+        this.certificationId=res.id
+      },
+      error: (e) => {
+        console.error('Error adding item', e);
+        console.log('cv Form is invalid');
+        console.log(this.cvForm.errors);
+      }
+    });
+  }
+
 
   
   /*get languages(): FormArray {
@@ -251,7 +300,6 @@ export class cvcandidatComponent implements OnInit {
     }
   }*/
 
-
   saveCandidate(): void {
     console.log('Submitting form...');
   //  if (this.myForm.valid) {
@@ -263,11 +311,25 @@ export class cvcandidatComponent implements OnInit {
           console.log('Selected candidat ID:', this.selectedEmplyee.id);
           console.log('Form value', this.myForm.value);
           this.submitted = true;
+         // this.openPopUp();
         },
         error: (e) => console.error('Error adding item', e)
       });
+      //this.dialog.open(cvDialog1Component);
     }
 
+   /* openPopUp(): void {
+      const dialogRef = this.dialog.open(cvDialog1Component, {
+        width: '600px',
+        data: { /* any data you want to pass  }
+      });*/
+    
+      /*dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+        console.log('Result:', result);
+      });}*/
+
+    
     saveTechFile(): void {
       console.log('Submitting form...');
       this.cvCandidatService.addTechFile({...this.techFileForm.value, employeeId:this.selectedEmplyee.id}).subscribe({
@@ -447,9 +509,6 @@ export class cvcandidatComponent implements OnInit {
     }
     
 
-
-
-
   public confirmer(){}
    ///////Skills chips//////////
    add(event: MatChipInputEvent): void {
@@ -539,7 +598,6 @@ handleRemoveRepeatForm(index: number) {
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       })
-
   }
 
   getDisplayedColumns() {
@@ -596,5 +654,9 @@ handleRemoveRepeatForm(index: number) {
     [LanguageLevel.NATIVE_LANGUAGE]: 'Langue Maternelle',
     [LanguageLevel.BILINGUAL]: 'Bilingue'
   };
+
+  
+
+  
   
 }

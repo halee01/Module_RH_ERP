@@ -12,10 +12,6 @@ import {  Validators,  FormGroup, FormBuilder, FormArray } from '@angular/forms'
 })
 export class OfferPopupComponent implements OnInit {
   submitted = false;
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
   offerForm : FormGroup;
   private offerService: OfferService
   formWidth = 200; //declare and initialize formWidth property
@@ -23,7 +19,6 @@ export class OfferPopupComponent implements OnInit {
   
   selectedFile: File;
   constructor(
-    private _formBuilder: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<OfferPopupComponent>,
     private fb: FormBuilder,
@@ -45,13 +40,8 @@ export class OfferPopupComponent implements OnInit {
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
   }
-
-
-
   ngOnInit() {
     this.buildItemForm(this.data.payload)
-    
-
   }
 
   submit() {

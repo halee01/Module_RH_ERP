@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogClose, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -34,7 +34,7 @@ import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
-    
+    MatDialogModule,
     CommonModule,
     MatSelectModule,
     ReactiveFormsModule,
@@ -65,6 +65,7 @@ import { MatTableModule } from '@angular/material/table';
     }),
     RouterModule.forChild(CalendarRoutes)
   ],
+  exports: [MatDialogModule,MatDialogClose],
   providers: [CvCandidatService,{
     provide: STEPPER_GLOBAL_OPTIONS,
     useValue: { showError: true }
