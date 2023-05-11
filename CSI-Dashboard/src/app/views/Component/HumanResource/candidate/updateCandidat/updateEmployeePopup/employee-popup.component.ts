@@ -1,6 +1,5 @@
 
 import { Civility } from './../../../../../../shared/models/contact';
-import { catchError, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -40,21 +39,14 @@ export class employeePopupComponent implements OnInit {
 
 
 
-  /*buildItemForm(item){
-    this.offerForm = this.fb.group({
-      reference : [item.reference || '', Validators.required],
-      title : [item.title || '', Validators.required],
-      description : [item.description || '', Validators.required]
-    });
-
-  }*/
+  
 
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
   }
 
   ngOnInit() {
-    
+    const employeeData = this.data.payload;
    // this.getemployee();
    
     this.updateEmployee = new UntypedFormGroup({

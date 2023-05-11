@@ -608,8 +608,5 @@ handleRemoveRepeatForm(index: number) {
 
   }
   
-  getItems() {
-    throw new Error('Method not implemented.');
-  }
   
 }

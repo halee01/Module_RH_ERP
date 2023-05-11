@@ -1,10 +1,122 @@
+<div class="page-layout overflow-hidden pb-8">
+  <div class="header-bg blue"></div>
+
+  <div class="content">
+    <div class="content-header p-24" fxLayout="row wrap" fxLayoutAlign="start center">
+      <mat-list role="list">
+        <mat-list-item  role="listitem" ><h1 class="text-white m-0">{{ employee.firstName }} {{ employee.lastName }}</h1></mat-list-item>
+        <mat-list-item role="listitem"><h2 class="text-white m-0">{{employeeTitleMap[employee.title]}}</h2> </mat-list-item>
+       </mat-list>
+    </div>
+    <div class="content-body">
+      <div class="content-card mat-bg-default">
+    <mat-card class="p-0" >
+      <mat-card-content style="padding-top: 20px;">
+        <div div fxLayout="row" fxLayoutAlign="space-evenly center" >
+          
+          <div fxFlex="100" fxFlex.gt-sm="60">
+            <div fxLyout="row wrap" >
+              <div class="card-title-text">
+              </div>
+              <span fxFlex></span>
+
+                <div style="padding-top: 20px;  margin-right: 3cm;"><button  mat-raised-button (click)="openPopUpEmployee(employee)" color="primary"  >Modifier le candidat</button></div>
+            </div>
+          <mat-card class="p-0" >
+              <mat-card-title class="cardColor">
+               
+                <div class="card-title-text">Informations Personelles </div>
+                <mat-divider></mat-divider>
+              </mat-card-title>
+              <mat-card-content>
+                <mat-list>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">face</mat-icon> <strong style="padding-right: 10px;">Civilité : </strong>{{ civilityMap[employee.civility]}} </mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">cake</mat-icon><strong style="padding-right: 10px;">Date de naissance : </strong> {{ employee.birthDate }}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">people_outline</mat-icon> <strong style="padding-right: 10px;">Situation Maritale : </strong>{{ maritalSituationMap[employee.maritalSituation] }}</mat-list-item>
+                   <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Adresse : </strong>{{ employee.address}}</mat-list-item>
+                   <mat-list-item><mat-icon color="primary" class="mr-16">add_locationgit </mat-icon> <strong style="padding-right: 10px;" >Code Postal : </strong>{{ employee.postCode }}</mat-list-item>
+                    <mat-list-item><mat-icon color="primary" class="mr-16">location_city</mat-icon> <strong style="padding-right: 10px;">Ville : </strong>{{ employee.city }}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">public</mat-icon> <strong style="padding-right: 10px;">Pays : </strong>{{ employee.country }}</mat-list-item>
+                </mat-list>
+               <!-- <mat-divider></mat-divider>
+                <div  fxLayoutAlign="center center" style="padding-top: 25px;">
+                  <button mat-raised-button color="primary">Envoyer un Email</button>
+                </div>-->
+              </mat-card-content>
+            </mat-card>
+        </div>
+        <div style="padding-top: 50px;"></div>
+        
+           <div fxFlex="100" fxFlex.gt-sm="50">
+            <mat-card class="p-0" >
+              <mat-card-title class="cardColor">
+                <div class="card-title-text">Info de Contact du Candiadat </div>
+                <mat-divider></mat-divider>
+              </mat-card-title>
+              <mat-card-content>
+                <mat-list>
+                  <mat-list-item><mat-icon  color="primary"class="mr-16">email</mat-icon> <strong style="padding-right: 10px;">Email 1 : </strong> {{ employee.emailOne}}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">email</mat-icon> <strong style="padding-right: 10px;">Email 2 : </strong> {{ employee.emailTwo}}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">phone</mat-icon><strong style="padding-right: 10px;">Numéro de téléphone 1 : </strong>{{ employee.phoneNumberOne }}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">phone</mat-icon><strong style="padding-right: 10px;">Numéro de téléphone 2 : </strong> {{ employee.phoneNumberTwo }}</mat-list-item>
+                </mat-list>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </div>
+        
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="p-0">
+      <mat-card-content> 
+        <div fxLayout="column">
+          <div fxLayout="row">
+          <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
+            <mat-card class="p-0">
+              <mat-card-title class="cardColor"> 
+                <div class="card-title-text">Dossier Technique</div>
+                <mat-divider></mat-divider>
+              </mat-card-title>
+              <mat-card-content>
+                <mat-list>
+                  <mat-list-item><mat-icon  color="primary"class="mr-16">bookmark</mat-icon> <strong style="padding-right: 10px;">Référence  : </strong> {{ technicalFile.reference}}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">description</mat-icon><strong style="padding-right: 10px;">Déscription : </strong>{{ technicalFile.description }}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">check</mat-icon><strong style="padding-right: 10px;">Objectif : </strong> {{ technicalFile.objective }}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">directions_car</mat-icon> <strong style="padding-right: 10px;">Permit de conduire : </strong>{{ technicalFile.driverLicense}}</mat-list-item>
+  
+                </mat-list>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          </div> 
+          
+
+        </div>
+          
+      </mat-card-content>
+    </mat-card> 
+
+
+  
+
+
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!---------------------------------------------------------------------------------------------------------------------->
+
 <mat-accordion multi="false">
   <!---------Education-------->
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-icon color="primary">contact_phone</mat-icon>
-        <h6 class="text-18 mb-4"> Education <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
+        <mat-icon color="primary">school </mat-icon>
+        <h6 class="text-18 mb-4"> Education de  <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <button mat-icon-button color="primary" type="button" (click)="openPopUpEducation({},true)">
@@ -38,8 +150,8 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-icon color="primary">contact_phone</mat-icon>
-        <h6 class="text-18 mb-4"> Experience <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
+        <mat-icon color="primary">work</mat-icon>
+        <h6 class="text-18 mb-4"> Experience de  <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <button mat-icon-button color="primary" type="button" (click)="openPopUpExperience({},true)">
@@ -77,7 +189,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-icon color="primary">contact_phone</mat-icon>
+        <mat-icon color="primary">verified_user</mat-icon>
         <h6 class="text-18 mb-4"> Certifications <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
@@ -112,7 +224,7 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-icon color="primary">contact_phone</mat-icon>
+        <mat-icon color="primary">language</mat-icon>
         <h6 class="text-18 mb-4"> Language <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
@@ -134,7 +246,7 @@
           <button mat-icon-button mat-button color="primary" class="mr-16" (click)="openPopUpLanguage(row)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button mat-button color="warn">
+          <button mat-icon-button mat-button color="warn" (click)="deleteLanguage(row.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
@@ -147,8 +259,8 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-icon color="primary">contact_phone</mat-icon>
-        <h6 class="text-18 mb-4"> Language <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
+        <mat-icon color="primary">build</mat-icon>
+        <h6 class="text-18 mb-4"> Skills <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <button mat-icon-button color="primary" type="button" (click)="openPopUpSkills({},true)">
@@ -166,7 +278,7 @@
           <button mat-icon-button mat-button color="primary" class="mr-16" (click)="openPopUpSkills(row)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button mat-button color="warn">
+          <button mat-icon-button mat-button color="warn" (click)="deleteSkills(row.id)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>

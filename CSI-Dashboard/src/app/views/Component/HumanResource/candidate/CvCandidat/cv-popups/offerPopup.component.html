@@ -1,11 +1,11 @@
 <h1 mat-dialog-title></h1>
 <div mat-dialog-content>Ajoutez la date d'application et le niveau d'expérience </div>
-<div  style="margin:20px;">
-    <form [formGroup]="offerCandidatForm">
+<div  style="margin:20px">
+    <form [formGroup]="offerCandidatForm" >
 
             <div class="pb-16">
-                <mat-form-field appearance="outline" [style.width.cm]="8">
-                    <mat-label>Situation Maritale</mat-label>
+                <mat-form-field appearance="outline" [style.width.cm]=10>
+                    <mat-label>Niveau d'experience</mat-label>
                     <mat-select formControlName="expeienceLevel" >
                       <mat-option *ngFor="let ExperienceLevels of ExperienceLevel " [value]="ExperienceLevels">{{ ExperienceLevelMap[ExperienceLevels]}}</mat-option>
                       

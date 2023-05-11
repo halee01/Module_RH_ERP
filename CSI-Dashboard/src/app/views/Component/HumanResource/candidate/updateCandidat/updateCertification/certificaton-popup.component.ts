@@ -40,14 +40,6 @@ export class certificationPopupComponent implements OnInit {
 
 
 
-  /*buildItemForm(item){
-    this.offerForm = this.fb.group({
-      reference : [item.reference || '', Validators.required],
-      title : [item.title || '', Validators.required],
-      description : [item.description || '', Validators.required]
-    });
-
-  }*/
 
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
