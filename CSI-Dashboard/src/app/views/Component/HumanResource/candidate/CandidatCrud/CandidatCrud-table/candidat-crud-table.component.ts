@@ -190,7 +190,7 @@ add(){
   getStatusColor(employeeStatus: string): { color: string, displayText: string } {
     const STATUS_DATA = {
       IN_PROCESS: { color: 'primary', displayText: 'En processus' },
-      /*IN_PROGRESS: { color: 'primary', displayText: 'En progrès' },*/
+      IN_PROGRESS: { color: 'primary', displayText: 'En progrès' },
       PRE_QUALIFIED: { color: 'red', displayText: 'Non qualifié' },
       TOP_PROFILES: { color: 'purple', displayText: 'Top profiles' },
       CONVERTED_TO_RESOURCE: { color: 'purple', displayText: 'Converti en ressource ' },
@@ -207,9 +207,9 @@ changeEmployeeStatus(employeeStatus: string, employeeId: number): void {
     case 'employeeStatus.IN_PROCESS':
       updateObservable = this.crudService.updateToInProcessById(employeeId);
       break;
-    /*case 'employeeStatus.IN_PROGRESS':
+    case 'employeeStatus.IN_PROGRESS':
       updateObservable = this.crudService.updateToInProgressById(employeeId);
-      break;*/
+      break;
     case 'employeeStatus.PRE_QUALIFIED':
       updateObservable = this.crudService.updateToPreQualifiedById(employeeId);
       break;
@@ -241,5 +241,23 @@ changeEmployeeStatus(employeeStatus: string, employeeId: number): void {
     }
   );
 }
-
+employeeTitleMap = {
+  [Title.FRONT_END_DEVELOPER]: 'Développeur Front-End',
+  [Title.BACK_END_DEVELOPER]: 'Développeur Back-End',
+  [Title.FULLSTACK_DEVELOPER]: 'Développeur Full-Stack',
+  [Title.CRM]: 'CRM',
+  [Title.HUMAN_RESOURCE_MANAGER]: 'Responsable des Ressources Humaines',
+  [Title.HUMAN_RESOURCE]: 'Ressources Humaines',
+  [Title.PROJECT_MANAGER]: 'Chef de Projet',
+  [Title.UI_UX_DESIGNER]: 'Concepteur UI/UX',
+  [Title.QA_ENGINEER]: 'Ingénieur QA',
+  [Title.DEVOPS_ENGINEER]: 'Ingénieur DevOps',
+  [Title.WEB_DEVELOPER]: 'Développeur Web',
+  [Title.OFFICE_MANAGER]: 'Responsable d Agence',
+  [Title.ACCOUNTANT]: 'Comptable',
+  [Title.SALES_REPRESENTATIVE]: 'Représentant Commercial',
+  [Title.CUSTOMER_SUPPORT_SPECIALIST]: 'Spécialiste du Support Client',
+  [Title.MARKETING_COORDINATOR]: 'Coordinateur Marketing'
+  
+};
 }

@@ -76,7 +76,11 @@ export class cvcandidatComponent implements OnInit {
 
 
 //////////////Form Candidate///////////////
-  public itemForm: FormGroup;;
+  public itemForm: FormGroup;technicalFile: any;
+loader: any;
+snack: any;
+updateCandidatService: any;
+;
   CompanyStatus = Object.values(CompanyStatus);
   WorkField :string []= Object.values(WorkField);
   LegalStatus = Object.values(LegalStatus);
@@ -600,7 +604,48 @@ handleRemoveRepeatForm(index: number) {
     dialogConfig.height = '350px'; // set the height
 
     const dialogRef = this.dialog.open(OfferPopupComponent, dialogConfig);
+
   }
-  
+  openPopUpCandidature(data: any, isNew?: boolean) {
+  const title = isNew ? 'Nouvelle certification' : 'Modifier certification';
+  const dialogRef: MatDialogRef<any> = this.dialog.open(OfferPopupComponent, {
+    width: '1000px',
+    disableClose: true,
+    data: { title: title, payload: data, employeeNum:this.selectedEmplyee.id ,offerNum:id }
+  });
+
+  dialogRef.afterClosed()
+    .subscribe(res => {
+      if (!res) {
+        // If user press cancel
+        return;
+      }
+      if (isNew) {
+        this.loader.open('Ajout en cours');
+        this.cvCandidatService.addOfferCandidate(res)
+          .subscribe((data: any) => {
+            this.dataSource = data;
+            this.loader.close();
+            this.snack.open('Education ajoutée avec succès!', 'OK', { duration: 2000 });
+          })
+      } else {
+        const updatedData = { ...data, ...res };
+        this.updateCandidatService.updateSkills(data.id, updatedData).subscribe(
+          (response) => {
+            console.log('certification updated successfully', response);
+            this.snack.open('certification modifié avec succès!', 'OK', { duration: 2000 });
+            this.getItems();
+          },
+          (error) => {
+            console.error('Error updating item', error);
+            this.snack.open('Une erreur est survenue lors de la modification d certification.', 'OK', { duration: 2000 });
+          }
+        );
+      }
+    });
+}
+  getItems() {
+    throw new Error('Method not implemented.');
+  }
   
 }

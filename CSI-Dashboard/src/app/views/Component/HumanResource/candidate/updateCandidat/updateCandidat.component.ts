@@ -496,7 +496,7 @@ getItems() {
     })
 }*/
 openPopUpEmployee(data: any = {}) {
-  const title = 'Modifier compte bancaire';
+  const title = 'Modifier Employee';
   const dialogRef: MatDialogRef<any> = this.dialog.open(employeePopupComponent, {
     width: '1000px',
     disableClose: true,
