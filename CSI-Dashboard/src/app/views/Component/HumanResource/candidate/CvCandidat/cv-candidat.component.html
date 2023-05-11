@@ -515,12 +515,13 @@
         </mat-card-title>
 
         <mat-card-content style="padding-top: 2cm;">
-         <!--<div [formGroup]="repeatForm" class="repeat-form">
-            <div class="card-body" formArrayName="repeatArray">
-                <div class="col-12 align-items-center" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
-                  <div class="repeater-default" style="display: flex;justify-content: center;align-items: center;">
-                    <div [formGroupName]="i" >--> 
-                      <div class="d-flex ">
+          <form  [formGroup]="formExperience">
+            <div class="card-body" formArrayName="value"  >
+              <div class="row" >
+                <div class="repeater-default">
+                  <div fxLayout="row"  fxLayoutAlign="space-evenly center" *ngFor="let val of getExperience; let i = index"  [formGroupName]="i"  >
+                  <div>
+                     <div class="d-flex ">
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <!--Institution-->
                           <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
@@ -604,20 +605,20 @@
                       <div class="pb-16">
                         <mat-checkbox formControlName="actualEmployment">En cours</mat-checkbox>
                       </div>
-
-                   <!-- </div>
                       <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
-                        <button mat-icon-button color="warn" type="button"  [disabled]="i === 0" (click)="handleRemoveRepeatForm(i)">
+                        <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
                           <mat-icon>delete</mat-icon>
                         </button>
-                        <button mat-icon-button color="primary" type="button" (click)="handleAddRepeatForm()">
+                        <button mat-icon-button color="primary" type="button" (click)="saveExperience(i)">
                           <mat-icon>add</mat-icon>
                         </button>
                       </div>
                     </div>
                   </div>
               </div>
-            </div>-->
+            </div>
+          </div>
+          </form>
       </mat-card-content>
       <div  fxLayout="row" dir="rtl" fxLayoutAlign="space-between center">
         <!--Button 2-->
@@ -689,7 +690,7 @@
                       <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
                         <mat-icon>delete</mat-icon>
                       </button>
-                      <button mat-icon-button color="primary" type="button" (click)="addCert(i)">
+                      <button mat-icon-button color="primary" type="button" (click)="saveCertification(i)">
                         <mat-icon>add</mat-icon>
                       </button>
                     </div>
@@ -708,12 +709,12 @@
                  Langues
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <!--<div [formGroup]="repeatForm" class="repeat-form">
-                <div class="card-body" formArrayName="repeatArray">
-                  <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
-                    <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
-                      <div [formGroupName]="i" class="d-flex align-items-center">-->
-                       
+              <form  [formGroup]="formLanguage">
+                <div class="card-body" formArrayName="value"  >
+                  <div class="row" >
+                    <div class="repeater-default">
+                      <div fxLayout="row"  fxLayoutAlign="space-evenly center" *ngFor="let val of getLanguage; let i = index"  [formGroupName]="i"  >
+                      <div>
                         <!--languages-->
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field appearance="outline" [style.width.cm]=8 style="margin-right: 0.5cm;">
@@ -739,11 +740,11 @@
                             <textarea matInput placeholder="Listez ici les technologies utilisées." formControlName="additionalInformation"></textarea>
                           </mat-form-field>
                         </div>
-                        <!--<div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
-                          <button mat-icon-button color="warn" type="button" [disabled]="i === 0"  (click)="handleRemoveRepeatForm(i)">
+                        <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+                          <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
                             <mat-icon>delete</mat-icon>
                           </button>
-                          <button mat-icon-button color="primary" type="button" (click)="handleAddRepeatForm()">
+                          <button mat-icon-button color="primary" type="button" (click)="saveLanguage(i)">
                             <mat-icon>add</mat-icon>
                           </button>
                         </div>
@@ -751,7 +752,9 @@
                     </div>
                   </div>
                 </div>
-              </div>-->
+              </div>
+
+              </form>
             </mat-expansion-panel>
 
             <!---------------------Compétances-------------------->
@@ -762,11 +765,12 @@
                  Skills
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <!--<div [formGroup]="repeatForm" class="repeat-form">
-                <div class="card-body" formArrayName="repeatArray">
-                  <div class="col-12" *ngFor="let repeatForm of repeatFormGroup.controls; let i = index;">
-                    <div class="repeater-default" style="display: flex; justify-content: center; align-items: center;">
-                      <div [formGroupName]="i" class="d-flex align-items-center">-->
+              <form  [formGroup]="formSkills">
+                <div class="card-body" formArrayName="value"  >
+                  <div class="row" >
+                    <div class="repeater-default">
+                      <div fxLayout="row"  fxLayoutAlign="space-evenly center" *ngFor="let val of getSkills; let i = index"  [formGroupName]="i"  >
+                      <div>
                         <!--Skills Category-->
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <mat-form-field appearance="outline" [style.width.cm]=7>
@@ -776,6 +780,14 @@
                               formControlName="skillsTitle"
                               placeholder="Ex. Soft Skills / Hard Skills">
                           </mat-form-field>
+                        </div>
+                        <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+                          <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
+                            <mat-icon>delete</mat-icon>
+                          </button>
+                          <button mat-icon-button color="primary" type="button" (click)="saveSkills(i)">
+                            <mat-icon>add</mat-icon>
+                          </button>
                         </div>
                         
                         <!--Skills Chips -->
@@ -799,19 +811,12 @@
                           </div>
                         </div>--> 
 
-                        <!--<div class="form-group col-sm-12 col-md-3 " style="margin-left: 1cm;">
-                          <button mat-icon-button color="warn" type="button" [disabled]="i === 0"  (click)="handleRemoveRepeatForm(i)">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                          <button mat-icon-button color="primary" type="button" (click)="handleAddRepeatForm()">
-                            <mat-icon>add</mat-icon>
-                          </button>
-                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>-->
+              </div>
+              </form>
             </mat-expansion-panel>
 
             <!--Sections supplémentaires-->
@@ -843,7 +848,6 @@
           <button  mat-raised-button 
           color="primary"
            type="submit"
-           (click)="saveRest()"
           >Créer le Cv</button>
         </div>
       </div>
