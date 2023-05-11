@@ -29,12 +29,18 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatChipList, MatChipsModule } from '@angular/material/chips';
 import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { updatecandidatComponent } from './updateCandidat.component';
-import { update } from './updateCandidat.routing';
 import { updateCandidatService } from './updateCandidat.service';
 import { CandidatRoutes } from '../CandidatCrud/candidat-crud.routing';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { techFilePopupComponent } from './updateTechFile/techFile-popup.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { experiencePopupComponent } from './updateExperience/experience-popup.component';
+import { educationPopupComponent } from './updateEducation/education-popup.component';
+import { certificationPopupComponent } from './updateCertification/certificaton-popup.component';
+import { languagePopupComponent } from './updateLanguage/language-popup.component';
+import { skillsPopupComponent } from './updateSkills/skills-popup.component';
+
 
 
 @NgModule({
@@ -55,7 +61,7 @@ import { techFilePopupComponent } from './updateTechFile/techFile-popup.componen
     MatButtonModule,
     MatRadioModule,
     MatCardModule,
-  
+    MatPaginatorModule,
     MatListModule,
     MatToolbarModule,
     MatDatepickerModule,
@@ -77,7 +83,8 @@ import { techFilePopupComponent } from './updateTechFile/techFile-popup.componen
   }],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-   updatecandidatComponent,employeePopupComponent,techFilePopupComponent
+   updatecandidatComponent,employeePopupComponent,techFilePopupComponent,educationPopupComponent,experiencePopupComponent,certificationPopupComponent,
+   languagePopupComponent,skillsPopupComponent
   ]
 })
 export class updateCandidatModule { }

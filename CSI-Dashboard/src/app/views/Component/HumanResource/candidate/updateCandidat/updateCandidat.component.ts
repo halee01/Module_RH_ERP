@@ -1,4 +1,5 @@
 
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import {  Employee, MaritalSituation } from '../../../../../shared/models/Employee';
@@ -27,6 +28,11 @@ import { Experience } from 'app/shared/models/Experience';
 import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
 import { Education } from 'app/shared/models/Education';
 import { employeePopupComponent } from './updateEmployeePopup/employee-popup.component';
+import { educationPopupComponent } from './updateEducation/education-popup.component';
+import { experiencePopupComponent } from './updateExperience/experience-popup.component';
+import { certificationPopupComponent } from './updateCertification/certificaton-popup.component';
+import { languagePopupComponent } from './updateLanguage/language-popup.component';
+import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
 
 
 @Component({
@@ -68,9 +74,25 @@ snack: any;
   offers: Offer[];
   isPageReloaded = false;
   public emplyeeDataSource: any;
+  public dataSourceEducation: MatTableDataSource<Education>;
+  public dataSourceExperience: MatTableDataSource<Experience>;
+  public dataSourceCertification: MatTableDataSource<Certification>;
+  public dataSourceLanguage: MatTableDataSource<Language>;
+  public dataSourceSkills: MatTableDataSource<Skills>;
+
+
+  
   public dataSource: any;
 
-  public displayedColumns: any;
+  public displayedColumnsEducation: any;
+  public displayedColumnsExperience: any;
+  public displayedColumnsCertification: any;
+  public displayedColumnsLanguage: any;
+  public displayedColumnsSkills: any;
+
+
+
+
   public getItemSub: Subscription;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -78,13 +100,13 @@ snack: any;
   formWidth = 200; //declare and initialize formWidth property
   formHeight = 700; //declare and initialize formHeight property
   cvHtml = '';
-  id: number
+  EmployeeId: number
   idTechnicalFile:number
-  education : Education 
+  experience : Experience 
   language: Language
   technicalFile: TechnicalFile
   certification : Certification
-  experience : Experience
+  public education : Education[]
   candidature : AssOfferCandidate
   private router: Router
   itemForm: any;
@@ -97,12 +119,21 @@ snack: any;
   private updateCandidatService: updateCandidatService,
   private formBuilder: FormBuilder,
   private http:HttpClient,
+  private confirmService: AppConfirmService,
   //public dialogRef: MatDialogRef<employeePopupComponent>,
   private dialog: MatDialog
    ) 
    {  
 
     this.emplyeeDataSource = new MatTableDataSource<Employee>([]);
+    this.dataSourceEducation = new MatTableDataSource<Education>([]);
+    this.dataSourceExperience = new MatTableDataSource<Experience>([]);
+    this.dataSourceCertification = new MatTableDataSource<Certification>([]);
+    this.dataSourceLanguage = new MatTableDataSource<Language>([]);
+    this.dataSourceSkills = new MatTableDataSource<Skills>([]);
+
+
+
 
   }
 
@@ -113,18 +144,23 @@ snack: any;
   
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
+    this.EmployeeId = this.route.snapshot.params['id'];
     this.getemployee();
-   console.log(this.id);
-   this.getTechnicalFile();
-   this.getEducation();
-   this.getExperience();
-   this.getCertification();
-   this.getlanguage();
-   this.getSkills();
-   this.getCandidature();
-   this.displayedColumns = this.getExperienceDisplayedColumns();
+    console.log(this.EmployeeId);
+    this.getTechnicalFile();
+    this.getEducation();
+    this.displayedColumnsEducation = this.getEducationDisplayedColumns();
     this.getExperience();
+    this.displayedColumnsExperience = this.getExperienceDisplayedColumns();
+   this.getCertification();
+   this.displayedColumnsCertification = this.getCertificationDisplayedColumns();
+    this.getLanguage();
+    this.displayedColumnsLanguage = this.getLanguageDisplayedColumns();
+   this.getSkills();
+   this.displayedColumnsSkills = this.getSkillsDisplayedColumns();
+
+   //this.getCandidature();
+  
    /*const cv = document.getElementById('CV');
     if (cv) {
       this.cvHtml = cv.innerHTML;
@@ -136,8 +172,8 @@ snack: any;
     );
 
     
-    this.displayedColumns = this.getDisplayedColumns();
-    this.getOfferItems()
+    this.displayedColumnsEducation = this.getEducationDisplayedColumns();
+   
     this.repeatForm= new FormGroup({
       repeatArray: new FormArray([])
     });
@@ -146,72 +182,6 @@ snack: any;
     });
 
   
-    this.myForm = new UntypedFormGroup({
-      firstName: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(15),
-        this.capitalLetterValidator
-      ]),
-      lastName: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-        this.capitalLetterValidator
-      ]),
-      birthDate: new UntypedFormControl('', ),
-      title: new UntypedFormControl('', ),
-      address: new UntypedFormControl(''),
-      emailOne: new UntypedFormControl('',[] ),
-      phoneNumberOne: new UntypedFormControl('', []),
-      civility: new UntypedFormControl('', []),
-      maritalSituation: new UntypedFormControl('', []),
-      //country: new UntypedFormControl('', ),
-      //city: new UntypedFormControl('', []),
-      postCode: new UntypedFormControl('', []),
-      emailTwo: new UntypedFormControl('', ),
-      phoneNumberTwo: new UntypedFormControl('', [])
-
-    })
-      this.cvForm = new UntypedFormGroup({
-      institution: new UntypedFormControl('', []),
-      diploma: new UntypedFormControl('', []),
-      score: new UntypedFormControl('', []),
-      startYear: new UntypedFormControl('', []),
-      obtainedDate: new UntypedFormControl('', []),
-      actual: new UntypedFormControl(false),
-      actualEmployment :new UntypedFormControl(false),
-      experienceCompany: new UntypedFormControl('', []),
-      experiencePost: new UntypedFormControl('', []),
-      experienceTitle: new UntypedFormControl('', []),
-      experienceRole : new UntypedFormControl('', []),
-      experienceStartDate: new UntypedFormControl('', []),
-      experienceEndDate: new UntypedFormControl('', []),
-      technology: new UntypedFormControl('', []),
-      certificationTitle: new UntypedFormControl('', []),
-      certificationObtainedDate: new UntypedFormControl('', []),
-      language: new UntypedFormControl('', []),
-      languageLevel: new UntypedFormControl('', []),
-      additionalInformation: new UntypedFormControl('', []),
-      skillTitle : new UntypedFormControl('', []),
-      skillCategoryTitle: new UntypedFormControl('', []),
-    })
-
-      this.techFileForm = new UntypedFormGroup({
-      reference: new UntypedFormControl('', []),
-      description: new UntypedFormControl('', []),
-      objective: new UntypedFormControl('', []),
-      driverLicense: new UntypedFormControl('', []),
-      //nationality: new UntypedFormControl('', []),
-    })
-
-
-    /////FormDuplicate///
-    this.repeatForm = this._formBuilder.group({
-      repeatArray: this._formBuilder.array([this.createRepeatForm()])
-    });
-
-
     /////Countries////
     this.itemForm.get("country").valueChanges.subscribe((country) => {
       this.itemForm.get("city").reset();
@@ -229,11 +199,21 @@ snack: any;
     }
     return null;
   }
-  getExperienceDisplayedColumns() {
-    return ['experienceTitle', 'experiencePost', 'experienceCompany'];
+  getEducationDisplayedColumns() {
+    return ['diploma', 'institution', 'actions'];
   }
-
-
+  getExperienceDisplayedColumns() {
+    return ['experienceCompany', 'experiencePost','technology', 'actions'];
+  }
+  getCertificationDisplayedColumns() {
+    return ['certificationTitle', 'certificationObtainedDate', 'actions'];
+  }
+  getLanguageDisplayedColumns() {
+    return ['language', 'languageLevel', 'actions'];
+  }
+  getSkillsDisplayedColumns() {
+    return ['skillsTitle',  'actions'];
+  }
   /*ngAfterViewInit() {
     if (!this.isPageReloaded) {
       this.isPageReloaded = true;
@@ -256,215 +236,6 @@ snack: any;
         error: (e) => console.error('Error adding item', e)
       });
     }
-
-    saveTechFile(): void {
-      console.log('Submitting form...');
-      this.updateCandidatService.addTechFile({...this.techFileForm.value, employeeId:this.selectedEmplyee.id}).subscribe({
-        next: (res) => {
-          console.log('Item added successfully', res);
-          this.selectedTechFile = res;
-          console.log('Selected technical file ID:', this.selectedTechFile.id);
-         console.log('Form value', this.techFileForm.value);
-          this.submitted = true;
-        },
-        error: (e) => {
-          console.error('Error adding item', e);
-          console.log('Form is invalid');
-          console.log(this.techFileForm.errors);
-        }
-      });
-    }
-  
-
-    /*saveFormation(): void {
-      console.log('Submitting cv form...');
-      this.cvCandidatService.addEducation({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
-        next: (res) => {
-          console.log('Item added successfully', res);
-          console.log('Form value', this.cvForm.value);
-          this.submitted = true;
-        },   
-        error: (e) => {
-          console.error('Error adding item', e);
-          console.log('cv Form is invalid');
-          console.log(this.cvForm.errors);
-        }
-      });
-    }*/
-
-    /*saveExperience(): void {
-      console.log('Submitting cv form...');
-      this.cvCandidatService.addExperience({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
-        next: (res) => {
-          console.log('Item added successfully', res);
-          console.log('Form value', this.cvForm.value);
-          this.submitted = true;
-        },   
-        error: (e) => {
-          console.error('Error adding item', e);
-          console.log('cv Form is invalid');
-          console.log(this.cvForm.errors);
-        }
-      });
-    }*/
-
-
-
-
-    saveCertif(): void {
-      console.log('Submitting cv form...');
-      this.updateCandidatService.addCertif({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
-        next: (res) => {
-          console.log('Item added successfully', res);
-          console.log('Form value', this.cvForm.value);
-          this.submitted = true;
-        },   
-        error: (e) => {
-          console.error('Error adding item', e);
-          console.log('cv Form is invalid');
-          console.log(this.cvForm.errors);
-        }
-      });
-    }
-
-     saveRest(): void {
-      console.log('Submitting cv form...');
-         
-      //Save Formation 
-      this.updateCandidatService.addEducation({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
-        next: (res) => {
-          console.log('Item added successfully', res);
-          console.log('Form value', this.cvForm.value);
-          this.submitted = true;
-        },   
-        error: (e) => {
-          console.error('Error adding item', e);
-          console.log('cv Form is invalid');
-          console.log(this.cvForm.errors);
-        }
-      });
-
-      // Save Expérience 
-      this.updateCandidatService.addExperience({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
-        next: (res) => {
-          console.log('Item added successfully', res);
-          console.log('Form value', this.cvForm.value);
-          this.submitted = true;
-        },   
-        error: (e) => {
-          console.error('Error adding item', e);
-          console.log('cv Form is invalid');
-          console.log(this.cvForm.errors);
-        }
-      });
-
-      // Save language
-      this.updateCandidatService.addLanguage({...this.cvForm.value, technicalFileId: this.selectedTechFile.id}).subscribe({
-        next: (res) => {
-          console.log('Language added successfully', res);
-          console.log('Form value', this.cvForm.value);
-          this.submitted = true;
-        },
-        error: (e) => {
-          console.error('Error adding Language', e);
-          console.log('cv Form is invalid');
-          console.log(this.cvForm.errors);
-        }
-      });
-    
-      // Save certif
-      this.updateCandidatService.addCertif({...this.cvForm.value, technicalFileId: this.selectedTechFile.id}).subscribe({
-        next: (res) => {
-          console.log('certif added successfully', res);
-          console.log('Form value', this.cvForm.value);
-          this.submitted = true;
-        },
-        error: (e) => {
-          console.error('Error adding certif', e);
-          console.log('cv Form is invalid');
-          console.log(this.cvForm.errors);
-        }
-      });
-
-    
-      // Save skills
-      this.updateCandidatService.addSkill({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
-        next: (res) => {
-          console.log('skill added successfully', res);
-          console.log('Form value', this.cvForm.value);
-          this.submitted = true;
-        },   
-        error: (e) => {
-          console.error('Error adding skill', e);
-          console.log('cv Form is invalid');
-          console.log(this.cvForm.errors);
-        }
-      });
-
-
-      // Save skills category
-      this.updateCandidatService.addSkillCategory({...this.cvForm.value, technicalFileId: this.selectedTechFile.id}).subscribe({
-        next: (res) => {
-          console.log('skill cat added successfully', res);
-          console.log('Form value', this.cvForm.value);
-          this.submitted = true;
-        },
-        error: (e) => {
-          console.error('Error adding skill cat', e);
-          console.log('cv Form is invalid');
-          console.log(this.cvForm.errors);
-        }
-      });
-    }
-    
-
-
-
-
-  public confirmer(){}
-   ///////Skills chips//////////
-   add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-    // Add skill
-    if ((value || '').trim()) {
-      this.skills.push({skillsTitle: value.trim()});
-      this.cvForm.controls['skillTitle'].setValue(this.skills);// update the form control with the new skills array
-    }
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-  }
-  // Remove skill
-  remove(skill: Skills): void {
-    const index = this.skills.indexOf(skill);
-    if (index >= 0) {
-      this.skills.splice(index, 1);
-      this.cvForm.controls['skillTitle'].setValue(this.skills); // update the form control with the new skills array
-    }
-    }
-
-
-  ///// Form Submit/////
-  onSubmit() {
-    // Get the values of each form
-    const formData = this.myForm.value;
-    this.http.post('http://localhost:8080/rh/employee', formData)
-  .pipe(
-    catchError(error => {
-      console.log(error);
-      return of(error);
-    })
-  )
-  .subscribe(response => {
-    console.log(response);
-    // Handle the response, such as displaying a success message
-  });
-  }
-
-
-
 
   //Section Supplimentaire button
   showInput = false;
@@ -503,7 +274,6 @@ handleRemoveRepeatForm(index: number) {
     this.states = this.updateCandidatService.getStatesByCountry(countryShotName);
    
   }
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
   
   getOfferItems() {    
     this.getItemSub = this.updateCandidatService.getOfferItems()
@@ -514,65 +284,130 @@ handleRemoveRepeatForm(index: number) {
       })
 
   }
-  getDisplayedColumns() {
+/*  getDisplayedColumns() {
     return ['reference','title','actions' ];
-  }
+  }*/
 
   ///------------partiedetails-----------/////////////////////
 
   getemployee() {
-    this.updateCandidatService.getItemById(this.id).subscribe((data: any) => {
+    this.updateCandidatService.getItemById(this.EmployeeId).subscribe((data: any) => {
       this.employee = data;
 
     });
   }
   getTechnicalFile() {
-    this.updateCandidatService.getTechnicalFileById(this.id).subscribe((data: any) => {
+    this.updateCandidatService.getTechnicalFileById(this.EmployeeId).subscribe((data: any) => {
       this.technicalFile = data;
+      console.log(this.technicalFile);
 
     });
   }
   getEducation() {
-    this.updateCandidatService.getEducationById(this.id).subscribe((data: any) => {
-      this.education = data;
-      console.log(this.education);
+    this.updateCandidatService.getEducationById(this.EmployeeId).subscribe((data: any) => {
+      {
+        this.dataSourceEducation = new MatTableDataSource(data);
+      }
+      
     });
   }
-  getExperience(){
-    this.updateCandidatService.getExperienceById(this.id).subscribe((data : any)=>{
-      this.experience = data;
-      console.log(this.experience);
-    })
+
+  getExperience() {
+    this.updateCandidatService.getExperienceById(this.EmployeeId).subscribe((data: any) => {
+      {
+        this.dataSourceExperience = new MatTableDataSource(data);
+      }
+      
+    });
   }
-  getCertification(){
-    this.updateCandidatService.getCertificationById(this.id).subscribe((data : any)=>{
-      this.certification = data;
-      console.log(this.certification);
-    })
+
+  getCertification() {
+    this.updateCandidatService.getCertificationById(this.EmployeeId).subscribe((data: any) => {
+      {
+        this.dataSourceCertification = new MatTableDataSource(data);
+      }
+      
+    });
   }
-  getlanguage(){
-    this.updateCandidatService.getLanguageById(this.id).subscribe((data : any)=>{
-      this.language = data;
-      console.log(this.language);
-    })
+  getLanguage() {
+    this.updateCandidatService.getLanguageById(this.EmployeeId).subscribe((data: any) => {
+      {
+        this.dataSourceLanguage = new MatTableDataSource(data);
+      }
+      
+    });
   }
+
+
+ 
   getSkills(){
-    this.updateCandidatService.getSkillsById(this.id).subscribe((data : any)=>{
+    this.updateCandidatService.getSkillsById(this.EmployeeId).subscribe((data : any)=>{
       this.skills = data;
       console.log(this.skills);
     })
   }
   getCandidature(){
-    this.updateCandidatService.getCandiatureById(this.id).subscribe((data : any)=>{
+    this.updateCandidatService.getCandiatureById(this.EmployeeId).subscribe((data : any)=>{
       this.candidature =data;
       console.log(this.candidature);
     })
   }
+  //--------delete-----------
+  deleteEducation(id :number) {
+  
+    this.updateCandidatService.deleteEducation(id)
+    .subscribe(
+      response => {
+        console.log(response);
+        // Reload the addresses list after deletion
+        this.getEducation();
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    }
+    deleteExperience(id: number) {
+      this.updateCandidatService.deleteExperience(id)
+        .subscribe(
+          response => {
+            console.log(response);
+            // Reload the addresses list after deletion
+            this.getExperience();
+          },
+          error => {
+            console.log(error);
+          }
+        );
+      }
+      deleteCertification(id: number) {
+        this.updateCandidatService.deleteCertificaion(id)
+          .subscribe(
+            response => {
+              console.log(response);
+              // Reload the addresses list after deletion
+              this.getCertification();
+            },
+            error => {
+              console.log(error);
+            }
+          );
+        }    
+        deleteLanguage(id: number) {
+          this.updateCandidatService.deleteCertificaion(id)
+            .subscribe(
+              response => {
+                console.log(response);
+                // Reload the addresses list after deletion
+                this.getCertification();
+              },
+              error => {
+                console.log(error);
+              }
+            );
+          }   
 
-  openEvaluationCandidat(){
-    this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
-  }
-
+//-------------------------
   employeeTitleMap = {
     [Title.FRONT_END_DEVELOPER]: 'Développeur Front-End',
     [Title.BACK_END_DEVELOPER]: 'Développeur Back-End',
@@ -686,19 +521,248 @@ openPopUpEmployee(data: any = {}) {
   });
 }
 
-////////*-----------------------------
-open(Id: number) {
-  // show popup and set employeeId
-  Id = this.id; // set employeeId to the desired value
-  let dialogRef: MatDialogRef<any> = this.dialog.open(employeePopupComponent) ;
-  
-    this.updateCandidatService.getItemById(Id).subscribe((data: any) => {
-      this.employee = data;
+/*openPopUpEducation(data:  any , isNew?) {
+  const title = 'Modifier compte bancaire';
+  const dialogRef: MatDialogRef<any> = this.dialog.open(educationPopupComponent, {
+    width: '1000px',
+    disableClose: true,
+    data: { title: title, payload: data  }
+  });
 
+  dialogRef.afterClosed()
+  .subscribe(res => {
+    if(!res) {
+      // If user press cancel
+      return;
+    }
+    if (isNew) {
+      this.loader.open('Ajout en cours');
+      this.updateCandidatService.addEducation(res)
+        .subscribe((data :any)=> {
+          this.dataSource = data;
+          this.loader.close();
+          this.snack.open('Education ajoutée avec succès!', 'OK', { duration: 2000 });
+          this.getItems();
+        })
+    } else 
+    {
+      const updatedData = { ...data, ...res };
+      this.updateCandidatService.updateEducation(data.id, res).subscribe(
+        (response) => {
+          console.log('Item updated successfully', response);
+          this.snack.open('Compte bancaire modifié avec succès!', 'OK', { duration: 2000 });
+          this.getItems();
+        },
+        (error) => {
+          console.error('Error updating item', error);
+          this.snack.open('Une erreur est survenue lors de la modification du compte bancaire.', 'OK', { duration: 2000 });
+        }
+      );
+    }
+  });
+}
+
+}
+}*/
+openPopUpEducation(data: any, isNew?: boolean) {
+  const title = isNew ? 'Nouvelle education' : 'Modifier education';
+  const dialogRef: MatDialogRef<any> = this.dialog.open(educationPopupComponent, {
+    width: '1000px',
+    disableClose: true,
+    data: { title: title, payload: data, technicalFileId: this.technicalFile.id }
+  });
+
+  dialogRef.afterClosed()
+    .subscribe(res => {
+      if (!res) {
+        // If user press cancel
+        return;
+      }
+      if (isNew) {
+        this.loader.open('Ajout en cours');
+        this.updateCandidatService.addEducation(res)
+          .subscribe((data: any) => {
+            this.dataSource = data;
+            this.loader.close();
+            this.snack.open('Education ajoutée avec succès!', 'OK', { duration: 2000 });
+            this.getItems();
+          })
+      } else {
+        const updatedData = { ...data, ...res };
+        this.updateCandidatService.updateEducation(data.id, updatedData).subscribe(
+          (response) => {
+            console.log('Education updated successfully', response);
+            this.snack.open('Education modifié avec succès!', 'OK', { duration: 2000 });
+            this.getItems();
+          },
+          (error) => {
+            console.error('Error updating Education', error);
+            this.snack.open('Une erreur est survenue lors de la modification de l education', 'OK', { duration: 2000 });
+          }
+        );
+      }
     });
-  
 }
 
 
+openPopUpExperience(data: any, isNew?: boolean) {
+  const title = isNew ? 'Nouvelle experience' : 'Modifier experience';
+  const dialogRef: MatDialogRef<any> = this.dialog.open(experiencePopupComponent, {
+    width: '1000px',
+    disableClose: true,
+    data: { title: title, payload: data, technicalFileId: this.technicalFile.id }
+  });
+
+  dialogRef.afterClosed()
+    .subscribe(res => {
+      if (!res) {
+        // If user press cancel
+        return;
+      }
+      if (isNew) {
+        this.loader.open('Ajout en cours');
+        this.updateCandidatService.addExperience(res)
+          .subscribe((data: any) => {
+            this.dataSource = data;
+            this.loader.close();
+            this.snack.open('Education ajoutée avec succès!', 'OK', { duration: 2000 });
+            this.getExperience();
+          })
+      } else {
+        const updatedData = { ...data, ...res };
+        this.updateCandidatService.updateExperience(data.id, updatedData).subscribe(
+          (response) => {
+            console.log('Experience updated successfully', response);
+            this.snack.open('Experience modifié avec succès!', 'OK', { duration: 2000 });
+            this.getItems();
+          },
+          (error) => {
+            console.error('Error updating item', error);
+            this.snack.open('Une erreur est survenue lors de la modification d experience.', 'OK', { duration: 2000 });
+          }
+        );
+      }
+    });
 }
+
+openPopUpCertification(data: any, isNew?: boolean) {
+  const title = isNew ? 'Nouvelle certification' : 'Modifier certification';
+  const dialogRef: MatDialogRef<any> = this.dialog.open(certificationPopupComponent, {
+    width: '1000px',
+    disableClose: true,
+    data: { title: title, payload: data, technicalFileId: this.technicalFile.id }
+  });
+
+  dialogRef.afterClosed()
+    .subscribe(res => {
+      if (!res) {
+        // If user press cancel
+        return;
+      }
+      if (isNew) {
+        this.loader.open('Ajout en cours');
+        this.updateCandidatService.addCertif(res)
+          .subscribe((data: any) => {
+            this.dataSource = data;
+            this.loader.close();
+            this.snack.open('Education ajoutée avec succès!', 'OK', { duration: 2000 });
+            this.getItems();
+          })
+      } else {
+        const updatedData = { ...data, ...res };
+        this.updateCandidatService.updateCertification(data.id, updatedData).subscribe(
+          (response) => {
+            console.log('certification updated successfully', response);
+            this.snack.open('certification modifié avec succès!', 'OK', { duration: 2000 });
+            this.getItems();
+          },
+          (error) => {
+            console.error('Error updating item', error);
+            this.snack.open('Une erreur est survenue lors de la modification d certification.', 'OK', { duration: 2000 });
+          }
+        );
+      }
+    });
+}
+openPopUpLanguage(data: any, isNew?: boolean) {
+  const title = isNew ? 'Nouvelle certification' : 'Modifier certification';
+  const dialogRef: MatDialogRef<any> = this.dialog.open(languagePopupComponent, {
+    width: '1000px',
+    disableClose: true,
+    data: { title: title, payload: data, technicalFileNum: this.technicalFile.id }
+  });
+
+  dialogRef.afterClosed()
+    .subscribe(res => {
+      if (!res) {
+        // If user press cancel
+        return;
+      }
+      if (isNew) {
+        this.loader.open('Ajout en cours');
+        this.updateCandidatService.addLanguage(res)
+          .subscribe((data: any) => {
+            this.dataSource = data;
+            this.loader.close();
+            this.snack.open('Education ajoutée avec succès!', 'OK', { duration: 2000 });
+            this.getExperience();
+          })
+      } else {
+        const updatedData = { ...data, ...res };
+        this.updateCandidatService.updateLanguage(data.id, updatedData).subscribe(
+          (response) => {
+            console.log('certification updated successfully', response);
+            this.snack.open('certification modifié avec succès!', 'OK', { duration: 2000 });
+            this.getItems();
+          },
+          (error) => {
+            console.error('Error updating item', error);
+            this.snack.open('Une erreur est survenue lors de la modification d certification.', 'OK', { duration: 2000 });
+          }
+        );
+      }
+    });
+}
+openPopUpSkills(data: any, isNew?: boolean) {
+  const title = isNew ? 'Nouvelle certification' : 'Modifier certification';
+  const dialogRef: MatDialogRef<any> = this.dialog.open(languagePopupComponent, {
+    width: '1000px',
+    disableClose: true,
+    data: { title: title, payload: data, technicalFileNum: this.technicalFile.id }
+  });
+
+  dialogRef.afterClosed()
+    .subscribe(res => {
+      if (!res) {
+        // If user press cancel
+        return;
+      }
+      if (isNew) {
+        this.loader.open('Ajout en cours');
+        this.updateCandidatService.addSkill(res)
+          .subscribe((data: any) => {
+            this.dataSource = data;
+            this.loader.close();
+            this.snack.open('Education ajoutée avec succès!', 'OK', { duration: 2000 });
+            this.getExperience();
+          })
+      } else {
+        const updatedData = { ...data, ...res };
+        this.updateCandidatService.updateSkills(data.id, updatedData).subscribe(
+          (response) => {
+            console.log('certification updated successfully', response);
+            this.snack.open('certification modifié avec succès!', 'OK', { duration: 2000 });
+            this.getItems();
+          },
+          (error) => {
+            console.error('Error updating item', error);
+            this.snack.open('Une erreur est survenue lors de la modification d certification.', 'OK', { duration: 2000 });
+          }
+        );
+      }
+    });
+}
+
+}
+
 

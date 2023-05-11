@@ -360,7 +360,7 @@ export class cvcandidatComponent implements OnInit {
       console.log('Submitting cv form...');
          
       //Save Formation 
-      this.cvCandidatService.addEducation({...this.cvForm.value, technicalFileId:this.selectedTechFile.id}).subscribe({
+      this.cvCandidatService.addEducation({...this.cvForm.value, technicalFileNum:this.selectedTechFile.id}).subscribe({
         next: (res) => {
           console.log('Item added successfully', res);
           console.log('Form value', this.cvForm.value);

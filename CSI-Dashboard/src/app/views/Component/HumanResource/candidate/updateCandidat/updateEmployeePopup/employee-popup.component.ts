@@ -80,7 +80,7 @@ export class employeePopupComponent implements OnInit {
       postCode: new UntypedFormControl('', []),
       emailTwo: new UntypedFormControl('', ),
       phoneNumberTwo: new UntypedFormControl('', []),
-      id: new UntypedFormControl(this.data.payload.id, [])
+      id: new UntypedFormControl(this.data.technichalFile, [])
 
     });
 

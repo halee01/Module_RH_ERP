@@ -16,6 +16,7 @@ import { TechnicalFile } from 'app/shared/models/TechnicalFile';
 
 @Injectable()
 export class updateCandidatService {
+  [x: string]: any;
   private apiUrl = 'http://localhost:8080/rh/employee';
   private apiTechFile = 'http://localhost:8080/rh/technicalFile';
   private apiOffer='http://localhost:8080/rh/Offer'
@@ -89,7 +90,7 @@ export class updateCandidatService {
 
 
 
-  /////////////////////////Back Connection//////////////////////////
+  /////////////////////////update//////////////////////////
 
 
 
@@ -101,6 +102,19 @@ export class updateCandidatService {
         console.error('Error updating employee', err);
         return throwError(err);
       })
+    );
+  }
+  updateEducation(id: number, education: Education): Observable<Education> {
+    const url = `${this.apiEducation+ '/update'}/${id}`;
+    return this.http.put<Education>(url, education).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateCertification(id: number, certification: Certification): Observable<Certification> {
+    const url = `${this.apiCertification+ '/updateCertification'}/${id}`;
+    return this.http.put<Certification>(url, certification).pipe(
+      catchError(this.handleError)
     );
   }
 
@@ -193,8 +207,27 @@ addTechFile(techfile: any): Observable<any> {
   );
 }
 updateTechFile(techfile: any): Observable<any> {
-  const apiTechFileWithAdd = this.apiTechFile + '/addTechnicalFile'; // Append /add to the apiUrl
+  const apiTechFileWithAdd = this.apiTechFile + '/updateTechnicalFile'; // Append /add to the apiUrl
   return this.http.put<any>(apiTechFileWithAdd, techfile).pipe(
+    catchError(this.handleError)
+  );
+}
+
+updateExperience(id: number, experience: Experience): Observable<Experience> {
+  const url = `${this.apiExperience+ '/update'}/${id}`;
+  return this.http.put<Experience>(url, experience).pipe(
+    catchError(this.handleError)
+  );
+}
+updateLanguage(id: number, language: Language): Observable<Experience> {
+  const url = `${this.apiLanguage+ '/update'}/${id}`;
+  return this.http.put<Experience>(url, language).pipe(
+    catchError(this.handleError)
+  );
+}
+updateSkills(id: number, skills: Skills): Observable<Skills> {
+  const url = `${this.apiSkill+ '/update'}/${id}`;
+  return this.http.put<Skills>(url, skills).pipe(
     catchError(this.handleError)
   );
 }
@@ -321,5 +354,43 @@ getItemById(id: number): Observable<Employee> {
     catchError(this.handleError)
   );
 }
+//---Delete-----------
+deleteEducation(id: number): Observable<Education> {
+ 
+  const url = `${this.apiEducation+'/delete'}/${id}`;
+  return this.http.delete<Education>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+deleteExperience(id: number): Observable<Experience> {
+ 
+  const url = `${this.apiExperience+'/delete'}/${id}`;
+  return this.http.delete<Experience>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+deleteCertificaion(id: number): Observable<Certification> {
+ 
+  const url = `${this.apiCertification+'/deleteCertification'}/${id}`;
+  return this.http.delete<Certification>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+deleteLanguage(id: number): Observable<Language> {
+ 
+  const url = `${this.apiLanguage+'/delete'}/${id}`;
+  return this.http.delete<Language>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+deleteSkills(id: number): Observable<Skills> {
+ 
+  const url = `${this.apiSkill+'/delete'}/${id}`;
+  return this.http.delete<Skills>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+
+
 
 }
