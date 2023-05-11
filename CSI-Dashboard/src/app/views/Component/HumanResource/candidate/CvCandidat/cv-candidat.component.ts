@@ -76,7 +76,11 @@ export class cvcandidatComponent implements OnInit {
 
 
 //////////////Form Candidate///////////////
-  public itemForm: FormGroup;;
+  public itemForm: FormGroup;technicalFile: any;
+loader: any;
+snack: any;
+updateCandidatService: any;
+;
   CompanyStatus = Object.values(CompanyStatus);
   WorkField :string []= Object.values(WorkField);
   LegalStatus = Object.values(LegalStatus);
@@ -168,6 +172,7 @@ export class cvcandidatComponent implements OnInit {
     this.repeatForm= new FormGroup({
       repeatArray: new FormArray([])
     });
+
    this.cvCandidatService.getLastEmployee().subscribe(employee => {
       this.lastEmployee = employee;
     });
@@ -216,7 +221,7 @@ export class cvcandidatComponent implements OnInit {
       description: new UntypedFormControl('', []),
       objective: new UntypedFormControl('', []),
       driverLicense: new UntypedFormControl('', []),
-      //nationality: new UntypedFormControl('', []),
+      experienceAmount:new UntypedFormControl('', [Validators.required])
     })
 
 
@@ -510,10 +515,10 @@ handleAddRepeatForm() {
 
 handleRemoveRepeatForm(index: number) {
   this.repeatFormGroup.removeAt(index);
- /* if (index > 0) { // check if the index is greater than 0
+  if (index > 0) { // check if the index is greater than 0
     const repeatArray = this.repeatForm.get('repeatArray') as FormArray;
     repeatArray.removeAt(index);
-}*/
+}
 }
 
   email = new FormControl('', [Validators.required, Validators.email]);
@@ -600,7 +605,11 @@ handleRemoveRepeatForm(index: number) {
     dialogConfig.height = '350px'; // set the height
 
     const dialogRef = this.dialog.open(OfferPopupComponent, dialogConfig);
+
   }
   
+  getItems() {
+    throw new Error('Method not implemented.');
+  }
   
 }

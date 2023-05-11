@@ -241,5 +241,24 @@ changeEmployeeStatus(employeeStatus: string, employeeId: number): void {
     }
   );
 }
-
+employeeTitleMap = {
+  [Title.FRONT_END_DEVELOPER]: 'Développeur Front-End',
+  [Title.BACK_END_DEVELOPER]: 'Développeur Back-End',
+  [Title.FULLSTACK_DEVELOPER]: 'Développeur Full-Stack',
+  [Title.CRM]: 'CRM',
+  [Title.HUMAN_RESOURCE_MANAGER]: 'Responsable des Ressources Humaines',
+  [Title.HUMAN_RESOURCE]: 'Ressources Humaines',
+  [Title.PROJECT_MANAGER]: 'Chef de Projet',
+  [Title.TECH_LEAD]: 'Chef de Projet',
+  [Title.UI_UX_DESIGNER]: 'Concepteur UI/UX',
+  [Title.QA_ENGINEER]: 'Ingénieur QA',
+  [Title.DEVOPS_ENGINEER]: 'Ingénieur DevOps',
+  [Title.WEB_DEVELOPER]: 'Développeur Web',
+  [Title.OFFICE_MANAGER]: 'Responsable d Agence',
+  [Title.ACCOUNTANT]: 'Comptable',
+  [Title.SALES_REPRESENTATIVE]: 'Représentant Commercial',
+  [Title.CUSTOMER_SUPPORT_SPECIALIST]: 'Spécialiste du Support Client',
+  [Title.MARKETING_COORDINATOR]: 'Coordinateur Marketing'
+  
+};
 }

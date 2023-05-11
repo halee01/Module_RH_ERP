@@ -288,9 +288,10 @@
                 disabled="true" />
             </mat-form-field>
           </div>-->
-          <div class="example-form">
-            <div class="example-grid">
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
+          <div class="container">
+            <mat-grid-list cols="3" rowHeight="100px">
+            <mat-grid-tile>
+              <mat-form-field appearance="outline" class="example-field" [style.width.cm]=7.25>
                 <mat-label>Référence</mat-label>
                 <input 
                 required
@@ -301,30 +302,47 @@
                 <mat-error *ngIf="techFileForm.get('reference').invalid && techFileForm.get('reference').touched">
                   Ce champ est obligatoire.</mat-error>
               </mat-form-field>
-             
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=10 >
+              </mat-grid-tile>
+
+              <mat-grid-tile>
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=7 >
                 <mat-label>Permit de conduire</mat-label>
                 <input 
                 type="text"
                 matInput
                 formControlName="driverLicense"  >
               </mat-form-field>
-            </div>
+              </mat-grid-tile>
 
-            <div class="example-grid">
-
-              <mat-form-field appearance="outline"  [style.width.cm]=10 [style.padding-right.cm]=3.5 class="example-full-width">
+              <mat-grid-tile>
+                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=7 >
+                  <mat-label>Nombre d'années d'expérience</mat-label>
+                  <input 
+                  type="text"
+                  matInput
+                  formControlName="experienceAmount"  >
+                </mat-form-field>
+              </mat-grid-tile>
+              </mat-grid-list>
+                
+              <mat-grid-list cols="2" rowHeight="100px">
+                <mat-grid-tile>
+                   <mat-form-field appearance="outline"  [style.width.cm]=11 [style.padding-right.cm]=1 class="example-full-width">
                 <mat-label>Déscription</mat-label>
                 <textarea matInput formControlName="description" placeholder="Décrivez içi le parcours du candidat."></textarea>
               </mat-form-field>
-              
-              <mat-form-field appearance="outline"  [style.width.cm]=10  class="example-full-width">
+               </mat-grid-tile>
+
+                <mat-grid-tile>
+                  <mat-form-field appearance="outline"  [style.width.cm]=11  class="example-full-width">
                 <mat-label>Objectifs</mat-label>
                 <textarea matInput formControlName="objective" placeholder="Décrivez içi les Objectifs du candidat."></textarea>
-              </mat-form-field>
-            </div>
-            
+                </mat-form-field>
+                </mat-grid-tile>
+
+                </mat-grid-list>
           </div>
+          
         </mat-card-content>
         
         <div  fxLayout="row" dir="rtl" fxLayoutAlign="space-between center">

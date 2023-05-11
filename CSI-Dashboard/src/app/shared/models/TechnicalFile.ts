@@ -11,6 +11,7 @@ export interface TechnicalFile{
     description?: string;
     objective?: string;
     driverLicense?: string;
+    experienceAmount?: number;
     skills?: Skills[];
     experiences?: Experience[];
     languages ?: Language[];

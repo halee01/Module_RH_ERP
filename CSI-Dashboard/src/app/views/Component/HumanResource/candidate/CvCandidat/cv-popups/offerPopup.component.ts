@@ -20,8 +20,6 @@ import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
           })
     }
 
-
-
     ExperienceLevelMap= {
         [ExperienceLevel.JUNIOR]:'Junior',
         [ExperienceLevel.MID_LEVEL]:'Confirmé',
