@@ -300,7 +300,7 @@ updateCandidatService: any;
     
     saveTechFile(): void {
       console.log('Submitting form...');
-      this.cvCandidatService.addTechFile({...this.techFileForm.value, employeeId:this.selectedEmplyee.id}).subscribe({
+      this.cvCandidatService.addTechFile({...this.techFileForm.value, employeeNum:this.selectedEmplyee.id}).subscribe({
         next: (res) => {
           console.log('Item added successfully', res);
           this.selectedTechFile = res;

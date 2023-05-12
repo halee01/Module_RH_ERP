@@ -2,7 +2,9 @@
     <mat-card>
       <form [formGroup]="updateEmployee" (ngSubmit)="submit()" >
       <mat-tab-group>
-        <mat-tab label="Renseignements personnels"> <mat-grid-list cols="2" rowHeight="100px">
+        <mat-tab label="Renseignements personnels">
+          <div style="margin: 1cm;">
+           <mat-grid-list cols="2" rowHeight="100px">
           <mat-grid-tile>
             <div class="pb-16">
               <mat-form-field appearance="outline" [style.width.cm]=10>
@@ -66,9 +68,12 @@
                     </mat-grid-tile>
 
             </mat-grid-list>
+          </div>
            </mat-tab>
-        <mat-tab label="Adresse">
-          <mat-grid-list cols="2" rowHeight="100px" >
+           
+        <mat-tab label="Contact">
+          <div style="margin: 1cm;">
+            <mat-grid-list cols="2" rowHeight="100px" >
             <mat-grid-tile >
                <!--Country-->
                <div class="pb-16">
@@ -188,17 +193,19 @@
                     placeholder="Ex.+33 801 123 456" 
                     value="">
                 </mat-form-field>
-                <div>
-                <div class="pt-16">
-                  <button mat-button color="warn" type="button" (click)="dialogRef.close(false)">Ignorer</button>
-                  <button mat-raised-button color="primary" >Enregistrer</button>
-                </div>
-              </div>  
+                 
             </div>
             </mat-grid-tile>
-      
-        </mat-grid-list> </mat-tab>
-        
+        </mat-grid-list>
+          </div>
+          <div fxLayout="row" fxLayoutAlign="space-between center" >
+            <div class="pt-16">
+              <button mat-raised-button color="warn" type="button" (click)="dialogRef.close(false)">Ignorer</button>
+              <button mat-raised-button color="primary" >Enregistrer</button>
+            </div>
+          </div>
+          
+       </mat-tab>
       </mat-tab-group>
     </form>
   </mat-card>

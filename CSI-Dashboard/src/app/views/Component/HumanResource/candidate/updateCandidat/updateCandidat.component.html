@@ -10,18 +10,19 @@
     </div>
     <div class="content-body">
       <div class="content-card mat-bg-default">
-    <mat-card class="p-0" >
-      <mat-card-content style="padding-top: 20px;">
         <div div fxLayout="row" fxLayoutAlign="space-evenly center" >
           
-          <div fxFlex="100" fxFlex.gt-sm="60">
-            <div fxLyout="row wrap" >
-              <div class="card-title-text">
-              </div>
+          <div fxFlex="100" fxFlex.gt-sm="60" >
+            <div style="margin: 30px;" fxLayout="row" fxLayoutAlign="space-between center" >
+              <div class="card-title-text"><h1>Modification du Candiadat</h1></div>
               <span fxFlex></span>
-
-                <div style="padding-top: 20px;  margin-right: 3cm;"><button  mat-raised-button (click)="openPopUpEmployee(employee)" color="primary"  >Modifier le candidat</button></div>
+                <div> <button  mat-raised-button (click)="openPopUpEmployee(employee)" color="primary"  >Modifier le candidat</button>
+               
+                </div>
             </div>
+
+            
+                
           <mat-card class="p-0" >
               <mat-card-title class="cardColor">
                
@@ -47,7 +48,7 @@
         </div>
         <div style="padding-top: 50px;"></div>
         
-           <div fxFlex="100" fxFlex.gt-sm="50">
+           <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
             <mat-card class="p-0" >
               <mat-card-title class="cardColor">
                 <div class="card-title-text">Info de Contact du Candiadat </div>
@@ -64,12 +65,7 @@
             </mat-card>
           </div>
         </div>
-        
-      </mat-card-content>
-    </mat-card>
 
-    <mat-card class="p-0">
-      <mat-card-content> 
         <div fxLayout="column">
           <div fxLayout="row">
           <div fxFlex="100" fxFlex.gt-sm="50"  style="width: 14.5cm;">
@@ -90,38 +86,23 @@
             </mat-card>
           </div>
           </div> 
-          
-
         </div>
-          
-      </mat-card-content>
-    </mat-card> 
-
-
-  
-
-
-
       </div>
     </div>
 
-  </div>
-</div>
 
 <!---------------------------------------------------------------------------------------------------------------------->
 
-<mat-accordion multi="false">
+<mat-accordion style="margin-top: 0.8cm; " multi="false">
   <!---------Education-------->
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
+  <mat-expansion-panel >
+    <mat-expansion-panel-header style="height: 60px;">
       <mat-panel-title>
-        <mat-icon color="primary">school </mat-icon>
+        <mat-icon style="padding-right: 15px;" color="primary">school </mat-icon>
         <h6 class="text-18 mb-4"> Education de  <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <button mat-icon-button color="primary" type="button" (click)="openPopUpEducation({},true)">
-      <mat-icon>add</mat-icon>
-    </button>
+
     <mat-table [dataSource]="dataSourceEducation" matSort >
       <ng-container matColumnDef="diploma">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Diplome </mat-header-cell>
@@ -148,15 +129,13 @@
   </mat-expansion-panel>
   <!---------Experience------->
   <mat-expansion-panel>
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header style="height: 60px;">
       <mat-panel-title>
-        <mat-icon color="primary">work</mat-icon>
+        <mat-icon style="padding-right: 15px;" color="primary">work</mat-icon>
         <h6 class="text-18 mb-4"> Experience de  <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <button mat-icon-button color="primary" type="button" (click)="openPopUpExperience({},true)">
-      <mat-icon>add</mat-icon>
-    </button>
+
     <mat-table [dataSource]="dataSourceExperience" matSort >
       <ng-container matColumnDef="experienceCompany">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Société </mat-header-cell>
@@ -187,15 +166,13 @@
   </mat-expansion-panel>
   <!-------Certification------>
   <mat-expansion-panel>
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header style="height: 60px;">
       <mat-panel-title>
-        <mat-icon color="primary">verified_user</mat-icon>
+        <mat-icon style="padding-right: 15px;" color="primary">verified_user</mat-icon>
         <h6 class="text-18 mb-4"> Certifications <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <button mat-icon-button color="primary" type="button" (click)="openPopUpCertification({},true)">
-      <mat-icon>add</mat-icon>
-    </button>
+
     <mat-table [dataSource]="dataSourceCertification" matSort >
       <ng-container matColumnDef="certificationTitle">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Titre de la certification </mat-header-cell>
@@ -222,15 +199,13 @@
   </mat-expansion-panel>
   <!---------Language----------->
   <mat-expansion-panel>
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header style="height: 60px;">
       <mat-panel-title>
-        <mat-icon color="primary">language</mat-icon>
+        <mat-icon style="padding-right: 15px;" color="primary">language</mat-icon>
         <h6 class="text-18 mb-4"> Language <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <button mat-icon-button color="primary" type="button" (click)="openPopUpLanguage({},true)">
-      <mat-icon>add</mat-icon>
-    </button>
+
     <mat-table [dataSource]="dataSourceLanguage" matSort >
       <ng-container matColumnDef="language">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Language </mat-header-cell>
@@ -257,15 +232,13 @@
   </mat-expansion-panel>
   <!-----------Skills---------->
   <mat-expansion-panel>
-    <mat-expansion-panel-header>
+    <mat-expansion-panel-header style="height: 60px;">
       <mat-panel-title>
-        <mat-icon color="primary">build</mat-icon>
+        <mat-icon style="padding-right: 15px;" color="primary">lightbulb_outline</mat-icon>
         <h6 class="text-18 mb-4"> Skills <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <button mat-icon-button color="primary" type="button" (click)="openPopUpSkills({},true)">
-      <mat-icon>add</mat-icon>
-    </button>
+    
     <mat-table [dataSource]="dataSourceSkills" matSort >
       <ng-container matColumnDef="skillsTitle">
         <mat-header-cell *matHeaderCellDef mat-sort-header> titre </mat-header-cell>
@@ -288,3 +261,5 @@
     </mat-table>
   </mat-expansion-panel>
 </mat-accordion>
+</div>
+</div>
