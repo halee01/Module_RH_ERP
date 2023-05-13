@@ -114,7 +114,8 @@
                   <mat-list-item><mat-icon color="primary" class="mr-16">person</mat-icon> <strong style="padding-right: 10px;">Intitulé du poste : </strong>{{experiences.experienceTitle}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">keyboard</mat-icon><strong style="padding-right: 10px;">Technologies: </strong>{{experiences.technology}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de début : </strong>{{experiences.experienceStartDate}}</mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de fin : </strong>{{experiences.experienceEndDate}}</mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de fin : </strong> <ng-container *ngIf="actualEmploymentIsChecked; else experienceEndDate">{{'Present'}}</ng-container>
+                    <ng-template #experienceEndDate>{{experiences.experienceEndDate}}</ng-template></mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Actuellement employé : </strong>{{experiences.actualEmployment}}</mat-list-item>
                 </mat-list>
               </mat-list>
@@ -282,7 +283,8 @@
               <li>
                 <div style="display: flex; justify-content: space-between;">
                     <p><strong style="padding-right: 10px;color: #4d528c; font-size:medium;">Intitulé du poste:</strong>{{experiences.experienceTitle}}</p>
-                     <p>{{experiences.experienceStartDate}} | {{experiences.experienceEndDate}}</p>
+                     <p>{{experiences.experienceStartDate}} |  <ng-container *ngIf="actualEmploymentIsChecked; else experienceEndDate">{{'Present'}}</ng-container>
+                      <ng-template #experienceEndDate>{{experiences.experienceEndDate}}</ng-template></p>
                 </div>
                 <ul>
                   <li><strong style="padding-right: 10px;">Technologies utilisées:</strong>{{experiences.technology}}</li>

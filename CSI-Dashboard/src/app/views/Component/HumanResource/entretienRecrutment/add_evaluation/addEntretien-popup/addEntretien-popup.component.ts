@@ -109,20 +109,15 @@ export class ajoutEntretienPopupComponent implements OnInit {
 
 InterviewModeMap = {
   [InterviewMode.REMOTE]: 'À distance',
-  [InterviewMode.ON_SITE]: 'Sur place',}
+  [InterviewMode.ON_SITE]: 'Sur place',
+  [InterviewMode.PHONE_INTERVIEW]: 'Téléphonique',
+  [InterviewMode.VIDEOCONFERENCE]: 'Visioconférence',
+}
 
 
   InterviewTypeMap = {
-  [InterviewType.BEHAVIORAL_INTERVIEW]: 'Entretien comportemental',
   [InterviewType.TECHNICAL_INTERVIEW]: 'Entretien technique',
-  [InterviewType.CASE_STUDY_INTERVIEW]: 'Entretien détude de cas',
-  [InterviewType.HUMAN_RESOURCE_INTERVIEW]: 'Entretien ressources humaines',
-  [InterviewType.ONLINE_TEST]: 'Entretien en ligne',
-  [InterviewType.ON_SITE_TEST]: 'Entretien sur site ',
-  [InterviewType.PANEL_INTERVIEW]: 'Entretien avec un panel',
-  [InterviewType.GROUP_INTERVIEW]: 'Entretien collectif',
-  [InterviewType.PHONE_INTERVIEW]: 'Entretien téléphonique',
-  [InterviewType.IN_PERSON]: 'Entretien présentiel'
+  [InterviewType.HUMAN_RESOURCE_INTERVIEW]: 'Entretien ressources humaines'
 }
 
 weekendFilter = (d: Date | null): boolean => {

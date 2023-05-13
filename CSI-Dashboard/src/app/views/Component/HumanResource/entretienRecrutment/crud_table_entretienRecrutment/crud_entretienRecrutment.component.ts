@@ -135,8 +135,6 @@ export class crudEntretienRecrutmentComponent implements OnInit {
   }
 
 
-
-
   saveEvaluation1(): void {
     this.crudEntretien.addEvaluation(this.evaluation).subscribe(
       response => console.log('Evaluation added successfully'),
@@ -145,15 +143,20 @@ export class crudEntretienRecrutmentComponent implements OnInit {
   }
 
   saveEvaluation(row: any): void {
-    // Set the ID of the evaluation to the selected row ID
-    this.evaluation.id = row.id;
+    // Create a new evaluation object with null properties
+    const newEvaluation: Evaluation = {
+        id: row.id,
+        globalAppreciation: null,
+        administrativeData: null,
+        offerCandidates: null
+    };
     
-    // Call the addEvaluation() method with the evaluation object as a parameter
-    this.crudEntretien.addEvaluation(this.evaluation).subscribe(
-      response => console.log('Evaluation added successfully'),
-      error => console.error('Error adding evaluation:', error)
+    // Call the addEvaluation() method with the new evaluation object as a parameter
+    this.crudEntretien.addEvaluation(newEvaluation).subscribe(
+        response => console.log('Evaluation added successfully'),
+        error => console.error('Error adding evaluation:', error)
     );
-  }
+}
 
 }
 

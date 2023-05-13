@@ -107,7 +107,7 @@ addItem(candidate: any): Observable<any> {
 
 // POST a new evaluation
 addEvaluation(evaluation: any): Observable<any> {
-  const apiUrlEvaluationWithAdd = this.apiUrlEvaluation + '/add'; // Append /add to the apiUrl
+  const apiUrlEvaluationWithAdd = this.apiUrlEvaluation + '/add'; // Append add to the apiUrl
   return this.http.post<any>(apiUrlEvaluationWithAdd, evaluation).pipe(
     catchError(this.handleError)
   );
