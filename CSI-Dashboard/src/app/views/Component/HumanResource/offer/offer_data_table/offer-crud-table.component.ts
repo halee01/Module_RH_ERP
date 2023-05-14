@@ -65,7 +65,7 @@ export class OfferCrudTableComponent implements OnInit {
   }
 
   getDisplayedColumns() {
-    return ['reference','title','actions' ];
+    return ['reference','title','startDate','endDate','actions' ];
   }
 
 

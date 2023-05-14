@@ -73,6 +73,7 @@
               <mat-card-title class="cardColor"> 
                 <div class="card-title-text">Dossier Technique</div>
                 <mat-divider></mat-divider>
+          <!---      <div style="padding-top: 20px;  margin-right: 3cm;"><button  mat-raised-button (click)="openPopUpTechFile(technicalFile)" color="primary"  >Modifier le candidat</button></div>-->
               </mat-card-title>
               <mat-card-content>
                 <mat-list>
@@ -102,7 +103,9 @@
         <h6 class="text-18 mb-4"> Education de  <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
-
+  <!----  <button mat-icon-button color="primary" type="button" (click)="openPopUpEducation({},true)">
+      <mat-icon>add</mat-icon>
+    </button>-->
     <mat-table [dataSource]="dataSourceEducation" matSort >
       <ng-container matColumnDef="diploma">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Diplome </mat-header-cell>
@@ -135,7 +138,9 @@
         <h6 class="text-18 mb-4"> Experience de  <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
-
+    <!---- <button mat-icon-button color="primary" type="button" (click)="openPopUpExperience({},true)">
+      <mat-icon>add</mat-icon>
+    </button>-->
     <mat-table [dataSource]="dataSourceExperience" matSort >
       <ng-container matColumnDef="experienceCompany">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Société </mat-header-cell>
@@ -172,7 +177,9 @@
         <h6 class="text-18 mb-4"> Certifications <strong>{{employee.firstName}} {{employee.lastName}}</strong></h6>
       </mat-panel-title>
     </mat-expansion-panel-header>
-
+   <!---<button mat-icon-button color="primary" type="button" (click)="openPopUpCertification({},true)">
+      <mat-icon>add</mat-icon>
+    </button>-->
     <mat-table [dataSource]="dataSourceCertification" matSort >
       <ng-container matColumnDef="certificationTitle">
         <mat-header-cell *matHeaderCellDef mat-sort-header> Titre de la certification </mat-header-cell>

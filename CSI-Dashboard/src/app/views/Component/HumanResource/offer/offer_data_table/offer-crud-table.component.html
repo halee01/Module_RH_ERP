@@ -34,6 +34,30 @@
   </ng-container>
 
 
+  <ng-container matColumnDef="startDate">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Date de début
+      <div style="padding-left: 20px;">
+        <mat-form-field style="width:1.5cm;" >
+         <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
+       </mat-form-field>
+       </div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row" data-label="Date de début" [style.color]="row.color"> {{row.startDate}} </mat-cell>
+  </ng-container>
+
+
+
+  <ng-container matColumnDef="endDate">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Date de fin
+      <div style="padding-left: 20px;">
+        <mat-form-field style="width:1.5cm;" >
+         <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
+       </mat-form-field>
+       </div>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row" data-label="Date de fin" [style.color]="row.color"> {{row.endDate}} </mat-cell>
+  </ng-container>
+
    <ng-container matColumnDef="actions">
      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
      <mat-cell *matCellDef="let row">

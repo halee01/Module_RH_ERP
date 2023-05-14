@@ -39,51 +39,41 @@ export class employeePopupComponent implements OnInit {
 
 
 
-  
+
 
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
   }
 
   ngOnInit() {
-    const employeeData = this.data.payload;
+    const educationData = this.data.payload;
    // this.getemployee();
    
     this.updateEmployee = new UntypedFormGroup({
-      firstName: new UntypedFormControl('', [
+      firstName: new UntypedFormControl(this.data.payload.firstName, [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(15),
       ]),
-      lastName: new UntypedFormControl('', [
+      lastName: new UntypedFormControl(this.data.payload.lastName, [
         Validators.required,
         Validators.minLength(2),
         Validators.maxLength(20),
       ]),
-      birthDate: new UntypedFormControl('', ),
-      title: new UntypedFormControl('', ),
-      address: new UntypedFormControl(''),
-      emailOne: new UntypedFormControl('',[] ),
-      phoneNumberOne: new UntypedFormControl('', []),
-      civility: new UntypedFormControl('', []),
-      maritalSituation: new UntypedFormControl('', []),
-      country: new UntypedFormControl('', []),
-      city: new UntypedFormControl('', []),
-      postCode: new UntypedFormControl('', []),
-      emailTwo: new UntypedFormControl('', ),
-      phoneNumberTwo: new UntypedFormControl('', []),
+      birthDate: new UntypedFormControl(this.data.payload.birthDate, ),
+      title: new UntypedFormControl(this.data.payload.title, ),
+      address: new UntypedFormControl(this.data.payload.address),
+      emailOne: new UntypedFormControl(this.data.payload.emailOne, ),
+      phoneNumberOne: new UntypedFormControl(this.data.payload.phoneNumberOne, ),
+      civility: new UntypedFormControl(this.data.payload.civility, []),
+      maritalSituation: new UntypedFormControl(this.data.payload.maritalSituation, []),
+      country: new UntypedFormControl(this.data.payload.country, []),
+      city: new UntypedFormControl(this.data.payload.city, []),
+      postCode: new UntypedFormControl(this.data.payload.postCode, ),
+      emailTwo: new UntypedFormControl(this.data.payload.emailTwo, ),
+      phoneNumberTwo: new UntypedFormControl(this.data.payload.phoneNumberTwo, ),
       id: new UntypedFormControl(this.data.technichalFile, [])
-
-    });
-
-     /////Countries////
-  this.updateEmployee.get("country").valueChanges.subscribe((country) => {
-    this.updateEmployee.get("city").reset();
-    if (country) {
-      this.states = this.update.getStatesByCountry(country);
-    }
-  })
-    
+    })
 
   }
 

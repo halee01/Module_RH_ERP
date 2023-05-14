@@ -33,6 +33,8 @@ import { experiencePopupComponent } from './updateExperience/experience-popup.co
 import { certificationPopupComponent } from './updateCertification/certificaton-popup.component';
 import { languagePopupComponent } from './updateLanguage/language-popup.component';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
+import { techFilePopupComponent } from './updateTechFile/techFile-popup.component';
+import { skillsPopupComponent } from './updateSkills/skills-popup.component';
 
 
 @Component({
@@ -70,7 +72,7 @@ snack: any;
   selectable = true;
   removable = true;
   addOnBlur = true;
-  skills: Skills[] = [];
+  skills: Skills;
   offers: Offer[];
   isPageReloaded = false;
   public emplyeeDataSource: any;
@@ -342,8 +344,9 @@ handleRemoveRepeatForm(index: number) {
  
   getSkills(){
     this.updateCandidatService.getSkillsById(this.EmployeeId).subscribe((data : any)=>{
-      this.skills = data;
-      console.log(this.skills);
+      {
+        this.dataSourceSkills = new MatTableDataSource(data);
+      }
     })
   }
   getCandidature(){
@@ -406,7 +409,20 @@ handleRemoveRepeatForm(index: number) {
               }
             );
           }   
-
+          deleteSkills(id :number) {
+  
+            this.updateCandidatService.deleteSkills(id)
+            .subscribe(
+              response => {
+                console.log(response);
+                // Reload the addresses list after deletion
+                this.getEducation();
+              },
+              error => {
+                console.log(error);
+              }
+            );
+            }
 //-------------------------
   employeeTitleMap = {
     [Title.FRONT_END_DEVELOPER]: 'Développeur Front-End',
@@ -689,7 +705,7 @@ openPopUpLanguage(data: any, isNew?: boolean) {
   const dialogRef: MatDialogRef<any> = this.dialog.open(languagePopupComponent, {
     width: '1000px',
     disableClose: true,
-    data: { title: title, payload: data, technicalFileNum: this.technicalFile.id }
+    data: { title: title, payload: data, technicalFileId: this.technicalFile.id }
   });
 
   dialogRef.afterClosed()
@@ -711,7 +727,7 @@ openPopUpLanguage(data: any, isNew?: boolean) {
         const updatedData = { ...data, ...res };
         this.updateCandidatService.updateLanguage(data.id, updatedData).subscribe(
           (response) => {
-            console.log('certification updated successfully', response);
+            console.log('language updated successfully', response);
             this.snack.open('certification modifié avec succès!', 'OK', { duration: 2000 });
             this.getItems();
           },
@@ -725,10 +741,10 @@ openPopUpLanguage(data: any, isNew?: boolean) {
 }
 openPopUpSkills(data: any, isNew?: boolean) {
   const title = isNew ? 'Nouvelle certification' : 'Modifier certification';
-  const dialogRef: MatDialogRef<any> = this.dialog.open(languagePopupComponent, {
+  const dialogRef: MatDialogRef<any> = this.dialog.open(skillsPopupComponent, {
     width: '1000px',
     disableClose: true,
-    data: { title: title, payload: data, technicalFileNum: this.technicalFile.id }
+    data: { title: title, payload: data, technicalFileId: this.technicalFile.id }
   });
 
   dialogRef.afterClosed()
@@ -749,6 +765,45 @@ openPopUpSkills(data: any, isNew?: boolean) {
       } else {
         const updatedData = { ...data, ...res };
         this.updateCandidatService.updateSkills(data.id, updatedData).subscribe(
+          (response) => {
+            console.log('certification updated successfully', response);
+            this.snack.open('certification modifié avec succès!', 'OK', { duration: 2000 });
+            this.getItems();
+          },
+          (error) => {
+            console.error('Error updating item', error);
+            this.snack.open('Une erreur est survenue lors de la modification d certification.', 'OK', { duration: 2000 });
+          }
+        );
+      }
+    });
+}
+openPopUpTechFile(data: any, isNew?: boolean) {
+  const title = isNew ? 'Nouvelle certification' : 'Modifier certification';
+  const dialogRef: MatDialogRef<any> = this.dialog.open(techFilePopupComponent, {
+    width: '1000px',
+    disableClose: true,
+    data: { title: title, payload: data, employeeId: this.EmployeeId }
+  });
+
+  dialogRef.afterClosed()
+    .subscribe(res => {
+      if (!res) {
+        // If user press cancel
+        return;
+      }
+      if (isNew) {
+        this.loader.open('Ajout en cours');
+        this.updateCandidatService.addTechFile(res)
+          .subscribe((data: any) => {
+            this.dataSource = data;
+            this.loader.close();
+            this.snack.open('Education ajoutée avec succès!', 'OK', { duration: 2000 });
+            this.getExperience();
+          })
+      } else {
+        const updatedData = { ...data, ...res };
+        this.updateCandidatService.updateTechFile(data.id, updatedData).subscribe(
           (response) => {
             console.log('certification updated successfully', response);
             this.snack.open('certification modifié avec succès!', 'OK', { duration: 2000 });

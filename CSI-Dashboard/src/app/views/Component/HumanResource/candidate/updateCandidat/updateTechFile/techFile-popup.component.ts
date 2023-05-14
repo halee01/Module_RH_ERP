@@ -17,7 +17,7 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router'
 })
 export class techFilePopupComponent implements OnInit {
  
-  updateEmployee: FormGroup;
+  techFileForm: FormGroup;
   id:number;
   employee : Employee;
   Civility :string []= Object.values(Civility);
@@ -40,14 +40,7 @@ export class techFilePopupComponent implements OnInit {
 
 
 
-  /*buildItemForm(item){
-    this.offerForm = this.fb.group({
-      reference : [item.reference || '', Validators.required],
-      title : [item.title || '', Validators.required],
-      description : [item.description || '', Validators.required]
-    });
-
-  }*/
+  
 
   onFileSelected(event) {
     this.selectedFile = <File>event.target.files[0];
@@ -57,35 +50,19 @@ export class techFilePopupComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     this.getemployee();
     
-    this.updateEmployee = new UntypedFormGroup({
-      firstName: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(15),
-      ]),
-      lastName: new UntypedFormControl('', [
-        Validators.required,
-        Validators.minLength(2),
-        Validators.maxLength(20),
-      ]),
-      birthDate: new UntypedFormControl('', ),
-      title: new UntypedFormControl('', ),
-      address: new UntypedFormControl(''),
-      emailOne: new UntypedFormControl('',[] ),
-      phoneNumberOne: new UntypedFormControl('', []),
-      civility: new UntypedFormControl('', []),
-      maritalSituation: new UntypedFormControl('', []),
-      country: new UntypedFormControl('', []),
-      city: new UntypedFormControl('', []),
-      postCode: new UntypedFormControl('', []),
-      emailTwo: new UntypedFormControl('', ),
-      phoneNumberTwo: new UntypedFormControl('', [])
+    this.techFileForm = new UntypedFormGroup({
+     
+      reference: new UntypedFormControl(this.data.payload.reference, []),
+      description: new UntypedFormControl(this.data.payload.description, []),
+      objective: new UntypedFormControl(this.data.payload.objective, []),
+      driverLicense: new UntypedFormControl(this.data.payload.driverLicense, ),
+      
 
     });
 
      /////Countries////
-  this.updateEmployee.get("country").valueChanges.subscribe((country) => {
-    this.updateEmployee.get("city").reset();
+  this.techFileForm.get("country").valueChanges.subscribe((country) => {
+    this.techFileForm.get("city").reset();
     if (country) {
       this.states = this.update.getStatesByCountry(country);
     }
@@ -95,14 +72,14 @@ export class techFilePopupComponent implements OnInit {
   }
 
   submit() {
-    this.dialogRef.close(this.updateEmployee.value)
+    this.dialogRef.close(this.techFileForm.value)
   }
 
  
   ///// Form Submit///// 
   onSubmit() {
     // Get the values of each form
-    const formData = this.updateEmployee.value;
+    const formData = this.techFileForm.value;
     this.update.updateItem(this.id,this.employee)
   .pipe(
     catchError(error => {
