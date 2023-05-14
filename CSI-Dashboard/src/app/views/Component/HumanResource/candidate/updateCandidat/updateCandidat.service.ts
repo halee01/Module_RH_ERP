@@ -206,22 +206,22 @@ addTechFile(techfile: any): Observable<any> {
     catchError(this.handleError)
   );
 }
-updateTechFile(techfile: any): Observable<any> {
-  const apiTechFileWithAdd = this.apiTechFile + '/updateTechnicalFile'; // Append /add to the apiUrl
-  return this.http.put<any>(apiTechFileWithAdd, techfile).pipe(
+
+updateTechFile(id: number, techFile: TechnicalFile): Observable<TechnicalFile> {
+  const url = `${this.apiTechFile+ '/updateTechnicalFile'}/${id}`;
+  return this.http.put<TechnicalFile>(url, techFile).pipe(
     catchError(this.handleError)
   );
 }
-
 updateExperience(id: number, experience: Experience): Observable<Experience> {
   const url = `${this.apiExperience+ '/update'}/${id}`;
   return this.http.put<Experience>(url, experience).pipe(
     catchError(this.handleError)
   );
 }
-updateLanguage(id: number, language: Language): Observable<Experience> {
+updateLanguage(id: number, language: Language): Observable<Language> {
   const url = `${this.apiLanguage+ '/update'}/${id}`;
-  return this.http.put<Experience>(url, language).pipe(
+  return this.http.put<Language>(url, language).pipe(
     catchError(this.handleError)
   );
 }

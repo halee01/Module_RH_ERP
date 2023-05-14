@@ -61,9 +61,9 @@ export class languagePopupComponent implements OnInit {
    // this.getemployee();
    
     this.languageForm = new UntypedFormGroup({
-      language: new UntypedFormControl(this.data.payload.language, ),
+      language: new UntypedFormControl(this.data.payload.language, []),
       additionalInformation: new UntypedFormControl(this.data.payload.additionalInformation, ),
-      languageLevel: new UntypedFormControl(this.data.payload.languageLevel, ),
+      languageLevel: new UntypedFormControl(this.data.payload.languageLevel,[] ),
       /*technicalFileNum : new UntypedFormControl(this.data.technicalFileId,),*/
       technicalFileNum : new UntypedFormControl(this.data.technicalFileId, []),
      //id: new UntypedFormControl(this.data.payload.id, [])
@@ -107,7 +107,21 @@ onCountryChange(countryShotName: string) {
   this.states = this.update.getStatesByCountry(countryShotName);
 }
 
-
+LanguageLevelMap = {
+  [LanguageLevel.BEGINNER_A1]: 'Niveau Débutant A1',
+  [LanguageLevel.BEGINNER]: 'Niveau Débutant',
+  [LanguageLevel.ELEMENTARY_A2]: 'Niveau Elémentaire A2',
+  [LanguageLevel.BASIC]: 'Niveau de Base',
+  [LanguageLevel.INTERMEDIATE_B1]: 'Niveau Intermédiaire B1',
+  [LanguageLevel.INTERMEDIATE]: 'Niveau Intermédiaire',
+  [LanguageLevel.UPPER_INTERMEDIATE_B2]: 'Niveau Intermédiaire Supérieur B2',
+  [LanguageLevel.PROFESSIONAL]: 'Niveau Professionnel',
+  [LanguageLevel.ADVANCED_C1]: 'Niveau Avancé C1',
+  [LanguageLevel.FLUENT]: 'Courant',
+  [LanguageLevel.PROFICIENT_C2]: 'Niveau Expert C2',
+  [LanguageLevel.NATIVE_LANGUAGE]: 'Langue Maternelle',
+  [LanguageLevel.BILINGUAL]: 'Bilingue'
+};
 
 }
 

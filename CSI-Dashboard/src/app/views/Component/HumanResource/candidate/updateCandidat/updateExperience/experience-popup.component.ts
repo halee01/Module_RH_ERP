@@ -64,6 +64,10 @@ export class experiencePopupComponent implements OnInit {
       /*technicalFileNum : new UntypedFormControl(this.data.technicalFileId,),*/
       technicalFileNum : new UntypedFormControl(this.data.technicalFileId, []),
      //id: new UntypedFormControl(this.data.payload.id, [])
+
+
+     
+     
     });
 
   }
