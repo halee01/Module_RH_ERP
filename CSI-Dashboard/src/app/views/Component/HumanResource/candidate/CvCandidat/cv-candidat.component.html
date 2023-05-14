@@ -15,6 +15,38 @@
           <mat-card-content class="container" style="padding-top: 1.5cm;">
             <div >
               <mat-grid-list cols="2" rowHeight="100px">
+
+
+                <mat-grid-tile>
+                  <!-- civility-->
+                  <div class="pb-16">
+                   <mat-form-field appearance="outline" [style.width.cm]=10>
+                   <mat-label>Civilité</mat-label>
+                   <mat-select formControlName="civility">
+                     <mat-option  *ngFor="let civilities of Civility " [value]="civilities">{{civilityMap[civilities]}}</mat-option>
+                   </mat-select>
+                   </mat-form-field>
+                 </div>
+               </mat-grid-tile>
+
+
+
+               <mat-grid-tile>
+                <!--last name-->
+                <div class="pb-16">
+                  <mat-form-field appearance="outline" [style.width.cm]=10>
+                    <mat-label>Nom</mat-label>
+                      <input
+                      matInput
+                      required
+                      name="lastName"
+                      formControlName="lastName"
+                      placeholder="Ex.Macron">
+                      <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                        Le nom est requis et doit commencer par une majuscule.</mat-error>
+                  </mat-form-field>
+                </div>
+              </mat-grid-tile>
                 <mat-grid-tile>
                   <div class="pb-16">
                     <mat-form-field appearance="outline" [style.width.cm]=10>
@@ -31,48 +63,7 @@
                   </div>
                   </mat-grid-tile>
               
-                  <mat-grid-tile>
-                    <!--last name-->
-                    <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                        <mat-label>Nom</mat-label>
-                          <input
-                          matInput
-                          required
-                          name="lastName"
-                          formControlName="lastName"
-                          placeholder="Ex.Macron">
-                          <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
-                            Le nom est requis et doit commencer par une majuscule.</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                    <!-- civility-->
-                    <div class="pb-16">
-                     <mat-form-field appearance="outline" [style.width.cm]=10>
-                     <mat-label>Civilité</mat-label>
-                     <mat-select formControlName="civility">
-                       <mat-option  *ngFor="let civilities of Civility " [value]="civilities">{{civilityMap[civilities]}}</mat-option>
-                     </mat-select>
-                     </mat-form-field>
-                   </div>
-                 </mat-grid-tile>
-              
-                 <mat-grid-tile>
-                  <!--Maritial Situation -->
-                  <div class="pb-16">
-                    <mat-form-field appearance="outline" [style.width.cm]=10>
-                    <mat-label>Situation Maritale</mat-label>
-                    <mat-select formControlName="maritalSituation" >
-                      <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{maritalSituationMap[MaritalSituations]}}</mat-option>
-                      
-                    </mat-select>
-                    </mat-form-field>
-                  </div>
-                </mat-grid-tile>
-              
+                 
                   <mat-grid-tile>
                     <!--Birthdate-->
                     <div class="pb-16">
@@ -87,6 +78,22 @@
                       </div>
                   </mat-grid-tile>
               
+                 
+              
+                 <mat-grid-tile>
+                  <!--Maritial Situation -->
+                  <div class="pb-16">
+                    <mat-form-field appearance="outline" [style.width.cm]=10>
+                    <mat-label>Situation Maritale</mat-label>
+                    <mat-select formControlName="maritalSituation" >
+                      <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{maritalSituationMap[MaritalSituations]}}</mat-option>
+                      
+                    </mat-select>
+                    </mat-form-field>
+                  </div>
+                </mat-grid-tile>
+              
+                 
                   <mat-grid-tile>
                     <!--intitulé du poste / title-->
                     <div class="pb-16">
@@ -112,34 +119,7 @@
       
 
                 <mat-grid-list cols="2" rowHeight="100px" >
-                  <mat-grid-tile >
-                     <!--Country-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Pays</mat-label>
-                      <mat-select required formControlName="country" placeholder="Ex.France" >
-                        <mat-option *ngFor="let country of countries" [value]="country.shortName">{{country.name}}</mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
-                        Le pays est requis.</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
-              
-                  <mat-grid-tile>
-                     <!--City-->
-                     <div class="pb-16">
-                      <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Ville</mat-label>
-                      <mat-select required formControlName="city" placeholder="Ex.Lyon" >
-                        <mat-option *ngFor="let state of states"  [value]="state">{{state}}</mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
-                        La ville est requise.</mat-error>
-                      </mat-form-field>
-                    </div>
-                  </mat-grid-tile>
-              
+
                   <mat-grid-tile>
                     <!--Adress-->
                     <div class="pb-16">
@@ -170,6 +150,36 @@
                       </mat-form-field>
                      </div>
                   </mat-grid-tile>
+
+                  <mat-grid-tile >
+                     <!--Country-->
+                     <div class="pb-16">
+                      <mat-form-field appearance="outline" [style.width.cm]=10>
+                      <mat-label>Pays</mat-label>
+                      <mat-select required formControlName="country" placeholder="Ex.France" >
+                        <mat-option *ngFor="let country of countries" [value]="country.shortName">{{country.name}}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                        Le pays est requis.</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </mat-grid-tile>
+              
+                  <mat-grid-tile>
+                     <!--City-->
+                     <div class="pb-16">
+                      <mat-form-field appearance="outline" [style.width.cm]=10>
+                      <mat-label>Ville</mat-label>
+                      <mat-select required formControlName="city" placeholder="Ex.Lyon" >
+                        <mat-option *ngFor="let state of states"  [value]="state">{{state}}</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                        La ville est requise.</mat-error>
+                      </mat-form-field>
+                    </div>
+                  </mat-grid-tile>
+              
+                 
               
                   <mat-grid-tile>
                     <!--Email1-->

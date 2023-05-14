@@ -136,20 +136,18 @@ export class crudEntretienRecrutmentComponent implements OnInit {
 
 
 
-
+//fontion halee
   saveEvaluation1(): void {
     this.crudEntretien.addEvaluation(this.evaluation).subscribe(
       response => console.log('Evaluation added successfully'),
       error => console.error('Error adding evaluation:', error)
     );
   }
-
-  saveEvaluation(row: any): void {
-    // Set the ID of the evaluation to the selected row ID
-    this.evaluation.id = row.id;
-    
-    // Call the addEvaluation() method with the evaluation object as a parameter
-    this.crudEntretien.addEvaluation(this.evaluation).subscribe(
+//fonction tekhdem-----------
+//---PS:ena f request mtei aandi employeeId ken aandek employeeNum badal Num
+// Cordialement w bien à vous 
+  saveEvaluation(id: number): void {
+    this.crudEntretien.addEvaluation({employeeId:id}).subscribe(
       response => console.log('Evaluation added successfully'),
       error => console.error('Error adding evaluation:', error)
     );

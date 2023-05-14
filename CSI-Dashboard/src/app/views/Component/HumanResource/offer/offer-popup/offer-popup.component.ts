@@ -32,7 +32,12 @@ export class OfferPopupComponent implements OnInit {
     this.offerForm = this.fb.group({
       reference : [item.reference || '', Validators.required],
       title : [item.title || '', Validators.required],
-      description : [item.description || '', Validators.required]
+      description : [item.description || '', Validators.required],
+      jobSite : [item.jobSite || '', Validators.required],
+      startDate : [item.startDate || '', Validators.required],
+      endDate : [item.endDate || '', Validators.required],
+
+      
     });
 
   }
