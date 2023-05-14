@@ -32,6 +32,7 @@ export class crudEntretienRecrutmentComponent implements OnInit {
   public getItemSub: Subscription;
   classAdded = false;
   evaluation :Evaluation;
+  selectedEvaluation= { id:null};
   constructor(
     private dialog: MatDialog,
     private snack: MatSnackBar,
@@ -142,21 +143,12 @@ export class crudEntretienRecrutmentComponent implements OnInit {
     );
   }
 
-  saveEvaluation(row: any): void {
-    // Create a new evaluation object with null properties
-    const newEvaluation: Evaluation = {
-        id: row.id,
-        globalAppreciation: null,
-        administrativeData: null,
-        offerCandidates: null
-    };
-    
+  saveEvaluation(id: number): void {
     // Call the addEvaluation() method with the new evaluation object as a parameter
-    this.crudEntretien.addEvaluation(newEvaluation).subscribe(
+    this.crudEntretien.addEvaluation(this.evaluation).subscribe(
         response => console.log('Evaluation added successfully'),
         error => console.error('Error adding evaluation:', error)
     );
 }
-
 }
 
