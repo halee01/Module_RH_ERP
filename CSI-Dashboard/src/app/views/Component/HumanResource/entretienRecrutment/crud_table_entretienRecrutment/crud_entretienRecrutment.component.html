@@ -72,6 +72,7 @@
     <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary"  (click)="goToEvaluer()">
         Ajouter un entretien </button>
        <div style="clear: both;"></div>
+       
    
    
    <mat-card class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
@@ -123,6 +124,12 @@
              <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row)">
                <mat-icon>delete</mat-icon>
              </button>
+             <button
+             class="card-control"
+             mat-icon-button
+             [matMenuTriggerFor]="menu2">
+                  <mat-icon class="text-muted text-18">more_vert</mat-icon>
+                </button>
              
            </mat-cell>
          </ng-container>

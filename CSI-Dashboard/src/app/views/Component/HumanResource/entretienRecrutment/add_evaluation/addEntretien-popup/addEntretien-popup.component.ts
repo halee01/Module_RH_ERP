@@ -4,12 +4,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {  Validators,  FormGroup, FormBuilder, FormArray, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { entretienRecrutmentService } from '../../entretienRecrutment.service';
-import { Interview, InterviewMode, InterviewType } from 'app/shared/models/Interview';
+import { Interview, InterviewMode, InterviewType, interviewLocation } from 'app/shared/models/Interview';
 
 
 @Component({
   selector: 'app-ngx-table-popup',
-  templateUrl: './addEntretien-popup.component.html'
+  templateUrl: './addEntretien-popup.component.html',
+  styleUrls:  ['./addEntretien-popup.component.scss']
 })
 export class ajoutEntretienPopupComponent implements OnInit {
   
@@ -25,6 +26,7 @@ export class ajoutEntretienPopupComponent implements OnInit {
   ////////////////Interview Form/////////////
   interviewType :string []= Object.values(InterviewType);
   interviewMode :string []= Object.values(InterviewMode);
+  interviewlocation:string []= Object.values(interviewLocation);
   interview: Interview;
 
 
@@ -46,7 +48,13 @@ export class ajoutEntretienPopupComponent implements OnInit {
       comment: new UntypedFormControl('', []),
       interviewType: new UntypedFormControl('', [Validators.required]),
       duration: new UntypedFormControl('', []),
-      interviewMode: new UntypedFormControl('', [Validators.required])
+      interviewMode: new UntypedFormControl('', [Validators.required]),
+      interviewerName: new UntypedFormControl('', []),
+      interviewerEmail: new UntypedFormControl('', []),
+      interviewerPhoneNumber: new UntypedFormControl('', []),
+      interviewTime: new UntypedFormControl('', []),
+      interviewlocation: new UntypedFormControl('', []),
+      interviewPlace: new UntypedFormControl('', []),
     })
     
   }
@@ -118,6 +126,10 @@ InterviewModeMap = {
   InterviewTypeMap = {
   [InterviewType.TECHNICAL_INTERVIEW]: 'Entretien technique',
   [InterviewType.HUMAN_RESOURCE_INTERVIEW]: 'Entretien ressources humaines'
+}
+interviewLocationMap={
+  [interviewLocation.INTERNAL]: 'Interne',
+  [interviewLocation.EXTERNAL]: 'Externe'
 }
 
 weekendFilter = (d: Date | null): boolean => {

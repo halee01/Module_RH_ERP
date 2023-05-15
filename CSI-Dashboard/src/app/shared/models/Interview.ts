@@ -2,11 +2,17 @@ import { AssQuestionInterview } from "./AssQuestionInterview";
 
 export interface Interview{
     id ?:number;
-    interviewDate ?:string;
-    comment ?:string;
     globalMark ?:string;
-    interviewType ?:InterviewType;
+    interviewDate ?:string;
+    interviewTime?:string;
     duration ?:string;
+    comment ?:string;
+    interviewlocation?:interviewLocation;
+    interviewPlace?: string;
+    interviewerName?:string;
+    interviewerEmail?:string;
+    interviewerPhoneNumber?:number;
+    interviewType ?:InterviewType;
     interviewMode ?:InterviewMode;
     assQuestionInterview?: AssQuestionInterview[];
 }
@@ -21,4 +27,9 @@ export enum InterviewMode{
 export enum InterviewType {
     TECHNICAL_INTERVIEW="TECHNICAL_INTERVIEW",
     HUMAN_RESOURCE_INTERVIEW="HUMAN_RESOURCE_INTERVIEW"
+}
+
+export enum interviewLocation{
+    INTERNAL="INTERNAL" ,
+     EXTERNAL="EXTERNAL"
 }

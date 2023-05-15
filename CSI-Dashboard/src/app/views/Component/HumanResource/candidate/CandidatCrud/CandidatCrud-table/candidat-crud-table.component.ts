@@ -48,7 +48,7 @@ export class CandidatCrudTableComponent implements OnInit {
   
   public dataSource: any;
   public displayedColumns: any;
-  public getItemSub: Subscription;
+  public getEmployeesub: Subscription;
   submitBtnLabel = 'Save';
   editMode = false;
   employeeId: number //| null = null;
@@ -68,7 +68,7 @@ export class CandidatCrudTableComponent implements OnInit {
   ngOnInit() {
     
     this.displayedColumns = this.getDisplayedColumns();
-    this.getItems();
+    this.getEmployees();
   }
 
 
@@ -93,16 +93,16 @@ export class CandidatCrudTableComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    if (this.getItemSub) {
-      this.getItemSub.unsubscribe()
+    if (this.getEmployeesub) {
+      this.getEmployeesub.unsubscribe()
     }
   }
 
   
   
 
-  getItems() {    
-    this.getItemSub = this.crudService.getItems()
+  getEmployees() {    
+    this.getEmployeesub = this.crudService.getItems()
       .subscribe((data:any)  => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
@@ -110,36 +110,7 @@ export class CandidatCrudTableComponent implements OnInit {
       })
 
   }
-  /*applyFilterFirstName(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-    this.dataSource.filterPredicate = (data, filter) => {
-      return data.firstName.trim().toLowerCase().indexOf(filter) !== -1;
-    };
-  }
-  applyFilterLastName(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-    this.dataSource.filterPredicate = (data, filter) => {
-      return data.lastName.trim().toLowerCase().indexOf(filter) !== -1;
-    };
-  }
-  applyFilterTitle(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-    this.dataSource.filterPredicate = (data, filter) => {
-      return data.title.trim().toLowerCase().indexOf(filter) !== -1;
-    };
-  }*/
+  
 
 
   applyFilterr(event: Event, key: string) {
@@ -166,7 +137,7 @@ export class CandidatCrudTableComponent implements OnInit {
               this.dataSource = data;
               this.loader.close();
               this.snack.open('candidat supprimé!', 'OK', { duration: 20});
-              this.getItems();
+              this.getEmployees();
             })
         }
       })
@@ -181,11 +152,6 @@ add(){
  
  }
  
-  createRepeatForm(): FormGroup {
-    return this._formBuilder.group({
-    });
-  }
-
 
   getStatusColor(employeeStatus: string): { color: string, displayText: string } {
     const STATUS_DATA = {
@@ -230,11 +196,12 @@ changeEmployeeStatus(employeeStatus: string, employeeId: number): void {
       console.error('Statut de candidat non géré');
       return;
   }
+  
   updateObservable.subscribe(
     (data) => {
       // handle success
       console.log('Mise à jour effectuée avec succès');
-      this.getItems();    
+      this.getEmployees();    
     },
     (error) => {
       console.error('Erreur lors de la mise à jour : ', error);

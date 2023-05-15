@@ -59,7 +59,7 @@
    </mat-card>
 
    <mat-form-field style="padding-left: 19px;">
-    <input matInput (keyup)="applyFilter($event)" placeholder="Filtrer">
+    <input matInput (keyup)="applyFilter($event)" placeholder="Recherche">
     </mat-form-field> 
     
 
@@ -113,7 +113,12 @@
    
     
         <ng-container matColumnDef="status" >
-          <mat-header-cell *matHeaderCellDef mat-sort-header style="padding-left: 2cm;"> Statut </mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header style="padding-left: 2cm;"> Statut 
+            <div style="padding-left: 20px;">
+              <mat-form-field style="width:1.5cm;" >
+                <input matInput (input)="applyFilterr($event, 'status')" placeholder="Filtrer">
+             </mat-form-field>
+             </div></mat-header-cell>
           <mat-cell *matCellDef="let row">
             <mat-chip mat-sm-chip [color]="getStatusColor(row.employeeStatus).color">
               {{ getStatusColor(row.employeeStatus).displayText }}
@@ -157,7 +162,7 @@
                   </button>
                   <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.CONVERTED_TO_RESOURCE', row.id)">
                     <mat-icon>cancel</mat-icon>
-                    <span>Converté en ressource</span>
+                    <span>Converti en ressource</span>
                   </button>
                   <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.DO_NOT_CONTACT', row.id)">
                     <mat-icon>cancel</mat-icon>

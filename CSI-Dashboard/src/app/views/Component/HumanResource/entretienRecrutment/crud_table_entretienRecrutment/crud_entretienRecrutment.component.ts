@@ -139,12 +139,72 @@ export class crudEntretienRecrutmentComponent implements OnInit {
 //fonction tekhdem-----------
 //---PS:ena f request mtei aandi employeeId ken aandek employeeNum badal Num
 // Cordialement w bien à vous 
-  saveEvaluation(id: number): void {
-    this.crudEntretien.addEvaluation({employeeId:id}).subscribe(
+  /*saveEvaluation(id: number): void {
+    this.crudEntretien.addEvaluation({employeeNum:id}).subscribe(
       response => console.log('Evaluation added successfully'),
       error => console.error('Error adding evaluation:', error)
 
     );
+}*/ //gets saved as many times as u press the button 
+
+
+
+
+////EL fonction hedhy ya sidek ben sidek , matkhalich evaluation ttsajel martyn , ama kif taaml refresh tensa l hkeya w taawed taml evluation , heka aleh amalt l fnct eli baadha , eli ma tensech kif trefreshi
+
+
+
+
+private evaluationCreatedMap = new Map<number, boolean>();
+
+saveEvaluation(id: number): void {
+  // Check if an evaluation has already been created for this employee
+  if (this.evaluationCreatedMap.get(id)) {
+    console.log('Evaluation already created for this employee');
+    return;
+  }
+
+  this.crudEntretien.addEvaluation({employeeNum:id}).subscribe(
+    response => {
+      console.log('Evaluation added successfully');
+      // Set flag to indicate that evaluation has been created for this employee
+      this.evaluationCreatedMap.set(id, true);
+    },
+    error => console.error('Error adding evaluation:', error)
+  );
 }
+
+/////////////////////////////////hedhy l fonction eli ma tensech////////////////////////////////
+
+/*saveEvaluation(id: number): void {
+  // Get the evaluationCreatedMap from local storage
+  const evaluationCreatedMapStr = localStorage.getItem('evaluationCreatedMap');
+  let evaluationCreatedMap: Map<number, boolean>;
+  try {
+    evaluationCreatedMap = evaluationCreatedMapStr ? new Map(JSON.parse(evaluationCreatedMapStr)) : new Map<number, boolean>();
+  } catch (error) {
+    console.error('Error parsing evaluationCreatedMap:', error);
+    evaluationCreatedMap = new Map<number, boolean>();
+  }
+
+  // Check if an evaluation has already been created for this employee
+  if (evaluationCreatedMap.get(id)) {
+    console.log('Evaluation already created for this employee');
+    return;
+  }
+  
+  // Create new evaluation
+  this.crudEntretien.addEvaluation({employeeNum:id}).subscribe(
+    response => {
+      console.log('Evaluation added successfully');
+      // Set flag to indicate that evaluation has been created for this employee
+      evaluationCreatedMap.set(id, true);
+      // Save the updated evaluationCreatedMap to local storage
+      localStorage.setItem('evaluationCreatedMap', JSON.stringify(Array.from(evaluationCreatedMap.entries())));
+    },
+    error => console.error('Error adding evaluation:', error)
+  );
+}*/
+
 }
 
