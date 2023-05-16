@@ -30,9 +30,7 @@ constructor(    @Inject(MAT_DIALOG_DATA) public data: any
         [ExperienceLevel.JUNIOR]:'Junior',
         [ExperienceLevel.MID_LEVEL]:'Confirmé',
        [ExperienceLevel.SENIOR]:'Senior',
-       [ExperienceLevel.LEAD]:'Lead',
-        [ExperienceLevel.ARCHITECT]:'Architecte',
-       [ExperienceLevel.APPRENTICE]:'Apprentice',
+       
        [ExperienceLevel.EXPERT]:'Expert',
       };
 

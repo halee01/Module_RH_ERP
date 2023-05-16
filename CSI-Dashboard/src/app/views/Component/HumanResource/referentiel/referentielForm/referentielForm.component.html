@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" type="text">
+  </mat-form-field>
+
+
+
+  <mat-form-field appearance="outline">
+    <mat-label>Experience Level</mat-label>
+    <mat-select formControlName="level">
+      <mat-option *ngFor="let levels of level" [value]="levels">{{ ExperienceLevelMap[levels]}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" >Submit</button>
+</form>

@@ -15,6 +15,7 @@ import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { referentielService } from '../referentiel.service';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
+import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 
 @Component({
   selector: 'referentiel-crud',
@@ -23,116 +24,29 @@ import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 
 
 export class referentielFormComponent implements OnInit {
-  formData = {}
-  console = console;
-  
-  public itemForm: FormGroup;;
+form:FormGroup;
+questionCategory:QuestionCategory;
+level = Object.values(ExperienceLevel);
+
+constructor(){
+
+}
+ngOnInit(): void {
+  this.form = new UntypedFormGroup({
+    name: new UntypedFormControl('', [Validators.required]),
+    level: new UntypedFormControl('', [Validators.required]),
+    
+  })
  
-  selectedFile: File;
-  title :string[]= Object.values(Title);
+}
+ExperienceLevelMap= {
+  [ExperienceLevel.JUNIOR]:'Junior',
+  [ExperienceLevel.MID_LEVEL]:'Confirmé',
+ [ExperienceLevel.SENIOR]:'Senior',
 
-  formWidth = 200; //declare and initialize formWidth property
-  formHeight = 700; //declare and initialize formHeight property
- 
-
-  submitted = false;
-  visible = true;
-  selectable = true;
-  removable = true;
-  addOnBlur = true;
-  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
- 
-  public dataSource: MatTableDataSource<QuestionCategory>;
-  public displayedColumns: any;
-  public getItemSub: Subscription;
- 
+ [ExperienceLevel.EXPERT]:'Expert',
+};
 
 
-  constructor(
-    private router : Router,
-    private dialog: MatDialog,
-    private snack: MatSnackBar,
-    private crudService: referentielService,
-    private confirmService: AppConfirmService,
-    private loader: AppLoaderService
-  ) {     this.dataSource = new MatTableDataSource<QuestionCategory>([]);}
-
-  ngOnInit() {
-   this.displayedColumns = this.getDisplayedColumns();
-    this.getItems()  
-  }
-
-  getDisplayedColumns() {
-    return ['name','level','actions' ];
-  }
-
-
-  applyFilterReference(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-    this.dataSource.filterPredicate = (data, filter) => {
-      return data.name.trim().toLowerCase().indexOf(filter) !== -1;
-    };
-  }
-  applyFilterTitle(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-    this.dataSource.filterPredicate = (data, filter) => {
-      return data.level.trim().toLowerCase().indexOf(filter) !== -1;
-    };
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-  ngOnDestroy() {
-    if (this.getItemSub) {
-      this.getItemSub.unsubscribe()
-    }
-  }
-
-  getItems() {    
-    this.getItemSub = this.crudService.getItems()
-      .subscribe((data:any)  => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      })
-
-  }
-
-
-
-
-  deleteItem(row) {
-    this.confirmService.confirm({message: `Delete ${row.name}?`})
-      .subscribe(res => {
-        if (res) {
-          this.loader.open('Supprssion de l`offre');
-          this.crudService.deleteItem(row)
-            .subscribe((data:any)=> {
-              this.dataSource = data;
-              this.loader.close();
-              this.snack.open('Offre supprimée!', 'OK', { duration: 2000 });
-              this.getItems();
-            })
-        }
-      })
-  }
-
-  applyFilter(event :Event){
-    const FilterValue = (event.target as HTMLInputElement).value ;
-     this.dataSource.filter = FilterValue.trim().toLowerCase();
- 
- }
  
 }
