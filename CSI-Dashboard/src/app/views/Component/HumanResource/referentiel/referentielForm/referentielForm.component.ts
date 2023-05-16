@@ -1,3 +1,4 @@
+import { Service } from 'app/shared/models/contact';
 import { referentielRoutes } from './../referentiel.routing';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -27,8 +28,9 @@ export class referentielFormComponent implements OnInit {
 form:FormGroup;
 questionCategory:QuestionCategory;
 level = Object.values(ExperienceLevel);
-
-constructor(){
+selectedCategorie= { id:null};
+submitted = false;
+constructor(private refService:referentielService){
 
 }
 ngOnInit(): void {
@@ -47,6 +49,18 @@ ExperienceLevelMap= {
  [ExperienceLevel.EXPERT]:'Expert',
 };
 
-
+saveQuestionCategory(): void {
+  console.log('Submitting form...');
+//  if (this.myForm.valid) {
+    console.log('Form is valid, submitting...');
+    this.refService.addItem(this.form.value).subscribe({
+      next: (res) => {
+        console.log('Item added successfully', res);
+        this.submitted = true;
+       // this.openPopUp();
+      },
+      error: (e) => console.error('Error adding item', e)
+    });
  
+}
 }
