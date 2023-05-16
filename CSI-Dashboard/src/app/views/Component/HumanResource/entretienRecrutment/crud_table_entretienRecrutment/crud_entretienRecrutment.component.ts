@@ -139,6 +139,8 @@ export class crudEntretienRecrutmentComponent implements OnInit {
 //fonction tekhdem-----------
 //---PS:ena f request mtei aandi employeeId ken aandek employeeNum badal Num
 // Cordialement w bien à vous 
+
+
   /*saveEvaluation(id: number): void {
     this.crudEntretien.addEvaluation({employeeNum:id}).subscribe(
       response => console.log('Evaluation added successfully'),
