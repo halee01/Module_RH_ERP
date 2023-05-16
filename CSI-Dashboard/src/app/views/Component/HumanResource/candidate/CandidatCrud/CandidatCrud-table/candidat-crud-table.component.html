@@ -80,17 +80,18 @@
         <ng-container matColumnDef="firstName">
           <mat-header-cell *matHeaderCellDef mat-sort-header > Prénom 
             <div style="padding-left: 20px;">
-               <mat-form-field style="width:1.5cm;" >
+              <mat-form-field style="width: 1.5cm;">
                 <input matInput (input)="applyFilterr($event, 'firstName')" placeholder="Filtrer">
               </mat-form-field>
-              </div>
+            </div>
+            
           </mat-header-cell> 
           <mat-cell *matCellDef="let row" data-label="firstName" [style.color]="row.color"> {{row.firstName}} </mat-cell>
         </ng-container>
         
    
         <ng-container matColumnDef="lastName">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Nom 
+          <mat-header-cell *matHeaderCellDef > Nom 
             <div style="padding-left: 20px;">
               <mat-form-field style="width:1.5cm;" >
                 <input matInput (input)="applyFilterr($event, 'lastName')" placeholder="Filtrer">
@@ -101,7 +102,7 @@
         </ng-container>
 
         <ng-container matColumnDef="title" >
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Intitulé du poste
+          <mat-header-cell *matHeaderCellDef > Intitulé du poste
             <div style="padding-left: 20px;">
               <mat-form-field style="width:1.5cm;" >
                 <input matInput (input)="applyFilterr($event, 'title')" placeholder="Filtrer">
@@ -113,7 +114,7 @@
    
     
         <ng-container matColumnDef="status" >
-          <mat-header-cell *matHeaderCellDef mat-sort-header style="padding-left: 2cm;"> Statut 
+          <mat-header-cell *matHeaderCellDef style="padding-left: 2cm;"> Statut 
             <div style="padding-left: 20px;">
               <mat-form-field style="width:1.5cm;" >
                 <input matInput (input)="applyFilterr($event, 'status')" placeholder="Filtrer">
