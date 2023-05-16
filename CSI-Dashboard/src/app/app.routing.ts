@@ -151,7 +151,16 @@ export const rootRouterConfig: Routes = [
         loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/add_evaluation/add_crud_evaluation.module').then(m => m.CrudEvaluationModule),
         data: { title: 'Evaluation', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
       },
-      
+      {
+        path: 'TableReferentiel',
+        loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielDataTable/referentiel-crud.module').then(m => m.referentielCrudModule),
+        data: { title: 'refTable', breadcrumb: 'Table'}
+      },
+      {
+        path: 'formReferentiel',
+        loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielForm/referentielForm.module').then(m => m.referentielFormModule),
+        data: { title: 'refForm', breadcrumb: 'form'}
+      },
       {
         path: 'chat',
         loadChildren: () => import('./views/app-chats/app-chats.module').then(m => m.AppChatsModule),

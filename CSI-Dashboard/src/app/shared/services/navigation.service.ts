@@ -150,7 +150,7 @@ export class NavigationService {
       tooltip: 'Shop',
       icon: 'description',
       sub: [
-        { name: 'Devise', state: 'dashboard/analytics' },
+        { name: 'Questionnaire', state: 'TableReferentiel/referentielTable' },
         { name: 'Civilité', state: 'dashboard/learning-management' }     
       ]
     },
