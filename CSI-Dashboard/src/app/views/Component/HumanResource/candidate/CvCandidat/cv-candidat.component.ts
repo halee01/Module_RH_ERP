@@ -23,6 +23,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { Skills } from 'app/shared/models/Skills';
 import { OfferPopupComponent } from './cv-popups/offerPopup.component';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 
 
@@ -30,6 +31,12 @@ import { OfferPopupComponent } from './cv-popups/offerPopup.component';
   selector: 'app-basic-form',
   templateUrl: './cv-candidat.component.html',
   styleUrls: ['./cv-candidat.component.scss'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: {showError: true},
+    },
+  ],
 })
 
 export class cvcandidatComponent implements OnInit {
@@ -37,6 +44,7 @@ export class cvcandidatComponent implements OnInit {
   console = console;
   repeatForm: FormGroup;
   myForm: FormGroup;
+  formEducation:FormGroup;
   formCertif: FormGroup;
   formExperience:FormGroup;
   formLanguage:FormGroup;
@@ -44,7 +52,6 @@ export class cvcandidatComponent implements OnInit {
   techFileForm: FormGroup;
   languageForm: FormGroup;
   cvForm: FormGroup;
-  step1:FormGroup;
   step2:FormGroup;
   step3:FormGroup;
   step4:FormGroup;
@@ -77,10 +84,10 @@ export class cvcandidatComponent implements OnInit {
 
 //////////////Form Candidate///////////////
   public itemForm: FormGroup;technicalFile: any;
-loader: any;
-snack: any;
-updateCandidatService: any;
-;
+  loader: any;
+  snack: any;
+  updateCandidatService: any;
+
   CompanyStatus = Object.values(CompanyStatus);
   WorkField :string []= Object.values(WorkField);
   LegalStatus = Object.values(LegalStatus);
@@ -103,6 +110,9 @@ updateCandidatService: any;
   isLinear = false;
 
  
+  step1 = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
 
  constructor(private _formBuilder: FormBuilder,
   private cvCandidatService: CvCandidatService,
@@ -115,6 +125,22 @@ updateCandidatService: any;
    
 
   ngOnInit() {
+
+    
+    this.step2 = this._formBuilder.group({
+      secondCtrl: ['', Validators.required],
+    });
+
+    this.step3 = this._formBuilder.group({
+      firstCtrl: ['', Validators.required],
+    });
+    this.step4 = this._formBuilder.group({
+      secondCtrl: ['', Validators.required],
+    });
+
+    this.stepTechFile= this._formBuilder.group({
+      secondCtrl: ['', Validators.required],
+    });
 
     this.formCertif = this.fb.group({
       value : new FormArray([])
@@ -159,6 +185,17 @@ updateCandidatService: any;
     }));
 
 
+    this.formEducation = this.fb.group({
+      value : new FormArray([])
+     });
+     (this.formEducation.get('value') as FormArray).push(this.fb.group({
+      institution: new UntypedFormControl('', [Validators.required]),
+      diploma: new UntypedFormControl('', [Validators.required]),
+      score: new UntypedFormControl('', []),
+      startYear: new UntypedFormControl('', []),
+      obtainedDate: new UntypedFormControl('', []),
+      actual: new UntypedFormControl(false),
+    }));
 
    
     this.cvCandidatService.getOfferItems().subscribe(
@@ -206,16 +243,7 @@ updateCandidatService: any;
 
     })
 
-      this.cvForm = new UntypedFormGroup({
-      institution: new UntypedFormControl('', [Validators.required]),
-      diploma: new UntypedFormControl('', [Validators.required]),
-      score: new UntypedFormControl('', []),
-      startYear: new UntypedFormControl('', []),
-      obtainedDate: new UntypedFormControl('', []),
-      actual: new UntypedFormControl(false),
-    })
-
-
+    
       this.techFileForm = new UntypedFormGroup({
       reference: new UntypedFormControl('', [Validators.required]),
       description: new UntypedFormControl('', []),
@@ -225,10 +253,12 @@ updateCandidatService: any;
     })
 
 
+
     /////FormDuplicate///
     this.repeatForm = this._formBuilder.group({
       repeatArray: this._formBuilder.array([this.createRepeatForm()])
     });
+
 
 
     /////Countries////
@@ -252,8 +282,13 @@ updateCandidatService: any;
   get getLanguage() {
     return (this.formLanguage.get('value') as FormArray).controls;
   }
+
   get getSkills() {
     return (this.formSkills.get('value') as FormArray).controls;
+  }
+
+  get getEducation() {
+    return (this.formEducation.get('value') as FormArray).controls;
   }
 
 
@@ -434,49 +469,35 @@ this.cvCandidatService.addCertif({...this.formCertif.get('value.'+i).value, tech
 }
 
 
-     saveEducation(i:any): void {
-      console.log('Submitting cv form...');
-         
-      //Save Educztion 
-      this.cvCandidatService.addEducation({...this.cvForm.value, technicalFileNum:this.selectedTechFile.id}).subscribe({
-        next: (res) => {
-          console.log('Item added successfully', res);
-          console.log('Form value', this.cvForm.value);
-          this.submitted = true;
-        },   
-        error: (e) => {
-          console.error('Error adding item', e);
-          console.log('cv Form is invalid');
-          console.log(this.cvForm.errors);
-        }
-      });
-    }
     
 
-  /*public confirmer(){}
-   ///////Skills chips//////////
-   add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-    // Add skill
-    if ((value || '').trim()) {
-      this.skills.push({skillsTitle: value.trim()});
-      this.cvForm.controls['skillTitle'].setValue(this.skills);// update the form control with the new skills array
-    }
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+    // Save Education
+  saveEducation(i:any): void {
+    this.cvCandidatService.addEducation({...this.formEducation.get('value.'+i).value, technicalFileNum:this.selectedTechFile.id}).subscribe({
+      next: (res) => {
+        console.log('Item added successfully', res);
+       console.log('Form value', this.formEducation.value);
+        this.submitted = true;
+        (this.formEducation.get('value') as FormArray).push(this.fb.group({
+
+          institution: new UntypedFormControl('', [Validators.required]),
+          diploma: new UntypedFormControl('', [Validators.required]),
+          score: new UntypedFormControl('', []),
+          startYear: new UntypedFormControl('', []),
+          obtainedDate: new UntypedFormControl('', []),
+          actual: new UntypedFormControl(false)}));
+        
+        this.educationId=res.id
+      },
+      error: (e) => {
+        console.error('Error adding item', e);
+        console.log('cv Form is invalid');
+        console.log(this.formEducation.errors);
+      }
+    });
+
   }
 
-  // Remove skill
-  remove(skill: Skills): void {
-    const index = this.skills.indexOf(skill);
-    if (index >= 0) {
-      this.skills.splice(index, 1);
-      this.cvForm.controls['skillTitle'].setValue(this.skills); // update the form control with the new skills array
-    }
-    }*/
 
 
   ///// Form Submit/////

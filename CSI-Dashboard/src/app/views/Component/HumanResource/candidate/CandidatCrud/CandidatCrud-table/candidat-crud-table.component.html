@@ -120,9 +120,34 @@
              </mat-form-field>
              </div></mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <mat-chip mat-sm-chip [color]="getStatusColor(row.employeeStatus).color">
-              {{ getStatusColor(row.employeeStatus).displayText }}
-            </mat-chip>
+            <button mat-button class="status-button"  [matMenuTriggerFor]="menu" [color]="getStatusColor(row.employeeStatus).color" >{{ getStatusColor(row.employeeStatus).displayText }}</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.IN_PROCESS', row.id)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>En processus</span>
+                </button>
+                
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.PRE_QUALIFIED', row.id)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>Non qualifié</span>
+                </button>
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.TOP_PROFILES', row.id)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>Top profiles</span>
+                </button>
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.CONVERTED_TO_RESOURCE', row.id)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>Converti en ressource</span>
+                </button>
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.DO_NOT_CONTACT', row.id)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>A ne plus contacter</span>
+                </button>
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.ARCHIVE', row.id)">
+                  <mat-icon>check_circle</mat-icon>
+                  <span>Archivé</span>
+                </button>
+              </mat-menu>
           </mat-cell>
         </ng-container>
    
@@ -139,40 +164,6 @@
              <button mat-icon-button mat-sm-button color="warn" (click)="deleteCandidate(row)">
                <mat-icon>delete</mat-icon>
              </button>
-             <button
-             class="card-control"
-             mat-icon-button
-             [matMenuTriggerFor]="menu2">
-                  <mat-icon class="text-muted text-18">more_vert</mat-icon>
-                </button>
-                <mat-menu #menu2="matMenu">
-
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.IN_PROCESS', row.id)">
-                    <mat-icon>cancel</mat-icon>
-                    <span>En processus</span>
-                  </button>
-                  
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.PRE_QUALIFIED', row.id)">
-                    <mat-icon>cancel</mat-icon>
-                    <span>Non qualifié</span>
-                  </button>
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.TOP_PROFILES', row.id)">
-                    <mat-icon>cancel</mat-icon>
-                    <span>Top profiles</span>
-                  </button>
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.CONVERTED_TO_RESOURCE', row.id)">
-                    <mat-icon>cancel</mat-icon>
-                    <span>Converti en ressource</span>
-                  </button>
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.DO_NOT_CONTACT', row.id)">
-                    <mat-icon>cancel</mat-icon>
-                    <span>A ne plus contacter</span>
-                  </button>
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.ARCHIVE', row.id)">
-                    <mat-icon>check_circle</mat-icon>
-                    <span>Archivé</span>
-                  </button>
-                </mat-menu>
            </mat-cell>
          </ng-container>
    

@@ -21,7 +21,8 @@ import { Observable } from 'rxjs-compat';
 
 @Component({
   selector: 'app-candidat-crud',
-  templateUrl: './candidat-crud-table.component.html'
+  templateUrl: './candidat-crud-table.component.html',
+  styleUrls: ['./candidat-crud-table.component.scss'],
 })
 
 
