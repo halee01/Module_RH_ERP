@@ -6,9 +6,10 @@ import * as countrycitystatejson from 'countrycitystatejson';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Offer } from 'app/shared/models/Offer';
+import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 @Injectable()
 export class referentielService {
-  private apiUrl = 'http://localhost:8080/rh/Offer';
+  private apiUrl = 'http://localhost:8080/rh/questionCategory';
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -75,7 +76,7 @@ export class referentielService {
 
   /////////////////////////Back Connection//////////////////////////
 //******* Implement your APIs ********
-getItems(): Observable<Offer[]> {
+getItems(): Observable<QuestionCategory[]> {
   const apiUrlWithGET = this.apiUrl + '/getAll';
   return this.http.get<any>(apiUrlWithGET).pipe(
     catchError(this.handleError)

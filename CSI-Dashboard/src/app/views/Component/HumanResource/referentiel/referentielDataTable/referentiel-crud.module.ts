@@ -30,6 +30,7 @@ import { Ng2TelInputModule } from "ng2-tel-input";
 import { MatGridListModule, MatGridTile } from "@angular/material/grid-list";
 import { referentielCrudTableComponent } from "./referentiel-crud-table.component";
 import { referentielRoutes } from "../referentiel.routing";
+import { referentielService } from "../referentiel.service";
 
 
 
@@ -68,7 +69,7 @@ import { referentielRoutes } from "../referentiel.routing";
     RouterModule.forChild(referentielRoutes)
   ],
   declarations: [ referentielCrudTableComponent],
-  providers: [
+  providers: [  referentielService
     ]
 })
 export class referentielCrudModule { }

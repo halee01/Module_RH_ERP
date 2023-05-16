@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Offer } from 'app/shared/models/Offer';
 import { referentielService } from '../referentiel.service';
+import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 
 @Component({
   selector: 'referentiel-crud',
@@ -44,7 +44,7 @@ export class referentielCrudTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
  
-  public dataSource: MatTableDataSource<Offer>;
+  public dataSource: MatTableDataSource<QuestionCategory>;
   public displayedColumns: any;
   public getItemSub: Subscription;
  
@@ -57,7 +57,7 @@ export class referentielCrudTableComponent implements OnInit {
     private crudService: referentielService,
     private confirmService: AppConfirmService,
     private loader: AppLoaderService
-  ) {     this.dataSource = new MatTableDataSource<Offer>([]);}
+  ) {     this.dataSource = new MatTableDataSource<QuestionCategory>([]);}
 
   ngOnInit() {
    this.displayedColumns = this.getDisplayedColumns();
@@ -65,7 +65,7 @@ export class referentielCrudTableComponent implements OnInit {
   }
 
   getDisplayedColumns() {
-    return ['domaine','level','actions' ];
+    return ['name','level','actions' ];
   }
 
 
@@ -76,7 +76,7 @@ export class referentielCrudTableComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
     this.dataSource.filterPredicate = (data, filter) => {
-      return data.reference.trim().toLowerCase().indexOf(filter) !== -1;
+      return data.name.trim().toLowerCase().indexOf(filter) !== -1;
     };
   }
   applyFilterTitle(event: Event) {
@@ -86,7 +86,7 @@ export class referentielCrudTableComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
     this.dataSource.filterPredicate = (data, filter) => {
-      return data.title.trim().toLowerCase().indexOf(filter) !== -1;
+      return data.level.trim().toLowerCase().indexOf(filter) !== -1;
     };
   }
 
@@ -134,7 +134,5 @@ export class referentielCrudTableComponent implements OnInit {
      this.dataSource.filter = FilterValue.trim().toLowerCase();
  
  }
- Affiche(id: number){
-  this.router.navigate(["affichageOffer/affichageOffer", id]);
-}
+ 
 }
