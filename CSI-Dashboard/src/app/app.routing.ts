@@ -157,6 +157,11 @@ export const rootRouterConfig: Routes = [
         data: { title: 'refTable', breadcrumb: 'Table'}
       },
       {
+        path: 'formReferentiel',
+        loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielForm/referentielForm.module').then(m => m.referentielFormModule),
+        data: { title: 'refForm', breadcrumb: 'form'}
+      },
+      {
         path: 'chat',
         loadChildren: () => import('./views/app-chats/app-chats.module').then(m => m.AppChatsModule),
         data: { title: 'Chat', breadcrumb: 'CHAT'}

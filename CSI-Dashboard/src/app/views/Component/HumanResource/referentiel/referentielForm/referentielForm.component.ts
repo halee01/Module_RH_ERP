@@ -18,11 +18,11 @@ import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 
 @Component({
   selector: 'referentiel-crud',
-  templateUrl: './referentielcrud-table.component.html'
+  templateUrl: './referentielForm.component.html'
 })
 
 
-export class referentielCrudTableComponent implements OnInit {
+export class referentielFormComponent implements OnInit {
   formData = {}
   console = console;
   
@@ -134,7 +134,5 @@ export class referentielCrudTableComponent implements OnInit {
      this.dataSource.filter = FilterValue.trim().toLowerCase();
  
  }
- goToForm(){
-  this.router.navigateByUrl('formReferentiel/referentielForm');
- }
+ 
 }

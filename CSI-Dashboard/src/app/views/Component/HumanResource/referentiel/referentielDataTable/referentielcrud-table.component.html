@@ -1,7 +1,7 @@
 <div class="m-12" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
 
 
-  <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" > New referentiel </button>
+  <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)="goToForm()"> New referentiel </button>
 
   <mat-form-field  >
     <input matInput (keyup)="applyFilter($event)" placeholder="Filtre">
