@@ -19,7 +19,9 @@ import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 
 @Component({
   selector: 'referentiel-crud',
-  templateUrl: './referentielForm.component.html'
+  templateUrl: './referentielForm.component.html',
+  styleUrls:  ['./referentielForm.component.scss']
+
 })
 
 
@@ -27,23 +29,29 @@ export class referentielFormComponent implements OnInit {
 form:FormGroup;
 questionCategory:QuestionCategory;
 level = Object.values(ExperienceLevel);
-
+showSecondForm = false;
 constructor(){
 
 }
 ngOnInit(): void {
+
+ 
+}
+
+
+submitFirstForm() {
   this.form = new UntypedFormGroup({
     name: new UntypedFormControl('', [Validators.required]),
     level: new UntypedFormControl('', [Validators.required]),
-    
   })
- 
+  this.showSecondForm = true;
 }
-ExperienceLevelMap= {
-  [ExperienceLevel.JUNIOR]:'Junior',
-  [ExperienceLevel.MID_LEVEL]:'Confirmé',
- [ExperienceLevel.SENIOR]:'Senior',
 
+
+ExperienceLevelMap= {
+ [ExperienceLevel.JUNIOR]:'Junior',
+ [ExperienceLevel.MID_LEVEL]:'Confirmé',
+ [ExperienceLevel.SENIOR]:'Senior',
  [ExperienceLevel.EXPERT]:'Expert',
 };
 
