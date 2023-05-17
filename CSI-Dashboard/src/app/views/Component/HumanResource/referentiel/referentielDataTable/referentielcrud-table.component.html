@@ -45,7 +45,7 @@
        <button mat-icon-button mat-sm-button color="accent" class=" mr-16 "  >
          <mat-icon>remove_red_eye </mat-icon>
        </button>
-       <button mat-icon-button mat-sm-button color="warn" >
+       <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row.id)">
          <mat-icon>delete</mat-icon>
        </button>
        

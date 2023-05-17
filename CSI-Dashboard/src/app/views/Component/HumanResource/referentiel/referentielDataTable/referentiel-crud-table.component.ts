@@ -117,12 +117,12 @@ export class referentielCrudTableComponent implements OnInit {
     this.confirmService.confirm({message: `Delete ${row.name}?`})
       .subscribe(res => {
         if (res) {
-          this.loader.open('Supprssion de l`offre');
+          this.loader.open('Supprssion du questionnaire');
           this.crudService.deleteItem(row)
             .subscribe((data:any)=> {
               this.dataSource = data;
               this.loader.close();
-              this.snack.open('Offre supprimée!', 'OK', { duration: 2000 });
+              this.snack.open('Questionnaire supprimée!', 'OK', { duration: 2000 });
               this.getItems();
             })
         }
@@ -137,4 +137,6 @@ export class referentielCrudTableComponent implements OnInit {
  goToForm(){
   this.router.navigateByUrl('formReferentiel/referentielForm');
  }
+
+
 }

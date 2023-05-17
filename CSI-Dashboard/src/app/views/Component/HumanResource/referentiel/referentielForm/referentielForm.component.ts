@@ -58,6 +58,20 @@ submitFirstForm() {
       });
   this.showSecondForm = true;
 }
+submitSecondForm() {
+ 
+  console.log('Submitting form...');
+  //  if (this.myForm.valid) {
+      console.log('Form is valid, submitting...');
+      this.refService.addQuest(this.form.value).subscribe({
+        next: (res) => {
+          console.log('Item added successfully', res);
+          this.submitted = true;
+        },
+        error: (e) => console.error('Error adding item', e)
+      });
+  this.showSecondForm = true;
+}
 
 
 ExperienceLevelMap= {
@@ -67,8 +81,5 @@ ExperienceLevelMap= {
  [ExperienceLevel.EXPERT]:'Expert',
 };
 
-saveQuestionCategory(): void {
 
- 
-}
 }
