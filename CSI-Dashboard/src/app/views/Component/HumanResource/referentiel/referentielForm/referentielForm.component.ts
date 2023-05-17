@@ -34,6 +34,9 @@ level = Object.values(ExperienceLevel);
 submitted=false ;
 showSecondForm = false;
 questionId:number;
+selectedCategory= { id:null};
+
+
 constructor(private refService:referentielService, private fb: FormBuilder,){
 
 }
@@ -58,7 +61,7 @@ get getQuestion() {
 }
 
 
-submitFirstForm() {
+/*submitFirstForm() {
  
   console.log('Submitting form...');
   //  if (this.myForm.valid) {
@@ -71,8 +74,10 @@ submitFirstForm() {
         error: (e) => console.error('Error adding item', e)
       });
   this.showSecondForm = true;
-}
-submitSecondForm() {
+}*/
+
+
+/*submitSecondForm() {
  
   console.log('Submitting form...');
   //  if (this.myForm.valid) {
@@ -85,7 +90,7 @@ submitSecondForm() {
         error: (e) => console.error('Error adding item', e)
       });
   this.showSecondForm = true;
-}
+}*/
 
 
 ExperienceLevelMap= {
@@ -95,12 +100,29 @@ ExperienceLevelMap= {
  [ExperienceLevel.EXPERT]:'Expert',
 };
 
-
+saveCatQuestion(): void {
+  console.log('Submitting form...');
+  this.refService.addItem({...this.form.value}).subscribe({
+    next: (res) => {
+      console.log('Item added successfully', res);
+      this.selectedCategory = res;
+      console.log('Selected technical file ID:', this.selectedCategory.id);
+     console.log('Form value', this.form.value);
+      this.submitted = true;
+    },
+    error: (e) => {
+      console.error('Error adding item', e);
+      console.log('Form is invalid');
+      console.log(this.form.errors);
+    }
+  });
+  this.showSecondForm = true;
 }
 
-/*saveQuestion(i:any): void {
 
-  this.referentielService.addLanguage({...this.questionForm.get('value.'+i).value, technicalFileNum:this.selectedTechFile.id}).subscribe({
+saveQuestion(i:any): void {
+
+  this.refService.addQuest({...this.questionForm.get('value.'+i).value, categoryNum:this.selectedCategory.id}).subscribe({
     next: (res) => {
       console.log('Item added successfully', res);
      console.log('Form value', this.questionForm);
@@ -116,6 +138,6 @@ ExperienceLevelMap= {
       console.log(this.questionForm.errors);
     }
   });
-}*/
+}
 
 }
