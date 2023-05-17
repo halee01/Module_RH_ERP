@@ -240,4 +240,22 @@ employeeTitleMap = {
   [Title.MARKETING_COORDINATOR]: 'Coordinateur Marketing'
   
 };
+
+showInput1 = false;
+showInput2 = false;
+showInput3 = false;
+showInput4 = false;
+
+toggleInput1() {
+  this.showInput1 = !this.showInput1;
+}
+
+toggleInput2() {
+  this.showInput2 = !this.showInput2;
+}
+toggleInput3() {
+  this.showInput3 = !this.showInput3;
+}toggleInput4() {
+  this.showInput4 = !this.showInput4;
+}
 }

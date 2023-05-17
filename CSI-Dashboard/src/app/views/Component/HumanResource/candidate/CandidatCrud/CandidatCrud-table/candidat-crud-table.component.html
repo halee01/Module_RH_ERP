@@ -78,12 +78,17 @@
           <mat-table [dataSource]="dataSource" matSort >
         
         <ng-container matColumnDef="firstName">
-          <mat-header-cell *matHeaderCellDef mat-sort-header > Prénom 
-            <div style="padding-left: 20px;">
-              <mat-form-field style="width: 1.5cm;">
+          <mat-header-cell *matHeaderCellDef> Prénom 
+            <div>
+              <button style="size:10px ;" mat-icon-button (click)="toggleInput1()">
+                <mat-icon style="size:10px ;">search</mat-icon>
+              </button>
+              
+              <mat-form-field *ngIf="showInput1" style="width:1.3cm;" >
                 <input matInput (input)="applyFilterr($event, 'firstName')" placeholder="Filtrer">
-              </mat-form-field>
-            </div>
+             </mat-form-field>
+  
+               </div>
             
           </mat-header-cell> 
           <mat-cell *matCellDef="let row" data-label="firstName" [style.color]="row.color"> {{row.firstName}} </mat-cell>
@@ -92,10 +97,16 @@
    
         <ng-container matColumnDef="lastName">
           <mat-header-cell *matHeaderCellDef > Nom 
-            <div style="padding-left: 20px;">
-              <mat-form-field style="width:1.5cm;" >
-                <input matInput (input)="applyFilterr($event, 'lastName')" placeholder="Filtrer">
-             </mat-form-field>
+
+            <div >
+            <button mat-icon-button (click)="toggleInput2()">
+              <mat-icon>search</mat-icon>
+            </button>
+            
+            <mat-form-field *ngIf="showInput2" style="width:1.3cm;" >
+              <input matInput (input)="applyFilterr($event, 'lastName')" placeholder="Filtrer">
+           </mat-form-field>
+
              </div>
           </mat-header-cell>
           <mat-cell *matCellDef="let row" data-label="lastName" [style.color]="row.color"> {{row.lastName}} </mat-cell>
@@ -103,11 +114,16 @@
 
         <ng-container matColumnDef="title" >
           <mat-header-cell *matHeaderCellDef > Intitulé du poste
-            <div style="padding-left: 20px;">
-              <mat-form-field style="width:1.5cm;" >
+            <div>
+              <button mat-icon-button (click)="toggleInput3()">
+                <mat-icon>search</mat-icon>
+              </button>
+              
+              <mat-form-field *ngIf="showInput3" style="width:1.3cm;" >
                 <input matInput (input)="applyFilterr($event, 'title')" placeholder="Filtrer">
              </mat-form-field>
-             </div>
+  
+               </div>
           </mat-header-cell>
           <mat-cell style="padding-right: 20px;" *matCellDef="let row" data-label="title" [style.color]="row.color"> {{employeeTitleMap[row.title]}} </mat-cell>
         </ng-container>
@@ -115,13 +131,19 @@
     
         <ng-container matColumnDef="status" >
           <mat-header-cell *matHeaderCellDef style="padding-left: 2cm;"> Statut 
-            <div style="padding-left: 20px;">
-              <mat-form-field style="width:1.5cm;" >
+            <div>
+              <button mat-icon-button (click)="toggleInput4()">
+                <mat-icon>search</mat-icon>
+              </button>
+              
+              <mat-form-field *ngIf="showInput4" style="width:1.3cm;" >
                 <input matInput (input)="applyFilterr($event, 'status')" placeholder="Filtrer">
              </mat-form-field>
-             </div></mat-header-cell>
+  
+               </div>
+            </mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <button mat-button class="status-button"  [matMenuTriggerFor]="menu" [color]="getStatusColor(row.employeeStatus).color" >{{ getStatusColor(row.employeeStatus).displayText }}</button>
+            <button mat-button class="mat-button-as-chip"  [matMenuTriggerFor]="menu" [color]="getStatusColor(row.employeeStatus).color" >{{ getStatusColor(row.employeeStatus).displayText }}</button>
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.IN_PROCESS', row.id)">
                   <mat-icon>cancel</mat-icon>
