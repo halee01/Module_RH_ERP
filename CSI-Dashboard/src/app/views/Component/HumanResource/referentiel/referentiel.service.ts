@@ -13,6 +13,7 @@ import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 
 export class referentielService {
   private apiUrl = 'http://localhost:8080/rh/questionCategory';
+  private questUrl= 'http://localhost:8080/rh/Question'
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -106,6 +107,12 @@ getItems(): Observable<QuestionCategory[]> {
 // POST a new item
 addItem(candidate: any): Observable<any> {
   const apiUrlWithAdd = this.apiUrl + '/add'; // Append /add to the apiUrl
+  return this.http.post<any>(apiUrlWithAdd, candidate).pipe(
+    catchError(this.handleError)
+  );
+}
+addQuest(candidate: any): Observable<any> {
+  const apiUrlWithAdd = this.questUrl + '/add'; // Append /add to the apiUrl
   return this.http.post<any>(apiUrlWithAdd, candidate).pipe(
     catchError(this.handleError)
   );
