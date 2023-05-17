@@ -1,18 +1,33 @@
-<form [formGroup]="form">
+<mat-card>
+    <div class="container">
+      <div>
+        <form [formGroup]="form" >
 
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input matInput formControlName="name" type="text">
-  </mat-form-field>
+        <mat-form-field class="i-need-padding" appearance="outline">
+         <mat-label>Name</mat-label>
+         <input matInput formControlName="name" type="text">
+       </mat-form-field>
+
+     <mat-form-field class="i-need-padding" appearance="outline">
+      <mat-label>Experience Level</mat-label>
+      <mat-select formControlName="level">
+        <mat-option *ngFor="let levels of level" [value]="levels">{{ExperienceLevelMap[levels]}}</mat-option>
+      </mat-select>
+     </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="submitFirstForm()">Submit</button>
+    </form>
+   </div>
+
+    <div *ngIf="showSecondForm">
+      <form>
+       <div>E5dem biiiiiiitch</div>
+        
+        <button  mat-raised-button color="primary"  type="submit">Submit Second Form</button>
+      </form>
+    </div>
 
 
+</div>
+</mat-card>
 
-  <mat-form-field appearance="outline">
-    <mat-label>Experience Level</mat-label>
-    <mat-select formControlName="level">
-      <mat-option *ngFor="let levels of level" [value]="levels">{{ ExperienceLevelMap[levels]}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" >Submit</button>
-</form>

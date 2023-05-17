@@ -80,17 +80,18 @@
         <ng-container matColumnDef="firstName">
           <mat-header-cell *matHeaderCellDef mat-sort-header > Prénom 
             <div style="padding-left: 20px;">
-               <mat-form-field style="width:1.5cm;" >
+              <mat-form-field style="width: 1.5cm;">
                 <input matInput (input)="applyFilterr($event, 'firstName')" placeholder="Filtrer">
               </mat-form-field>
-              </div>
+            </div>
+            
           </mat-header-cell> 
           <mat-cell *matCellDef="let row" data-label="firstName" [style.color]="row.color"> {{row.firstName}} </mat-cell>
         </ng-container>
         
    
         <ng-container matColumnDef="lastName">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Nom 
+          <mat-header-cell *matHeaderCellDef > Nom 
             <div style="padding-left: 20px;">
               <mat-form-field style="width:1.5cm;" >
                 <input matInput (input)="applyFilterr($event, 'lastName')" placeholder="Filtrer">
@@ -101,7 +102,7 @@
         </ng-container>
 
         <ng-container matColumnDef="title" >
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Intitulé du poste
+          <mat-header-cell *matHeaderCellDef > Intitulé du poste
             <div style="padding-left: 20px;">
               <mat-form-field style="width:1.5cm;" >
                 <input matInput (input)="applyFilterr($event, 'title')" placeholder="Filtrer">
@@ -113,16 +114,41 @@
    
     
         <ng-container matColumnDef="status" >
-          <mat-header-cell *matHeaderCellDef mat-sort-header style="padding-left: 2cm;"> Statut 
+          <mat-header-cell *matHeaderCellDef style="padding-left: 2cm;"> Statut 
             <div style="padding-left: 20px;">
               <mat-form-field style="width:1.5cm;" >
                 <input matInput (input)="applyFilterr($event, 'status')" placeholder="Filtrer">
              </mat-form-field>
              </div></mat-header-cell>
           <mat-cell *matCellDef="let row">
-            <mat-chip mat-sm-chip [color]="getStatusColor(row.employeeStatus).color">
-              {{ getStatusColor(row.employeeStatus).displayText }}
-            </mat-chip>
+            <button mat-button class="status-button"  [matMenuTriggerFor]="menu" [color]="getStatusColor(row.employeeStatus).color" >{{ getStatusColor(row.employeeStatus).displayText }}</button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.IN_PROCESS', row.id)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>En processus</span>
+                </button>
+                
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.PRE_QUALIFIED', row.id)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>Non qualifié</span>
+                </button>
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.TOP_PROFILES', row.id)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>Top profiles</span>
+                </button>
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.CONVERTED_TO_RESOURCE', row.id)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>Converti en ressource</span>
+                </button>
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.DO_NOT_CONTACT', row.id)">
+                  <mat-icon>cancel</mat-icon>
+                  <span>A ne plus contacter</span>
+                </button>
+                <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.ARCHIVE', row.id)">
+                  <mat-icon>check_circle</mat-icon>
+                  <span>Archivé</span>
+                </button>
+              </mat-menu>
           </mat-cell>
         </ng-container>
    
@@ -139,40 +165,6 @@
              <button mat-icon-button mat-sm-button color="warn" (click)="deleteCandidate(row)">
                <mat-icon>delete</mat-icon>
              </button>
-             <button
-             class="card-control"
-             mat-icon-button
-             [matMenuTriggerFor]="menu2">
-                  <mat-icon class="text-muted text-18">more_vert</mat-icon>
-                </button>
-                <mat-menu #menu2="matMenu">
-
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.IN_PROCESS', row.id)">
-                    <mat-icon>cancel</mat-icon>
-                    <span>En processus</span>
-                  </button>
-                  
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.PRE_QUALIFIED', row.id)">
-                    <mat-icon>cancel</mat-icon>
-                    <span>Non qualifié</span>
-                  </button>
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.TOP_PROFILES', row.id)">
-                    <mat-icon>cancel</mat-icon>
-                    <span>Top profiles</span>
-                  </button>
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.CONVERTED_TO_RESOURCE', row.id)">
-                    <mat-icon>cancel</mat-icon>
-                    <span>Converti en ressource</span>
-                  </button>
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.DO_NOT_CONTACT', row.id)">
-                    <mat-icon>cancel</mat-icon>
-                    <span>A ne plus contacter</span>
-                  </button>
-                  <button mat-menu-item (click)="changeEmployeeStatus('employeeStatus.ARCHIVE', row.id)">
-                    <mat-icon>check_circle</mat-icon>
-                    <span>Archivé</span>
-                  </button>
-                </mat-menu>
            </mat-cell>
          </ng-container>
    

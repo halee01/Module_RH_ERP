@@ -20,7 +20,9 @@ import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 
 @Component({
   selector: 'referentiel-crud',
-  templateUrl: './referentielForm.component.html'
+  templateUrl: './referentielForm.component.html',
+  styleUrls:  ['./referentielForm.component.scss']
+
 })
 
 
@@ -28,8 +30,8 @@ export class referentielFormComponent implements OnInit {
 form:FormGroup;
 questionCategory:QuestionCategory;
 level = Object.values(ExperienceLevel);
-selectedCategorie= { id:null};
-submitted = false;
+submitted=false ;
+showSecondForm = false;
 constructor(private refService:referentielService){
 
 }
@@ -37,30 +39,36 @@ ngOnInit(): void {
   this.form = new UntypedFormGroup({
     name: new UntypedFormControl('', [Validators.required]),
     level: new UntypedFormControl('', [Validators.required]),
-    
   })
  
 }
-ExperienceLevelMap= {
-  [ExperienceLevel.JUNIOR]:'Junior',
-  [ExperienceLevel.MID_LEVEL]:'Confirmé',
- [ExperienceLevel.SENIOR]:'Senior',
 
+
+submitFirstForm() {
+ 
+  console.log('Submitting form...');
+  //  if (this.myForm.valid) {
+      console.log('Form is valid, submitting...');
+      this.refService.addItem(this.form.value).subscribe({
+        next: (res) => {
+          console.log('Item added successfully', res);
+          this.submitted = true;
+        },
+        error: (e) => console.error('Error adding item', e)
+      });
+  this.showSecondForm = true;
+}
+
+
+ExperienceLevelMap= {
+ [ExperienceLevel.JUNIOR]:'Junior',
+ [ExperienceLevel.MID_LEVEL]:'Confirmé',
+ [ExperienceLevel.SENIOR]:'Senior',
  [ExperienceLevel.EXPERT]:'Expert',
 };
 
 saveQuestionCategory(): void {
-  console.log('Submitting form...');
-//  if (this.myForm.valid) {
-    console.log('Form is valid, submitting...');
-    this.refService.addItem(this.form.value).subscribe({
-      next: (res) => {
-        console.log('Item added successfully', res);
-        this.submitted = true;
-       // this.openPopUp();
-      },
-      error: (e) => console.error('Error adding item', e)
-    });
+
  
 }
 }
