@@ -20,8 +20,26 @@
    </div>
 
     <div *ngIf="showSecondForm">
-      <form>
-       <div>E5dem biiiiiiitch</div>
+      <form [formGroup]="questionForm">
+        <div class="card-body" formArrayName="value"  >
+          <div class="row" >
+            <div class="repeater-default">
+              <div fxLayout="row"  fxLayoutAlign="space-evenly center" *ngFor="let val of getLanguage; let i = index"  [formGroupName]="i"  >
+              <div>
+                 <div>E5demmmmmm</div>
+                 <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
+                  <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                  <button mat-icon-button color="primary" type="button" (click)="saveLanguage(i)">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
+                </div>
         
         <button  mat-raised-button color="primary"  type="submit">Submit Second Form</button>
       </form>

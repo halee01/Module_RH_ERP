@@ -7,7 +7,10 @@ import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Offer } from 'app/shared/models/Offer';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
+
 @Injectable()
+
+
 export class referentielService {
   private apiUrl = 'http://localhost:8080/rh/questionCategory';
   private countryData = countrycitystatejson;

@@ -11,7 +11,7 @@ import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.s
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { referentielService } from '../referentiel.service';
@@ -28,19 +28,33 @@ import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 
 export class referentielFormComponent implements OnInit {
 form:FormGroup;
+questionForm:FormGroup;
 questionCategory:QuestionCategory;
 level = Object.values(ExperienceLevel);
 submitted=false ;
 showSecondForm = false;
-constructor(private refService:referentielService){
+questionId:number;
+constructor(private refService:referentielService, private fb: FormBuilder,){
 
 }
+
 ngOnInit(): void {
   this.form = new UntypedFormGroup({
     name: new UntypedFormControl('', [Validators.required]),
     level: new UntypedFormControl('', [Validators.required]),
   })
+
+  this.questionForm = this.fb.group({
+    value : new FormArray([])
+   });
+   (this.questionForm.get('value') as FormArray).push(this.fb.group({
+    question : new UntypedFormControl('', [Validators.required]),
+  }));
  
+}
+
+get getQuestion() {
+  return (this.questionForm.get('value') as FormArray).controls;
 }
 
 
@@ -71,4 +85,25 @@ saveQuestionCategory(): void {
 
  
 }
+
+/*saveQuestion(i:any): void {
+
+  this.referentielService.addLanguage({...this.questionForm.get('value.'+i).value, technicalFileNum:this.selectedTechFile.id}).subscribe({
+    next: (res) => {
+      console.log('Item added successfully', res);
+     console.log('Form value', this.questionForm);
+      this.submitted = true;
+      (this.questionForm.get('value') as FormArray).push(this.fb.group({
+      question : new UntypedFormControl('', [Validators.required]),
+      }));
+      this.questionId=res.id
+    },
+    error: (e) => {
+      console.error('Error adding item', e);
+      console.log('cv Form is invalid');
+      console.log(this.questionForm.errors);
+    }
+  });
+}*/
+
 }
