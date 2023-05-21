@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { catchError, delay, map } from 'rxjs/operators';
 import * as countrycitystatejson from 'countrycitystatejson';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
@@ -270,6 +270,17 @@ updateToArchiveById(id: number): Observable<any> {
   return this.http.put<any>(url, {}).pipe(
     catchError(this.handleError)
   );
+}
+
+// Cv print from Mat table
+
+private cvDataSubject = new BehaviorSubject<string>(''); 
+getCvData$() {
+  return this.cvDataSubject.asObservable();
+}
+
+setCvData(cvData: string) { 
+  this.cvDataSubject.next(cvData);
 }
 
 }

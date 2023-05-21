@@ -105,10 +105,13 @@ export class crudEntretienRecrutmentComponent implements OnInit {
   }
 
   
-   openPopUp(): void {
+   openPopUp(row: any): void {
     const dialogRef = this.dialog.open(ajoutEntretienPopupComponent, {
       width: '900px',
-      data: { /* any data you want to pass */ }
+      data: {
+        firstName: row.firstName,
+        lastName: row.lastName
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

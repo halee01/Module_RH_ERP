@@ -15,6 +15,8 @@ import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { referentielService } from '../referentiel.service';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
+import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
+import { QuestionType } from 'app/shared/models/QuestionType';
 
 @Component({
   selector: 'referentiel-crud',
@@ -25,7 +27,7 @@ import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 export class referentielCrudTableComponent implements OnInit {
   formData = {}
   console = console;
-  
+  ExperienceLevel :string []= Object.values(ExperienceLevel);
   public itemForm: FormGroup;;
  
   selectedFile: File;
@@ -33,8 +35,6 @@ export class referentielCrudTableComponent implements OnInit {
 
   formWidth = 200; //declare and initialize formWidth property
   formHeight = 700; //declare and initialize formHeight property
- 
-
   submitted = false;
   visible = true;
   selectable = true;
@@ -44,11 +44,13 @@ export class referentielCrudTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
  
+
   public dataSource: MatTableDataSource<QuestionCategory>;
+  public questionTypesDataSource: MatTableDataSource<QuestionType>;
   public displayedColumns: any;
   public getItemSub: Subscription;
+  public getItemSub2: Subscription;
  
-
 
   constructor(
     private router : Router,
@@ -57,38 +59,19 @@ export class referentielCrudTableComponent implements OnInit {
     private crudService: referentielService,
     private confirmService: AppConfirmService,
     private loader: AppLoaderService
-  ) {     this.dataSource = new MatTableDataSource<QuestionCategory>([]);}
+  ) 
+  {     this.dataSource = new MatTableDataSource<QuestionCategory>([]);
+    this.questionTypesDataSource = new MatTableDataSource<QuestionType>([]);}
 
   ngOnInit() {
    this.displayedColumns = this.getDisplayedColumns();
-    this.getItems()  
+    this.getItems()  ;
   }
 
   getDisplayedColumns() {
-    return ['name','level','actions' ];
+    return ['questionTypeName','name','level','actions' ];
   }
 
-
-  applyFilterReference(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-    this.dataSource.filterPredicate = (data, filter) => {
-      return data.name.trim().toLowerCase().indexOf(filter) !== -1;
-    };
-  }
-  applyFilterTitle(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-    this.dataSource.filterPredicate = (data, filter) => {
-      return data.level.trim().toLowerCase().indexOf(filter) !== -1;
-    };
-  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -102,14 +85,19 @@ export class referentielCrudTableComponent implements OnInit {
 
   getItems() {    
     this.getItemSub = this.crudService.getItems()
-      .subscribe((data:any)  => {
+      .subscribe((data: any) => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-      })
-
+  
+        // Call getAllQuestiontypes() and assign the result to another data source
+        this.crudService.getAllQuestiontypes().subscribe((questionTypes: any) => {
+          this.questionTypesDataSource = new MatTableDataSource(questionTypes);
+          // Perform any additional configuration for the question types data source
+        });
+      });
   }
-
+  
 
 
 
@@ -139,4 +127,9 @@ export class referentielCrudTableComponent implements OnInit {
  }
 
 
+ ExperienceLevelMap={
+  [ExperienceLevel.JUNIOR]:'Junior',
+  [ExperienceLevel.MID_LEVEL]:'Confirmé',
+  [ExperienceLevel.SENIOR]:'Senior',
+  [ExperienceLevel.EXPERT]:'Expert', }
 }

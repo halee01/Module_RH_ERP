@@ -39,11 +39,12 @@ title :string[]= Object.values(Title);
 Civility :string []= Object.values(Civility);
 MaritalSituation :string []= Object.values(MaritalSituation);
 LanguageLevel : string[] = Object.values(LanguageLevel);
+cvData: string; 
 
-
-  constructor(    private route: ActivatedRoute,
+  constructor (  private route: ActivatedRoute,
     private candidatService: CrudService,
-    private routerPdf: Router ,) { }
+    private routerPdf: Router,
+    ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -64,14 +65,22 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
   }
 
   //////////////////CV Print///////////////////
-  printCv() {
+  /*printCv() {
     const printableArea = document.getElementById('resume');
     var originalContents = document.body.innerHTML;
     var printContents = document.getElementById('resume').innerHTML;
     document.body.innerHTML = printContents ;
     window.print();
     document.body.innerHTML = originalContents;
+  }*/
+
+  printCv(cvData: string) {
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = cvData;
+    window.print();
+    document.body.innerHTML = originalContents;
   }
+
   
  downloadCV() {
     const element = document.getElementById("resume");
@@ -88,18 +97,20 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
 
     });
   }
+
   getTechnicalFile() {
     this.candidatService.getTechnicalFileById(this.id).subscribe((data: any) => {
       this.technicalFile = data;
-
     });
   }
+
   getEducation() {
     this.candidatService.getEducationById(this.id).subscribe((data: any) => {
       this.education = data;
       console.log(this.education);
     });
   }
+  
   getExperience(){
     this.candidatService.getExperienceById(this.id).subscribe((data : any)=>{
       this.experience = data;

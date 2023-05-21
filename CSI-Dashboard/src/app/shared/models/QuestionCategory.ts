@@ -7,3 +7,8 @@ export interface QuestionCategory{
     questions ?:Question[] ;
     level ?: ExperienceLevel;
 }
+
+export enum QuestionnaireType{
+    FOR_EMPLOYEES="FOR_EMPLOYEES",
+    FOR_CANDIDATES="FOR_CANDIDATES"
+}

@@ -36,8 +36,8 @@ export class CandidatCrudTableComponent implements OnInit {
   addOnBlur = true;
   public itemForm: FormGroup;;
   selectedFile: File;
-  formWidth = 200; //declare and initialize formWidth property
-  formHeight = 700; //declare and initialize formHeight property
+  formWidth = 200; 
+  formHeight = 700; 
   title :string[]= Object.values(Title);
   EmployeeStatus :any= Object.values(EmployeeStatus);
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -65,7 +65,12 @@ export class CandidatCrudTableComponent implements OnInit {
     private router: Router
   ) { }
    
- 
+  printCv(cvData: string) {
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = cvData;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
   ngOnInit() {
     
     this.displayedColumns = this.getDisplayedColumns();

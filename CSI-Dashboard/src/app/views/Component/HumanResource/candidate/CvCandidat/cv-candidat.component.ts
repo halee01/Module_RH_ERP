@@ -1,6 +1,4 @@
-import { id } from 'date-fns/locale';
 import { Offer } from './../../../../../shared/models/Offer';
-import { Experience } from 'app/shared/models/Experience';
 import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -9,7 +7,6 @@ import { Inject, Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray, AbstractControl, UntypedFormArray } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes';
 import { CompanyStatus, LegalStatus, Provenance, Country } from 'app/shared/models/Partner';
 import {  Civility, Service } from 'app/shared/models/contact';
@@ -38,6 +35,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     },
   ],
 })
+
+
 
 export class cvcandidatComponent implements OnInit {
   formData = {}

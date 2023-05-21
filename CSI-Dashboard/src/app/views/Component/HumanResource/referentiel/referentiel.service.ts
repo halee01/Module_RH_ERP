@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, delay, map } from 'rxjs/operators';
+import { catchError, delay, map, tap } from 'rxjs/operators';
 import * as countrycitystatejson from 'countrycitystatejson';
 import { EgretCalendarEvent } from 'app/shared/models/event.model';
 import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Offer } from 'app/shared/models/Offer';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
+import { Question } from 'app/shared/models/Question';
+import { QuestionType } from 'app/shared/models/QuestionType';
 
 @Injectable()
 
 
 export class referentielService {
   private apiUrl = 'http://localhost:8080/rh/questionCategory';
+  private quesTypeUrl = 'http://localhost:8080/rh/QuestionType';
   private questUrl= 'http://localhost:8080/rh/Question'
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
@@ -74,12 +77,9 @@ export class referentielService {
 
 
 
-
-
-
-
   /////////////////////////Back Connection//////////////////////////
-//******* Implement your APIs ********
+
+  // GET a new item
 getItems(): Observable<QuestionCategory[]> {
   const apiUrlWithGET = this.apiUrl + '/getAll';
   return this.http.get<any>(apiUrlWithGET).pipe(
@@ -87,22 +87,34 @@ getItems(): Observable<QuestionCategory[]> {
   );
 }
 
-
- // GET an item by id
- getItem(id: number): Observable<Offer> {
-  const url = `${this.apiUrl+ '/get'}/${id}`;
-  return this.http.get<Offer>(url).pipe(
+getAllQuestiontypes(): Observable<QuestionType[]> {
+  const quesTypeUrlWithGET = this.quesTypeUrl + '/getAll';
+  return this.http.get<any>(quesTypeUrlWithGET).pipe(
     catchError(this.handleError)
   );
 }
-/*getrequirement(id: number): Observable<req[]> {
-  const url = `${this.apiUrl}/${id}`;
-  return this.http.get<Partner>(url).pipe(map(partner => partner.requirements),
-  catchError(error => {
-    console.error(error);
-    return of([]);
-  }));
-}*/
+
+//get question category by question type id
+getQcByQtId(id: number): Observable<Question>{
+  const url = `${this.apiUrl}/${id}`+ '/questionType';
+  return this.http.get<Question>(url).pipe(
+    catchError(this.handleError)
+  )
+  }
+
+getQuestionCategoryId(id: number): Observable<QuestionCategory> {
+  const url = `${this.apiUrl+ '/getBy'}/${id}`;
+  return this.http.get<QuestionCategory>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+
+getQuestionsById(id: number): Observable<Question>{
+  const url = `${this.apiUrl+ '/get'}/${id}`+ '/questions';
+  return this.http.get<Question>(url).pipe(
+    catchError(this.handleError)
+  )
+  }
 
 // POST a new item
 addItem(candidate: any): Observable<any> {
@@ -111,19 +123,20 @@ addItem(candidate: any): Observable<any> {
     catchError(this.handleError)
   );
 }
+
 addQuest(candidate: any): Observable<any> {
   const apiUrlWithAdd = this.questUrl + '/add'; // Append /add to the apiUrl
   return this.http.post<any>(apiUrlWithAdd, candidate).pipe(
     catchError(this.handleError)
   );
 }
-/*
-addItem(candidate: any): Observable<any> {
-  
-  return this.http.post<any>(this.apiUrl, candidate).pipe(
+
+addQuestionType(questionType: any): Observable<any> {
+  const quesTypeUrlWithAdd = this.quesTypeUrl + '/add'; // Append /add to the apiUrl
+  return this.http.post<any>(quesTypeUrlWithAdd, questionType).pipe(
     catchError(this.handleError)
   );
-}*/
+}
 
 // PUT an existing item
 updateItem(id: number, candidate: Offer): Observable<Offer> {
@@ -133,6 +146,18 @@ updateItem(id: number, candidate: Offer): Observable<Offer> {
   );
 }
 
+updateQuestion(Id: number, updatedQuestion: any): Observable<any> {
+  const url = `${this.questUrl+ '/update'}/${Id}`;
+  return this.http.put(url, updatedQuestion).pipe(
+    tap((res: any) => console.log(`Updated question with ID ${res.id}`)),
+    catchError((err: any) => {
+      console.error('Error updating question', err);
+      return throwError(err);
+    })
+  );
+}
+
+
 // DELETE an item by id
 deleteItem(id: number): Observable<Offer> {
  
@@ -141,6 +166,15 @@ deleteItem(id: number): Observable<Offer> {
     catchError(this.handleError)
   );
 }
+
+  // DELETE an item by id
+  deleteQuestion(id: number): Observable<Question> {
+ 
+    const url = `${this.questUrl+'/delete'}/${id}`;
+    return this.http.delete<Question>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
 
 ////////////////////////////////////////////////////////
 private handleError(error: HttpErrorResponse) {
@@ -158,11 +192,10 @@ private handleError(error: HttpErrorResponse) {
   return throwError(
     'Something bad happened; please try again later.');
 }
-getCountries() {
-  return this.countryData.getCountries();
-}
 
-getStatesByCountry(name: string) {
-  return this.countryData.getStatesByShort(name);
-}
+
+
+
+
+
 }

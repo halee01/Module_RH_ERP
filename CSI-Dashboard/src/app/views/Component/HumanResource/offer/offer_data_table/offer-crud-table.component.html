@@ -13,22 +13,12 @@
     <mat-table [dataSource]="dataSource" matSort  >
   
   <ng-container matColumnDef="reference">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Référance
-      <div style="padding-left: 20px;">
-        <mat-form-field style="width:1.5cm;" >
-         <input matInput (input)="applyFilterReference($event)" placeholder="Filtrer">
-       </mat-form-field>
-       </div> </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Référance </mat-header-cell>
     <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.reference}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="title">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Title
-      <div style="padding-left: 20px;">
-        <mat-form-field style="width:1.5cm;" >
-         <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
-       </mat-form-field>
-       </div>
     </mat-header-cell>
     <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.title}} </mat-cell>
   </ng-container>
@@ -36,11 +26,6 @@
 
   <ng-container matColumnDef="startDate">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Date de début
-      <div style="padding-left: 20px;">
-        <mat-form-field style="width:1.5cm;" >
-         <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
-       </mat-form-field>
-       </div>
     </mat-header-cell>
     <mat-cell *matCellDef="let row" data-label="Date de début" [style.color]="row.color"> {{row.startDate}} </mat-cell>
   </ng-container>
@@ -49,13 +34,27 @@
 
   <ng-container matColumnDef="endDate">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Date de fin
-      <div style="padding-left: 20px;">
-        <mat-form-field style="width:1.5cm;" >
-         <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
-       </mat-form-field>
-       </div>
     </mat-header-cell>
     <mat-cell *matCellDef="let row" data-label="Date de fin" [style.color]="row.color"> {{row.endDate}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="statut" >
+    <mat-header-cell *matHeaderCellDef style="padding-left: 2cm;"> Statut   </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-button class="mat-button-as-chip"  [matMenuTriggerFor]="menu" [color]="getStatusColor(row.offerStatus).color" >{{ getStatusColor(row.offerStatus).displayText }}</button>
+        <mat-menu #menu="matMenu">
+          
+          <button mat-menu-item (click)="changeOffereStatus('offerStatus.OPEN', row.id)">
+            <mat-icon>cancel</mat-icon>
+            <span>Ouverte</span>
+          </button>
+          <button mat-menu-item (click)="changeOffereStatus('offerStatus.ENDED', row.id)">
+            <mat-icon>cancel</mat-icon>
+            <span>Cloturé</span>
+          </button>
+
+        </mat-menu>
+    </mat-cell>
   </ng-container>
 
    <ng-container matColumnDef="actions">

@@ -11,26 +11,24 @@
 <mat-card  style="border: 5px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
   <mat-card-content class="p-0">
     <mat-table [dataSource]="dataSource" matSort  >
-  
+
+  <ng-container matColumnDef="questionTypeName">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Catégorie
+       </mat-header-cell>
+    <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.questionTypeName}} </mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Référance
-      <div style="padding-left: 20px;">
-        <mat-form-field style="width:1.5cm;" >
-         <input matInput (input)="applyFilterReference($event)" placeholder="Filtrer">
-       </mat-form-field>
-       </div> </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Domaine
+       </mat-header-cell>
     <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.name}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="level">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Title
-      <div style="padding-left: 20px;">
-        <mat-form-field style="width:1.5cm;" >
-         <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
-       </mat-form-field>
-       </div>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Niveau d'expérience
+     
     </mat-header-cell>
-    <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.level}} </mat-cell>
+    <mat-cell *matCellDef="let row" [style.color]="row.color"> {{ExperienceLevelMap[row.level]}} </mat-cell>
   </ng-container>
 
 
@@ -39,10 +37,7 @@
    <ng-container matColumnDef="actions">
      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
      <mat-cell *matCellDef="let row">
-       <button mat-icon-button mat-sm-button color="primary" class="mr-16 "  >
-         <mat-icon>edit</mat-icon>
-       </button>
-       <button mat-icon-button mat-sm-button color="accent" class=" mr-16 "  >
+       <button mat-icon-button mat-sm-button color="accent" class=" mr-16 "  routerLink="/referentielAffichage/{{row.id}}" routerLinkActive="router-link-active" >
          <mat-icon>remove_red_eye </mat-icon>
        </button>
        <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row.id)">

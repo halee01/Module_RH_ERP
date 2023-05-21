@@ -7,18 +7,19 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { OfferService } from '../offer.service';
-import { Offer } from 'app/shared/models/Offer';
+import { Offer, OfferStatus } from 'app/shared/models/Offer';
 import { OfferPopupComponent } from '../offer-popup/offer-popup.component';
 
 @Component({
   selector: 'offer-crud',
-  templateUrl: './offer-crud-table.component.html'
+  templateUrl: './offer-crud-table.component.html',
+  styleUrls: ['./offer-crud-table.component.scss'],
 })
 
 
@@ -41,9 +42,11 @@ export class OfferCrudTableComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  offerStatus :any= Object.values(OfferStatus);
+  defaultStatus = OfferStatus.OPEN;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
- 
+  offerId: number
   public dataSource: MatTableDataSource<Offer>;
   public displayedColumns: any;
   public getItemSub: Subscription;
@@ -65,30 +68,9 @@ export class OfferCrudTableComponent implements OnInit {
   }
 
   getDisplayedColumns() {
-    return ['reference','title','startDate','endDate','actions' ];
+    return ['reference','title','startDate','endDate','statut','actions' ];
   }
 
-
-  applyFilterReference(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-    this.dataSource.filterPredicate = (data, filter) => {
-      return data.reference.trim().toLowerCase().indexOf(filter) !== -1;
-    };
-  }
-  applyFilterTitle(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-    this.dataSource.filterPredicate = (data, filter) => {
-      return data.title.trim().toLowerCase().indexOf(filter) !== -1;
-    };
-  }
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
@@ -108,6 +90,26 @@ export class OfferCrudTableComponent implements OnInit {
         this.dataSource.sort = this.sort;
       })
 
+  }
+  applyFilterr(event: Event, key: string) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    const filterWords = filterValue.split(' ');
+  
+    this.dataSource.filterPredicate = (data, filter) => {
+      // Split the data value into words and convert to lowercase
+      const dataWords = data[key].trim().toLowerCase().split(' ');
+  
+      // Check if all filter words are present in the data (case-insensitive)
+      return filterWords.every(word => {
+        return dataWords.some(dataWord => dataWord.indexOf(word.toLowerCase()) !== -1);
+      });
+    };
+  
+    this.dataSource.filter = filterValue;
+  
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   openPopUp(data:  any , isNew?) {
@@ -163,12 +165,51 @@ export class OfferCrudTableComponent implements OnInit {
       })
   }
 
+
   applyFilter(event :Event){
     const FilterValue = (event.target as HTMLInputElement).value ;
      this.dataSource.filter = FilterValue.trim().toLowerCase();
  
  }
+
  Affiche(id: number){
-  this.router.navigate(["affichageOffer/affichageOffer", id]);
+  this.router.navigate(["affichageOffer/affichageOffer", id]);}
+
+getStatusColor(offerStatus: string): { color: string, displayText: string } {
+  const STATUS_DATA = {
+    OPEN: { color: 'primary', displayText: 'Ouverte' },
+    ENDED: { color: 'red', displayText: 'Cloturé' }
+  };
+  return STATUS_DATA[offerStatus] || { color: 'primary', displayText: 'Ouverte' };
+}
+
+changeOffereStatus(offerStatus: string, offerId: number): void {
+  console.log('Changing offer status to:', offerStatus);
+  let updateObservable: Observable<any>;
+  switch (offerStatus) {
+
+    case 'offerStatus.OPEN':
+      updateObservable = this.crudService.updateToOpenById(offerId);
+      break;
+
+    case 'offerStatus.ENDED':
+      updateObservable = this.crudService.updateToEndedById(offerId);
+      break;
+    default:
+      // Cas de statut de contrat non géré
+      console.error('Statut de l offre non géré');
+      return;
+  }
+  
+  updateObservable.subscribe(
+    (data) => {
+      // handle success
+      console.log('Mise à jour effectuée avec succès');
+      this.getItems();    
+    },
+    (error) => {
+      console.error('Erreur lors de la mise à jour : ', error);
+    }
+  ); 
 }
 }

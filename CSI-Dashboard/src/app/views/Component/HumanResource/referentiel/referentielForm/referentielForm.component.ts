@@ -1,21 +1,8 @@
-import { Service } from 'app/shared/models/contact';
-import { referentielRoutes } from './../referentiel.routing';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
-import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { referentielService } from '../referentiel.service';
-import { QuestionCategory } from 'app/shared/models/QuestionCategory';
+import { QuestionCategory, QuestionnaireType } from 'app/shared/models/QuestionCategory';
 import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 
 @Component({
@@ -28,12 +15,15 @@ import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 
 export class referentielFormComponent implements OnInit {
 form:FormGroup;
+typeForm:FormGroup;
 questionForm:FormGroup;
 questionCategory:QuestionCategory;
 level = Object.values(ExperienceLevel);
+questionnaireType = Object.values(QuestionnaireType);
 submitted=false ;
 showSecondForm = false;
 questionId:number;
+selectedQuestionType={ id:null};
 selectedCategory= { id:null};
 
 
@@ -42,9 +32,18 @@ constructor(private refService:referentielService, private fb: FormBuilder,){
 }
 
 ngOnInit(): void {
+
+
+  this.typeForm = new UntypedFormGroup({
+    questionTypeName: new UntypedFormControl('', [Validators.required])
+  })
+
+
   this.form = new UntypedFormGroup({
     name: new UntypedFormControl('', [Validators.required]),
     level: new UntypedFormControl('', [Validators.required]),
+    questionTypeName: new UntypedFormControl('', [Validators.required]),
+    questionnaireType: new UntypedFormControl('', [Validators.required]),
   })
 
   this.questionForm = this.fb.group({
@@ -61,48 +60,22 @@ get getQuestion() {
 }
 
 
-/*submitFirstForm() {
- 
-  console.log('Submitting form...');
-  //  if (this.myForm.valid) {
-      console.log('Form is valid, submitting...');
-      this.refService.addItem(this.form.value).subscribe({
-        next: (res) => {
-          console.log('Item added successfully', res);
-          this.submitted = true;
-        },
-        error: (e) => console.error('Error adding item', e)
-      });
-  this.showSecondForm = true;
-}*/
-
-
-/*submitSecondForm() {
- 
-  console.log('Submitting form...');
-  //  if (this.myForm.valid) {
-      console.log('Form is valid, submitting...');
-      this.refService.addQuest(this.form.value).subscribe({
-        next: (res) => {
-          console.log('Item added successfully', res);
-          this.submitted = true;
-        },
-        error: (e) => console.error('Error adding item', e)
-      });
-  this.showSecondForm = true;
-}*/
-
-
 ExperienceLevelMap= {
+  [ExperienceLevel.INTERN]:'Stagière',
  [ExperienceLevel.JUNIOR]:'Junior',
  [ExperienceLevel.MID_LEVEL]:'Confirmé',
  [ExperienceLevel.SENIOR]:'Senior',
  [ExperienceLevel.EXPERT]:'Expert',
 };
 
+QuestionnaireTypeMap={
+  [QuestionnaireType.FOR_EMPLOYEES]:'Pour Employées',
+  [QuestionnaireType.FOR_CANDIDATES]:'Pour candidats',
+}
+
 saveCatQuestion(): void {
   console.log('Submitting form...');
-  this.refService.addItem({...this.form.value}).subscribe({
+  this.refService.addItem({...this.form.value, questionTypeNum:this.selectedQuestionType.id}).subscribe({
     next: (res) => {
       console.log('Item added successfully', res);
       this.selectedCategory = res;
@@ -117,6 +90,25 @@ saveCatQuestion(): void {
     }
   });
   this.showSecondForm = true;
+}
+
+
+saveQuestionType(): void {
+  console.log('Submitting form...');
+  this.refService.addQuestionType({...this.typeForm.value}).subscribe({
+    next: (res) => {
+      console.log('Item added successfully', res);
+      this.selectedQuestionType = res;
+      console.log('Selected question category:', this.selectedQuestionType.id);
+     console.log('Form value', this.typeForm.value);
+      this.submitted = true;
+    },
+    error: (e) => {
+      console.error('Error adding item', e);
+      console.log('Form is invalid');
+      console.log(this.typeForm.errors);
+    }
+  });
 }
 
 

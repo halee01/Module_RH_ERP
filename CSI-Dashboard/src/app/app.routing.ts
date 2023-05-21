@@ -1,3 +1,4 @@
+import { referentielAffichageModule } from './views/Component/HumanResource/referentiel/referentielAffichage/referentielAffichage.module';
 
 import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
@@ -154,6 +155,12 @@ export const rootRouterConfig: Routes = [
       {
         path: 'TableReferentiel',
         loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielDataTable/referentiel-crud.module').then(m => m.referentielCrudModule),
+        data: { title: 'refTable', breadcrumb: 'Table'}
+      },
+
+      {
+        path: 'referentielAffichage',
+        loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielAffichage/referentielAffichage.module').then(m => m.referentielAffichageModule),
         data: { title: 'refTable', breadcrumb: 'Table'}
       },
       {
