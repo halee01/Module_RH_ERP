@@ -26,6 +26,7 @@ import { crudEntretienRecrutmentComponent } from './crud_entretienRecrutment.com
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
+import { evaluationPopupComponent } from '../evaluationnPopup/evaluation-popup.component';
 
 
 
@@ -60,7 +61,7 @@ import { entretienRecrutmentService } from '../entretienRecrutment.service';
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    crudEntretienRecrutmentComponent
+    crudEntretienRecrutmentComponent,evaluationPopupComponent
   ],
 })
 export class CrudEntretienRecrutmentModule { }

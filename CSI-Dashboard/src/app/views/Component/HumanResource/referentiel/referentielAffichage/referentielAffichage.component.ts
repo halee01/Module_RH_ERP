@@ -1,3 +1,4 @@
+import { referentielService } from './../referentiel.service';
 
 
 import { Router, ActivatedRoute } from '@angular/router';
@@ -5,7 +6,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Question } from 'app/shared/models/Question';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
-import { referentielService } from '../referentiel.service';
+
 import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,7 +15,7 @@ import { Subscription } from 'rxjs';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { questionUpdateComponent } from './questionUpdate.component';
 
 
@@ -49,6 +50,7 @@ import { questionUpdateComponent } from './questionUpdate.component';
       private route: ActivatedRoute,
       private confirmService: AppConfirmService,
       private loader: AppLoaderService,
+      private service : referentielService,
       public dialog: MatDialog )
 
       {this.dataSourceQuestion = new MatTableDataSource<Question>([]);
@@ -113,7 +115,7 @@ import { questionUpdateComponent } from './questionUpdate.component';
         selectedQuestionId: number;
 
       
-        openUpdateQuestionDialog(row: any): void {
+       openUpdateQuestionDialog(row: any): void {
           const dialogRef = this.dialog.open(questionUpdateComponent, {
             data: { row }
           });
@@ -138,7 +140,33 @@ import { questionUpdateComponent } from './questionUpdate.component';
         }
         
         
-        
+        /*openPopUp(data:  any , isNew?) {
+          let title = isNew ? 'Nouveau partenaire' : 'Modifier Partenaire';
+          let dialogRef: MatDialogRef<any> = this.dialog.open(questionUpdateComponent, {
+            width: '1000px',
+            disableClose: true,
+            data: { title: title, payload: data }
+          })
+          dialogRef.afterClosed()
+            .subscribe(res => {
+              if(!res) {
+                // If user press cancel
+                return;
+              }
+              if (isNew) {
+                
+              } else {
+                this.loader.open('modification en cours');
+                this.service.updateQuestion(data.id,res)
+                  .subscribe((data:any) => {
+                    this.dataSource = data ;
+                    this.loader.close();
+                    this.snack.open('Partenaire modifié avec succées !', 'OK', { duration: 2000 });
+                    
+                  })
+              }
+            })
+        }*/
         
 
 }

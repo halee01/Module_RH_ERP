@@ -18,6 +18,7 @@ import { Observable, Subscription } from 'rxjs';
 import { CrudService } from '../../candidate/CandidatCrud/candidat-crud.service';
 import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
 import { interviewStatus } from 'app/shared/models/Interview';
+import { evaluationPopupComponent } from '../evaluationnPopup/evaluation-popup.component';
 
 
 @Component({
@@ -112,12 +113,9 @@ export class crudEntretienRecrutmentComponent implements OnInit {
 
   
    openPopUp(row: any): void {
-    const dialogRef = this.dialog.open(ajoutEntretienPopupComponent, {
+    const dialogRef = this.dialog.open(evaluationPopupComponent, {
       width: '900px',
-      data: {
-        firstName: row.firstName,
-        lastName: row.lastName
-      }
+      data: {id : row }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -170,20 +168,38 @@ private evaluationCreatedMap = new Map<number, boolean>();
 
 saveEvaluation(id: number): void {
   // Check if an evaluation has already been created for this employee
-  if (this.evaluationCreatedMap.get(id)) {
+  /*if (this.evaluationCreatedMap.get(id)) {
     console.log('Evaluation already created for this employee');
     return;
-  }
+  }*/
 
-  this.crudEntretien.addEvaluation({employeeNum:id}).subscribe(
+  this.crudEntretien.addEvaluation({ employeeNum: id }).subscribe(
     response => {
       console.log('Evaluation added successfully');
-      // Set flag to indicate that evaluation has been created for this employee
-      this.evaluationCreatedMap.set(id, true);
     },
     error => console.error('Error adding evaluation:', error)
   );
 }
+
+openpopup(row:any): void {
+  const dialogRef = this.dialog.open(evaluationPopupComponent, {
+    width: '300px',
+    data: { row }
+    
+  }
+  
+  );
+console.log(row.id)
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('Popup closed');
+    if (result === 'view') {
+      this.router.navigate(['/CandidatEvaluation', row.id]);
+    }
+    // Perform any additional actions after the popup is closed
+  });
+
+}
+
 
 /////////////////////////////////hedhy l fonction eli ma tensech////////////////////////////////
 
