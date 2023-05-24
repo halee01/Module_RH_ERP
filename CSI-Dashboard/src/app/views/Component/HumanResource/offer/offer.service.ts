@@ -123,6 +123,20 @@ updateItem(id: number, candidate: Offer): Observable<Offer> {
   );
 }
 
+updateToOpenById(id: number): Observable<any> {
+  const url = `${this.apiUrl}/updateStatusToOpenById/${id}`;
+  return this.http.put<any>(url, {}).pipe(
+    catchError(this.handleError)
+  );
+}
+
+updateToEndedById(id: number): Observable<any> {
+  const url = `${this.apiUrl}/updateStatusToEndedById/${id}`;
+  return this.http.put<any>(url, {}).pipe(
+    catchError(this.handleError)
+  );
+}
+
 // DELETE an item by id
 deleteItem(id: number): Observable<Offer> {
  

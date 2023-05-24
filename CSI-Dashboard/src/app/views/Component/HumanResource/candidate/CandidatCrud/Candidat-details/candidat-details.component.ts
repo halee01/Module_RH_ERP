@@ -13,6 +13,7 @@ import { Language, LanguageLevel } from 'app/shared/models/Language';
 import { Civility } from 'app/shared/models/contact';
 import html2pdf from 'html2pdf.js';
 import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
+import { PrintSharedService } from 'app/shared/services/PrintShared.service';
 
 @Component({
   selector: 'app-details-candidat',
@@ -39,11 +40,13 @@ title :string[]= Object.values(Title);
 Civility :string []= Object.values(Civility);
 MaritalSituation :string []= Object.values(MaritalSituation);
 LanguageLevel : string[] = Object.values(LanguageLevel);
+cvData: string; 
 
-
-  constructor(    private route: ActivatedRoute,
+  constructor (  private route: ActivatedRoute,
     private candidatService: CrudService,
-    private routerPdf: Router ,) { }
+    private routerPdf: Router,
+    private printService: PrintSharedService,
+    ) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -61,10 +64,14 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
       this.cvHtml = cv.innerHTML;
     }*/
 
+    this.printService.print$.subscribe((employee: any) => {
+      this.printCv(employee);
+    });
+
   }
 
   //////////////////CV Print///////////////////
-  printCv() {
+  printCv(employee: any) {
     const printableArea = document.getElementById('resume');
     var originalContents = document.body.innerHTML;
     var printContents = document.getElementById('resume').innerHTML;
@@ -72,6 +79,16 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
     window.print();
     document.body.innerHTML = originalContents;
   }
+
+ /* printCvFromDataTbale(cvData: string) {
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = cvData;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }*/
+
+  
+
   
  downloadCV() {
     const element = document.getElementById("resume");
@@ -88,18 +105,20 @@ LanguageLevel : string[] = Object.values(LanguageLevel);
 
     });
   }
+
   getTechnicalFile() {
     this.candidatService.getTechnicalFileById(this.id).subscribe((data: any) => {
       this.technicalFile = data;
-
     });
   }
+
   getEducation() {
     this.candidatService.getEducationById(this.id).subscribe((data: any) => {
       this.education = data;
       console.log(this.education);
     });
   }
+  
   getExperience(){
     this.candidatService.getExperienceById(this.id).subscribe((data : any)=>{
       this.experience = data;

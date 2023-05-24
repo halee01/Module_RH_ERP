@@ -17,6 +17,7 @@ import { Civility, Employee, EmployeeStatus, MaritalSituation, Provenance, Title
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs-compat';
+import { PrintSharedService } from 'app/shared/services/PrintShared.service';
 
 
 @Component({
@@ -36,8 +37,8 @@ export class CandidatCrudTableComponent implements OnInit {
   addOnBlur = true;
   public itemForm: FormGroup;;
   selectedFile: File;
-  formWidth = 200; //declare and initialize formWidth property
-  formHeight = 700; //declare and initialize formHeight property
+  formWidth = 200; 
+  formHeight = 700; 
   title :string[]= Object.values(Title);
   EmployeeStatus :any= Object.values(EmployeeStatus);
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
@@ -55,6 +56,9 @@ export class CandidatCrudTableComponent implements OnInit {
   employeeId: number //| null = null;
   employeeList: Employee[];
   filteredEmployees: Employee[] = [];
+  filteredStatusOptions: string[];
+
+
   constructor(
     private _formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -62,10 +66,15 @@ export class CandidatCrudTableComponent implements OnInit {
     private crudService: CrudService,
     private confirmService: AppConfirmService,
     private loader: AppLoaderService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private printService: PrintSharedService, ) { }
    
- 
+  printCv(cvData: string) {
+    var originalContents = document.body.innerHTML;
+    document.body.innerHTML = cvData;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
   ngOnInit() {
     
     this.displayedColumns = this.getDisplayedColumns();
@@ -133,14 +142,30 @@ export class CandidatCrudTableComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+ 
   
+  
+  applyStatusFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+  
+    this.dataSource.filterPredicate = (data, filter) => {
+      const status = this.getStatusColor(data.employeeStatus).displayText.toLowerCase();
+      return status.includes(filter);
+    };
+  
+    this.dataSource.filter = filterValue;
+  
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   
   
   
   
   
   deleteCandidate(row) {
-    this.confirmService.confirm({message: `Delete ${row.firstName}?`})
+    this.confirmService.confirm({message: `Voulez vous vraiment supprimer ${row.lastName} ${row.firstName}?`})
       .subscribe(res => {
         if (res) {
           this.loader.open('Supprission du candidat');
@@ -148,7 +173,7 @@ export class CandidatCrudTableComponent implements OnInit {
             .subscribe((data:any)=> {
               this.dataSource = data;
               this.loader.close();
-              this.snack.open('candidat supprimé!', 'OK', { duration: 20});
+              this.snack.open('Candidat supprimé!', 'OK', { duration: 20});
               this.getEmployees();
             })
         }
@@ -158,12 +183,16 @@ export class CandidatCrudTableComponent implements OnInit {
 add(){
   this.router.navigateByUrl('cvCandidat/cvCandidat-crud');
 }
+
+
+
  applyFilter(event :Event){
     const FilterValue = (event.target as HTMLInputElement).value ;
      this.dataSource.filter = FilterValue.trim().toLowerCase();
  
  }
- 
+
+
 
   getStatusColor(employeeStatus: string): { color: string, displayText: string } {
     const STATUS_DATA = {
@@ -220,6 +249,9 @@ changeEmployeeStatus(employeeStatus: string, employeeId: number): void {
     }
   );
 }
+
+
+
 employeeTitleMap = {
   [Title.FRONT_END_DEVELOPER]: 'Développeur Front-End',
   [Title.BACK_END_DEVELOPER]: 'Développeur Back-End',
@@ -256,15 +288,33 @@ toggleInput2() {
   this.showInput2 = !this.showInput2;
 }
 
-
 toggleInput3() {
   this.showInput3 = !this.showInput3;
 }
-
-
 toggleInput4() {
   this.showInput4 = !this.showInput4;
 }
 
+
+
+/*printCvById(employeeId: string) {
+  const cvUrl = `/candidat/${employeeId}`;
+  const printWindow = window.open(cvUrl, '_blank');
+
+  if (printWindow) {
+    printWindow.onload = () => {
+      printWindow.print();
+      printWindow.onafterprint = () => {
+        printWindow.close();
+      };
+    };
+  } else {
+    console.error('Failed to open print window.');
+  }
+}*/
+
+printCV(employee: any) {
+  this.printService.printCV(employee);
+}
 
 }

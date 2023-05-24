@@ -423,6 +423,7 @@ handleRemoveRepeatForm(index: number) {
               }
             );
             }
+            
 //-------------------------
   employeeTitleMap = {
     [Title.FRONT_END_DEVELOPER]: 'Développeur Front-End',
@@ -473,7 +474,10 @@ handleRemoveRepeatForm(index: number) {
     [LanguageLevel.NATIVE_LANGUAGE]: 'Langue Maternelle',
     [LanguageLevel.BILINGUAL]: 'Bilingue'
   };
+
 ///////////-------updatePopup------------///////////////
+
+
 getItems() {    
   this.getItemSub = this.updateCandidatService.getItems()
     .subscribe((data:any)  => {
@@ -485,32 +489,7 @@ getItems() {
 }
 
 
-/*openPopUp6(data: any = {} , isNew?) {
-  let title = isNew ? 'Ajouter compte bancaire' : 'Modifier compte bancaire';
-  let dialogRef: MatDialogRef<any> = this.dialog.open(employeePopupComponent, {
-    width: '1000px',
-    disableClose: true,
-    data: { title: title, payload: data , employeeId: this.employee.id}
-  })
-  dialogRef.afterClosed()
-    .subscribe(res => {
-      if(!res) {
-        // If user press cancel
-        return;
-      }
-     
-        this.loader.open('modification en cours');
-        console.log(data.id)
-        this.updateCandidatService.updateItem( this.id, res)
-          .subscribe((data:any) => {
-            this.emplyeeDataSource = data ;
-            this.loader.close();
-            this.snack.open('Compte bancaire modifié avec succés!', 'OK', { duration: 2000 });
-            this.getItems();
-          })
-       
-    })
-}*/
+
 openPopUpEmployee(data: any = {}) {
   const title = 'Modifier Employee';
   const dialogRef: MatDialogRef<any> = this.dialog.open(employeePopupComponent, {
@@ -537,50 +516,9 @@ openPopUpEmployee(data: any = {}) {
   });
 }
 
-/*openPopUpEducation(data:  any , isNew?) {
-  const title = 'Modifier compte bancaire';
-  const dialogRef: MatDialogRef<any> = this.dialog.open(educationPopupComponent, {
-    width: '1000px',
-    disableClose: true,
-    data: { title: title, payload: data  }
-  });
 
-  dialogRef.afterClosed()
-  .subscribe(res => {
-    if(!res) {
-      // If user press cancel
-      return;
-    }
-    if (isNew) {
-      this.loader.open('Ajout en cours');
-      this.updateCandidatService.addEducation(res)
-        .subscribe((data :any)=> {
-          this.dataSource = data;
-          this.loader.close();
-          this.snack.open('Education ajoutée avec succès!', 'OK', { duration: 2000 });
-          this.getItems();
-        })
-    } else 
-    {
-      const updatedData = { ...data, ...res };
-      this.updateCandidatService.updateEducation(data.id, res).subscribe(
-        (response) => {
-          console.log('Item updated successfully', response);
-          this.snack.open('Compte bancaire modifié avec succès!', 'OK', { duration: 2000 });
-          this.getItems();
-        },
-        (error) => {
-          console.error('Error updating item', error);
-          this.snack.open('Une erreur est survenue lors de la modification du compte bancaire.', 'OK', { duration: 2000 });
-        }
-      );
-    }
-  });
-}
-
-}
-}*/
 openPopUpEducation(data: any, isNew?: boolean) {
+
   const title = isNew ? 'Nouvelle education' : 'Modifier education';
   const dialogRef: MatDialogRef<any> = this.dialog.open(educationPopupComponent, {
     width: '1000px',
@@ -661,6 +599,7 @@ openPopUpExperience(data: any, isNew?: boolean) {
     });
 }
 
+
 openPopUpCertification(data: any, isNew?: boolean) {
   const title = isNew ? 'Nouvelle certification' : 'Modifier certification';
   const dialogRef: MatDialogRef<any> = this.dialog.open(certificationPopupComponent, {
@@ -700,6 +639,7 @@ openPopUpCertification(data: any, isNew?: boolean) {
       }
     });
 }
+
 openPopUpLanguage(data: any, isNew?: boolean) {
   const title = isNew ? 'Nouvelle certification' : 'Modifier certification';
   const dialogRef: MatDialogRef<any> = this.dialog.open(languagePopupComponent, {

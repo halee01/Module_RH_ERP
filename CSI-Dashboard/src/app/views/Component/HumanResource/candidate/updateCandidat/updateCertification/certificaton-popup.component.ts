@@ -92,13 +92,9 @@ export class certificationPopupComponent implements OnInit {
   }
 
 onCountryChange(countryShotName: string) {
-  this.states = this.update.getStatesByCountry(countryShotName);
-}
+  this.states = this.update.getStatesByCountry(countryShotName);}
 
 
-
-}
-
-function buildItemForm(item: any) {
-  throw new Error('Function not implemented.');
+ buildItemForm(item: any) {
+  throw new Error('Function not implemented.');}
 }

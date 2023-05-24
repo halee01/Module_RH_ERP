@@ -144,6 +144,28 @@ updateItem(id: number, candidate: Employee): Observable<Employee> {
   );
 }
 
+updateToPlannedById(id: number): Observable<any> {
+  const url = `${this.apiUrlInterview}/updateStatusToPlannedById/${id}`;
+  return this.http.put<any>(url, {}).pipe(
+    catchError(this.handleError)
+  );
+}
+
+updateToEndedById(id: number): Observable<any> {
+  const url = `${this.apiUrlInterview}/updateStatusToEndedById/${id}`;
+  return this.http.put<any>(url, {}).pipe(
+    catchError(this.handleError)
+  );
+}
+
+updateToCancelledById(id: number): Observable<any> {
+  const url = `${this.apiUrlInterview}/updateStatusToCancelledById/${id}`;
+  return this.http.put<any>(url, {}).pipe(
+    catchError(this.handleError)
+  );
+}
+
+
 // DELETE an item by id
 deleteItem(id: number): Observable<Employee> {
  
