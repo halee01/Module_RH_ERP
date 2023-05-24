@@ -103,6 +103,7 @@ export const rootRouterConfig: Routes = [
         loadChildren: () => import('./views/app-calendar/app-calendar.module').then(m => m.AppCalendarModule),
         data: { title: 'Calendar', breadcrumb: 'CALENDAR'}
       },
+      
       {
         path: 'candidat',
         loadChildren: () => import('./views/Component/HumanResource/candidate/CandidatCrud/candidat-crud.module').then(m => m.CandidatCrudModule),
@@ -161,6 +162,7 @@ export const rootRouterConfig: Routes = [
         loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielForm/referentielForm.module').then(m => m.referentielFormModule),
         data: { title: 'refForm', breadcrumb: 'form'}
       },
+    
       {
         path: 'chat',
         loadChildren: () => import('./views/app-chats/app-chats.module').then(m => m.AppChatsModule),

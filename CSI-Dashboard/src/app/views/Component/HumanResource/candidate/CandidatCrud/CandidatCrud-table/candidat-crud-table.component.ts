@@ -246,6 +246,8 @@ showInput2 = false;
 showInput3 = false;
 showInput4 = false;
 
+
+
 toggleInput1() {
   this.showInput1 = !this.showInput1;
 }
@@ -253,9 +255,16 @@ toggleInput1() {
 toggleInput2() {
   this.showInput2 = !this.showInput2;
 }
+
+
 toggleInput3() {
   this.showInput3 = !this.showInput3;
-}toggleInput4() {
+}
+
+
+toggleInput4() {
   this.showInput4 = !this.showInput4;
 }
+
+
 }
