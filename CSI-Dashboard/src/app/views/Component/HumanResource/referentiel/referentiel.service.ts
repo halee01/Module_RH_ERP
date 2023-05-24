@@ -146,7 +146,7 @@ updateItem(id: number, candidate: Offer): Observable<Offer> {
   );
 }
 
-updateQuestion(Id: number, updatedQuestion: any): Observable<any> {
+/*updateQuestion(Id: number, updatedQuestion: any): Observable<any> {
   const url = `${this.questUrl+ '/update'}/${Id}`;
   return this.http.put(url, updatedQuestion).pipe(
     tap((res: any) => console.log(`Updated question with ID ${res.id}`)),
@@ -155,7 +155,15 @@ updateQuestion(Id: number, updatedQuestion: any): Observable<any> {
       return throwError(err);
     })
   );
+}*/
+
+updateQuestion(Id: number, question: Question): Observable<Question> {
+  const url = `${this.questUrl+ '/update'}/${Id}`;
+  return this.http.put<Question>(url, question).pipe(
+    catchError(this.handleError)
+  );
 }
+
 
 
 // DELETE an item by id

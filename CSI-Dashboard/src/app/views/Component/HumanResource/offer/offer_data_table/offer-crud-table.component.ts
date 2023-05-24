@@ -9,8 +9,8 @@ import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.s
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
+import { FormGroup } from '@angular/forms';
+import { Title } from 'app/shared/models/Employee';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { OfferService } from '../offer.service';
 import { Offer, OfferStatus } from 'app/shared/models/Offer';
@@ -211,5 +211,25 @@ changeOffereStatus(offerStatus: string, offerId: number): void {
       console.error('Erreur lors de la mise à jour : ', error);
     }
   ); 
+}
+
+applyStatusFilter(event: Event) {
+  const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+
+  this.dataSource.filterPredicate = (data, filter) => {
+    const status = this.getStatusColor(data.offerStatus).displayText.toLowerCase();
+    return status.includes(filter);
+  };
+
+  this.dataSource.filter = filterValue;
+
+  if (this.dataSource.paginator) {
+    this.dataSource.paginator.firstPage();
+  }
+}
+
+showInput1 = false;
+toggleInput1() {
+  this.showInput1 = !this.showInput1;
 }
 }

@@ -30,13 +30,13 @@ export const CandidatRoutes: Routes = [
   },
 
   { 
-    path: "id", 
+    path: ":id", 
    component: CandidatDetailComponent, 
    pathMatch: "full"
    //data: { title: 'AffichageCandidat' }
   },
 
-  /*{ 
+  { 
     path: 'evaluationCandidat', 
 component: entretienRecrutmentComponent, 
 data: { title: 'EntretienRecrutment' } },
@@ -46,7 +46,7 @@ data: { title: 'EntretienRecrutment' } },
  component: entretienRecrutmentComponent, 
  pathMatch: "full"
  //data: { title: 'AffichageCandidat' }
-},*/
+},
 
 /*{ 
   path: ":templateDuCv", 

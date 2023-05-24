@@ -33,3 +33,9 @@ export enum interviewLocation{
     INTERNAL="INTERNAL" ,
      EXTERNAL="EXTERNAL"
 }
+
+export enum interviewStatus{
+    PLANNED="PLANNED" ,
+    ENDED="ENDED",
+    CANCELLED="CANCELLED"
+}

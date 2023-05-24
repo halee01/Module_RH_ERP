@@ -49,14 +49,13 @@ import { questionUpdateComponent } from './questionUpdate.component';
       private route: ActivatedRoute,
       private confirmService: AppConfirmService,
       private loader: AppLoaderService,
-      public dialog: MatDialog ){
-        
-      this.dataSourceQuestion = new MatTableDataSource<Question>([]);
+      public dialog: MatDialog )
+
+      {this.dataSourceQuestion = new MatTableDataSource<Question>([]);
 
       this.repeatForm= new FormGroup({
         repeatArray: new FormArray([])
-      });
-      }
+      });}
   
      
     ngOnInit() {
@@ -111,11 +110,12 @@ import { questionUpdateComponent } from './questionUpdate.component';
         [ExperienceLevel.SENIOR]:'Senior',
         [ExperienceLevel.EXPERT]:'Expert', }
 
-    
+        selectedQuestionId: number;
+
       
-        openUpdateQuestionDialog(row): void {
+        openUpdateQuestionDialog(row: any): void {
           const dialogRef = this.dialog.open(questionUpdateComponent, {
-            data: { question: row.question }
+            data: { row }
           });
         
           dialogRef.afterClosed().subscribe((result: any) => {
@@ -136,6 +136,7 @@ import { questionUpdateComponent } from './questionUpdate.component';
             }
           });
         }
+        
         
         
         

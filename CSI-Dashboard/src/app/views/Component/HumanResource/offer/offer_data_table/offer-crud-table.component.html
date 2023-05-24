@@ -34,12 +34,23 @@
 
   <ng-container matColumnDef="endDate">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Date de fin
+      
     </mat-header-cell>
     <mat-cell *matCellDef="let row" data-label="Date de fin" [style.color]="row.color"> {{row.endDate}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="statut" >
-    <mat-header-cell *matHeaderCellDef style="padding-left: 2cm;"> Statut   </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef style="padding-left: 2cm;"> Statut   
+      <div>
+        <button mat-icon-button (click)="toggleInput1()">
+          <mat-icon>search</mat-icon>
+        </button>
+        
+        <mat-form-field *ngIf="showInput1" style="width:1.3cm;" >
+          <input matInput (input)="applyStatusFilter($event)" placeholder="Filter by Status">
+       </mat-form-field>
+         </div>
+        </mat-header-cell>
     <mat-cell *matCellDef="let row">
       <button mat-button class="mat-button-as-chip"  [matMenuTriggerFor]="menu" [color]="getStatusColor(row.offerStatus).color" >{{ getStatusColor(row.offerStatus).displayText }}</button>
         <mat-menu #menu="matMenu">

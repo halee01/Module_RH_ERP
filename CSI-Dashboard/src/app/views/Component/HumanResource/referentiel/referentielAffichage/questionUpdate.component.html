@@ -3,18 +3,17 @@
       <div class="container">
         <form [formGroup]="questionForm">
           <div class="align">
-                  <mat-form-field [style.width.cm]=14 class="example-full-width"  style="margin-right: 20px;" appearance="outline">
-                    <mat-label>Question</mat-label>
-                    <textarea matInput  formControlName="question"></textarea>
-                  </mat-form-field>
-                  </div>
-                  <div fxFlex="100" class="mt-16">
-                    <button mat-button (click)="onCancel()">Cancel</button>
-                    <button mat-button [mat-dialog-close]="updatedQuestion" cdkFocusInitial>Update</button>
-
-                  </div>
-
+            <mat-form-field [style.width.cm]="14" class="example-full-width" style="margin-right: 20px;" appearance="outline">
+              <mat-label>Question</mat-label>
+              <textarea matInput formControlName="question"></textarea>
+            </mat-form-field>
+          </div>
+          <div fxFlex="100" class="mt-16">
+            <button mat-button (click)="onCancel()">Cancel</button>
+            <button mat-button (click)="onUpdate()">Update</button>
+          </div>
         </form>
+        
   
   
   </div>

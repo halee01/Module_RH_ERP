@@ -137,9 +137,10 @@
               </button>
               
               <mat-form-field *ngIf="showInput4" style="width:1.3cm;" >
-                <input matInput (input)="applyFilterr($event, 'status')" placeholder="Filtrer">
+                <input matInput (input)="applyStatusFilter($event)" placeholder="Filter by Status">
+
+
              </mat-form-field>
-  
                </div>
             </mat-header-cell>
           <mat-cell *matCellDef="let row">
@@ -178,15 +179,29 @@
          <ng-container matColumnDef="actions" >
            <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
            <mat-cell *matCellDef="let row">
-             <button mat-icon-button mat-sm-button color="primary" class="mr-16 "   (click)="printCv(row.cvData)">
-               <mat-icon>edit</mat-icon>
-             </button>
-             <button mat-icon-button mat-sm-button color="accent" class=" mr-16 " routerLink="/candidatAffichage/{{row.id}}" routerLinkActive="router-link-active">
+
+            <button mat-icon-button mat-sm-button  class="mr-16 " routerLink="/candidat/{{row.id}}" routerLinkActive="router-link-active">
                <mat-icon>remove_red_eye </mat-icon>
              </button>
-             <button mat-icon-button mat-sm-button color="warn" (click)="deleteCandidate(row)">
-               <mat-icon>delete</mat-icon>
-             </button>
+
+             <button  class="mr-16 " mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item class="mr-16 " (click)="deleteCandidate(row)">
+                <mat-icon>delete</mat-icon>
+                <span>Supprimer le candidat</span>
+              </button>
+              <button mat-menu-item mat-sm-button class="mr-16 " (click)="printCV(row.id)">
+                <mat-icon>print</mat-icon>
+                <span>Imprimer le Cv</span>
+              </button>
+              <button mat-menu-item class="mr-16 " (click)="printCV(row.id)">
+                <mat-icon>mode_edit</mat-icon>
+                <span>Modifier le candidat</span>
+              </button>
+            </mat-menu>
+             
            </mat-cell>
          </ng-container>
    

@@ -13,6 +13,7 @@ import { Language, LanguageLevel } from 'app/shared/models/Language';
 import { Civility } from 'app/shared/models/contact';
 import html2pdf from 'html2pdf.js';
 import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
+import { PrintSharedService } from 'app/shared/services/PrintShared.service';
 
 @Component({
   selector: 'app-details-candidat',
@@ -44,6 +45,7 @@ cvData: string;
   constructor (  private route: ActivatedRoute,
     private candidatService: CrudService,
     private routerPdf: Router,
+    private printService: PrintSharedService,
     ) { }
 
   ngOnInit(): void {
@@ -62,24 +64,30 @@ cvData: string;
       this.cvHtml = cv.innerHTML;
     }*/
 
+    this.printService.print$.subscribe((employee: any) => {
+      this.printCv(employee);
+    });
+
   }
 
   //////////////////CV Print///////////////////
-  /*printCv() {
+  printCv(employee: any) {
     const printableArea = document.getElementById('resume');
     var originalContents = document.body.innerHTML;
     var printContents = document.getElementById('resume').innerHTML;
     document.body.innerHTML = printContents ;
     window.print();
     document.body.innerHTML = originalContents;
-  }*/
+  }
 
-  printCv(cvData: string) {
+ /* printCvFromDataTbale(cvData: string) {
     var originalContents = document.body.innerHTML;
     document.body.innerHTML = cvData;
     window.print();
     document.body.innerHTML = originalContents;
-  }
+  }*/
+
+  
 
   
  downloadCV() {
