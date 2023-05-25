@@ -165,13 +165,13 @@ export class crudEntretienRecrutmentComponent implements OnInit {
 
 
 private evaluationCreatedMap = new Map<number, boolean>();
-
-saveEvaluation(id: number): void {
-  // Check if an evaluation has already been created for this employee
+// Check if an evaluation has already been created for this employee
   /*if (this.evaluationCreatedMap.get(id)) {
     console.log('Evaluation already created for this employee');
     return;
   }*/
+/*saveEvaluation(id: number): void {
+  
 
   this.crudEntretien.addEvaluation({ employeeNum: id }).subscribe(
     response => {
@@ -179,7 +179,7 @@ saveEvaluation(id: number): void {
     },
     error => console.error('Error adding evaluation:', error)
   );
-}
+}*//*
 
 openpopup(row:any): void {
   const dialogRef = this.dialog.open(evaluationPopupComponent, {
@@ -198,7 +198,7 @@ console.log(row.id)
     // Perform any additional actions after the popup is closed
   });
 
-}
+}*/
 
 
 /////////////////////////////////hedhy l fonction eli ma tensech////////////////////////////////
@@ -282,5 +282,47 @@ showInput1 = false;
 toggleInput1() {
   this.showInput1 = !this.showInput1;
 }
+///********SARRA----------------
+saveEvaluation(id: number): void {
+  this.crudEntretien.addEvaluation({ employeeNum: id }).subscribe(
+    response => {
+      console.log('Evaluation added successfully');
+      const newEvaluationId = response.id; // Assuming the response contains the new evaluation ID
+      this.openpopup({ id: newEvaluationId }); // Open the popup with the new evaluation ID
+    },
+    error => console.error('Error adding evaluation:', error)
+  );
+}
+
+openpopup(row: any): void {
+  console.log('Open popup for employee:', row.id);
+  
+  this.crudEntretien.addEvaluation({ employeeNum: row.id }).subscribe(
+    response => {
+      console.log('Evaluation added successfully:', response);
+      const newEvaluationId = response.id;
+      
+      const dialogRef = this.dialog.open(evaluationPopupComponent, {
+        width: '300px',
+        data: { row }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('Popup closed');
+        if (result === 'view') {
+          console.log('View evaluation clicked');
+          this.router.navigate(['/CandidatEvaluation', newEvaluationId]);
+        }
+        // Perform any additional actions after the popup is closed
+      });
+    },
+    error => console.error('Error adding evaluation:', error)
+  );
+}
+
+
+
+
+
 }
 

@@ -1,3 +1,4 @@
+import { Interview } from 'app/shared/models/Interview';
 import { id } from 'date-fns/locale';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -10,15 +11,16 @@ import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.serv
 import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
 import { Subscription } from 'rxjs';
 
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Fruit } from 'assets/examples/material/input-chip/input-chip.component';
 import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { CompanyStatus, Country } from 'app/shared/models/Partner';
-import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
+import { Civility, Employee, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
 import { Service } from 'app/shared/models/contact';
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
+import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
 
 @Component({
   selector: 'app-candidat-crud',
@@ -27,6 +29,9 @@ import { entretienRecrutmentService } from '../entretienRecrutment.service';
 
 
 export class entretienRecrutmentComponent implements OnInit {
+  id:number;
+  employee:Employee;
+  interview:Interview;
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
@@ -186,9 +191,63 @@ export class entretienRecrutmentComponent implements OnInit {
     },
     
   ];
+  snack: any;
   
   
-  constructor() { }
-  ngOnInit
+  constructor(private route: ActivatedRoute,
+             private service:entretienRecrutmentService,
+             private dialog: MatDialog) 
+             
+             { }
+  ngOnInit(){
+    this.id = this.route.snapshot.params['id'];
+    console.log('sarra',this.id);
+    this.getEmployee();
+    this.getInterviews();
+  }
+
+  getEmployee() {
+    this.service.getEmployeeById(this.id).subscribe((data: any) => {
+      this.employee = data;
+    });
+    console.log(this.employee);
+  }
+  getInterviews() {
+    this.service.getInterviewsById(this.id).subscribe((data: any) => {
+      this.interview = data;
+    });
+    console.log(this.interview);
+  }
+
+
+  openPopUpEntretien(data:  any , isNew?) {
+    let title = isNew ? 'Nouveau entretien' : 'Modifier entretien';
+
+    const dialogRef: MatDialogRef<any> = this.dialog.open(ajoutEntretienPopupComponent, {
+      width: '1000px',
+      disableClose: true,
+      data: { title: title, payload: data , evaluationNum: this.id}
+    });
+  
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        const updatedData = { ...data, ...res };
+        this.service.addInterview( updatedData).subscribe(
+          (response) => {
+            console.log('Item updated successfully', response);
+            this.snack.open('Compte bancaire modifié avec succès!', 'OK', { duration: 2000 });
+            this.getItems();
+          },
+          (error) => {
+            console.error('Error updating item', error);
+            this.snack.open('Une erreur est survenue lors de la modification du compte bancaire.', 'OK', { duration: 2000 });
+          }
+        );
+      }
+    });
+  }
+  getItems() {
+    throw new Error('Method not implemented.');
+  }
 
 }

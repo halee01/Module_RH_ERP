@@ -192,4 +192,18 @@ private handleError(error: HttpErrorResponse) {
     'Something bad happened; please try again later.');
 }
 
+//------getEmployeeByEvaluationId---------
+getEmployeeById(id: number): Observable<any> {
+  const url = `${this.apiUrlEvaluation+ '/get'}/${id}`+ '/employee';
+  return this.http.get<any>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+getInterviewsById(id: number): Observable<any> {
+  const url = `${this.apiUrlEvaluation+ '/get'}/${id}`+ '/interview';
+  return this.http.get<any>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+
 }

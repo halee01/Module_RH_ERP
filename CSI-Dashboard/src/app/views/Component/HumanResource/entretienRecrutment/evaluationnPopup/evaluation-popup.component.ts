@@ -55,6 +55,10 @@ export class evaluationPopupComponent implements OnInit {
   closePopup(): void {
     this.dialogRef.close();
   }
+  onViewEvaluationClick(): void {
+    this.dialogRef.close('view'); // Emit 'view' as the result when the button is clicked
+  }
+
 
 
 }
