@@ -120,6 +120,7 @@ getEvaluation(id: number): Observable<Evaluation> {
     catchError(this.handleError)
   );
   }
+
 // POST a new interview
 addInterview(interview: any): Observable<any> {
   const apiUrlInterviewWithAdd = this.apiUrlInterview + '/add'; // Append /add to the apiUrl
@@ -135,6 +136,13 @@ getInterview(id: number): Observable<Interview> {
     catchError(this.handleError)
   );
   }
+
+  getEmployeeEvaluation(id: number): Observable<Interview> {
+    const url =  `${this.apiUrl+ '/get'}/${id}`+ '/evaluation';
+    return this.http.get<Interview>(url).pipe(
+      catchError(this.handleError)
+    );
+    }
 
 // PUT an existing item
 updateItem(id: number, candidate: Employee): Observable<Employee> {

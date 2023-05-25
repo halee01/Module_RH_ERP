@@ -1,6 +1,6 @@
 
 
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Question } from 'app/shared/models/Question';
@@ -137,8 +137,4 @@ import { questionUpdateComponent } from './questionUpdate.component';
           });
         }
         
-        
-        
-        
-
 }

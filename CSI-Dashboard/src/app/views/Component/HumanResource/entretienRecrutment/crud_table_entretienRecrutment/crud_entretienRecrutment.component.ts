@@ -1,11 +1,7 @@
 import { Evaluation } from 'app/shared/models/Evaluation';
 import { entretienRecrutmentService } from './../entretienRecrutment.service';
-import { crudEntretien } from '../crud_entretienRecrutment.routing';
-
-
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -13,9 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
-import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
 import { Observable, Subscription } from 'rxjs';
-import { CrudService } from '../../candidate/CandidatCrud/candidat-crud.service';
 import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
 import { interviewStatus } from 'app/shared/models/Interview';
 
@@ -57,10 +51,12 @@ export class crudEntretienRecrutmentComponent implements OnInit {
     this.displayedColumns = this.getDisplayedColumns();
     this.getItems()
   }
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
+  
   ngOnDestroy() {
     if (this.getItemSub) {
       this.getItemSub.unsubscribe()
@@ -246,6 +242,7 @@ switch (interviewStatus) {
     return;
 }
 }
+
 
 applyStatusFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
