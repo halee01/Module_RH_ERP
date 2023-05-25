@@ -1,9 +1,8 @@
-
 <div class="modal-body px-0">
   <div style="overflow-y: hidden; height: calc(100vh - 15rem);">
     <div class="px-2" style="overflow-y: auto; height: 100%;">
       
-      <form [formGroup]="offerForm" >
+      <form [formGroup]="offerForm"  >
     
         <mat-card class="p-0" >
           <mat-tab-group mat-stretch-tabs>
@@ -135,7 +134,7 @@
               <div fxFlex="100" class="mt-16">
                 <button mat-raised-button color="warn" type="button" (click)="dialogRef.close(false)">Ignorer</button>
                 <span fxFlex></span>
-                <button mat-raised-button color="primary" (click)="saveInterview()">save</button>
+                <button mat-raised-button color="primary" (click)="submit()" >save</button>
               </div>
             </div>
             </mat-card-content>
@@ -148,4 +147,3 @@
     </div>
   </div>
 </div>
-

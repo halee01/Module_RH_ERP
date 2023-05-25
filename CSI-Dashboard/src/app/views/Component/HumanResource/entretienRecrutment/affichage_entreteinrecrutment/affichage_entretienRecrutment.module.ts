@@ -1,5 +1,4 @@
 import { NgApexchartsModule } from 'ng-apexcharts';
-
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -26,8 +25,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { crudEntretien } from '../crud_entretienRecrutment.routing';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
-
-
+import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 
@@ -38,10 +37,10 @@ import { entretienRecrutmentService } from '../entretienRecrutment.service';
     HttpClientModule,
     MatProgressBarModule,
     MatPaginatorModule,
+    MatTableModule,
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
-    MatTableModule,
     MatExpansionModule,
     MatRadioModule,
     MatCardModule,
@@ -52,6 +51,7 @@ import { entretienRecrutmentService } from '../entretienRecrutment.service';
     MatInputModule,
     FlexLayoutModule,
     ColorPickerModule,
+    MatTabsModule,
     NgApexchartsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -59,10 +59,10 @@ import { entretienRecrutmentService } from '../entretienRecrutment.service';
     }),
     RouterModule.forChild(crudEntretien)
   ],
+
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    entretienRecrutmentComponent
-  ],
+    entretienRecrutmentComponent,ajoutEntretienPopupComponent ]
 })
 export class EntretienRecrutmentModule { }

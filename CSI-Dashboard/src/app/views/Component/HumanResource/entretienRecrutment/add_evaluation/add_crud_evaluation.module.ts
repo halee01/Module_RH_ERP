@@ -70,7 +70,7 @@ import { ajoutEntretienPopupComponent } from './addEntretien-popup/addEntretien-
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    crudEvaluationComponent,ajoutEntretienPopupComponent
+    crudEvaluationComponent
   ],
 })
 export class CrudEvaluationModule { }

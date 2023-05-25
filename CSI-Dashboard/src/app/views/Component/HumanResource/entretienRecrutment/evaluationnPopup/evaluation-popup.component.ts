@@ -1,8 +1,7 @@
-import { catchError, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {  Validators,  FormGroup, FormBuilder, FormArray, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Interview, InterviewMode, InterviewType, interviewLocation } from 'app/shared/models/Interview';
 import { Employee } from 'app/shared/models/Employee';
 import { Router } from '@angular/router';
@@ -55,10 +54,9 @@ export class evaluationPopupComponent implements OnInit {
   closePopup(): void {
     this.dialogRef.close();
   }
+
   onViewEvaluationClick(): void {
     this.dialogRef.close('view'); // Emit 'view' as the result when the button is clicked
   }
-
-
 
 }
