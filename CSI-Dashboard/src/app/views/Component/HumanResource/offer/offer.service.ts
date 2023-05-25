@@ -117,7 +117,7 @@ addItem(candidate: any): Observable<any> {
 
 // PUT an existing item
 updateItem(id: number, candidate: Offer): Observable<Offer> {
-  const url = `${this.apiUrl +'/update'}/${id}`;
+  const url = `${this.apiUrl }/update/${id}`;
   return this.http.put<Offer>(url, candidate).pipe(
     catchError(this.handleError)
   );

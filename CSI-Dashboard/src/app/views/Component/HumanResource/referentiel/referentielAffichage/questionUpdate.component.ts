@@ -20,6 +20,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   constructor(
     public dialogRef: MatDialogRef<questionUpdateComponent>,
     private ref: referentielService,
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private formBuilder: FormBuilder,
     private snackBar: MatSnackBar )
@@ -32,6 +33,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
     ngOnInit() {
       const questionId = this.data.row.id; // Access the question ID from the passed data
+      
       // Additional initialization code if needed
     }
 
@@ -39,7 +41,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   onCancel(): void {
     this.dialogRef.close();
   }
-
+  submit() {
+    this.dialogRef.close(this.questionForm.value)
+  }
   
  /* onUpdate(): void {
     this.dialogRef.close(this.updatedQuestion);
@@ -57,7 +61,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
   onUpdate() {
     const updatedQuestion = this.questionForm.value;
-    const questionId = this.data.row.id;
+    const questionId = this.data.id;
   
     this.ref.updateQuestion(questionId, updatedQuestion).subscribe(
       (res) => {
@@ -76,5 +80,4 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
     this.dialogRef.close({ question: updatedQuestion });
   }
-  
-  }
+}
