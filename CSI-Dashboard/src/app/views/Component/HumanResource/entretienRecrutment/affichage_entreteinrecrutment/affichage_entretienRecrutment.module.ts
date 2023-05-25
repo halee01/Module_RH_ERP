@@ -1,5 +1,4 @@
 import { NgApexchartsModule } from 'ng-apexcharts';
-
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -26,16 +25,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { crudEntretien } from '../crud_entretienRecrutment.routing';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
-
-
-
+import { QuestionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MatSelectModule,
     HttpClientModule,
+    MatTabsModule,
     MatProgressBarModule,
     MatPaginatorModule,
     MatIconModule,
@@ -57,12 +58,12 @@ import { entretienRecrutmentService } from '../entretienRecrutment.service';
       provide: DateAdapter,
       useFactory: adapterFactory
     }),
+
     RouterModule.forChild(crudEntretien)
   ],
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    entretienRecrutmentComponent
-  ],
+    entretienRecrutmentComponent,QuestionnairePopupComponent],
 })
 export class EntretienRecrutmentModule { }

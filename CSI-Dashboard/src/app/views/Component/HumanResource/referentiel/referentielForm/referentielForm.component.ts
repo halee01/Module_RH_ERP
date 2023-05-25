@@ -49,15 +49,15 @@ ngOnInit(): void {
   this.questionForm = this.fb.group({
     value : new FormArray([])
    });
+
    (this.questionForm.get('value') as FormArray).push(this.fb.group({
     question : new UntypedFormControl('', [Validators.required]),
   }));
- 
 }
 
 get getQuestion() {
   return (this.questionForm.get('value') as FormArray).controls;
-}
+};
 
 
 ExperienceLevelMap= {
@@ -71,7 +71,7 @@ ExperienceLevelMap= {
 QuestionnaireTypeMap={
   [QuestionnaireType.FOR_EMPLOYEES]:'Pour Employées',
   [QuestionnaireType.FOR_CANDIDATES]:'Pour candidats',
-}
+};
 
 saveCatQuestion(): void {
   console.log('Submitting form...');

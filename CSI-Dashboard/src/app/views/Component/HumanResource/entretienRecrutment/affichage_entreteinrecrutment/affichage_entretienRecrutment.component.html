@@ -21,12 +21,12 @@
         ></apx-chart>
       </div>
     </div>
-    
+    <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopUpEntretien({},true)" >Ajouter un entretien </button>
+
   </mat-card>
-  <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopUpEntretien({},true)" >Ajouter un entretien </button>
      
   <div style="padding-left: 15px;padding-right: 15px;">
-    
+    <div></div>
      <mat-accordion>
   <!-------------entretien RH----------------->
     <mat-expansion-panel *ngFor="let interviews of interview" >
@@ -35,27 +35,12 @@
           <mat-icon>description</mat-icon> &nbsp; &nbsp;{{interviews.interviewType}}
         </mat-panel-title>
         <mat-panel-description>
-          <h3 style="padding-left: 16cm;padding-top: 12px;">20%</h3>
+
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <h3>note</h3>
-      <div
-              class="d-flex justify-content-between align-items-baseline"
-              *ngFor="let r of results"
-            >
+      <div class="d-flex justify-content-between align-items-baseline">
               <div class="mr-2">
-                <i class="material-icons text-10 text-{{r.color}} mr-16">lens</i>
-              </div>
-              <div class="lm-title flex-grow-1">
-                <p class="font-weight-semi mb-0">{{r.name}}</p>
-                <p class="text-small text-muted">{{r.date}}</p>
-              </div>
-              <div class="ul-progressbar flex-grow-1">
-                <div class="progress-percentage d-flex">
-                  <span class="flex-grow-1"></span>
-                  <span class="text-muted">{{r.completed}}%</span>
-                </div>
-                <mat-progress-bar mode="determinate" [value]="r.completed" [color]="r.color"></mat-progress-bar>
+                <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="addQuestionnaire()" >Ajouter un questionnaire </button>
               </div>
             </div>
     </mat-expansion-panel>

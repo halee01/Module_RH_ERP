@@ -1,26 +1,13 @@
 import { Interview } from 'app/shared/models/Interview';
-import { id } from 'date-fns/locale';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
-import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
-import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
-import { Subscription } from 'rxjs';
 
-import { Router, ActivatedRoute } from '@angular/router';
-import { Fruit } from 'assets/examples/material/input-chip/input-chip.component';
-import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { CompanyStatus, Country } from 'app/shared/models/Partner';
-import { Civility, Employee, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
-import { Service } from 'app/shared/models/contact';
-import { LanguageLevel, Languages } from 'app/shared/models/Language';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { ActivatedRoute } from '@angular/router';
+import { UntypedFormGroup} from '@angular/forms';
+import { Employee,} from 'app/shared/models/Employee';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
 import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
+import { QuestionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
 
 @Component({
   selector: 'app-candidat-crud',
@@ -226,7 +213,6 @@ export class entretienRecrutmentComponent implements OnInit {
    
   
     const dialogRef: MatDialogRef<any> = this.dialog.open(ajoutEntretienPopupComponent, {
-      width: '1000px',
       disableClose: true,
       data: { title: title, payload: data, evaluationNum: this.id }
     });
@@ -254,4 +240,14 @@ export class entretienRecrutmentComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
+  
+  addQuestionnaire() {
+    const dialogRef = this.dialog.open( QuestionnairePopupComponent );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }
+
+

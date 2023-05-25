@@ -15,6 +15,7 @@ export class entretienRecrutmentService {
   private apiUrl = 'http://localhost:8080/rh/employee';
   private apiUrlInterview = 'http://localhost:8080/rh/Interview';
   private apiUrlEvaluation = 'http://localhost:8080/rh/evaluation';
+  private apiQuestionType = 'http://localhost:8080/rh/QuestionType'
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -83,6 +84,13 @@ export class entretienRecrutmentService {
 //******* Implement your APIs ********
 getItems(): Observable<Employee[]> {
   const apiUrlWithGET = this.apiUrl + '/getEmployees';
+  return this.http.get<any>(apiUrlWithGET).pipe(
+    catchError(this.handleError)
+  );
+}
+
+getAllQuestiontypes(): Observable<Employee[]> {
+  const apiUrlWithGET = this.apiQuestionType + '//getAll';
   return this.http.get<any>(apiUrlWithGET).pipe(
     catchError(this.handleError)
   );
