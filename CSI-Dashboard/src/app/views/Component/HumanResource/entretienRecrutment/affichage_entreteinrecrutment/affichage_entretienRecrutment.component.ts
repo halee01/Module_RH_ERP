@@ -220,23 +220,24 @@ export class entretienRecrutmentComponent implements OnInit {
   }
 
 
-  openPopUpEntretien(data:  any , isNew?) {
+  openPopUpEntretien(data: any, isNew?) {
     let title = isNew ? 'Nouveau entretien' : 'Modifier entretien';
-
+    console.log(this.id);
+   
+  
     const dialogRef: MatDialogRef<any> = this.dialog.open(ajoutEntretienPopupComponent, {
       width: '1000px',
       disableClose: true,
-      data: { title: title, payload: data , evaluationNum: this.id}
+      data: { title: title, payload: data, evaluationNum: this.id }
     });
   
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
-        const updatedData = { ...data, ...res };
-        this.service.addInterview( updatedData).subscribe(
+        this.service.addInterview({...res,evaluationNum:this.id}).subscribe(
           (response) => {
             console.log('Item updated successfully', response);
             this.snack.open('Compte bancaire modifié avec succès!', 'OK', { duration: 2000 });
-            this.getItems();
+            this.getInterviews();
           },
           (error) => {
             console.error('Error updating item', error);
@@ -246,6 +247,9 @@ export class entretienRecrutmentComponent implements OnInit {
       }
     });
   }
+  
+  
+  
   getItems() {
     throw new Error('Method not implemented.');
   }

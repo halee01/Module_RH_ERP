@@ -145,7 +145,6 @@ export class crudEntretienRecrutmentComponent implements OnInit {
 
 //fonction tekhdem-----------
 //---PS:ena f request mtei aandi employeeId ken aandek employeeNum badal Num
-// Cordialement w bien à vous 
 
 
   /*saveEvaluation(id: number): void {
@@ -319,8 +318,6 @@ openpopup(row: any): void {
     error => console.error('Error adding evaluation:', error)
   );
 }
-
-
 
 
 

@@ -57,9 +57,14 @@ export class ajoutEntretienPopupComponent implements OnInit {
       interviewTime: new UntypedFormControl('', []),
       interviewlocation: new UntypedFormControl('', []),
       interviewPlace: new UntypedFormControl('', []),
+      evaluationNum:new UntypedFormControl('',[])
     })
     
   }
+    submit() {
+    this.dialogRef.close(this.offerForm.value)
+  }
+
 
   saveInterview(): void {
     console.log('Submitting cv form...');
