@@ -8,6 +8,7 @@ import { Employee,} from 'app/shared/models/Employee';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
 import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
 import { QuestionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
+import { Evaluation } from 'app/shared/models/Evaluation';
 
 @Component({
   selector: 'app-candidat-crud',
@@ -18,12 +19,20 @@ import { QuestionnairePopupComponent } from './questionnaire-popup/questionnaire
 export class entretienRecrutmentComponent implements OnInit {
   id:number;
   employee:Employee;
+  evaluation: Evaluation={
+    globalAppreciation: 0,
+  };
   interview:Interview;
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
+
+
+
+  //Global appreciation chart 
+
   welcomeProgressChart = {
-    series: [52],
+    series: [this.evaluation.globalAppreciation],
     chartOptions: {
       chart: {
         type: 'radialBar',
@@ -39,6 +48,7 @@ export class entretienRecrutmentComponent implements OnInit {
           bottom: 10,
         },
       },
+
       plotOptions: {
         radialBar: {
           startAngle: -90,
@@ -234,8 +244,6 @@ export class entretienRecrutmentComponent implements OnInit {
     });
   }
   
-  
-  
   getItems() {
     throw new Error('Method not implemented.');
   }
@@ -248,6 +256,10 @@ export class entretienRecrutmentComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+   // Assigning the globalAppreciation value to a property for binding
+   globalAppreciationValue: number = this.evaluation.globalAppreciation;
+
 }
 
 

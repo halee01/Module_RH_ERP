@@ -3,9 +3,12 @@
     <div fxLayout="row wrap">
       <div fxFlex="70">
         <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
-        <p class="text-small">
-          nom,prenom,offre/ / / /la note globale est:<span class="font-weight-bold">52</span>
-        </p>
+        <div style="padding-top: 15px;">
+          <p class="text-small"><strong >L'email numéro 1:</strong>{{employee.emailOne}}</p>
+        <p class="text-small"><strong >Numéro de téléphone 1:</strong>{{employee.phoneNumberOne}}</p>
+        <p class="text-small"><strong >La note globale est:</strong>52</p>
+      </div>
+        
       </div>
       <div fxFlex="30">
         <apx-chart

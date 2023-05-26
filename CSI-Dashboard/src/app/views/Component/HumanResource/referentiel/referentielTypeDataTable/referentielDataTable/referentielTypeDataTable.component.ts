@@ -1,4 +1,3 @@
-import { referentielRoutes } from './../referentiel.routing';
 
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -10,21 +9,21 @@ import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.s
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { Civility, MaritalSituation, Provenance, Title } from 'app/shared/models/Employee';
+import { FormGroup} from '@angular/forms';
+import {  Title } from 'app/shared/models/Employee';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { referentielService } from '../referentiel.service';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 import { QuestionType } from 'app/shared/models/QuestionType';
+import { referentielService } from '../../referentiel.service';
 
 @Component({
   selector: 'referentiel-crud',
-  templateUrl: './referentielcrud-table.component.html'
+  templateUrl: './referentielTypeDataTable.component.html'
 })
 
 
-export class referentielCrudTableComponent implements OnInit {
+export class referentielTypeDataTableComponent implements OnInit {
   formData = {}
   console = console;
   ExperienceLevel :string []= Object.values(ExperienceLevel);
@@ -60,7 +59,9 @@ export class referentielCrudTableComponent implements OnInit {
     private confirmService: AppConfirmService,
     private loader: AppLoaderService
   ) 
-  {     this.dataSource = new MatTableDataSource<QuestionType>([]);}
+
+  { this.dataSource = new MatTableDataSource<QuestionCategory>([]);
+    this.questionTypesDataSource = new MatTableDataSource<QuestionType>([]);}
 
   ngOnInit() {
    this.displayedColumns = this.getDisplayedColumns();
@@ -68,24 +69,22 @@ export class referentielCrudTableComponent implements OnInit {
   }
 
   getDisplayedColumns() {
-    return ['questionTypeName','actions' ];
-  }
+    return ['questionTypeName','name','level','actions' ]; }
 
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
-
   ngOnDestroy() {
     if (this.getItemSub) {
       this.getItemSub.unsubscribe()
     }
   }
 
+
   getItems() {    
-    this.getItemSub  = this.crudService.getItems()
+    this.getItemSub = this.crudService.getItems()
       .subscribe((data: any) => {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
@@ -97,10 +96,10 @@ export class referentielCrudTableComponent implements OnInit {
           // Perform any additional configuration for the question types data source
         });
       });
-      
   }
-    
   
+
+
   deleteItem(row) {
     this.confirmService.confirm({message: `Delete ${row.name}?`})
       .subscribe(res => {
@@ -117,14 +116,14 @@ export class referentielCrudTableComponent implements OnInit {
       })
   }
 
+
   applyFilter(event :Event){
     const FilterValue = (event.target as HTMLInputElement).value ;
-     this.dataSource.filter = FilterValue.trim().toLowerCase();
- 
- }
+     this.dataSource.filter = FilterValue.trim().toLowerCase();}
+
+
  goToForm(){
-  this.router.navigateByUrl('formReferentiel/referentielForm');
- }
+  this.router.navigateByUrl('formReferentiel/referentielForm');}
 
 
  ExperienceLevelMap={
@@ -132,4 +131,5 @@ export class referentielCrudTableComponent implements OnInit {
   [ExperienceLevel.MID_LEVEL]:'Confirmé',
   [ExperienceLevel.SENIOR]:'Senior',
   [ExperienceLevel.EXPERT]:'Expert', }
+
 }

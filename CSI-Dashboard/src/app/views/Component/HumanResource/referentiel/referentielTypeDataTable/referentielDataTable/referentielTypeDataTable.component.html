@@ -17,17 +17,33 @@
        </mat-header-cell>
     <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.questionTypeName}} </mat-cell>
   </ng-container>
+  
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Domaine
+       </mat-header-cell>
+    <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.name}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="level">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Niveau d'expérience
+     
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row" [style.color]="row.color"> {{ExperienceLevelMap[row.level]}} </mat-cell>
+  </ng-container>
+
+
 
 
    <ng-container matColumnDef="actions">
      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
      <mat-cell *matCellDef="let row">
-       <button mat-icon-button mat-sm-button color="accent" class=" mr-16 " routerLink="/referentielAffichage/{{row.id}}" routerLinkActive="router-link-active" >
+       <button mat-icon-button mat-sm-button color="accent" class=" mr-16 "  routerLink="/referentielAffichage/{{row.id}}" routerLinkActive="router-link-active" >
          <mat-icon>remove_red_eye </mat-icon>
        </button>
        <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row.id)">
          <mat-icon>delete</mat-icon>
        </button>
+       
      </mat-cell>
    </ng-container>
 
