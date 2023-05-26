@@ -7,7 +7,8 @@ import { UntypedFormGroup} from '@angular/forms';
 import { Employee,} from 'app/shared/models/Employee';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
 import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
-import { QuestionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
+import { questionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
+import { Question } from 'app/shared/models/Question';
 
 @Component({
   selector: 'app-candidat-crud',
@@ -19,6 +20,7 @@ export class entretienRecrutmentComponent implements OnInit {
   id:number;
   employee:Employee;
   interview:Interview;
+  questions: Question[];
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
@@ -226,7 +228,7 @@ export class entretienRecrutmentComponent implements OnInit {
             this.getInterviews();
           },
           (error) => {
-            console.error('Error updating item', error);
+            console.error('Error adding item', error);
             this.snack.open('Une erreur est survenue lors de la modification du compte bancaire.', 'OK', { duration: 2000 });
           }
         );
@@ -242,12 +244,43 @@ export class entretienRecrutmentComponent implements OnInit {
 
   
   addQuestionnaire() {
-    const dialogRef = this.dialog.open( QuestionnairePopupComponent );
+    const dialogRef = this.dialog.open( questionnairePopupComponent );
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+
+
+  openPopupQuestionnaire(): void {
+    const dialogRef = this.dialog.open(questionnairePopupComponent, {
+      width: '400px',
+      data: {
+     //   questionTypes: /* provide the question types data */,
+        //questionCategories: /* provide the question categories data */
+      }
+    });
+  
+    dialogRef.componentInstance.filtersSelected.subscribe((filters: any) => {
+      // Retrieve the filtered questions based on the selected filters
+      this.retrieveFilteredQuestions(filters);
+    });
+  }
+
+    retrieveFilteredQuestions(filters: any): void {
+    // Make an API call or apply filtering logic to retrieve the filtered questions
+    // based on the selected question type and question category
+    // Assign the retrieved questions to the 'questions' property
+    // Example:
+   // this.questions = // Retrieve the filtered questions 
+  }
 }
+  
+
+
+
+
+
 
 

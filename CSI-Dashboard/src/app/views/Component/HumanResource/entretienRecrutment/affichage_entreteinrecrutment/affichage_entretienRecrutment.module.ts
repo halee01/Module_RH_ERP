@@ -25,9 +25,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { crudEntretien } from '../crud_entretienRecrutment.routing';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
-import { QuestionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
+import { questionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
 
 
 @NgModule({
@@ -64,6 +64,6 @@ import { MatSelectModule } from '@angular/material/select';
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    entretienRecrutmentComponent,QuestionnairePopupComponent],
+    entretienRecrutmentComponent,questionnairePopupComponent],
 })
 export class EntretienRecrutmentModule { }

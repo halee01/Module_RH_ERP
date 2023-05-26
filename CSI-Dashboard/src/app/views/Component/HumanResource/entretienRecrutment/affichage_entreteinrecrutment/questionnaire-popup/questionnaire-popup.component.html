@@ -1,3 +1,4 @@
+<!------
 <div class="modal-body px-0">
    
      <mat-card class="p-0" >
@@ -11,7 +12,7 @@
                     <form [formGroup]="questionnaireForm">
                        <div class="container" style="display: flex; flex-direction: column;">
                         <div class="form-container">
-                        <div class="mini-container" >
+                        <div class="mini-container" > -->
     
                            <!-- <mat-form-field class="full-width" appearance="outline">
                               <mat-label>Catégorie du questionnaire </mat-label>
@@ -20,7 +21,7 @@
                               </mat-select>
                             </mat-form-field>-->
 
-                            <mat-form-field class="full-width" appearance="outline">
+                         <!----  <mat-form-field class="full-width" appearance="outline">
                                 <mat-label>Niveau du questionnaire</mat-label>
                                 <mat-select formControlName="interviewMode">
                                   <mat-option></mat-option>
@@ -42,4 +43,29 @@
                  </mat-card-content>
             </mat-tab>
          </mat-tab-group>
-    </mat-card>
+    </mat-card>--> 
+
+    <h2 mat-dialog-title>Filter Questions</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Question Type</mat-label>
+    <mat-select [(value)]="selectedQuestionType">
+      <mat-option *ngFor="let questionType of questionTypes" [value]="questionType.id">
+        {{ questionType.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Question Category</mat-label>
+    <mat-select [(value)]="selectedQuestionCategory">
+      <mat-option *ngFor="let questionCategories of questionCategory" [value]="questionCategory.id">
+        {{ questionCategory.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="{ questionType: selectedQuestionType, questionCategory: selectedQuestionCategory }">Filter</button>
+  <button mat-button (click)="closeDialog()">Cancel</button>
+</mat-dialog-actions>

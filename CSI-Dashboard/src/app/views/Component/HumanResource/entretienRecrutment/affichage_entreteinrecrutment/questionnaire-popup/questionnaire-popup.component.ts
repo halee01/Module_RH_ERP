@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+/* import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -65,4 +65,37 @@ import { entretienRecrutmentService } from '../../entretienRecrutment.service';
         this.selectedQuestionType = questionType;
       }*/
 
-    }}
+   // }} 
+
+   import { Component, EventEmitter, Inject, Output } from '@angular/core';
+   import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { QuestionCategory } from 'app/shared/models/QuestionCategory';
+import { QuestionType } from 'app/shared/models/QuestionType';
+   
+   @Component({
+     selector: 'app-popup',
+     templateUrl: './questionnaire-popup.component.html',
+     //styleUrls: ['./questionnaire-popup.component.css']
+   })
+   export class questionnairePopupComponent {
+   
+     @Output() filtersSelected = new EventEmitter<any>();
+     questionCategory:QuestionCategory;
+     selectedQuestionType: number;
+     selectedQuestionCategory: number;
+     questionTypes: QuestionType[]; // Replace 'any' with the appropriate type for question types
+     constructor(
+       public dialogRef: MatDialogRef<questionnairePopupComponent>,
+       @Inject(MAT_DIALOG_DATA) public data: any
+     ) {
+       // ...
+     }
+   
+     closeDialog(): void {
+       this.filtersSelected.emit({
+         questionType: this.selectedQuestionType,
+         questionCategory: this.selectedQuestionCategory
+       });
+     }
+   }
+   
