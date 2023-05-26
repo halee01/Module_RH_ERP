@@ -25,8 +25,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { crudEntretien } from '../crud_entretienRecrutment.routing';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
-import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 
 
 

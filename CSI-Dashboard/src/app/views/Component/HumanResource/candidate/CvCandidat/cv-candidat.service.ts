@@ -141,8 +141,7 @@ deleteOfferCandidate(id: number): Observable<AssOfferCandidate> {
     catchError(this.handleError)
   );
 }
-
-
+ 
 
 //POST education
 addEducation(education: any): Observable<any>  {

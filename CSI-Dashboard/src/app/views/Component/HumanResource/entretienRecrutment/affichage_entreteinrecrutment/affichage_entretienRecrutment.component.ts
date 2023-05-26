@@ -21,8 +21,7 @@ import { Service } from 'app/shared/models/contact';
 import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
-import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
-
+import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 @Component({
   selector: 'app-candidat-crud',
   templateUrl: './affichage_entretienRecrutment.component.html'
