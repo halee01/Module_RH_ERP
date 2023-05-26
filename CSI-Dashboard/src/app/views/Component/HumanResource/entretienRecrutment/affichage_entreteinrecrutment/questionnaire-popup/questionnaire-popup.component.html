@@ -48,22 +48,33 @@
     <h2 mat-dialog-title>Filter Questions</h2>
 <mat-dialog-content>
   <mat-form-field>
-    <mat-label>Question Type</mat-label>
-    <mat-select [(value)]="selectedQuestionType">
-      <mat-option *ngFor="let questionType of questionTypes" [value]="questionType.id">
-        {{ questionType.name }}
+    <mat-label>Select question Type</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let  questionTypes of  questionType" [value]="questionTypes.id">
+        {{ questionTypes.questionTypeName }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Question Category</mat-label>
-    <mat-select [(value)]="selectedQuestionCategory">
-      <mat-option *ngFor="let questionCategories of questionCategory" [value]="questionCategory.id">
-        {{ questionCategory.name }}
+    <mat-label>Question Category Name</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let questionCategories of questionCategory" [value]="questionCategories.id">
+        {{ questionCategories.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Question Category Level</mat-label>
+    <mat-select [(value)]="selectedQuestionCategory">
+      <mat-option *ngFor="let questionCategories of questionCategory" [value]="questionCategories.id">
+        {{ questionCategories.level }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button [mat-dialog-close]="{ questionType: selectedQuestionType, questionCategory: selectedQuestionCategory }">Filter</button>

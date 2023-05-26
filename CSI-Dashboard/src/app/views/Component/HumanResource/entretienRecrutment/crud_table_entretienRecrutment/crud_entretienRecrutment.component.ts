@@ -16,7 +16,6 @@ import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.serv
 import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
 import { Observable, Subscription } from 'rxjs';
 import { CrudService } from '../../candidate/CandidatCrud/candidat-crud.service';
-import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
 import { interviewStatus } from 'app/shared/models/Interview';
 import { evaluationPopupComponent } from '../evaluationnPopup/evaluation-popup.component';
 

@@ -2,7 +2,7 @@ import { catchError, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {  Validators,  FormGroup, FormBuilder, FormArray, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
+import { Validators,  FormGroup, FormBuilder, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { entretienRecrutmentService } from '../../entretienRecrutment.service';
 import { Interview, InterviewMode, InterviewType, interviewLocation } from 'app/shared/models/Interview';
 import { Employee } from 'app/shared/models/Employee';

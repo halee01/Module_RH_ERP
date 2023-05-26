@@ -1,3 +1,5 @@
+import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
+
 import { Interview } from 'app/shared/models/Interview';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -6,9 +8,10 @@ import { ActivatedRoute } from '@angular/router';
 import { UntypedFormGroup} from '@angular/forms';
 import { Employee,} from 'app/shared/models/Employee';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
-import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
 import { questionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
 import { Question } from 'app/shared/models/Question';
+import { QuestionType } from 'app/shared/models/QuestionType';
+
 
 @Component({
   selector: 'app-candidat-crud',
@@ -21,11 +24,12 @@ export class entretienRecrutmentComponent implements OnInit {
   employee:Employee;
   interview:Interview;
   questions: Question[];
+  questionType:QuestionType[];
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
   welcomeProgressChart = {
-    series: [52],
+    series: [0],
     chartOptions: {
       chart: {
         type: 'radialBar',
@@ -185,7 +189,7 @@ export class entretienRecrutmentComponent implements OnInit {
   
   constructor(private route: ActivatedRoute,
              private service:entretienRecrutmentService,
-             private dialog: MatDialog) 
+             private dialog: MatDialog,) 
              
              { }
   ngOnInit(){
@@ -193,6 +197,7 @@ export class entretienRecrutmentComponent implements OnInit {
     console.log('sarra',this.id);
     this.getEmployee();
     this.getInterviews();
+    this.getCategoryTypes();
   }
 
   getEmployee() {
@@ -274,7 +279,24 @@ export class entretienRecrutmentComponent implements OnInit {
     // Assign the retrieved questions to the 'questions' property
     // Example:
    // this.questions = // Retrieve the filtered questions 
+ 
+ 
   }
+
+  /*getCategoryTypes() {
+    this.service.getAllQuestiontypes().subscribe(
+      ( questionType: QuestionType[]) => {
+        this.questionType = questionType
+      }
+    );
+  }*/
+  getCategoryTypes(){
+    this.service.getAllQuestiontypes().subscribe((data : any)=>{
+      this.questionType = data;
+      console.log(this.questionType);
+    })
+  }
+  
 }
   
 

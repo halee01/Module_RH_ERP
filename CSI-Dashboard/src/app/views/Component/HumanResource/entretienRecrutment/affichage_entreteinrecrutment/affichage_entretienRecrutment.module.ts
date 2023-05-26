@@ -28,6 +28,7 @@ import { entretienRecrutmentService } from '../entretienRecrutment.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
 import { questionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
+import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 
 
 @NgModule({
@@ -39,10 +40,10 @@ import { questionnairePopupComponent } from './questionnaire-popup/questionnaire
     MatTabsModule,
     MatProgressBarModule,
     MatPaginatorModule,
+    MatTableModule,
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
-    MatTableModule,
     MatExpansionModule,
     MatRadioModule,
     MatCardModule,
@@ -53,6 +54,7 @@ import { questionnairePopupComponent } from './questionnaire-popup/questionnaire
     MatInputModule,
     FlexLayoutModule,
     ColorPickerModule,
+    MatTabsModule,
     NgApexchartsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -61,9 +63,10 @@ import { questionnairePopupComponent } from './questionnaire-popup/questionnaire
 
     RouterModule.forChild(crudEntretien)
   ],
+
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    entretienRecrutmentComponent,questionnairePopupComponent],
+    entretienRecrutmentComponent,questionnairePopupComponent,ajoutEntretienPopupComponent]
 })
 export class EntretienRecrutmentModule { }
