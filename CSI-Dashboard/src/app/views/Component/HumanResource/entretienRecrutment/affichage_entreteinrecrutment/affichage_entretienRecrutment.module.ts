@@ -2,7 +2,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -35,6 +35,8 @@ import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-p
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
+    MatSelectModule,
     MatSelectModule,
     HttpClientModule,
     MatTabsModule,

@@ -44,39 +44,38 @@
             </mat-tab>
          </mat-tab-group>
     </mat-card>--> 
-
     <h2 mat-dialog-title>Filter Questions</h2>
 <mat-dialog-content>
   <mat-form-field>
-    <mat-label>Select question Type</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let  questionTypes of  questionType" [value]="questionTypes.id">
-        {{ questionTypes.questionTypeName }}
+    <mat-label>Select Question Type</mat-label>
+    <mat-select [(value)]="selectedQuestionType" (selectionChange)="filterQuestionCategories()">
+      <mat-option *ngFor="let questionType of questionTypes" [value]="questionType">
+        {{ questionType.questionTypeName }}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-label>Question Category Name</mat-label>
-    <mat-select>
-      <mat-option *ngFor="let questionCategories of questionCategory" [value]="questionCategories.id">
-        {{ questionCategories.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Question Category Level</mat-label>
+    <mat-label>Select Question Category</mat-label>
     <mat-select [(value)]="selectedQuestionCategory">
-      <mat-option *ngFor="let questionCategories of questionCategory" [value]="questionCategories.id">
-        {{ questionCategories.level }}
+      <mat-option *ngFor="let questionCategory of filteredQuestionCategories" [value]="questionCategory">
+        {{ questionCategory.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
-
-
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
-  <button mat-button [mat-dialog-close]="{ questionType: selectedQuestionType, questionCategory: selectedQuestionCategory }">Filter</button>
-  <button mat-button (click)="closeDialog()">Cancel</button>
+  <button mat-button (click)="closeDialog()">Close</button>
+  <button mat-button color="primary" (click)="applyFilters()">Apply</button>
 </mat-dialog-actions>
+
+<mat-dialog-content *ngIf="questions.length > 0">
+  <h3>Questions:</h3>
+  <ul>
+    <li *ngFor="let question of questions">
+      {{ question.question }}
+    </li>
+  </ul>
+  <button mat-button color="primary" (click)="getQuestions()">Get Questions</button>
+</mat-dialog-content>

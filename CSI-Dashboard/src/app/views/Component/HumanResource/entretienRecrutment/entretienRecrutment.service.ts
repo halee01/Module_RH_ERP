@@ -1,3 +1,4 @@
+import { id } from 'date-fns/locale';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
@@ -11,6 +12,7 @@ import { Interview } from 'app/shared/models/Interview';
 import { Evaluation } from 'app/shared/models/Evaluation';
 import { QuestionType } from 'app/shared/models/QuestionType';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
+import { Question } from 'app/shared/models/Question';
 
 @Injectable()
 export class entretienRecrutmentService {
@@ -104,9 +106,19 @@ getAllQuestionCategories(): Observable<QuestionCategory[]> {
     catchError(this.handleError)
   );
 }
+getQuestionCategoriesByType(id:number):Observable<QuestionCategory[]> {
+  const url =  `${this.apiQuestionType+ '/get'}/${id}`+ '/questionCategories';
+  return this.http.get<any>(url).pipe(
+    catchError(this.handleError)
+  );
+}
 
-
-
+getQuestionByTypeAndCategory(id:number ,Id:number):Observable<Question[]> {
+  const url =  `${this.apiQuestionType+ '/get'}/${id}/${Id}`+ '/questions';
+  return this.http.get<any>(url).pipe(
+    catchError(this.handleError)
+  );
+}
 
  // GET an item by id
  getItem(id: number): Observable<Employee> {

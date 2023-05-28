@@ -1,4 +1,4 @@
 export interface QuestionType{
-    Id ?:number;
+    id ?:number;
     questionTypeName?:string;
 }

@@ -11,6 +11,7 @@ import { entretienRecrutmentService } from '../entretienRecrutment.service';
 import { questionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
 import { Question } from 'app/shared/models/Question';
 import { QuestionType } from 'app/shared/models/QuestionType';
+import { EMPTY, Observable, catchError, forkJoin, map } from 'rxjs';
 
 
 @Component({
@@ -259,19 +260,37 @@ export class entretienRecrutmentComponent implements OnInit {
 
 
   openPopupQuestionnaire(): void {
-    const dialogRef = this.dialog.open(questionnairePopupComponent, {
-      width: '400px',
-      data: {
-     //   questionTypes: /* provide the question types data */,
-        //questionCategories: /* provide the question categories data */
-      }
-    });
-  
-    dialogRef.componentInstance.filtersSelected.subscribe((filters: any) => {
-      // Retrieve the filtered questions based on the selected filters
-      this.retrieveFilteredQuestions(filters);
+    this.getCategoryTypes().subscribe((data: any) => {
+      const dialogRef = this.dialog.open(questionnairePopupComponent, {
+        width: '400px',
+        data: {
+          questionTypes: data.questionTypes,
+          questionCategories: data.questionCategories
+        }
+      });
+
+      dialogRef.componentInstance.filtersSelected.subscribe((filters: any) => {
+        // Retrieve the filtered questions based on the selected filters
+        this.retrieveFilteredQuestions(filters);
+      });
     });
   }
+
+  getCategoryTypes(): Observable<any> {
+    return forkJoin([
+      this.service.getAllQuestiontypes(),
+      this.service.getAllQuestionCategories()
+    ]).pipe(
+      map(([questionTypes, questionCategories]) => {
+        return { questionTypes, questionCategories };
+      }),
+      catchError((error) => {
+        console.error('Failed to retrieve question types and categories', error);
+        return EMPTY;
+      })
+    );
+  }
+
 
     retrieveFilteredQuestions(filters: any): void {
     // Make an API call or apply filtering logic to retrieve the filtered questions
@@ -290,14 +309,10 @@ export class entretienRecrutmentComponent implements OnInit {
       }
     );
   }*/
-  getCategoryTypes(){
-    this.service.getAllQuestiontypes().subscribe((data : any)=>{
-      this.questionType = data;
-      console.log(this.questionType);
-    })
-  }
-  
+
 }
+  
+
   
 
 

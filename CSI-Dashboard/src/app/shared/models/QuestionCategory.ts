@@ -2,10 +2,11 @@ import { ExperienceLevel } from "./AssOfferCandidate";
 import { Question } from "./Question";
 
 export interface QuestionCategory{
-    Id ?:number;
+    id ?:number;
     name ?: string;
     questions ?:Question[] ;
     level ?: ExperienceLevel;
+    questionTypeNum: number;
 }
 
 export enum QuestionnaireType{
