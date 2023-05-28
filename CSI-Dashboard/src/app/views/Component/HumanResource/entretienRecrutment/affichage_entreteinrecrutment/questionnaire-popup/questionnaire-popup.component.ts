@@ -1,68 +1,107 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
-import { QuestionCategory, QuestionnaireType } from 'app/shared/models/QuestionCategory';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 import { QuestionType } from 'app/shared/models/QuestionType';
 import { entretienRecrutmentService } from '../../entretienRecrutment.service';
+import { Question } from 'app/shared/models/Question';
 
 @Component({
-    selector: 'dialog-content-example-dialog',
-    templateUrl: 'questionnaire-popup.component.html',
-  })
+  selector: 'app-popup',
+  templateUrl: './questionnaire-popup.component.html',
+  //styleUrls: ['./questionnaire-popup.component.css']
+})
+export class questionnairePopupComponent {
+  questionTypes: QuestionType[];
+  questionCategories: QuestionCategory[];
+  filteredQuestionCategories: QuestionCategory[];
+  questions: Question[];
 
-  export class QuestionnairePopupComponent {
-    submitted = false;
-    visible = true;
-    selectable = true;
-    removable = true;
-    addOnBlur = true;
-    formWidth = 900; //declare and initialize formWidth property
-    questionnaireForm:FormGroup;
-    questionCategory:QuestionCategory;
-    level = Object.values(ExperienceLevel);
-    questionnaireType = Object.values(QuestionnaireType);
-    questionTypes: QuestionType[] = [];
-    selectedQuestionType: QuestionType | null = null;
-    selectedFile: File;
+  selectedQuestionType: QuestionType;
+  selectedQuestionCategory: QuestionCategory;
+  selectedQuestionCategoryId: number;
 
-    constructor( 
-      private _formBuilder: FormBuilder,
-      @Inject(MAT_DIALOG_DATA) public data: any,
-      public MatDialogRef: MatDialogRef<QuestionnairePopupComponent>,
-      private fb: FormBuilder, 
-      private http: HttpClient,
-      private crudService:entretienRecrutmentService,
-    ) { }
+  filtersSelected: EventEmitter<any> = new EventEmitter<any>();
 
-    ngOnInit(): void {
+  constructor(
+    public dialogRef: MatDialogRef<questionnairePopupComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private service: entretienRecrutmentService
+  ) {
+    this.questionTypes = data.questionTypes;
+    this.selectedQuestionCategoryId = null; // Reset the selected question category
+    this.questionCategories = data.questionCategories;
+    this.filteredQuestionCategories = [];
+    this.questions = [];
+  }
 
-        this.questionnaireForm = new UntypedFormGroup({
-          name: new UntypedFormControl('', [Validators.required]),
-          level: new UntypedFormControl('', [Validators.required]),
-          questionTypeName: new UntypedFormControl('', [Validators.required])
-        });
-      //  this.getQuestionTypes();}
+  onQuestionTypeChange(): void {
+    this.filteredQuestionCategories = this.questionCategories.filter(
+      (category) => category.questionTypeNum === this.selectedQuestionType?.id
+    );
+  }
 
+  closeDialog(): void {
+    this.dialogRef.close();
+  }
 
+  applyFilters(): void {
+    const filters = {
+      questionType: this.selectedQuestionType,
+      questionCategory: this.selectedQuestionCategory
+    };
+    this.filtersSelected.emit(filters);
+    this.getQuestions();
+  }
 
-  //  questionTypeNames: string[] = this.questionTypes.map((questionType: QuestionType) => questionType.questionTypeName);
+  ngOnInit() {
+    this.getCategoryTypes();
+  }
 
-   /* getQuestionTypes() {
-        this.crudService.getAllQuestiontypes().subscribe(
-          (questionTypes: QuestionType[]) => {
-            this.questionTypes = questionTypes;
-          },
-          (error) => {
-            // Handle error if necessary
-          }
-        );
+  getCategoryTypes() {
+    this.service.getAllQuestiontypes().subscribe(
+      (questionTypes: QuestionType[]) => {
+        this.questionTypes = questionTypes;
+        this.filterQuestionCategories();
+      },
+      (error) => {
+        console.error('Failed to retrieve question types', error);
       }
+    );
+  }
 
-      onSelectQuestionType(questionType: QuestionType) {
-        this.selectedQuestionType = questionType;
-      }*/
+  filterQuestionCategories() {
+    if (this.selectedQuestionType) {
+      this.service.getQuestionCategoriesByType(this.selectedQuestionType.id).subscribe(
+        (questionCategories: QuestionCategory[]) => {
+          this.filteredQuestionCategories = questionCategories;
+          this.selectedQuestionCategory = null; // Reset the selected question category
+          this.getQuestions();
+        },
+        (error) => {
+          console.error('Failed to retrieve question categories', error);
+        }
+      );
+    } else {
+      this.filteredQuestionCategories = [];
+      this.selectedQuestionCategory = null; // Reset the selected question category
+      this.getQuestions();
+    }
+  }
 
-    }}
+  getQuestions(): void {
+    if (this.selectedQuestionType && this.selectedQuestionCategory) {
+      const typeId = this.selectedQuestionType.id;
+      const categoryId = this.selectedQuestionCategory.id;
+
+      this.service.getQuestionByTypeAndCategory(typeId, categoryId).subscribe(
+        (questions: Question[]) => {
+          this.questions = questions;
+          console.log(this.questions);
+        },
+        (error) => {
+          console.error('Failed to retrieve questions', error);
+        }
+      );
+    } else {
+      this.questions = [];
+    }}}

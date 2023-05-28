@@ -2,7 +2,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -25,24 +25,27 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { crudEntretien } from '../crud_entretienRecrutment.routing';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
-import { QuestionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
+import { questionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
+import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    FormsModule,
+    MatSelectModule,
     MatSelectModule,
     HttpClientModule,
     MatTabsModule,
     MatProgressBarModule,
     MatPaginatorModule,
+    MatTableModule,
     MatIconModule,
     MatDialogModule,
     MatButtonModule,
-    MatTableModule,
     MatExpansionModule,
     MatRadioModule,
     MatCardModule,
@@ -53,6 +56,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     FlexLayoutModule,
     ColorPickerModule,
+    MatTabsModule,
     NgApexchartsModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -61,9 +65,10 @@ import { MatSelectModule } from '@angular/material/select';
 
     RouterModule.forChild(crudEntretien)
   ],
+
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    entretienRecrutmentComponent,QuestionnairePopupComponent],
+    entretienRecrutmentComponent,questionnairePopupComponent,ajoutEntretienPopupComponent]
 })
 export class EntretienRecrutmentModule { }

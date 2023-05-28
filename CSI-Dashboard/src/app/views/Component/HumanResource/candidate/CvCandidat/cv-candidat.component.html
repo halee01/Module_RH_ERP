@@ -401,25 +401,13 @@
         </mat-card-title>
 
         <mat-card-content style="padding-top: 2cm;">
-          <!--<div class="form-group mb-1 col-sm-12 col-md-3">
-            <mat-form-field appearance="outline" [style.width.cm]=5 style="padding-right: 1cm;">
-              <mat-label>Technical File</mat-label>
-              <input
-                matInput
-                value="{{selectedTechFile.id}}"
-                placeholder="Technical File"
-                formControlName="technicalFileId"
-                disabled="true">
-            </mat-form-field>
-          </div>-->
 
           <form [formGroup]="formEducation">
             <div class="card-body" formArrayName="value"  >
               <div class="row" >
                 <div class="repeater-default">
-                  <div fxLayout="row"  fxLayoutAlign="space-evenly center" *ngFor="let val of getExperience; let i = index"  [formGroupName]="i"  >
+                  <div fxLayout="row"  fxLayoutAlign="space-evenly center" *ngFor="let val of getEducation; let i = index"  [formGroupName]="i"  >
                   <div>
-
                       <div class="form-group mb-1 col-sm-12 col-md-3">
                         <mat-form-field appearance="outline" [style.width.cm]=15>
                           <mat-label>Nom de l'établissement</mat-label>
@@ -481,20 +469,19 @@
                       <div class="pb-16">
                         <mat-checkbox formControlName="actual">En cours</mat-checkbox>
                       </div>
-
                       <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
-                        <button mat-icon-button color="primary" type="button" (click)="saveEducation(i)">
-                          <mat-icon>add</mat-icon>
-                        </button>
                         <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
                           <mat-icon>delete</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" type="button" (click)="saveEducation(i)">
+                          <mat-icon>check</mat-icon>
                         </button>
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
             </div>
+          </div>
           </form>
       </mat-card-content>
 
@@ -636,7 +623,7 @@
                           <mat-icon>delete</mat-icon>
                         </button>
                         <button mat-icon-button color="primary" type="button" (click)="saveExperience(i)">
-                          <mat-icon>add</mat-icon>
+                          <mat-icon>check</mat-icon>
                         </button>
                       </div>
                     </div>
@@ -717,7 +704,7 @@
                         <mat-icon>delete</mat-icon>
                       </button>
                       <button mat-icon-button color="primary" type="button" (click)="saveCertification(i)">
-                        <mat-icon>add</mat-icon>
+                        <mat-icon>check</mat-icon>
                       </button>
                     </div>
                   </div>
@@ -771,7 +758,7 @@
                             <mat-icon>delete</mat-icon>
                           </button>
                           <button mat-icon-button color="primary" type="button" (click)="saveLanguage(i)">
-                            <mat-icon>add</mat-icon>
+                            <mat-icon>check</mat-icon>
                           </button>
                         </div>
                       </div>
@@ -812,7 +799,7 @@
                             <mat-icon>delete</mat-icon>
                           </button>
                           <button mat-icon-button color="primary" type="button" (click)="saveSkills(i)">
-                            <mat-icon>add</mat-icon>
+                            <mat-icon>check</mat-icon>
                           </button>
                         </div>
                         

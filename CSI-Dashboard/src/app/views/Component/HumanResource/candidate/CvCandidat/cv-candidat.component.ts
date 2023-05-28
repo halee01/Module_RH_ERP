@@ -196,6 +196,7 @@ export class cvcandidatComponent implements OnInit {
       actual: new UntypedFormControl(false),
     }));
 
+
    
     this.cvCandidatService.getOfferItems().subscribe(
       offers => this.offers = offers,
@@ -286,9 +287,12 @@ export class cvcandidatComponent implements OnInit {
     return (this.formSkills.get('value') as FormArray).controls;
   }
 
+  
   get getEducation() {
     return (this.formEducation.get('value') as FormArray).controls;
   }
+
+  
 
 
 

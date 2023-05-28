@@ -1,3 +1,4 @@
+
 import { Interview } from 'app/shared/models/Interview';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -6,13 +7,17 @@ import { ActivatedRoute } from '@angular/router';
 import { UntypedFormGroup} from '@angular/forms';
 import { Employee,} from 'app/shared/models/Employee';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
-import { ajoutEntretienPopupComponent } from '../add_evaluation/addEntretien-popup/addEntretien-popup.component';
-import { QuestionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
+import { questionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
+import { Question } from 'app/shared/models/Question';
+import { QuestionType } from 'app/shared/models/QuestionType';
+import { EMPTY, Observable, catchError, forkJoin, map } from 'rxjs';
 import { Evaluation } from 'app/shared/models/Evaluation';
+import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 
 @Component({
   selector: 'app-candidat-crud',
-  templateUrl: './affichage_entretienRecrutment.component.html'
+  templateUrl: './affichage_entretienRecrutment.component.html',
+  styleUrls: ['./affichage_entretienRecrutment.component.scss'],
 })
 
 
@@ -23,6 +28,8 @@ export class entretienRecrutmentComponent implements OnInit {
     globalAppreciation: 0,
   };
   interview:Interview;
+  questions: Question[];
+  questionType:QuestionType[];
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
@@ -193,7 +200,7 @@ export class entretienRecrutmentComponent implements OnInit {
   
   constructor(private route: ActivatedRoute,
              private service:entretienRecrutmentService,
-             private dialog: MatDialog) 
+             private dialog: MatDialog,) 
              
              { }
   ngOnInit(){
@@ -201,6 +208,7 @@ export class entretienRecrutmentComponent implements OnInit {
     console.log('sarra',this.id);
     this.getEmployee();
     this.getInterviews();
+    this.getCategoryTypes();
   }
 
   getEmployee() {
@@ -224,7 +232,7 @@ export class entretienRecrutmentComponent implements OnInit {
   
     const dialogRef: MatDialogRef<any> = this.dialog.open(ajoutEntretienPopupComponent, {
       disableClose: true,
-      data: { title: title, payload: data, evaluationNum: this.id }
+      data: { title: title, row: data, evaluationNum: this.id,}
     });
   
     dialogRef.afterClosed().subscribe(res => {
@@ -236,7 +244,7 @@ export class entretienRecrutmentComponent implements OnInit {
             this.getInterviews();
           },
           (error) => {
-            console.error('Error updating item', error);
+            console.error('Error adding item', error);
             this.snack.open('Une erreur est survenue lors de la modification du compte bancaire.', 'OK', { duration: 2000 });
           }
         );
@@ -250,16 +258,74 @@ export class entretienRecrutmentComponent implements OnInit {
 
   
   addQuestionnaire() {
-    const dialogRef = this.dialog.open( QuestionnairePopupComponent );
+    const dialogRef = this.dialog.open( questionnairePopupComponent );
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
   }
 
-   // Assigning the globalAppreciation value to a property for binding
-   globalAppreciationValue: number = this.evaluation.globalAppreciation;
+
+
+  openPopupQuestionnaire(): void {
+    this.getCategoryTypes().subscribe((data: any) => {
+      const dialogRef = this.dialog.open(questionnairePopupComponent, {
+        width: '400px',
+        data: {
+          questionTypes: data.questionTypes,
+          questionCategories: data.questionCategories
+        }
+      });
+
+      dialogRef.componentInstance.filtersSelected.subscribe((filters: any) => {
+        // Retrieve the filtered questions based on the selected filters
+        this.retrieveFilteredQuestions(filters);
+      });
+    });
+  }
+
+  getCategoryTypes(): Observable<any> {
+    return forkJoin([
+      this.service.getAllQuestiontypes(),
+      this.service.getAllQuestionCategories()
+    ]).pipe(
+      map(([questionTypes, questionCategories]) => {
+        return { questionTypes, questionCategories };
+      }),
+      catchError((error) => {
+        console.error('Failed to retrieve question types and categories', error);
+        return EMPTY;
+      })
+    );
+  }
+
+
+    retrieveFilteredQuestions(filters: any): void {
+    // Make an API call or apply filtering logic to retrieve the filtered questions
+    // based on the selected question type and question category
+    // Assign the retrieved questions to the 'questions' property
+    // Example:
+   // this.questions = // Retrieve the filtered questions 
+ 
+ 
+  }
+
+  /*getCategoryTypes() {
+    this.service.getAllQuestiontypes().subscribe(
+      ( questionType: QuestionType[]) => {
+        this.questionType = questionType
+      }
+    );
+  }*/
 
 }
+  
+
+  
+
+
+
+
+
 
 

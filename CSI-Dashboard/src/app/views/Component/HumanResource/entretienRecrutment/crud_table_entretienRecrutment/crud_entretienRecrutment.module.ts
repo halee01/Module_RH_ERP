@@ -19,7 +19,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { crudEntretien } from '../crud_entretienRecrutment.routing';
 import { crudEntretienRecrutmentComponent } from './crud_entretienRecrutment.component';
@@ -61,7 +61,7 @@ import { evaluationPopupComponent } from '../evaluationnPopup/evaluation-popup.c
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    crudEntretienRecrutmentComponent,evaluationPopupComponent
-  ],
+    crudEntretienRecrutmentComponent,evaluationPopupComponent ],
 })
+
 export class CrudEntretienRecrutmentModule { }

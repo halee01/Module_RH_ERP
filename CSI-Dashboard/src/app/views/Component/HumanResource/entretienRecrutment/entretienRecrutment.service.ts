@@ -1,3 +1,4 @@
+import { id } from 'date-fns/locale';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
@@ -9,13 +10,17 @@ import { CalendarEventDB } from 'app/shared/inmemory-db/calendarEvents';
 import { Employee } from 'app/shared/models/Employee';
 import { Interview } from 'app/shared/models/Interview';
 import { Evaluation } from 'app/shared/models/Evaluation';
+import { QuestionType } from 'app/shared/models/QuestionType';
+import { QuestionCategory } from 'app/shared/models/QuestionCategory';
+import { Question } from 'app/shared/models/Question';
 
 @Injectable()
 export class entretienRecrutmentService {
-  private apiUrl = 'http://localhost:8080/rh/employee';
+  private apiUrl = 'http://localhost:8080/rh/employee'; 
   private apiUrlInterview = 'http://localhost:8080/rh/Interview';
   private apiUrlEvaluation = 'http://localhost:8080/rh/evaluation';
-  private apiQuestionType = 'http://localhost:8080/rh/QuestionType'
+  private apiQuestionType = 'http://localhost:8080/rh/QuestionType';
+  private apiQuestionCategory ='http://localhost:8080/rh/questionCategory'
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -89,13 +94,31 @@ getItems(): Observable<Employee[]> {
   );
 }
 
-getAllQuestiontypes(): Observable<Employee[]> {
-  const apiUrlWithGET = this.apiQuestionType + '//getAll';
+getAllQuestiontypes(): Observable<QuestionType[]> {
+  const apiUrlWithGET = this.apiQuestionType + '/getAll';
   return this.http.get<any>(apiUrlWithGET).pipe(
     catchError(this.handleError)
   );
 }
+getAllQuestionCategories(): Observable<QuestionCategory[]> {
+  const apiUrlWithGET = this.apiQuestionCategory + '/getAll';
+  return this.http.get<any>(apiUrlWithGET).pipe(
+    catchError(this.handleError)
+  );
+}
+getQuestionCategoriesByType(id:number):Observable<QuestionCategory[]> {
+  const url =  `${this.apiQuestionType+ '/get'}/${id}`+ '/questionCategories';
+  return this.http.get<any>(url).pipe(
+    catchError(this.handleError)
+  );
+}
 
+getQuestionByTypeAndCategory(id:number ,Id:number):Observable<Question[]> {
+  const url =  `${this.apiQuestionType+ '/get'}/${id}/${Id}`+ '/questions';
+  return this.http.get<any>(url).pipe(
+    catchError(this.handleError)
+  );
+}
 
  // GET an item by id
  getItem(id: number): Observable<Employee> {
@@ -128,6 +151,7 @@ getEvaluation(id: number): Observable<Evaluation> {
     catchError(this.handleError)
   );
   }
+
 // POST a new interview
 addInterview(interview: any): Observable<any> {
   const apiUrlInterviewWithAdd = this.apiUrlInterview + '/add'; // Append /add to the apiUrl
@@ -143,6 +167,15 @@ getInterview(id: number): Observable<Interview> {
     catchError(this.handleError)
   );
   }
+
+  
+
+  getEmployeeEvaluation(id: number): Observable<Interview> {
+    const url =  `${this.apiUrl+ '/get'}/${id}`+ '/evaluation';
+    return this.http.get<Interview>(url).pipe(
+      catchError(this.handleError)
+    );
+    }
 
 // PUT an existing item
 updateItem(id: number, candidate: Employee): Observable<Employee> {

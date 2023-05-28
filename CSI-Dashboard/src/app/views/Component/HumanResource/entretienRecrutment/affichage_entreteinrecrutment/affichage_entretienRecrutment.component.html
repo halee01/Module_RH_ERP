@@ -1,16 +1,20 @@
  <div class="">
 <mat-card class="p-24">
     <div fxLayout="row wrap">
-      <div fxFlex="70">
-        <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
-        <div style="padding-top: 15px;">
-          <p class="text-small"><strong >L'email numéro 1:</strong>{{employee.emailOne}}</p>
-        <p class="text-small"><strong >Numéro de téléphone 1:</strong>{{employee.phoneNumberOne}}</p>
-        <p class="text-small"><strong >La note globale est:</strong>52</p>
+      <div fxFlex="60">
+
+        
+          <div class="infor-card" >
+            <div  class="name-card" >
+            <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
+            </div>
+          <p class="text-small"><strong class="infor-card-text">L'email numéro 1:</strong>{{employee.emailOne}}</p>
+        <p class="text-small"><strong class="infor-card-text">Numéro de téléphone 1:</strong>{{employee.phoneNumberOne}}</p>
+        <p class="text-small"><strong class="infor-card-text">La note globale est:</strong>52</p>
       </div>
         
       </div>
-      <div fxFlex="30">
+      <div class="chart" fxFlex="40">
         <apx-chart
           [series]="welcomeProgressChart.series"
           [chart]="welcomeProgressChart.chartOptions.chart"
@@ -24,12 +28,15 @@
         ></apx-chart>
       </div>
     </div>
-    <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopUpEntretien({},true)" >Ajouter un entretien </button>
-
+    
   </mat-card>
-     
+  
+  
+  <div class="header-button">
+    <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopUpEntretien({},true)" >Ajouter un entretien </button>
+  </div>
+
   <div style="padding-left: 15px;padding-right: 15px;">
-    <div></div>
      <mat-accordion>
   <!-------------entretien RH----------------->
     <mat-expansion-panel *ngFor="let interviews of interview" >
@@ -38,17 +45,15 @@
           <mat-icon>description</mat-icon> &nbsp; &nbsp;{{interviews.interviewType}}
         </mat-panel-title>
         <mat-panel-description>
-
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="d-flex justify-content-between align-items-baseline">
+        
               <div class="mr-2">
-                <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="addQuestionnaire()" >Ajouter un questionnaire </button>
+                <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopupQuestionnaire()" >Ajouter un questionnaire </button>
               </div>
             </div>
     </mat-expansion-panel>
-
-  
   </mat-accordion>
 </div>
 </div>

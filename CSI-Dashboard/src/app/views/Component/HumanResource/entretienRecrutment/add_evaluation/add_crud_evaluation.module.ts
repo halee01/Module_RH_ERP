@@ -28,7 +28,7 @@ import { SharedMaterialModule } from 'app/shared/shared-material.module';
 import { crudEntretien } from '../crud_entretienRecrutment.routing';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
 import { crudEvaluationComponent } from './add_crud_evaluation.component';
-import { ajoutEntretienPopupComponent } from './addEntretien-popup/addEntretien-popup.component';
+import { ajoutEntretienPopupComponent } from '../affichage_entreteinrecrutment/add-entretien-pop/addEntretien-popup.component';
 
 
 
@@ -68,6 +68,7 @@ import { ajoutEntretienPopupComponent } from './addEntretien-popup/addEntretien-
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    crudEvaluationComponent,ajoutEntretienPopupComponent  ],
+    crudEvaluationComponent
+  ],
 })
 export class CrudEvaluationModule { }

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { Observable, Subscription } from 'rxjs';
+import { CrudService } from '../../candidate/CandidatCrud/candidat-crud.service';
 import { interviewStatus } from 'app/shared/models/Interview';
 import { evaluationPopupComponent } from '../evaluationnPopup/evaluation-popup.component';
 
