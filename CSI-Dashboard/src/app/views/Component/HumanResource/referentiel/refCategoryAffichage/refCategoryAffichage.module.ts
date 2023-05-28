@@ -25,24 +25,26 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
 import { Ng2TelInputModule } from "ng2-tel-input";
-import { NgxPaginationModule } from "ngx-pagination";
-import { referentielAffichageComponent } from "./referentielAffichage.component";
-import { CandidatRoutes } from "../../candidate/CandidatCrud/candidat-crud.routing";
-import { CrudService } from "app/views/cruds/crud.service";
+
+import { MatGridListModule, MatGridTile } from "@angular/material/grid-list";
+import { refCategoryAffichageComponent } from "./refCategoryAffichage.component";
 import { referentielService } from "../referentiel.service";
 import { referentielRoutes } from "../referentiel.routing";
-import { questionUpdateComponent } from "./questionUpdate.component";
+
+
 
 
 @NgModule({
   imports: [
     
     CommonModule,
-    NgxPaginationModule,
     ReactiveFormsModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
     FlexLayoutModule,
     MatInputModule,
     MatIconModule,
+    MatGridListModule,
     MatCardModule,
     MatMenuModule,
     MatButtonModule,
@@ -66,7 +68,8 @@ import { questionUpdateComponent } from "./questionUpdate.component";
     MatTabsModule,
     RouterModule.forChild(referentielRoutes)
   ],
-  declarations: [referentielAffichageComponent,questionUpdateComponent],
-  providers: [referentielService]
+  declarations: [ refCategoryAffichageComponent],
+  providers: [  referentielService
+    ]
 })
-export class referentielAffichageModule{ }
+export class refCategoryAffichageModule { }

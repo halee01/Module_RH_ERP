@@ -1,7 +1,9 @@
 import { Routes } from '@angular/router';
 import { referentielCrudTableComponent } from './referentielDataTable/referentiel-crud-table.component';
 import { referentielFormComponent } from './referentielForm/referentielForm.component';
-import { referentielAffichageComponent } from './referentielAffichage/referentielAffichage.component';
+import { refQuestionAffichageComponent } from './refQuestionAffichage/refQuestionAffichage.component';
+import { referentielForm2Component } from './referentielForm2/referentielForm2.component';
+import { refCategoryAffichageComponent } from './refCategoryAffichage/refCategoryAffichage.component';
 
 
 export const referentielRoutes: Routes = [
@@ -17,13 +19,23 @@ export const referentielRoutes: Routes = [
         component: referentielFormComponent , 
         data: { title: 'refForm', breadcrumb: 'TablForm' } 
       },
+      { 
+        path: ':id', 
+        component: referentielForm2Component , 
+        data: { title: 'refForm', breadcrumb: 'TablForm' } 
+      },
 
       { 
         path: ':id', 
-        component: referentielAffichageComponent , 
+        component: refCategoryAffichageComponent, 
+        data: { title: 'refAffiche', breadcrumb: 'Table' } 
+      },
+
+      { 
+        path: ':id', 
+        component: refQuestionAffichageComponent , 
         data: { title: 'refAffiche', breadcrumb: 'Table' } 
       }
 
-     
-
+      
 ]

@@ -168,12 +168,19 @@ updateQuestion(Id: number, question: Question): Observable<Question> {
 
 // DELETE an item by id
 deleteItem(id: number): Observable<Offer> {
- 
   const url = `${this.apiUrl+'/delete'}/${id}`;
   return this.http.delete<Offer>(url).pipe(
     catchError(this.handleError)
   );
-}
+ }
+
+ // DELETE an item by id
+deleteQuestionType(id: number): Observable<Offer> {
+  const url = `${this.quesTypeUrl+'/delete'}/${id}`;
+  return this.http.delete<Offer>(url).pipe(
+    catchError(this.handleError)
+  );
+ }
 
   // DELETE an item by id
   deleteQuestion(id: number): Observable<Question> {

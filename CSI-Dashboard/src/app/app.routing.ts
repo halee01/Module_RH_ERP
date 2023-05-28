@@ -1,6 +1,4 @@
-import { referentielAffichageModule } from './views/Component/HumanResource/referentiel/referentielAffichage/referentielAffichage.module';
-
-import { Component } from '@angular/core';
+import { refCategoryAffichageModule } from './views/Component/HumanResource/referentiel/refCategoryAffichage/refCategoryAffichage.module';
 import { Routes } from '@angular/router';
 import { AdminLayoutComponent } from './shared/components/layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './shared/components/layouts/auth-layout/auth-layout.component';
@@ -160,13 +158,24 @@ export const rootRouterConfig: Routes = [
       },
 
       {
-        path: 'referentielAffichage',
-        loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielAffichage/referentielAffichage.module').then(m => m.referentielAffichageModule),
+        path: 'refQuestionAffichage',
+        loadChildren: () => import('./views/Component/HumanResource/referentiel/refQuestionAffichage/refQuestionAffichage.module').then(m => m.refQuestionAffichageModule),
+        data: { title: 'refTable', breadcrumb: 'Table'}
+      },
+
+      {
+        path: 'refCategoryAffichage',
+        loadChildren: () => import('./views/Component/HumanResource/referentiel/refCategoryAffichage/refCategoryAffichage.module').then(m => m.refCategoryAffichageModule),
         data: { title: 'refTable', breadcrumb: 'Table'}
       },
       {
         path: 'formReferentiel',
         loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielForm/referentielForm.module').then(m => m.referentielFormModule),
+        data: { title: 'refForm', breadcrumb: 'form'}
+      },
+      {
+        path: 'formReferentiel2',
+        loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielForm2/referentielForm2.module').then(m => m.referentielForm2Module),
         data: { title: 'refForm', breadcrumb: 'form'}
       },
     

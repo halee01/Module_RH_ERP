@@ -15,15 +15,15 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 import { QuestionType } from 'app/shared/models/QuestionType';
-import { referentielService } from '../../referentiel.service';
+import { referentielService } from '../referentiel.service';
 
 @Component({
   selector: 'referentiel-crud',
-  templateUrl: './referentielTypeDataTable.component.html'
+  templateUrl: './refCategoryAffichage.component.html'
 })
 
 
-export class referentielTypeDataTableComponent implements OnInit {
+export class refCategoryAffichageComponent implements OnInit {
   formData = {}
   console = console;
   ExperienceLevel :string []= Object.values(ExperienceLevel);
@@ -45,7 +45,6 @@ export class referentielTypeDataTableComponent implements OnInit {
  
 
   public dataSource: MatTableDataSource<QuestionCategory>;
-  public questionTypesDataSource: MatTableDataSource<QuestionType>;
   public displayedColumns: any;
   public getItemSub: Subscription;
   public getItemSub2: Subscription;
@@ -60,8 +59,7 @@ export class referentielTypeDataTableComponent implements OnInit {
     private loader: AppLoaderService
   ) 
 
-  { this.dataSource = new MatTableDataSource<QuestionCategory>([]);
-    this.questionTypesDataSource = new MatTableDataSource<QuestionType>([]);}
+  { this.dataSource = new MatTableDataSource<QuestionCategory>([]);}
 
   ngOnInit() {
    this.displayedColumns = this.getDisplayedColumns();
@@ -69,7 +67,7 @@ export class referentielTypeDataTableComponent implements OnInit {
   }
 
   getDisplayedColumns() {
-    return ['questionTypeName','name','level','actions' ]; }
+    return ['name','level','actions' ]; }
 
 
   ngAfterViewInit() {
@@ -89,12 +87,6 @@ export class referentielTypeDataTableComponent implements OnInit {
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
-  
-        // Call getAllQuestiontypes() and assign the result to another data source
-        this.crudService.getAllQuestiontypes().subscribe((questionTypes: any) => {
-          this.questionTypesDataSource = new MatTableDataSource(questionTypes);
-          // Perform any additional configuration for the question types data source
-        });
       });
   }
   

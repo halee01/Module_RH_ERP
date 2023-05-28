@@ -25,26 +25,22 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatSortModule } from "@angular/material/sort";
 import { MatTabsModule } from "@angular/material/tabs";
 import { Ng2TelInputModule } from "ng2-tel-input";
-
-import { MatGridListModule, MatGridTile } from "@angular/material/grid-list";
-import {  referentielTypeDataTableComponent } from "./referentielTypeDataTable.component";
-import { referentielService } from "../../referentiel.service";
-import { referentielRoutes } from "../../referentiel.routing";
-
-
+import { NgxPaginationModule } from "ngx-pagination";
+import { refQuestionAffichageComponent} from "./refQuestionAffichage.component";
+import { referentielService } from "../referentiel.service";
+import { referentielRoutes } from "../referentiel.routing";
+import { questionUpdateComponent } from "./questionUpdate.component";
 
 
 @NgModule({
   imports: [
     
     CommonModule,
+    NgxPaginationModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatPaginatorModule,
     FlexLayoutModule,
     MatInputModule,
     MatIconModule,
-    MatGridListModule,
     MatCardModule,
     MatMenuModule,
     MatButtonModule,
@@ -68,8 +64,7 @@ import { referentielRoutes } from "../../referentiel.routing";
     MatTabsModule,
     RouterModule.forChild(referentielRoutes)
   ],
-  declarations: [ referentielTypeDataTableComponent],
-  providers: [  referentielService
-    ]
+  declarations: [refQuestionAffichageComponent,questionUpdateComponent],
+  providers: [referentielService]
 })
-export class referentielCrudModule { }
+export class refQuestionAffichageModule{ }
