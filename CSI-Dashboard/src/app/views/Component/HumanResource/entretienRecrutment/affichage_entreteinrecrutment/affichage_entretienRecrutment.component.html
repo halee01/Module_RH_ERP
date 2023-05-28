@@ -3,15 +3,18 @@
     <div fxLayout="row wrap">
       <div fxFlex="60">
 
-        
-          <div class="infor-card" >
-            <div  class="name-card" >
+        <div  class="name-card" >
             <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
-            </div>
+        </div>
+        
+        <div>
+          <div class="infor-card" >
           <p class="text-small"><strong class="infor-card-text">L'email numéro 1:</strong>{{employee.emailOne}}</p>
         <p class="text-small"><strong class="infor-card-text">Numéro de téléphone 1:</strong>{{employee.phoneNumberOne}}</p>
         <p class="text-small"><strong class="infor-card-text">La note globale est:</strong>52</p>
       </div>
+        </div>
+          
         
       </div>
       <div class="chart" fxFlex="40">
