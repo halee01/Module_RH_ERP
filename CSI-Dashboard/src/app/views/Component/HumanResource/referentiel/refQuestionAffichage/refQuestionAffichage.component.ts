@@ -1,4 +1,4 @@
-import { referentielService } from './../referentiel.service';
+import { referentielService } from '../referentiel.service';
 
 
 import { ActivatedRoute } from '@angular/router';
@@ -20,14 +20,14 @@ import { questionUpdateComponent } from './questionUpdate.component';
 
 
 @Component({
-    selector: 'referentielAffichage',
-    templateUrl: './referentielAffichage.component.html',
-    styleUrls:  ['./referentielAffichage.component.scss']
+    selector: 'refQuestionAffichage',
+    templateUrl: './refQuestionAffichage.component.html',
+    styleUrls:  ['./refQuestionAffichage.component.scss']
   })
 
 
 
-  export class referentielAffichageComponent implements OnInit {
+  export class refQuestionAffichageComponent implements OnInit {
     repeatForm: FormGroup;
     public getItemSub: Subscription;
 

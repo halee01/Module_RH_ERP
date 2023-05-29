@@ -23,12 +23,18 @@ import { EMPTY, Observable, catchError, forkJoin, map } from 'rxjs';
 export class entretienRecrutmentComponent implements OnInit {
   id:number;
   employee:Employee;
+ 
   interview:Interview;
   questions: Question[];
   questionType:QuestionType[];
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
+
+
+
+  //Global appreciation chart 
+
   welcomeProgressChart = {
     series: [0],
     chartOptions: {
@@ -46,6 +52,7 @@ export class entretienRecrutmentComponent implements OnInit {
           bottom: 10,
         },
       },
+
       plotOptions: {
         radialBar: {
           startAngle: -90,
@@ -242,39 +249,40 @@ export class entretienRecrutmentComponent implements OnInit {
     });
   }
   
-  
-  
   getItems() {
     throw new Error('Method not implemented.');
   }
 
   
-  addQuestionnaire() {
+ /* addQuestionnaire() {
     const dialogRef = this.dialog.open( questionnairePopupComponent );
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
-  }
+  }*/
 
 
 
-  openPopupQuestionnaire(): void {
+  openPopupQuestionnaire(interviewId: number): void {
     this.getCategoryTypes().subscribe((data: any) => {
       const dialogRef = this.dialog.open(questionnairePopupComponent, {
         width: '400px',
         data: {
+          interviewId: interviewId, // Pass the interview ID to the popup
           questionTypes: data.questionTypes,
           questionCategories: data.questionCategories
         }
       });
-
-      dialogRef.componentInstance.filtersSelected.subscribe((filters: any) => {
-        // Retrieve the filtered questions based on the selected filters
-        this.retrieveFilteredQuestions(filters);
+  
+      dialogRef.afterClosed().subscribe((result: any) => {
+        // Handle any actions after the popup is closed, if needed
       });
     });
   }
+  
+  
+ 
 
   getCategoryTypes(): Observable<any> {
     return forkJoin([
@@ -302,13 +310,7 @@ export class entretienRecrutmentComponent implements OnInit {
  
   }
 
-  /*getCategoryTypes() {
-    this.service.getAllQuestiontypes().subscribe(
-      ( questionType: QuestionType[]) => {
-        this.questionType = questionType
-      }
-    );
-  }*/
+ 
 
 }
   

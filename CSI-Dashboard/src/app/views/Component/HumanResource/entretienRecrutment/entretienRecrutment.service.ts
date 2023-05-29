@@ -13,6 +13,7 @@ import { Evaluation } from 'app/shared/models/Evaluation';
 import { QuestionType } from 'app/shared/models/QuestionType';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 import { Question } from 'app/shared/models/Question';
+import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 
 @Injectable()
 export class entretienRecrutmentService {
@@ -119,6 +120,18 @@ getQuestionByTypeAndCategory(id:number ,Id:number):Observable<Question[]> {
     catchError(this.handleError)
   );
 }
+getQuestionByTypeCategoryAndLevel(id:number ,Id:number, level:ExperienceLevel):Observable<Question[]> {
+  const url =  `${this.apiQuestionType+ '/get'}/${id}/${Id}/${level}`+ '/questions';
+  return this.http.get<any>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+addQuestionTypeToInterview(interviewId: number, questionTypeIds: number[]): Observable<any> {
+  const url = `${this.apiUrlInterview}/addQuestionType/${interviewId}`;
+  return this.http.put(url, questionTypeIds);
+}
+
+
 
  // GET an item by id
  getItem(id: number): Observable<Employee> {

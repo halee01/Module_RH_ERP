@@ -3,9 +3,12 @@
     <div fxLayout="row wrap">
       <div fxFlex="70">
         <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
-        <p class="text-small">
-          nom,prenom,offre/ / / /la note globale est:<span class="font-weight-bold">52</span>
-        </p>
+        <div style="padding-top: 15px;">
+          <p class="text-small"><strong >L'email numéro 1:</strong>{{employee.emailOne}}</p>
+        <p class="text-small"><strong >Numéro de téléphone 1:</strong>{{employee.phoneNumberOne}}</p>
+        <p class="text-small"><strong >La note globale est:</strong>52</p>
+      </div>
+        
       </div>
       <div fxFlex="30">
         <apx-chart
@@ -40,7 +43,7 @@
       <div class="d-flex justify-content-between align-items-baseline">
         
               <div class="mr-2">
-                <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopupQuestionnaire()" >Ajouter un questionnaire </button>
+                <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopupQuestionnaire(interviews.id)" >Ajouter un questionnaire </button>
               </div>
             </div>
     </mat-expansion-panel>

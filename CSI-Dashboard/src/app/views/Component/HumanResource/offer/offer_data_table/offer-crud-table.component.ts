@@ -166,11 +166,10 @@ export class OfferCrudTableComponent implements OnInit {
   }
 
 
-  applyFilter(event: Event) {
-    const FilterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = FilterValue.trim().toLowerCase();
-
-  }
+  applyFilter(event :Event){
+    const FilterValue = (event.target as HTMLInputElement).value ;
+     this.dataSource.filter = FilterValue.trim().toLowerCase();
+    }
 
   Affiche(id: number) {
     this.router.navigate(["affichageOffer/affichageOffer", id]);

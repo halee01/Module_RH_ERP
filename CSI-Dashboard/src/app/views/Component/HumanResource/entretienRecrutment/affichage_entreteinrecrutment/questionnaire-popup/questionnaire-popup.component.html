@@ -59,7 +59,7 @@
     <mat-label>Select Question Category</mat-label>
     <mat-select [(value)]="selectedQuestionCategory">
       <mat-option *ngFor="let questionCategory of filteredQuestionCategories" [value]="questionCategory">
-        {{ questionCategory.name }}
+        {{ questionCategory.name }} {{questionCategory.level}}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -67,7 +67,7 @@
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="closeDialog()">Close</button>
-  <button mat-button color="primary" (click)="applyFilters()">Apply</button>
+  <button mat-button color="primary" (click)="applyFilters()">Filtrer</button>
 </mat-dialog-actions>
 
 <mat-dialog-content *ngIf="questions.length > 0">
@@ -77,5 +77,5 @@
       {{ question.question }}
     </li>
   </ul>
-  <button mat-button color="primary" (click)="getQuestions()">Get Questions</button>
+  <button mat-button color="primary" (click)="addQuestionnaire(interviewId)">ajouter</button>
 </mat-dialog-content>

@@ -1,48 +1,42 @@
 <div class="m-12" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
 
 
-  <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)="goToForm()"> New referentiel </button>
+  <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)="goToForm()"> Ajouter un référentiel </button>
 
   <mat-form-field  >
     <input matInput (keyup)="applyFilter($event)" placeholder="Filtre">
     </mat-form-field> 
- 
+  
 
-<mat-card  style="border: 5px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
+<mat-card  style="border: 60 px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
   <mat-card-content class="p-0">
     <mat-table [dataSource]="dataSource" matSort  >
 
   <ng-container matColumnDef="questionTypeName">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Catégorie
-       </mat-header-cell>
-    <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.questionTypeName}} </mat-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Catégorie</mat-header-cell>
+    <mat-cell  *matCellDef="let row"  [style.color]="row.color"> {{row.questionTypeName}} </mat-cell> b
   </ng-container>
-
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Domaine
-       </mat-header-cell>
-    <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.name}} </mat-cell>
-  </ng-container>
-
-  <ng-container matColumnDef="level">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Niveau d'expérience
-     
-    </mat-header-cell>
-    <mat-cell *matCellDef="let row" [style.color]="row.color"> {{ExperienceLevelMap[row.level]}} </mat-cell>
-  </ng-container>
-
-
-
 
    <ng-container matColumnDef="actions">
      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
      <mat-cell *matCellDef="let row">
-       <button mat-icon-button mat-sm-button color="accent" class=" mr-16 "  routerLink="/referentielAffichage/{{row.id}}" routerLinkActive="router-link-active" >
+       <button mat-icon-button mat-sm-button style="color: #757575;"  routerLink="/refCategoryAffichage/{{row.id}}" >
          <mat-icon>remove_red_eye </mat-icon>
        </button>
-       <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row.id)">
+       <button  style="color: #757575;" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      
+      <mat-menu #menu="matMenu" style="width: 5cm;">
+        <button  mat-menu-item   (click)="deleteItem(row.id)">
          <mat-icon>delete</mat-icon>
-       </button>
+         <span>Supprimer la catégorie</span>
+       </button> 
+        <button mat-menu-item  routerLink="/formReferentiel2/{{row.id}}" routerLinkActive="router-link-active" >
+          <mat-icon>mode_edit</mat-icon>
+          <span>Créer un référentiel</span>
+        </button>
+      </mat-menu>
        
      </mat-cell>
    </ng-container>

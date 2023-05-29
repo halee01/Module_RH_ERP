@@ -1,11 +1,7 @@
 import { Evaluation } from 'app/shared/models/Evaluation';
 import { entretienRecrutmentService } from './../entretienRecrutment.service';
-import { crudEntretien } from '../crud_entretienRecrutment.routing';
-
-
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
@@ -13,7 +9,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
-import { NgxTablePopupComponent } from 'app/views/cruds/crud-ngx-table/ngx-table-popup/ngx-table-popup.component';
 import { Observable, Subscription } from 'rxjs';
 import { CrudService } from '../../candidate/CandidatCrud/candidat-crud.service';
 import { interviewStatus } from 'app/shared/models/Interview';
@@ -68,7 +63,7 @@ export class crudEntretienRecrutmentComponent implements OnInit {
   }
 
   getDisplayedColumns() {
-    return ['name', 'last name', 'note globale', 'status', 'actions'];
+    return ['name', 'last name', 'note globale', 'actions'];
   }
 
     
@@ -232,55 +227,12 @@ console.log(row.id)
 }*/
 
 
-getStatusColor(interviewStatus: string): { color: string, displayText: string } {
-  const STATUS_DATA = {
-    PLANNED: { color: 'primary', displayText: 'Planifié' },
-    ENDED: { color: 'purple', displayText: 'Cloturé' },
-    CANCELLED: { color: 'red', displayText: 'Annulé' }
-  };
-  return STATUS_DATA[interviewStatus] || { color: 'primary', displayText: 'Planifié' };
-}
-
-changeInterviewStatus(interviewStatus: string, interviewId: number): void {
-console.log('Changing interview status to:', interviewStatus);
-let updateObservable: Observable<any>;
-switch (interviewStatus) {
-  case 'interviewStatus.PLANNED':
-    updateObservable = this.crudEntretien.updateToPlannedById(interviewId);
-    break;
-  case 'interviewStatus.ENDED':
-    updateObservable = this.crudEntretien.updateToEndedById(interviewId);
-    break;
-  case 'interviewStatus.CANCELLED':
-    updateObservable = this.crudEntretien.updateToCancelledById(interviewId);
-    break;
-  default:
-    // Cas de statut de contrat non géré
-    console.error('Statut de candidat non géré');
-    return;
-}
-}
-
-applyStatusFilter(event: Event) {
-  const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-
-  this.dataSource.filterPredicate = (data, filter) => {
-    const status = this.getStatusColor(data.intervieStatus).displayText.toLowerCase();
-    return status.includes(filter);
-  };
-
-  this.dataSource.filter = filterValue;
-
-  if (this.dataSource.paginator) {
-    this.dataSource.paginator.firstPage();
-  }
-}
 
 showInput1 = false;
 toggleInput1() {
   this.showInput1 = !this.showInput1;
 }
-///********SARRA----------------
+
 saveEvaluation(id: number): void {
   this.crudEntretien.addEvaluation({ employeeNum: id }).subscribe(
     response => {
@@ -317,6 +269,9 @@ openpopup(row: any): void {
     error => console.error('Error adding evaluation:', error)
   );
 }
+
+//status 
+
 
 
 
