@@ -27,6 +27,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
 import { evaluationPopupComponent } from '../evaluationnPopup/evaluation-popup.component';
+import { ViewAllInterviewsComponent } from './viewAll-Interviews/viewAll-Interviews.component';
+import { MatMenu, MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -40,6 +42,7 @@ import { evaluationPopupComponent } from '../evaluationnPopup/evaluation-popup.c
     MatTableModule,
     MatIconModule,
     MatDialogModule,
+    MatMenuModule,
     MatButtonModule,
     MatExpansionModule,
     MatRadioModule,
@@ -61,7 +64,7 @@ import { evaluationPopupComponent } from '../evaluationnPopup/evaluation-popup.c
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    crudEntretienRecrutmentComponent,evaluationPopupComponent ],
+    crudEntretienRecrutmentComponent,evaluationPopupComponent,ViewAllInterviewsComponent],
 })
 
 export class CrudEntretienRecrutmentModule { }

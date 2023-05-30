@@ -40,12 +40,12 @@
   </div>
 
   <div style="padding-left: 15px;padding-right: 15px;">
-     <mat-accordion>
+     <mat-accordion >
   <!-------------entretien RH----------------->
-    <mat-expansion-panel *ngFor="let interviews of interview" >
+    <mat-expansion-panel class="accordion" *ngFor="let interviews of interview" >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon>description</mat-icon> &nbsp; &nbsp;{{interviews.interviewType}}
+          <mat-icon>description</mat-icon> &nbsp; &nbsp;{{InterviewTypeMap[interviews.interviewType]}}
         </mat-panel-title>
         <mat-panel-description>
         </mat-panel-description>

@@ -2,7 +2,7 @@ import { AssQuestionInterview } from "./AssQuestionInterview";
 
 export interface Interview{
     id ?:number;
-    globalMark ?:string;
+    globalMark ?:number;
     interviewDate ?:string;
     interviewTime?:string;
     duration ?:string;

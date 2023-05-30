@@ -168,11 +168,11 @@ getInterview(id: number): Observable<Interview> {
   );
   }
 
-  
+ 
 
-  getEmployeeEvaluation(id: number): Observable<Interview> {
+  getEmployeeEvaluation(id: number): Observable<Evaluation> {
     const url =  `${this.apiUrl+ '/get'}/${id}`+ '/evaluation';
-    return this.http.get<Interview>(url).pipe(
+    return this.http.get<Evaluation>(url).pipe(
       catchError(this.handleError)
     );
     }
@@ -216,6 +216,15 @@ deleteItem(id: number): Observable<Employee> {
   );
 }
 
+
+// DELETE an evaluation by id
+deleteEvaluation(id: number): Observable<Evaluation> {
+ 
+  const url = `${this.apiUrlEvaluation +'/delete'}/${id}`;
+  return this.http.delete<Evaluation>(url).pipe(
+    catchError(this.handleError)
+  );
+}
 ////////////////////////////////////////////////////////
 private handleError(error: HttpErrorResponse) {
   if (error.error instanceof ErrorEvent) {

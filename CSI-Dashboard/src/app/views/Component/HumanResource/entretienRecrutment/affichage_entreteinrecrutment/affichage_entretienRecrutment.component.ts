@@ -1,5 +1,5 @@
 
-import { Interview } from 'app/shared/models/Interview';
+import { Interview, InterviewType } from 'app/shared/models/Interview';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
@@ -24,6 +24,7 @@ import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-p
 export class entretienRecrutmentComponent implements OnInit {
   id:number;
   employee:Employee;
+  interviewType :string []= Object.values(InterviewType);
   evaluation: Evaluation={
     globalAppreciation: 0,
   };
@@ -297,6 +298,10 @@ export class entretienRecrutmentComponent implements OnInit {
         return EMPTY;
       })
     );
+  }
+  InterviewTypeMap = {
+    [InterviewType.TECHNICAL_INTERVIEW]: 'Entretien technique',
+    [InterviewType.HUMAN_RESOURCE_INTERVIEW]: 'Entretien ressources humaines'
   }
 
 

@@ -5,59 +5,7 @@
   <div class="info-card primary" >
     <div class="description">Les Notifications </div>
  </div>
-<!------------------------------------------------
- <mat-card class="p-0" [@animate]="{ value: '*', params: { y: '50px', delay: '300ms' } }">
-   <div fxLayout="row wrap" fxLayoutAlign="space-evenly center">
-     <div
-       fxFlex="50"
-       fxFlex.gt-sm="20"
-       fxFlex.sm="50"
-     >
-       <div class="text-center pt-16 pb-16 border-right-light">
-         <mat-icon class="text-orange">stars</mat-icon>
-         <h4 class="m-0 ">...</h4>
-         <small class="m-0 ">Top Profils</small>
-       </div>
-     </div>
-     <div
-       fxFlex="50"
-       fxFlex.gt-sm="20"
-       fxFlex.sm="50"
-     >
-       <div class="text-center pt-16 pb-16 border-right-light">
-         <mat-icon class="text-blue">build</mat-icon>
-         <h4 class="m-0 ">...</h4>
-         <small class="m-0 ">A traiter</small>
-       </div>
-     </div>
-     <div
-       fxFlex="50"
-       fxFlex.gt-sm="20"
-       fxFlex.sm="50"
-     >
-       <div class="text-center pt-16 pb-16 border-right-light">
-         <mat-icon class="text-orange">cached</mat-icon>
-         <h4 class="m-0 ">...</h4>
-         <small class="m-0 ">En cours de qualification</small>
-       </div>
-     </div>
-     <div
-       fxFlex="50"
-       fxFlex.gt-sm="20"
-       fxFlex.sm="50"
-     >
-       <div class="text-center pt-16 pb-16 border-right-light">
-         <mat-icon class="text-blue">done_all</mat-icon>
-         <h4 class="m-0 ">...</h4>
-         <small class="m-0 ">Converti en ressource</small>
-       </div>
-     </div>
-   </div>
- </mat-card>
- <mat-form-field style="padding-left: 19px;"   >
-  <input matInput (keyup)="applyFilter($event)" placeholder="Filtrer">
-  </mat-form-field>
-------->
+
   <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary"  (click)="goToEvaluer()">
       Ajouter un entretien </button>
      <div style="clear: both;"></div>
@@ -94,22 +42,24 @@
        <ng-container matColumnDef="actions">
          <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
          <mat-cell *matCellDef="let row">
-          <button mat-icon-button mat-sm-button color="primary" class=" mr-16 "  (click)="openpopup(row)">
-            <mat-icon>work </mat-icon>
-          </button>
-           <button mat-icon-button mat-sm-button color="accent" class=" mr-16 " (click)="saveEvaluation(row.id)"
-           >
+           <button mat-icon-button mat-sm-button style=" color: #757575;" class=" mr-16 " (click)="viewAllEvaluations(row)">
              <mat-icon>remove_red_eye </mat-icon>
            </button>
-           <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row)">
-             <mat-icon>delete</mat-icon>
-           </button>
-           <button
-           class="card-control"
-           mat-icon-button
-           [matMenuTriggerFor]="menu2">
-                <mat-icon class="text-muted text-18">more_vert</mat-icon>
-              </button>
+
+           <button  class="mr-16 " mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item class="mr-16 " style=" color: #757575;" (click)="deleteItem(row)">
+              <mat-icon>delete</mat-icon>
+              <span>Supprimer le candidat</span>
+            </button>
+            <button mat-menu-item class="mr-16 "style=" color: #757575;" class=" mr-16 "  (click)="openpopup(row)">
+              <mat-icon>work </mat-icon>
+              <span>Ajouter une évaluation</span>
+            </button>
+          </mat-menu>
+
          </mat-cell>
        </ng-container>
        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
