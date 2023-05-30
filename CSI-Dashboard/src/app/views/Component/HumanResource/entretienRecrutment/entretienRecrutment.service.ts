@@ -21,6 +21,7 @@ export class entretienRecrutmentService {
   private apiUrlInterview = 'http://localhost:8080/rh/Interview';
   private apiUrlEvaluation = 'http://localhost:8080/rh/evaluation';
   private apiQuestionType = 'http://localhost:8080/rh/QuestionType';
+  private apiUpdatedQuestion = 'http://localhost:8080/rh/updatedQuestion';
   private apiQuestionCategory ='http://localhost:8080/rh/questionCategory'
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
@@ -120,14 +121,16 @@ getQuestionByTypeAndCategory(id:number ,Id:number):Observable<Question[]> {
     catchError(this.handleError)
   );
 }
+
 getQuestionByTypeCategoryAndLevel(id:number ,Id:number, level:ExperienceLevel):Observable<Question[]> {
   const url =  `${this.apiQuestionType+ '/get'}/${id}/${Id}/${level}`+ '/questions';
   return this.http.get<any>(url).pipe(
     catchError(this.handleError)
   );
 }
+
 addQuestionTypeToInterview(interviewId: number, questionTypeIds: number[]): Observable<any> {
-  const url = `${this.apiUrlInterview}/addQuestionType/${interviewId}`;
+  const url = `${this.apiUrlInterview}/${interviewId}/questionTypes`;
   return this.http.put(url, questionTypeIds);
 }
 
@@ -153,6 +156,14 @@ addItem(candidate: any): Observable<any> {
 addEvaluation(evaluation: any): Observable<any> {
   const apiUrlEvaluationWithAdd = this.apiUrlEvaluation + '/add'; // Append add to the apiUrl
   return this.http.post<any>(apiUrlEvaluationWithAdd, evaluation).pipe(
+    catchError(this.handleError)
+  );
+}
+
+// POST a new updatedQuestion
+addUpdatedQuestion(updatedQuestion: any): Observable<any> {
+  const apiUrlUpdatedQuestionWithAdd = this.apiUpdatedQuestion + '/add'; // Append add to the apiUrl
+  return this.http.post<any>(apiUrlUpdatedQuestionWithAdd, updatedQuestion).pipe(
     catchError(this.handleError)
   );
 }

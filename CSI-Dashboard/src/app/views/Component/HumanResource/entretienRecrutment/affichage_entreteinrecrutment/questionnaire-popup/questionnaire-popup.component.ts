@@ -1,9 +1,11 @@
+import { InterviewType } from 'app/shared/models/Interview';
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 import { QuestionType } from 'app/shared/models/QuestionType';
 import { entretienRecrutmentService } from '../../entretienRecrutment.service';
 import { Question } from 'app/shared/models/Question';
+import { UpdatedQuestion } from 'app/shared/models/UpdatedQuestion';
 
 @Component({
   selector: 'app-popup',
@@ -17,6 +19,7 @@ export class questionnairePopupComponent {
   filteredQuestionCategories: QuestionCategory[];
   questions: Question[];
   interviewId: number;
+  updatedQuestions: UpdatedQuestion[] = [];
 
   selectedQuestionType: QuestionType;
   selectedQuestionCategory: QuestionCategory;
@@ -90,6 +93,8 @@ export class questionnairePopupComponent {
       this.getQuestions();
     }
   }
+
+
   addQuestionnaire(questionTypeId: number): void {
     const questionTypeIds: number[] = [this.selectedQuestionType.id];
     const interviewId: number = this.data.interviewId; // Access the interview ID from the data object
@@ -111,16 +116,20 @@ export class questionnairePopupComponent {
   }
   
   
-  
   getQuestions(): void {
     if (this.selectedQuestionType && this.selectedQuestionCategory) {
       const typeId = this.selectedQuestionType.id;
       const categoryId = this.selectedQuestionCategory.id;
-
+  
       this.service.getQuestionByTypeAndCategory(typeId, categoryId).subscribe(
         (questions: Question[]) => {
           this.questions = questions;
+          const questionStrings = this.questions.map(question => question.question);
+          const interviewId = this.data.interviewId; // Access the interview ID from the data object
+          this.createUpdatedQuestionsFromStrings(questionStrings, interviewId);
+  
           console.log(this.questions);
+          console.log(this.updatedQuestions);
         },
         (error) => {
           console.error('Failed to retrieve questions', error);
@@ -128,4 +137,36 @@ export class questionnairePopupComponent {
       );
     } else {
       this.questions = [];
-    }}}
+      this.updatedQuestions = [];
+    }
+  }
+  
+  createUpdatedQuestionsFromStrings(questionStrings: string[], interviewId: number): void {
+    this.updatedQuestions = []; // Reset the array before populating it
+  
+    questionStrings.forEach(questionString => {
+      const updatedQuestion: UpdatedQuestion = {
+        questionText: questionString,
+        interview: { id: interviewId }, // Set the interview ID for the updated question
+        // Set other properties as needed
+      };
+  
+      this.service.addUpdatedQuestion(updatedQuestion).subscribe(
+        (response) => {
+          console.log('Updated question added successfully', response);
+          // Perform any additional actions or update the UI as needed
+          this.updatedQuestions.push(response.updatedQuestion); // Add the updated question to the local array
+        },
+        (error) => {
+          console.error('Error adding updated question', error);
+        }
+      );
+    });
+  }
+  
+
+  
+}
+  
+    
+  
