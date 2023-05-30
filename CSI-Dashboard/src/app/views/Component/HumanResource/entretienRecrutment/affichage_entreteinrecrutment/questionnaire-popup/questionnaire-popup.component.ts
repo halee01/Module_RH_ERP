@@ -126,7 +126,7 @@ export class questionnairePopupComponent {
           this.questions = questions;
           const questionStrings = this.questions.map(question => question.question);
           const interviewId = this.data.interviewId; // Access the interview ID from the data object
-          this.createUpdatedQuestionsFromStrings(questionStrings, interviewId);
+          this.createUpdatedQuestionsFromQuestions(questionStrings, interviewId);
   
           console.log(this.questions);
           console.log(this.updatedQuestions);
@@ -141,28 +141,22 @@ export class questionnairePopupComponent {
     }
   }
   
-  createUpdatedQuestionsFromStrings(questionStrings: string[], interviewId: number): void {
-    this.updatedQuestions = []; // Reset the array before populating it
-  
-    questionStrings.forEach(questionString => {
-      const updatedQuestion: UpdatedQuestion = {
-        questionText: questionString,
-        interview: { id: interviewId }, // Set the interview ID for the updated question
-        // Set other properties as needed
-      };
-  
-      this.service.addUpdatedQuestion(updatedQuestion).subscribe(
+  createUpdatedQuestionsFromQuestions(questionStrings: string[], interviewId: number): void {
+    this.updatedQuestions = this.questions.map(question => ({
+      questionText: question.question,
+      interview: { id: interviewId },
+    }));
+
+      this.service.addUpdatedQuestion(this.updatedQuestions).subscribe(
         (response) => {
           console.log('Updated question added successfully', response);
-          // Perform any additional actions or update the UI as needed
           this.updatedQuestions.push(response.updatedQuestion); // Add the updated question to the local array
         },
         (error) => {
           console.error('Error adding updated question', error);
         }
       );
-    });
-  }
+    } 
   
 
   
