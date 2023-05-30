@@ -12,15 +12,18 @@ import { Question } from 'app/shared/models/Question';
 })
 export class questionnairePopupComponent {
   questionTypes: QuestionType[];
+  questionTypeIds:number[];
   questionCategories: QuestionCategory[];
   filteredQuestionCategories: QuestionCategory[];
   questions: Question[];
+  interviewId: number;
 
   selectedQuestionType: QuestionType;
   selectedQuestionCategory: QuestionCategory;
   selectedQuestionCategoryId: number;
 
   filtersSelected: EventEmitter<any> = new EventEmitter<any>();
+  snack: any;
 
   constructor(
     public dialogRef: MatDialogRef<questionnairePopupComponent>,
@@ -87,7 +90,28 @@ export class questionnairePopupComponent {
       this.getQuestions();
     }
   }
+  addQuestionnaire(questionTypeId: number): void {
+    const questionTypeIds: number[] = [this.selectedQuestionType.id];
+    const interviewId: number = this.data.interviewId; // Access the interview ID from the data object
+    console.log(interviewId);
+    console.log(questionTypeIds);
 
+    this.service.addQuestionTypeToInterview(interviewId, questionTypeIds).subscribe(
+      (response) => {
+        console.log('Question type added to the interview successfully', response);
+        this.snack.open('Type de question ajouté à l\'entretien avec succès!', 'OK', { duration: 2000 });
+        // Perform any additional actions or update the UI as needed
+        this.dialogRef.close(true); // Close the dialog with a success flag
+      },
+      (error) => {
+        console.error('Error adding question type to the interview', error);
+        this.snack.open('Une erreur est survenue lors de l\'ajout du type de question à l\'entretien.', 'OK', { duration: 2000 });
+      }
+    );
+  }
+  
+  
+  
   getQuestions(): void {
     if (this.selectedQuestionType && this.selectedQuestionCategory) {
       const typeId = this.selectedQuestionType.id;

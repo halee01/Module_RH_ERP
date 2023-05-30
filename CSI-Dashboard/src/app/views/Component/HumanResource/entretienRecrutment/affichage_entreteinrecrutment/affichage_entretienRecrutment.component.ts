@@ -258,32 +258,35 @@ export class entretienRecrutmentComponent implements OnInit {
   }
 
   
-  addQuestionnaire() {
+ /* addQuestionnaire() {
     const dialogRef = this.dialog.open( questionnairePopupComponent );
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
-  }
+  }*/
 
 
 
-  openPopupQuestionnaire(): void {
+  openPopupQuestionnaire(interviewId: number): void {
     this.getCategoryTypes().subscribe((data: any) => {
       const dialogRef = this.dialog.open(questionnairePopupComponent, {
         width: '400px',
         data: {
+          interviewId: interviewId, // Pass the interview ID to the popup
           questionTypes: data.questionTypes,
           questionCategories: data.questionCategories
         }
       });
-
-      dialogRef.componentInstance.filtersSelected.subscribe((filters: any) => {
-        // Retrieve the filtered questions based on the selected filters
-        this.retrieveFilteredQuestions(filters);
+  
+      dialogRef.afterClosed().subscribe((result: any) => {
+        // Handle any actions after the popup is closed, if needed
       });
     });
   }
+  
+  
+ 
 
   getCategoryTypes(): Observable<any> {
     return forkJoin([
