@@ -1,3 +1,4 @@
+import { UpdatedQuestion } from './../../../../../../shared/models/UpdtaedQuestion';
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
@@ -12,12 +13,13 @@ import { Question } from 'app/shared/models/Question';
 })
 export class questionnairePopupComponent {
   questionTypes: QuestionType[];
+  UpdatedQuestion :UpdatedQuestion[] ;
   questionTypeIds:number[];
   questionCategories: QuestionCategory[];
   filteredQuestionCategories: QuestionCategory[];
   questions: Question[];
   interviewId: number;
-
+  UpdatedQuestions: UpdatedQuestion[]=[] ;
   selectedQuestionType: QuestionType;
   selectedQuestionCategory: QuestionCategory;
   selectedQuestionCategoryId: number;
@@ -91,6 +93,7 @@ export class questionnairePopupComponent {
     }
   }
   addQuestionnaire(questionTypeId: number): void {
+    console.log(questionTypeId)
     const questionTypeIds: number[] = [this.selectedQuestionType.id];
     const interviewId: number = this.data.interviewId; // Access the interview ID from the data object
     console.log(interviewId);

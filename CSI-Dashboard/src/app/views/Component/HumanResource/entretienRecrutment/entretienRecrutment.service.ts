@@ -21,7 +21,10 @@ export class entretienRecrutmentService {
   private apiUrlInterview = 'http://localhost:8080/rh/Interview';
   private apiUrlEvaluation = 'http://localhost:8080/rh/evaluation';
   private apiQuestionType = 'http://localhost:8080/rh/QuestionType';
-  private apiQuestionCategory ='http://localhost:8080/rh/questionCategory'
+  private apiQuestionCategory ='http://localhost:8080/rh/questionCategory';
+  private apiUpdatedQuestion = 'http://localhost:8080/rh/updatedQuestion';
+
+
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -130,7 +133,12 @@ addQuestionTypeToInterview(interviewId: number, questionTypeIds: number[]): Obse
   const url = `${this.apiUrlInterview}/addQuestionType/${interviewId}`;
   return this.http.put(url, questionTypeIds);
 }
-
+addUpdatedQuestion(updatedQuestion: any): Observable<any> {
+  const apiUrlUpdatedQuestionWithAdd = this.apiUpdatedQuestion + '/add'; // Append add to the apiUrl
+  return this.http.post<any>(apiUrlUpdatedQuestionWithAdd, updatedQuestion).pipe(
+    catchError(this.handleError)
+  );
+}
 
 
  // GET an item by id
