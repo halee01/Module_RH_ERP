@@ -7,5 +7,5 @@ export interface UpdatedQuestion{
     comment?: string;
     questionText?: string;
     interviewType?: InterviewType;
-    interview?: Interview;
+    interviewNum?: number;
 }

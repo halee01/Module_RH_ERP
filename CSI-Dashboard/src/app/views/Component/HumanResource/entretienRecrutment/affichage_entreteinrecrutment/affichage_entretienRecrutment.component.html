@@ -51,7 +51,15 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="d-flex justify-content-between align-items-baseline">
+        <div *ngIf="interview">
+          <button mat-button color="primary" (click)="getUpdatedQuestions(interview.id)">Fetch Updated Questions</button>
         
+          <mat-list *ngFor="let updatedQuestion of updatedQuestions">
+            <mat-list>
+              <mat-list-item>{{ updatedQuestion.questionText }}</mat-list-item>
+            </mat-list>
+          </mat-list>
+        </div>
               <div class="mr-2">
                 <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopupQuestionnaire(interviews.id)" >Ajouter un questionnaire </button>
               </div>

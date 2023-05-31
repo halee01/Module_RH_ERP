@@ -141,22 +141,27 @@ export class questionnairePopupComponent {
     }
   }
   
-  createUpdatedQuestionsFromQuestions(questionStrings: string[], interviewId: number): void {
-    this.updatedQuestions = this.questions.map(question => ({
-      questionText: question.question,
-      interview: { id: interviewId },
-    }));
+ createUpdatedQuestionsFromQuestions(questionStrings: string[], interviewId: number): void {
+  this.updatedQuestions = []; // Reset the array before populating it
 
-      this.service.addUpdatedQuestion(this.updatedQuestions).subscribe(
-        (response) => {
-          console.log('Updated question added successfully', response);
-          this.updatedQuestions.push(response.updatedQuestion); // Add the updated question to the local array
-        },
-        (error) => {
-          console.error('Error adding updated question', error);
-        }
-      );
-    } 
+  questionStrings.forEach(questionString => {
+    const updatedQuestion: UpdatedQuestion = {
+      questionText: questionString,
+      interviewNum:  interviewId ,
+    };
+
+    this.service.addUpdatedQuestion(updatedQuestion).subscribe(
+      (response) => {
+        console.log('Updated question added successfully', response);
+        this.updatedQuestions.push(response.updatedQuestion); // Add the updated question to the local array
+      },
+      (error) => {
+        console.error('Error adding updated question', error);
+      }
+    );
+  });
+}
+
   
 
   

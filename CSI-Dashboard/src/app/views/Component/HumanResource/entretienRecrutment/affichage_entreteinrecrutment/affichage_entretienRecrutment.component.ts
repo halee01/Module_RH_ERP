@@ -218,12 +218,17 @@ export class entretienRecrutmentComponent implements OnInit {
     });
     console.log(this.employee);
   }
+
+  
   getInterviews() {
     this.service.getInterviewsById(this.id).subscribe((data: any) => {
       this.interview = data;
     });
     console.log(this.interview);
   }
+
+
+  
 
 
   openPopUpEntretien(data: any, isNew?) {
