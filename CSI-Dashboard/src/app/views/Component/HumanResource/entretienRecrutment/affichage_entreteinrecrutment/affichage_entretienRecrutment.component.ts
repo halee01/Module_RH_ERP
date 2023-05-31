@@ -12,6 +12,7 @@ import { questionnairePopupComponent } from './questionnaire-popup/questionnaire
 import { Question } from 'app/shared/models/Question';
 import { QuestionType } from 'app/shared/models/QuestionType';
 import { EMPTY, Observable, catchError, forkJoin, map } from 'rxjs';
+import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDetails-popup.component';
 
 
 @Component({
@@ -310,8 +311,14 @@ export class entretienRecrutmentComponent implements OnInit {
  
   }
 
- 
-
+  openInterviewDetailsPopup(interviewId: number): void {
+    const dialogRef = this.dialog.open(InterviewDetailsDialogComponent, {
+      width: '600px',
+      data: { interviewId: interviewId },
+    });
+    console.log(interviewId)
+  }
+  
 }
   
 

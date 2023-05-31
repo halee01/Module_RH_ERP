@@ -38,6 +38,9 @@
           <mat-icon>description</mat-icon> &nbsp; &nbsp;{{interviews.interviewType}}
         </mat-panel-title>
         <mat-panel-description>
+          <button mat-icon-button (click)="openInterviewDetailsPopup(interviews.id)">
+            <mat-icon>info</mat-icon>
+          </button>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="d-flex justify-content-between align-items-baseline">
