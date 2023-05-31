@@ -6,6 +6,7 @@ import { Interview } from 'app/shared/models/Interview';
 @Component({
   selector: 'app-interview-details-dialog',
   templateUrl: './interviewDetails-popup.component.html',
+  styleUrls :['./interviewDetails-popup.component.scss'] 
 })
 export class InterviewDetailsDialogComponent implements OnInit {
     interview:Interview;
