@@ -15,6 +15,7 @@ import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDet
 
 import { Evaluation } from 'app/shared/models/Evaluation';
 import { UpdatedQuestion } from 'app/shared/models/UpdatedQuestion';
+import { addAdminstrativeDataComponent } from './add-AdsministrativeData-popup/addAdministartiveData-popup.component';
 
 @Component({
   selector: 'app-candidat-crud',
@@ -338,6 +339,32 @@ export class entretienRecrutmentComponent implements OnInit {
     console.log(interviewId)
   }
   
+  openPopupAdministrativeData(data: any, isNew?){
+    let title = isNew ? 'Nouveau entretien' : 'Modifier entretien';
+    console.log(this.id);
+   
+  
+    const dialogRef: MatDialogRef<any> = this.dialog.open(addAdminstrativeDataComponent, {
+      disableClose: true,
+      data: { title: title, payload: data, evaluationNum: this.id }
+    });
+  
+    dialogRef.afterClosed().subscribe(res => {
+      if (res) {
+        this.service.addInterview({...res,evaluationNum:this.id}).subscribe(
+          (response) => {
+            console.log('Item updated successfully', response);
+            this.snack.open('Compte bancaire modifié avec succès!', 'OK', { duration: 2000 });
+            this.getInterviews();
+          },
+          (error) => {
+            console.error('Error adding item', error);
+            this.snack.open('Une erreur est survenue lors de la modification du compte bancaire.', 'OK', { duration: 2000 });
+          }
+        );
+      }
+    });
+  }
 }
   
 
