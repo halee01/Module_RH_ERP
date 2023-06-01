@@ -25,11 +25,13 @@
       </div>
     </div>
     <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopUpEntretien({},true)" >Ajouter un entretien </button>
-
+    <div>              
+      <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopupAdministrativeData({},true)" >Ajouter des donnees administratives </button>
+  </div>
   </mat-card>
      
   <div style="padding-left: 15px;padding-right: 15px;">
-    <div></div>
+
      <mat-accordion>
   <!-------------entretien RH----------------->
     <mat-expansion-panel *ngFor="let interviews of interview" >
@@ -44,7 +46,6 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="d-flex justify-content-between align-items-baseline">
-        
               <div class="mr-2">
                 <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopupQuestionnaire(interviews.id)" >Ajouter un questionnaire </button>
               </div>

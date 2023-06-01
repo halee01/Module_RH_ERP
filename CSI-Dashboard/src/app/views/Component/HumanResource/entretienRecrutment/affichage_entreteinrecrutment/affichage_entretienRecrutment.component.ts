@@ -15,6 +15,7 @@ import { QuestionType } from 'app/shared/models/QuestionType';
 import { EMPTY, Observable, catchError, forkJoin, map } from 'rxjs';
 import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDetails-popup.component';
 import { UpdatedQuestion } from 'app/shared/models/UpdtaedQuestion';
+import { addAdminstrativeDataComponent } from './add-AdsministrativeData-popup/addAdministartiveData-popup.component';
 
 
 @Component({
@@ -33,6 +34,7 @@ export class entretienRecrutmentComponent implements OnInit {
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
+  selectedInterviewId: number;
 
 
 
@@ -208,7 +210,8 @@ export class entretienRecrutmentComponent implements OnInit {
     this.getEmployee();
     this.getInterviews();
     this.getCategoryTypes();
-    console.log(this.interview.id)
+    console.log(this.selectedInterviewId);
+    
   }
 
   getEmployee() {
@@ -277,20 +280,49 @@ export class entretienRecrutmentComponent implements OnInit {
       const dialogRef = this.dialog.open(questionnairePopupComponent, {
         width: '400px',
         data: {
-          interviewId: interviewId, // Pass the interview ID to the popup
+          interviewId: interviewId,
           questionTypes: data.questionTypes,
           questionCategories: data.questionCategories
         }
       });
   
       dialogRef.afterClosed().subscribe((result: any) => {
-        // Handle any actions after the popup is closed, if needed
+        // Store the interviewId when the popup is closed
+        if (result) {
+          this.selectedInterviewId = result.interviewId;
+          console.log(this.selectedInterviewId);
+        }
       });
     });
   }
   
-  
+ openPopupAdministrativeData(data: any, isNew?){
+  let title = isNew ? 'Nouveau entretien' : 'Modifier entretien';
+  console.log(this.id);
  
+
+  const dialogRef: MatDialogRef<any> = this.dialog.open(addAdminstrativeDataComponent, {
+    disableClose: true,
+    data: { title: title, payload: data, evaluationNum: this.id }
+  });
+
+  dialogRef.afterClosed().subscribe(res => {
+    if (res) {
+      this.service.addInterview({...res,evaluationNum:this.id}).subscribe(
+        (response) => {
+          console.log('Item updated successfully', response);
+          this.snack.open('Compte bancaire modifié avec succès!', 'OK', { duration: 2000 });
+          this.getInterviews();
+        },
+        (error) => {
+          console.error('Error adding item', error);
+          this.snack.open('Une erreur est survenue lors de la modification du compte bancaire.', 'OK', { duration: 2000 });
+        }
+      );
+    }
+  });
+}
+
 
   getCategoryTypes(): Observable<any> {
     return forkJoin([
