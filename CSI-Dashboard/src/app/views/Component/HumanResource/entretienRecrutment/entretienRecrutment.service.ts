@@ -191,7 +191,12 @@ getInterview(id: number): Observable<Interview> {
   );
   }
 
-  
+  getUpdatedQuestionInterview(id: number): Observable<UpdatedQuestion> {
+    const url =  `${this.apiUpdatedQuestion+ '/get'}/${id}`+ '/updatedQuestion';
+    return this.http.get<UpdatedQuestion>(url).pipe(
+      catchError(this.handleError)
+    );
+    }
 
   getEmployeeEvaluation(id: number): Observable<Interview> {
     const url =  `${this.apiUrl+ '/get'}/${id}`+ '/evaluation';

@@ -1,3 +1,4 @@
+import { id } from 'date-fns/locale';
 import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 
 import { Interview } from 'app/shared/models/Interview';
@@ -13,6 +14,7 @@ import { Question } from 'app/shared/models/Question';
 import { QuestionType } from 'app/shared/models/QuestionType';
 import { EMPTY, Observable, catchError, forkJoin, map } from 'rxjs';
 import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDetails-popup.component';
+import { UpdatedQuestion } from 'app/shared/models/UpdtaedQuestion';
 
 
 @Component({
@@ -24,7 +26,7 @@ import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDet
 export class entretienRecrutmentComponent implements OnInit {
   id:number;
   employee:Employee;
- 
+  updatedQuestion:UpdatedQuestion;
   interview:Interview;
   questions: Question[];
   questionType:QuestionType[];
@@ -203,10 +205,10 @@ export class entretienRecrutmentComponent implements OnInit {
              { }
   ngOnInit(){
     this.id = this.route.snapshot.params['id'];
-    console.log('sarra',this.id);
     this.getEmployee();
     this.getInterviews();
     this.getCategoryTypes();
+    console.log(this.interview.id)
   }
 
   getEmployee() {
@@ -221,7 +223,12 @@ export class entretienRecrutmentComponent implements OnInit {
     });
     console.log(this.interview);
   }
-
+  getUpdatedQuestionInterview(id :number){
+    this.service.getUpdatedQuestionInterview(id).subscribe((data: any)=>{
+      this.updatedQuestion = data ;
+    });
+    console.log(this.updatedQuestion);
+  }
 
   openPopUpEntretien(data: any, isNew?) {
     let title = isNew ? 'Nouveau entretien' : 'Modifier entretien';
