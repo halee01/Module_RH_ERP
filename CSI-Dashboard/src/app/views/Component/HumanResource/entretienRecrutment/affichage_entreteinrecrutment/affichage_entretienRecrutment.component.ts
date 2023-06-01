@@ -38,6 +38,7 @@ export class entretienRecrutmentComponent implements OnInit {
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
+  selectedInterviewId: number;
 
 
 
@@ -264,27 +265,12 @@ export class entretienRecrutmentComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
- 
-  /*openPopupQuestionnaire(interviewId: number): void {
-    this.getCategoryTypes().subscribe((data: any) => {
-      const dialogRef = this.dialog.open(questionnairePopupComponent, {
-        width: '400px',
-        data: {
-          interviewId: interviewId, // Pass the interview ID to the popup
-          questionTypes: data.questionTypes,
-          questionCategories: data.questionCategories
-        }
-      });
   
-      dialogRef.afterClosed().subscribe((result: any) => {
-        console.log('Popup closed. Result:', result);
-  
-        if (result) {
-          const closedInterviewId: number = result.interviewId;
-          console.log('Interview ID after popup closed:', closedInterviewId);
-          // You can now use the closedInterviewId as needed
-        }
-      });
+ /* addQuestionnaire() {
+    const dialogRef = this.dialog.open( questionnairePopupComponent );
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
     });
   }*/
 
@@ -305,35 +291,13 @@ export class entretienRecrutmentComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe((result: any) => {
-        console.log('Popup closed. Result:', result);
-  
-        if (result && result.interviewId !== undefined) {
-          const closedInterviewId: number = result.interviewId;
-          console.log('Interview ID after popup closed:', closedInterviewId);
-          // You can now use the closedInterviewId as needed
-        }
+        // Handle any actions after the popup is closed, if needed
       });
     });
   }
   
   
-  
-  
-  getUpdatedQuestionInterviewHamza(id: number): void {
-    this.service.getQuestions(id).subscribe((data: UpdatedQuestion[][]) => {
-      this.updatedQuestion = data;
-      console.log(this.updatedQuestion);
-      // Perform any necessary operations with the updated questions
-    });
-  }
-  
-  getUpdatedQuestions(id:number) {
-    this.service.getUpdatedQuestionInterview(this.id).subscribe((data: any) => {
-      this.updatedQuestion = data;
-    });
-    console.log(this.updatedQuestion);
-  }
-
+ 
 
   getCategoryTypes(): Observable<any> {
     return forkJoin([

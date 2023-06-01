@@ -30,6 +30,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { questionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
 import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDetails-popup.component';
+import { addAdminstrativeDataComponent } from './add-AdsministrativeData-popup/addAdministartiveData-popup.component';
 
 
 @NgModule({
@@ -70,6 +71,7 @@ import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDet
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    entretienRecrutmentComponent,questionnairePopupComponent,ajoutEntretienPopupComponent,InterviewDetailsDialogComponent]
+    entretienRecrutmentComponent,questionnairePopupComponent,ajoutEntretienPopupComponent,InterviewDetailsDialogComponent,
+    addAdminstrativeDataComponent]
 })
 export class EntretienRecrutmentModule { }

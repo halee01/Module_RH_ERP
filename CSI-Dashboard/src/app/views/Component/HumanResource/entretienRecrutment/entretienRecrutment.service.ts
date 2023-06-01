@@ -26,6 +26,7 @@ export class entretienRecrutmentService {
   private apiUpdatedQuestion = 'http://localhost:8080/rh/updatedQuestion';
 
 
+
   private countryData = countrycitystatejson;
   public events: EgretCalendarEvent[];
   constructor(private http: HttpClient) {}
@@ -136,8 +137,6 @@ addQuestionTypeToInterview(interviewId: number, questionTypeIds: number[]): Obse
   const url = `${this.apiUrlInterview}/${interviewId}/questionTypes`;
   return this.http.put(url, questionTypeIds);
 }
-
-
 
 
  // GET an item by id

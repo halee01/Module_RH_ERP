@@ -90,7 +90,6 @@ export class questionnairePopupComponent {
       this.getQuestions();
     }
   }
-
   addQuestionnaire(questionnaire: any): void {
     const updatedQuestions = questionnaire.questions.map((question: any) => ({
       questionText: question.question,
