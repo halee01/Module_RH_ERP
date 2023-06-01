@@ -22,7 +22,7 @@ export class addAdminstrativeDataComponent implements OnInit {
   addOnBlur = true;
   administrativeDataForm : FormGroup;
   formWidth = 200; //declare and initialize formWidth property
-  formHeight = 700; //declare and initialize formHeight property
+  formHeight = 500; //declare and initialize formHeight property
 
   ////////////////Interview Form/////////////
   contractTitle :string []= Object.values(ContractTitle);

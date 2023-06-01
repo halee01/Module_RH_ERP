@@ -296,10 +296,9 @@ export class entretienRecrutmentComponent implements OnInit {
     });
   }
   
- openPopupAdministrativeData(data: any, isNew?){
+ openPopupAdministrativeData(id:number,data: any, isNew?){
   let title = isNew ? 'Nouveau entretien' : 'Modifier entretien';
-  console.log(this.id);
- 
+  console.log(id);
 
   const dialogRef: MatDialogRef<any> = this.dialog.open(addAdminstrativeDataComponent, {
     disableClose: true,
@@ -308,7 +307,7 @@ export class entretienRecrutmentComponent implements OnInit {
 
   dialogRef.afterClosed().subscribe(res => {
     if (res) {
-      this.service.addInterview({...res,evaluationNum:this.id}).subscribe(
+      this.service.addAdminstrativeData({...res,employeeNum:id}).subscribe(
         (response) => {
           console.log('Item updated successfully', response);
           this.snack.open('Compte bancaire modifié avec succès!', 'OK', { duration: 2000 });

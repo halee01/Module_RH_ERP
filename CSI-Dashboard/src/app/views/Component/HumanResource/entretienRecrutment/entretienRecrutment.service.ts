@@ -1,3 +1,4 @@
+import { addAdminstrativeDataComponent } from './affichage_entreteinrecrutment/add-AdsministrativeData-popup/addAdministartiveData-popup.component';
 import { id } from 'date-fns/locale';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -24,6 +25,8 @@ export class entretienRecrutmentService {
   private apiQuestionType = 'http://localhost:8080/rh/QuestionType';
   private apiQuestionCategory ='http://localhost:8080/rh/questionCategory';
   private apiUpdatedQuestion = 'http://localhost:8080/rh/updatedQuestion';
+  private apiAdministrativeData = 'http://localhost:8080/rh/administrativeData';
+
 
 
   private countryData = countrycitystatejson;
@@ -140,8 +143,12 @@ addUpdatedQuestion(updatedQuestion: any): Observable<any> {
     catchError(this.handleError)
   );
 }
-
-
+addAdminstrativeData(candidate: any): Observable<any> {
+  const apiUrlWithAdd = this.apiAdministrativeData + '/addAdmin'; // Append /add to the apiUrl
+  return this.http.post<any>(apiUrlWithAdd, candidate).pipe(
+    catchError(this.handleError)
+  );
+}
 
  // GET an item by id
  getItem(id: number): Observable<Employee> {
