@@ -92,26 +92,77 @@ export class questionnairePopupComponent {
       this.getQuestions();
     }
   }
-  addQuestionnaire(questionTypeId: number): void {
-    console.log(questionTypeId)
+  addQuestionnaire(questionnaire: any): void {
+    const updatedQuestions = questionnaire.questions.map((question: any) => ({
+      questionText: question.question,
+      interviewNum: questionnaire.interviewId
+    }));
+  
+    updatedQuestions.forEach(updatedQuestion => {
+      this.service.addUpdatedQuestion(updatedQuestion).subscribe(
+        (response) => {
+          console.log('Updated question added successfully', response);
+          // Add any necessary handling for the response
+        },
+        (error) => {
+          console.error('Error adding updated question', error);
+          // Add any necessary error handling
+        }
+      );
+    });
+  
+    // Find the selected question category based on the selected question type
+    const selectedQuestionCategory = this.questionCategories.find(category => category.id === this.selectedQuestionCategory.id);
+  
+    // Update the interview with the selected question category
     const questionTypeIds: number[] = [this.selectedQuestionType.id];
-    const interviewId: number = this.data.interviewId; // Access the interview ID from the data object
-    console.log(interviewId);
-    console.log(questionTypeIds);
-
-    this.service.addQuestionTypeToInterview(interviewId, questionTypeIds).subscribe(
+    this.service.addQuestionTypeToInterview(questionnaire.interviewId, questionTypeIds).subscribe(
       (response) => {
         console.log('Question type added to the interview successfully', response);
-        this.snack.open('Type de question ajouté à l\'entretien avec succès!', 'OK', { duration: 2000 });
-        // Perform any additional actions or update the UI as needed
-        this.dialogRef.close(true); // Close the dialog with a success flag
+  
+        // Reset the form and close the popup
+        this.dialogRef.close();
       },
       (error) => {
         console.error('Error adding question type to the interview', error);
-        this.snack.open('Une erreur est survenue lors de l\'ajout du type de question à l\'entretien.', 'OK', { duration: 2000 });
       }
     );
   }
+  
+  
+  onAddQuestionnaire(questionTypeId: number): void {
+    // Create the questionnaire object
+    const questionnaire = {
+      interviewId: this.data.interviewId,
+      questions: this.questions,
+      questionType: questionTypeId
+    };
+    console.log(questionnaire)
+    // Call the addQuestionnaire() method
+    this.addQuestionnaire(questionnaire);
+  }
+  
+  createUpdatedQuestionsFromQuestions(questionStrings: string[], interviewId: number): void {
+    this.UpdatedQuestions = []; // Reset the array before populating it
+  
+    questionStrings.forEach(questionString => {
+      const updatedQuestion: UpdatedQuestion = {
+        questionText: questionString, // Set the questionText to the questionString
+        interviewNum: interviewId,
+      };
+  
+      this.service.addUpdatedQuestion(updatedQuestion).subscribe(
+        (response) => {
+          console.log('Updated question added successfully', response);
+          this.UpdatedQuestions.push(response.updatedQuestion); // Add the updated question to the local array
+        },
+        (error) => {
+          console.error('Error adding updated question', error);
+        }
+      );
+    });
+  }
+  
   
   
   
@@ -119,7 +170,7 @@ export class questionnairePopupComponent {
     if (this.selectedQuestionType && this.selectedQuestionCategory) {
       const typeId = this.selectedQuestionType.id;
       const categoryId = this.selectedQuestionCategory.id;
-
+      console.log(this.selectedQuestionCategory);
       this.service.getQuestionByTypeAndCategory(typeId, categoryId).subscribe(
         (questions: Question[]) => {
           this.questions = questions;
@@ -131,4 +182,7 @@ export class questionnairePopupComponent {
       );
     } else {
       this.questions = [];
-    }}}
+    }}
+  
+  
+  }

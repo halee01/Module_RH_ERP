@@ -14,6 +14,7 @@ import { QuestionType } from 'app/shared/models/QuestionType';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 import { Question } from 'app/shared/models/Question';
 import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
+import { UpdatedQuestion } from 'app/shared/models/UpdtaedQuestion';
 
 @Injectable()
 export class entretienRecrutmentService {
@@ -139,6 +140,7 @@ addUpdatedQuestion(updatedQuestion: any): Observable<any> {
     catchError(this.handleError)
   );
 }
+
 
 
  // GET an item by id
