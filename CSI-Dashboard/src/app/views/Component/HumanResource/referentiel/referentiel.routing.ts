@@ -26,13 +26,13 @@ export const referentielRoutes: Routes = [
       },
 
       { 
-        path: ':id', 
+        path: 'ref/:id', 
         component: refCategoryAffichageComponent, 
         data: { title: 'refAffiche', breadcrumb: 'Table' } 
       },
 
       { 
-        path: ':id', 
+        path: ':quest/:id', 
         component: refQuestionAffichageComponent , 
         data: { title: 'refAffiche', breadcrumb: 'Table' } 
       }

@@ -1,4 +1,5 @@
-
+import { id } from 'date-fns/locale';
+import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 import { Interview, InterviewType } from 'app/shared/models/Interview';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -10,8 +11,9 @@ import { questionnairePopupComponent } from './questionnaire-popup/questionnaire
 import { Question } from 'app/shared/models/Question';
 import { QuestionType } from 'app/shared/models/QuestionType';
 import { EMPTY, Observable, catchError, forkJoin, map } from 'rxjs';
+import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDetails-popup.component';
+
 import { Evaluation } from 'app/shared/models/Evaluation';
-import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 import { UpdatedQuestion } from 'app/shared/models/UpdatedQuestion';
 
 @Component({
@@ -29,8 +31,8 @@ export class entretienRecrutmentComponent implements OnInit {
   evaluation: Evaluation={
     globalAppreciation: 0,
   };
+  updatedQuestion:UpdatedQuestion[][];
   interview:Interview;
-  updatedQuestion:UpdatedQuestion;
   questions: Question[];
   questionType:QuestionType[];
   formData = {}
@@ -198,7 +200,7 @@ export class entretienRecrutmentComponent implements OnInit {
     },
     
   ];
-  snack: any;
+  snack: any; 
   
   
   constructor(private route: ActivatedRoute,
@@ -208,10 +210,11 @@ export class entretienRecrutmentComponent implements OnInit {
              { }
   ngOnInit(){
     this.id = this.route.snapshot.params['id'];
-    console.log('sarra',this.id);
     this.getEmployee();
     this.getInterviews();
     this.getCategoryTypes();
+    console.log(this.interview.id);
+    
   }
 
   getEmployee() {
@@ -228,20 +231,6 @@ export class entretienRecrutmentComponent implements OnInit {
     console.log(this.interview);
   }
 
-  /*getUpdatedQuestions() {
-    this.service.getUpdatedQuestionByInterview(this.id).subscribe((data: any) => {
-      this.updatedQuestion = data;
-      console.log(this.updatedQuestion);
-    });
-  }*/
-  getUpdatedQuestions(id:number) {
-    this.service.getUpdatedQuestionByInterview(id).subscribe((data: any) => {
-      this.updatedQuestion = data.updatedQuestions; // Assuming the response contains an array of updated questions
-      console.log(this.updatedQuestion);
-      this.console.log(id)
-    });
-  }
-  
 
 
   openPopUpEntretien(data: any, isNew?) {
@@ -276,7 +265,7 @@ export class entretienRecrutmentComponent implements OnInit {
   }
 
  
-  openPopupQuestionnaire(interviewId: number): void {
+  /*openPopupQuestionnaire(interviewId: number): void {
     this.getCategoryTypes().subscribe((data: any) => {
       const dialogRef = this.dialog.open(questionnairePopupComponent, {
         width: '400px',
@@ -288,15 +277,63 @@ export class entretienRecrutmentComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe((result: any) => {
-        // Fetch updated questions when the popup is closed
+        console.log('Popup closed. Result:', result);
+  
+        if (result) {
+          const closedInterviewId: number = result.interviewId;
+          console.log('Interview ID after popup closed:', closedInterviewId);
+          // You can now use the closedInterviewId as needed
+        }
+      });
+    });
+  }*/
+
+  openPopupQuestionnaire(interviewId: number): void {
+    this.getCategoryTypes().subscribe((data: any) => {
+      const dialogRef = this.dialog.open(questionnairePopupComponent, {
+        width: '400px',
+        data: {
+          interviewId: interviewId, // Pass the interview ID to the popup
+          questionTypes: data.questionTypes,
+          questionCategories: data.questionCategories
+        }
+      });
+  
+      dialogRef.componentInstance.questionnaireAdded.subscribe((emittedInterviewId: number) => {
+          dialogRef.close({ interviewId: interviewId });
         
+      });
+  
+      dialogRef.afterClosed().subscribe((result: any) => {
+        console.log('Popup closed. Result:', result);
+  
+        if (result && result.interviewId !== undefined) {
+          const closedInterviewId: number = result.interviewId;
+          console.log('Interview ID after popup closed:', closedInterviewId);
+          // You can now use the closedInterviewId as needed
+        }
       });
     });
   }
   
   
   
- 
+  
+  getUpdatedQuestionInterviewHamza(id: number): void {
+    this.service.getQuestions(id).subscribe((data: UpdatedQuestion[][]) => {
+      this.updatedQuestion = data;
+      console.log(this.updatedQuestion);
+      // Perform any necessary operations with the updated questions
+    });
+  }
+  
+  getUpdatedQuestions(id:number) {
+    this.service.getUpdatedQuestionInterview(this.id).subscribe((data: any) => {
+      this.updatedQuestion = data;
+    });
+    console.log(this.updatedQuestion);
+  }
+
 
   getCategoryTypes(): Observable<any> {
     return forkJoin([
@@ -312,6 +349,7 @@ export class entretienRecrutmentComponent implements OnInit {
       })
     );
   }
+  
   InterviewTypeMap = {
     [InterviewType.TECHNICAL_INTERVIEW]: 'Entretien technique',
     [InterviewType.HUMAN_RESOURCE_INTERVIEW]: 'Entretien ressources humaines'
@@ -328,8 +366,14 @@ export class entretienRecrutmentComponent implements OnInit {
  
   }
 
+  openInterviewDetailsPopup(interviewId: number): void {
+    const dialogRef = this.dialog.open(InterviewDetailsDialogComponent, {
+      width: '600px',
+      data: { interviewId: interviewId },
+    });
+    console.log(interviewId)
+  }
   
-
 }
   
 

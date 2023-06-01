@@ -20,7 +20,7 @@
    <ng-container matColumnDef="actions">
      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
      <mat-cell *matCellDef="let row">
-       <button mat-icon-button mat-sm-button style="color: #757575;"  routerLink="/refCategoryAffichage/{{row.id}}" >
+       <button mat-icon-button mat-sm-button style="color: #757575;"  routerLink="/refCategoryAffichage/ref/{{row.id}}" >
          <mat-icon>remove_red_eye </mat-icon>
        </button>
        <button  style="color: #757575;" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">

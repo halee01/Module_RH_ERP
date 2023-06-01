@@ -1,11 +1,10 @@
-import { InterviewType } from 'app/shared/models/Interview';
+import { UpdatedQuestion } from './../../../../../../shared/models/UpdtaedQuestion';
 import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 import { QuestionType } from 'app/shared/models/QuestionType';
 import { entretienRecrutmentService } from '../../entretienRecrutment.service';
 import { Question } from 'app/shared/models/Question';
-import { UpdatedQuestion } from 'app/shared/models/UpdatedQuestion';
 
 @Component({
   selector: 'app-popup',
@@ -14,19 +13,17 @@ import { UpdatedQuestion } from 'app/shared/models/UpdatedQuestion';
 })
 export class questionnairePopupComponent {
   questionTypes: QuestionType[];
+  UpdatedQuestion :UpdatedQuestion[] ;
   questionTypeIds:number[];
   questionCategories: QuestionCategory[];
   filteredQuestionCategories: QuestionCategory[];
   questions: Question[];
   interviewId: number;
-  updatedQuestions: UpdatedQuestion[] = [];
+  UpdatedQuestions: UpdatedQuestion[]=[] ;
   selectedQuestionType: QuestionType;
   selectedQuestionCategory: QuestionCategory;
   selectedQuestionCategoryId: number;
-
-
-
-@Output() questionnaireAdded = new EventEmitter<number>();
+  @Output() questionnaireAdded: EventEmitter<number> = new EventEmitter<number>();
   filtersSelected: EventEmitter<any> = new EventEmitter<any>();
   snack: any;
 
@@ -48,9 +45,7 @@ export class questionnairePopupComponent {
     );
   }
 
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
+ 
 
   applyFilters(): void {
     const filters = {
@@ -96,44 +91,93 @@ export class questionnairePopupComponent {
     }
   }
 
-
-  addQuestionnaire(questionTypeId: number): void {
-    console.log('sarra')
+  addQuestionnaire(questionnaire: any): void {
+    const updatedQuestions = questionnaire.questions.map((question: any) => ({
+      questionText: question.question,
+      interviewNum: questionnaire.interviewId
+    }));
+  
+    updatedQuestions.forEach(updatedQuestion => {
+      this.service.addUpdatedQuestion(updatedQuestion).subscribe(
+        (response) => {
+          console.log('Updated question added successfully', response);
+          // Add any necessary handling for the response
+        },
+        (error) => {
+          console.error('Error adding updated question', error);
+          // Add any necessary error handling
+        }
+      );
+    });
+  
+    // Find the selected question category based on the selected question type
+    const selectedQuestionCategory = this.questionCategories.find(category => category.id === this.selectedQuestionCategory.id);
+  
+    // Update the interview with the selected question category
     const questionTypeIds: number[] = [this.selectedQuestionType.id];
-    const interviewId: number = this.data.interviewId; // Access the interview ID from the data object
-    console.log(interviewId);
-    console.log(questionTypeIds);
-
-    this.service.addQuestionTypeToInterview(interviewId, questionTypeIds).subscribe(
+    this.service.addQuestionTypeToInterview(questionnaire.interviewId, questionTypeIds).subscribe(
       (response) => {
         console.log('Question type added to the interview successfully', response);
-        this.snack.open('Type de question ajouté à l\'entretien avec succès!', 'OK', { duration: 2000 });
-        // Perform any additional actions or update the UI as needed
-        this.dialogRef.close(true); // Close the dialog with a success flag
+  
+        // Reset the form and close the popup
+        this.dialogRef.close();
       },
       (error) => {
         console.error('Error adding question type to the interview', error);
-        this.snack.open('Une erreur est survenue lors de l\'ajout du type de question à l\'entretien.', 'OK', { duration: 2000 });
       }
     );
-    this.questionnaireAdded.emit(interviewId);
   }
+  
+  
+  onAddQuestionnaire(questionTypeId: number): void {
+    // Create the questionnaire object
+    const questionnaire = {
+      interviewId: this.data.interviewId,
+      questions: this.questions,
+      questionType: questionTypeId
+    };
+
+   this.addQuestionnaire(questionnaire);
+
+    this.questionnaireAdded.emit(questionnaire.interviewId);
+    this.closeDialog();
+  }
+  
+  
+  
+  createUpdatedQuestionsFromQuestions(questionStrings: string[], interviewId: number): void {
+    this.UpdatedQuestions = []; // Reset the array before populating it
+  
+    questionStrings.forEach(questionString => {
+      const updatedQuestion: UpdatedQuestion = {
+        questionText: questionString, // Set the questionText to the questionString
+        interviewNum: interviewId,
+      };
+  
+      this.service.addUpdatedQuestion(updatedQuestion).subscribe(
+        (response) => {
+          console.log('Updated question added successfully', response);
+          this.UpdatedQuestions.push(response.updatedQuestion); // Add the updated question to the local array
+        },
+        (error) => {
+          console.error('Error adding updated question', error);
+        }
+      );
+    });
+  }
+  
+  
   
   
   getQuestions(): void {
     if (this.selectedQuestionType && this.selectedQuestionCategory) {
       const typeId = this.selectedQuestionType.id;
       const categoryId = this.selectedQuestionCategory.id;
-  
+      console.log(this.selectedQuestionCategory);
       this.service.getQuestionByTypeAndCategory(typeId, categoryId).subscribe(
         (questions: Question[]) => {
           this.questions = questions;
-          const questionStrings = this.questions.map(question => question.question);
-          const interviewId = this.data.interviewId; // Access the interview ID from the data object
-          this.createUpdatedQuestionsFromQuestions(questionStrings, interviewId);
-  
           console.log(this.questions);
-          console.log(this.updatedQuestions);
         },
         (error) => {
           console.error('Failed to retrieve questions', error);
@@ -141,35 +185,12 @@ export class questionnairePopupComponent {
       );
     } else {
       this.questions = [];
-      this.updatedQuestions = [];
+    }}
+  
+    closeDialog(): void {
+      const result = {
+        interviewId: this.interviewId  };
+      this.dialogRef.close(result);
     }
+  
   }
-  
- createUpdatedQuestionsFromQuestions(questionStrings: string[], interviewId: number): void {
-  this.updatedQuestions = []; // Reset the array before populating it
-
-  questionStrings.forEach(questionString => {
-    const updatedQuestion: UpdatedQuestion = {
-      questionText: questionString,
-      interviewNum:  interviewId ,
-    };
-
-    this.service.addUpdatedQuestion(updatedQuestion).subscribe(
-      (response) => {
-        console.log('Updated question added successfully', response);
-        this.updatedQuestions.push(response.updatedQuestion); // Add the updated question to the local array
-      },
-      (error) => {
-        console.error('Error adding updated question', error);
-      }
-    );
-  });
-}
-
-  
-
-  
-}
-  
-    
-  

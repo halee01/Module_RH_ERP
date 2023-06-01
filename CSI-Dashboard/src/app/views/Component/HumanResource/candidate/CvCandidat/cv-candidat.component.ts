@@ -110,7 +110,7 @@ export class cvcandidatComponent implements OnInit {
 
  
   step1 = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
+   // firstCtrl: ['', Validators.required],
   });
 
  constructor(private _formBuilder: FormBuilder,
@@ -127,18 +127,18 @@ export class cvcandidatComponent implements OnInit {
 
     
     this.step2 = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
+     // secondCtrl: ['', Validators.required],
     });
 
     this.step3 = this._formBuilder.group({
-      firstCtrl: ['', Validators.required],
+     // firstCtrl: ['', Validators.required],
     });
     this.step4 = this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
+     // secondCtrl: ['', Validators.required],
     });
 
     this.stepTechFile= this._formBuilder.group({
-      secondCtrl: ['', Validators.required],
+     // secondCtrl: ['', Validators.required],
     });
 
     this.formCertif = this.fb.group({
