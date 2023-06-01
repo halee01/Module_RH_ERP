@@ -20,11 +20,13 @@ export class questionnairePopupComponent {
   questions: Question[];
   interviewId: number;
   updatedQuestions: UpdatedQuestion[] = [];
-
   selectedQuestionType: QuestionType;
   selectedQuestionCategory: QuestionCategory;
   selectedQuestionCategoryId: number;
 
+
+
+@Output() questionnaireAdded = new EventEmitter<number>();
   filtersSelected: EventEmitter<any> = new EventEmitter<any>();
   snack: any;
 
@@ -96,6 +98,7 @@ export class questionnairePopupComponent {
 
 
   addQuestionnaire(questionTypeId: number): void {
+    console.log('sarra')
     const questionTypeIds: number[] = [this.selectedQuestionType.id];
     const interviewId: number = this.data.interviewId; // Access the interview ID from the data object
     console.log(interviewId);
@@ -113,6 +116,7 @@ export class questionnairePopupComponent {
         this.snack.open('Une erreur est survenue lors de l\'ajout du type de question à l\'entretien.', 'OK', { duration: 2000 });
       }
     );
+    this.questionnaireAdded.emit(interviewId);
   }
   
   

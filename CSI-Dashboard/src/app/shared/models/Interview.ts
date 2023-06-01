@@ -1,4 +1,5 @@
 import { AssQuestionInterview } from "./AssQuestionInterview";
+import { UpdatedQuestion } from "./UpdatedQuestion";
 
 export interface Interview{
     id ?:number;
@@ -15,6 +16,7 @@ export interface Interview{
     interviewType ?:InterviewType;
     interviewMode ?:InterviewMode;
     assQuestionInterview?: AssQuestionInterview[];
+    updatedQuestion?:UpdatedQuestion;
 }
 
 export enum InterviewMode{

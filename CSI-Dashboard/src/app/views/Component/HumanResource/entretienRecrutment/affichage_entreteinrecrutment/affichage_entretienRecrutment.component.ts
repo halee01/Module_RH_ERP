@@ -1,8 +1,7 @@
 
 import { Interview, InterviewType } from 'app/shared/models/Interview';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-
 import { ActivatedRoute } from '@angular/router';
 import { UntypedFormGroup} from '@angular/forms';
 import { Employee,} from 'app/shared/models/Employee';
@@ -13,6 +12,7 @@ import { QuestionType } from 'app/shared/models/QuestionType';
 import { EMPTY, Observable, catchError, forkJoin, map } from 'rxjs';
 import { Evaluation } from 'app/shared/models/Evaluation';
 import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
+import { UpdatedQuestion } from 'app/shared/models/UpdatedQuestion';
 
 @Component({
   selector: 'app-candidat-crud',
@@ -23,12 +23,14 @@ import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-p
 
 export class entretienRecrutmentComponent implements OnInit {
   id:number;
+  
   employee:Employee;
   interviewType :string []= Object.values(InterviewType);
   evaluation: Evaluation={
     globalAppreciation: 0,
   };
   interview:Interview;
+  updatedQuestion:UpdatedQuestion;
   questions: Question[];
   questionType:QuestionType[];
   formData = {}
@@ -219,7 +221,6 @@ export class entretienRecrutmentComponent implements OnInit {
     console.log(this.employee);
   }
 
-  
   getInterviews() {
     this.service.getInterviewsById(this.id).subscribe((data: any) => {
       this.interview = data;
@@ -227,7 +228,19 @@ export class entretienRecrutmentComponent implements OnInit {
     console.log(this.interview);
   }
 
-
+  /*getUpdatedQuestions() {
+    this.service.getUpdatedQuestionByInterview(this.id).subscribe((data: any) => {
+      this.updatedQuestion = data;
+      console.log(this.updatedQuestion);
+    });
+  }*/
+  getUpdatedQuestions(id:number) {
+    this.service.getUpdatedQuestionByInterview(id).subscribe((data: any) => {
+      this.updatedQuestion = data.updatedQuestions; // Assuming the response contains an array of updated questions
+      console.log(this.updatedQuestion);
+      this.console.log(id)
+    });
+  }
   
 
 
@@ -262,17 +275,7 @@ export class entretienRecrutmentComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  
- /* addQuestionnaire() {
-    const dialogRef = this.dialog.open( questionnairePopupComponent );
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }*/
-
-
-
+ 
   openPopupQuestionnaire(interviewId: number): void {
     this.getCategoryTypes().subscribe((data: any) => {
       const dialogRef = this.dialog.open(questionnairePopupComponent, {
@@ -285,10 +288,12 @@ export class entretienRecrutmentComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe((result: any) => {
-        // Handle any actions after the popup is closed, if needed
+        // Fetch updated questions when the popup is closed
+        
       });
     });
   }
+  
   
   
  
@@ -323,13 +328,7 @@ export class entretienRecrutmentComponent implements OnInit {
  
   }
 
-  /*getCategoryTypes() {
-    this.service.getAllQuestiontypes().subscribe(
-      ( questionType: QuestionType[]) => {
-        this.questionType = questionType
-      }
-    );
-  }*/
+  
 
 }
   
