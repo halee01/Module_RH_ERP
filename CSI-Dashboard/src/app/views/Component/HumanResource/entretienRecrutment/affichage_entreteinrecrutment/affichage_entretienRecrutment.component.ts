@@ -1,7 +1,7 @@
 import { id } from 'date-fns/locale';
 import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 
-import { Interview } from 'app/shared/models/Interview';
+import { Interview, InterviewMode, InterviewType } from 'app/shared/models/Interview';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
@@ -263,7 +263,18 @@ export class entretienRecrutmentComponent implements OnInit {
   getItems() {
     throw new Error('Method not implemented.');
   }
-
+  InterviewModeMap = {
+    [InterviewMode.REMOTE]: 'À distance',
+    [InterviewMode.ON_SITE]: 'Sur place',
+    [InterviewMode.PHONE_INTERVIEW]: 'Téléphonique',
+    [InterviewMode.VIDEOCONFERENCE]: 'Visioconférence',
+  }
+  
+  
+    InterviewTypeMap = {
+    [InterviewType.TECHNICAL_INTERVIEW]: 'Entretien technique',
+    [InterviewType.HUMAN_RESOURCE_INTERVIEW]: 'Entretien ressources humaines'
+  }
   
  /* addQuestionnaire() {
     const dialogRef = this.dialog.open( questionnairePopupComponent );

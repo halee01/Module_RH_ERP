@@ -6,7 +6,6 @@
         <div style="padding-top: 15px;">
           <p class="text-small"><strong >L'email numéro 1:</strong>{{employee.emailOne}}</p>
         <p class="text-small"><strong >Numéro de téléphone 1:</strong>{{employee.phoneNumberOne}}</p>
-        <p class="text-small"><strong >La note globale est:</strong>52</p>
       </div>
         
       </div>
@@ -37,7 +36,8 @@
     <mat-expansion-panel *ngFor="let interviews of interview" >
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <mat-icon>description</mat-icon> &nbsp; &nbsp;{{interviews.interviewType}}
+          <mat-icon>description</mat-icon> &nbsp; &nbsp;{{InterviewTypeMap[interviews.interviewType]}} &nbsp; &nbsp; {{interviews.interviewDate}} &nbsp; &nbsp; {{interviews.interviewTime}}
+
         </mat-panel-title>
         <mat-panel-description>
           <button mat-icon-button (click)="openInterviewDetailsPopup(interviews.id)">

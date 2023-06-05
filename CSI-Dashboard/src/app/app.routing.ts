@@ -106,7 +106,7 @@ export const rootRouterConfig: Routes = [
       {
         path: 'candidat',
         loadChildren: () => import('./views/Component/HumanResource/candidate/CandidatCrud/candidat-crud.module').then(m => m.CandidatCrudModule),
-        data: { title: 'Candidat', breadcrumb: 'Candidat'}
+        data: { title: 'Candidat', breadcrumb: 'Candidats'}
       },
       {
         path: 'cvCandidat',
@@ -127,7 +127,7 @@ export const rootRouterConfig: Routes = [
       {
         path: 'tableOffer',
         loadChildren: () => import('./views/Component/HumanResource/offer/offer-crud.module').then(m => m.OfferCrudModule),
-        data: { title: 'CandidatAffichage', breadcrumb: 'Candidat'}
+        data: { title: 'CandidatAffichage', breadcrumb: 'Offres'}
       },
       {
         path: 'affichageOffer',
