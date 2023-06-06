@@ -78,7 +78,18 @@
                       </div>
                   </mat-grid-tile>
               
-              
+                  <mat-grid-tile>
+                    <!--Maritial Situation -->
+                    <div class="pb-16">
+                      <mat-form-field appearance="outline" [style.width.cm]=10>
+                      <mat-label>Situation Maritale</mat-label>
+                      <mat-select formControlName="maritalSituation" >
+                        <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{maritalSituationMap[MaritalSituations]}}</mat-option>
+                        
+                      </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </mat-grid-tile>
                  
                   <mat-grid-tile>
                     <!--intitulé du poste / title-->
