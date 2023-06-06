@@ -11,7 +11,6 @@
           <div class="infor-card" >
           <p class="text-small"><strong class="infor-card-text">L'email numéro 1:</strong>{{employee.emailOne}}</p>
         <p class="text-small"><strong class="infor-card-text">Numéro de téléphone 1:</strong>{{employee.phoneNumberOne}}</p>
-        <p class="text-small"><strong class="infor-card-text">La note globale est:</strong>52</p>
       </div>
         </div>
           
@@ -39,7 +38,7 @@
     <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopUpEntretien({},true)" >Ajouter un entretien </button>
   </div>
   <div>              
-    <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopupAdministrativeData({},true)" >Ajouter des donnees administratives </button>
+    <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopupAdministrativeData(employee.id,{},true)" >Ajouter des donnees administratives </button>
 </div>
   </div>
   

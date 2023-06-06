@@ -1,3 +1,4 @@
+import { addAdminstrativeDataComponent } from './affichage_entreteinrecrutment/add-AdsministrativeData-popup/addAdministartiveData-popup.component';
 import { id } from 'date-fns/locale';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
@@ -24,6 +25,8 @@ export class entretienRecrutmentService {
   private apiQuestionType = 'http://localhost:8080/rh/QuestionType';
   private apiQuestionCategory ='http://localhost:8080/rh/questionCategory';
   private apiUpdatedQuestion = 'http://localhost:8080/rh/updatedQuestion';
+  private apiAdministrativeData = 'http://localhost:8080/rh/administrativeData';
+
 
 
 
@@ -137,6 +140,13 @@ addQuestionTypeToInterview(interviewId: number, questionTypeIds: number[]): Obse
   const url = `${this.apiUrlInterview}/${interviewId}/questionTypes`;
   return this.http.put(url, questionTypeIds);
 }
+addUpdatedQuestion(updatedQuestion: any): Observable<any> {
+  const apiUrlUpdatedQuestionWithAdd = this.apiUpdatedQuestion + '/add'; // Append add to the apiUrl
+  return this.http.post<any>(apiUrlUpdatedQuestionWithAdd, updatedQuestion).pipe(
+    catchError(this.handleError)
+  );
+}
+
 
 
  // GET an item by id
@@ -154,6 +164,12 @@ addItem(candidate: any): Observable<any> {
     catchError(this.handleError)
   );
 }
+addAdminstrativeData(candidate: any): Observable<any> {
+  const apiUrlWithAdd = this.apiAdministrativeData + '/addAdmin'; // Append /add to the apiUrl
+  return this.http.post<any>(apiUrlWithAdd, candidate).pipe(
+    catchError(this.handleError)
+  );
+}
 
 // POST a new evaluation
 addEvaluation(evaluation: any): Observable<any> {
@@ -164,12 +180,7 @@ addEvaluation(evaluation: any): Observable<any> {
 }
 
 // POST a new updatedQuestion
-addUpdatedQuestion(updatedQuestion: any): Observable<any> {
-  const apiUrlUpdatedQuestionWithAdd = this.apiUpdatedQuestion + '/add'; // Append add to the apiUrl
-  return this.http.post<any>(apiUrlUpdatedQuestionWithAdd, updatedQuestion).pipe(
-    catchError(this.handleError)
-  );
-}
+
 
 // GET an evaluation
 getEvaluation(id: number): Observable<Evaluation> {

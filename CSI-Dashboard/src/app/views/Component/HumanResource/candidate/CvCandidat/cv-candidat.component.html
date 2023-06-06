@@ -78,20 +78,6 @@
                       </div>
                   </mat-grid-tile>
               
-                 
-              
-                 <mat-grid-tile>
-                  <!--Maritial Situation -->
-                  <div class="pb-16">
-                    <mat-form-field appearance="outline" [style.width.cm]=10>
-                    <mat-label>Situation Maritale</mat-label>
-                    <mat-select formControlName="maritalSituation" >
-                      <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{maritalSituationMap[MaritalSituations]}}</mat-option>
-                      
-                    </mat-select>
-                    </mat-form-field>
-                  </div>
-                </mat-grid-tile>
               
                  
                   <mat-grid-tile>
@@ -107,6 +93,22 @@
                      </mat-form-field>
                      </div>
                  </mat-grid-tile>
+
+               <!-- <mat-grid-tile>
+                  <div class="pb-16">
+                    <mat-form-field appearance="outline" [style.width.cm]=10>
+                      <mat-label>Nombre d'années d'expérience</mat-label>
+                      <input matInput
+                        name="experienceAmount"
+                        formControlName="experienceAmount"
+                         required>
+                      <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                        Le prénom est requis et doit commencer par une majuscule.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  </mat-grid-tile>-->
+                
                 </mat-grid-list>
 
       
@@ -324,15 +326,7 @@
               </mat-form-field>
               </mat-grid-tile>
 
-              <mat-grid-tile>
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=7 >
-                  <mat-label>Nombre d'années d'expérience</mat-label>
-                  <input 
-                  type="text"
-                  matInput
-                  formControlName="experienceAmount"  >
-                </mat-form-field>
-              </mat-grid-tile>
+              
               </mat-grid-list>
                 
               <mat-grid-list cols="2" rowHeight="100px">
