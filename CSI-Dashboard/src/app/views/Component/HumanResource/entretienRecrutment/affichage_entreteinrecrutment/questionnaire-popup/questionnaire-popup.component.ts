@@ -135,14 +135,10 @@ export class questionnairePopupComponent {
       questions: this.questions,
       questionType: questionTypeId
     };
-
-   this.addQuestionnaire(questionnaire);
-
-    this.questionnaireAdded.emit(questionnaire.interviewId);
-    this.closeDialog();
+    console.log(questionnaire)
+    // Call the addQuestionnaire() method
+    this.addQuestionnaire(questionnaire);
   }
-  
-  
   
   createUpdatedQuestionsFromQuestions(questionStrings: string[], interviewId: number): void {
     this.UpdatedQuestions = []; // Reset the array before populating it
@@ -164,10 +160,6 @@ export class questionnairePopupComponent {
       );
     });
   }
-  
-  
-  
-  
   getQuestions(): void {
     if (this.selectedQuestionType && this.selectedQuestionCategory) {
       const typeId = this.selectedQuestionType.id;

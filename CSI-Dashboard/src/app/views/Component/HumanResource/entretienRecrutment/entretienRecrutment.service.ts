@@ -1,8 +1,6 @@
-import { addAdminstrativeDataComponent } from './affichage_entreteinrecrutment/add-AdsministrativeData-popup/addAdministartiveData-popup.component';
 import { id } from 'date-fns/locale';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-
 import { Observable, of, throwError } from 'rxjs';
 import * as countrycitystatejson from 'countrycitystatejson';
 import { catchError, map } from 'rxjs/operators';
@@ -26,7 +24,6 @@ export class entretienRecrutmentService {
   private apiQuestionCategory ='http://localhost:8080/rh/questionCategory';
   private apiUpdatedQuestion = 'http://localhost:8080/rh/updatedQuestion';
   private apiAdministrativeData = 'http://localhost:8080/rh/administrativeData';
-
 
 
 
@@ -137,7 +134,7 @@ getQuestionByTypeCategoryAndLevel(id:number ,Id:number, level:ExperienceLevel):O
 }
 
 addQuestionTypeToInterview(interviewId: number, questionTypeIds: number[]): Observable<any> {
-  const url = `${this.apiUrlInterview}/${interviewId}/questionTypes`;
+  const url = `${this.apiUrlInterview+'/addQuestionType'}/${interviewId}`;
   return this.http.put(url, questionTypeIds);
 }
 addUpdatedQuestion(updatedQuestion: any): Observable<any> {
@@ -146,7 +143,6 @@ addUpdatedQuestion(updatedQuestion: any): Observable<any> {
     catchError(this.handleError)
   );
 }
-
 
 
  // GET an item by id
@@ -206,19 +202,20 @@ getInterview(id: number): Observable<Interview> {
   );
   }
 
-  getUpdatedQuestionInterview(id: number): Observable<UpdatedQuestion> {
-    const url =  `${this.apiUrlInterview+ '/get'}/${id}`+ '/updatedQuestion';
-    return this.http.get<UpdatedQuestion>(url).pipe(
+  getUpdatedQuestionInterview(id: number): Observable<UpdatedQuestion[]> {
+    const url = `${this.apiUrlInterview}/get/${id}/updatedQuestion`;
+    return this.http.get<UpdatedQuestion[]>(url).pipe(
       catchError(this.handleError)
     );
-    }
-    getQuestions(id: number): Observable<UpdatedQuestion[][]> {
-      const url = `${this.apiUrl}/get/${id}/questions`;
-      return this.http.get<UpdatedQuestion[][]>(url).pipe(
-        catchError(this.handleError)
-      );
-    }
-    
+  }
+  updateUpdatedQuestion(id: number, updated: UpdatedQuestion): Observable<UpdatedQuestion> {
+    const url = `${this.apiUpdatedQuestion}/update/${id}`;
+    return this.http.put<UpdatedQuestion>(url, updated).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  
   getEmployeeEvaluation(id: number): Observable<Interview> {
     const url =  `${this.apiUrl+ '/get'}/${id}`+ '/evaluation';
     return this.http.get<Evaluation>(url).pipe(

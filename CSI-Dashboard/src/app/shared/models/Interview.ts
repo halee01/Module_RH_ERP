@@ -16,7 +16,7 @@ export interface Interview{
     interviewType ?:InterviewType;
     interviewMode ?:InterviewMode;
     assQuestionInterview?: AssQuestionInterview[];
-    updatedQuestion?:UpdatedQuestion;
+    updatedQuestions?: UpdatedQuestion[];
 }
 
 export enum InterviewMode{

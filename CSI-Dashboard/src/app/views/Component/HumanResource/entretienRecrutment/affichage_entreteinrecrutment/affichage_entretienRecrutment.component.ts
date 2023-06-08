@@ -1,10 +1,10 @@
-import { id } from 'date-fns/locale';
+
 import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
-import { Interview, InterviewType } from 'app/shared/models/Interview';
-import { Component, OnInit } from '@angular/core';
+import { Interview, InterviewMode, InterviewType } from 'app/shared/models/Interview';
+import { Component, OnInit,} from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { UntypedFormGroup} from '@angular/forms';
+import { FormGroup, UntypedFormGroup, Validators } from '@angular/forms';
 import { Employee,} from 'app/shared/models/Employee';
 import { entretienRecrutmentService } from '../entretienRecrutment.service';
 import { questionnairePopupComponent } from './questionnaire-popup/questionnaire-popup.component';
@@ -12,36 +12,34 @@ import { Question } from 'app/shared/models/Question';
 import { QuestionType } from 'app/shared/models/QuestionType';
 import { EMPTY, Observable, catchError, forkJoin, map } from 'rxjs';
 import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDetails-popup.component';
+import { UpdatedQuestion } from 'app/shared/models/UpdtaedQuestion';
+import { addAdminstrativeDataComponent } from './add-AdsministrativeData-popup/addAdministartiveData-popup.component';
 
 import { Evaluation } from 'app/shared/models/Evaluation';
-import { UpdatedQuestion } from 'app/shared/models/UpdatedQuestion';
-import { addAdminstrativeDataComponent } from './add-AdsministrativeData-popup/addAdministartiveData-popup.component';
 
 @Component({
   selector: 'app-candidat-crud',
   templateUrl: './affichage_entretienRecrutment.component.html',
   styleUrls: ['./affichage_entretienRecrutment.component.scss'],
 })
-
-
 export class entretienRecrutmentComponent implements OnInit {
   id:number;
-  
   employee:Employee;
   interviewType :string []= Object.values(InterviewType);
   evaluation: Evaluation={
     globalAppreciation: 0,
   };
-  updatedQuestion:UpdatedQuestion[][];
-  interview:Interview;
+  updatedQuestion: UpdatedQuestion[] = [];
+  interview: Interview[] = [];
   questions: Question[];
   questionType:QuestionType[];
   formData = {}
   console = console;
   basicForm: UntypedFormGroup;
   selectedInterviewId: number;
-
-
+  updatedQuestionForm: FormGroup;
+  isCheckDisabled: boolean = true;
+  sliderValue: number = 0;
 
   //Global appreciation chart 
 
@@ -203,8 +201,8 @@ export class entretienRecrutmentComponent implements OnInit {
     
   ];
   snack: any; 
-  
-  
+  FormBuilder: any;
+ 
   constructor(private route: ActivatedRoute,
              private service:entretienRecrutmentService,
              private dialog: MatDialog,) 
@@ -215,36 +213,71 @@ export class entretienRecrutmentComponent implements OnInit {
     this.getEmployee();
     this.getInterviews();
     this.getCategoryTypes();
-    console.log(this.interview.id);
-    
+    console.log(this.selectedInterviewId);
   }
-
+  initUpdatedQuestionForm() {
+    this.updatedQuestionForm = this.FormBuilder.group({
+      mark: ['', [Validators.required, Validators.min(0), Validators.max(5)]],
+      comment: ['', Validators.required]
+    });
+  }
+  updateSliderValue(value: number) {
+    this.sliderValue = value;
+  }
   getEmployee() {
     this.service.getEmployeeById(this.id).subscribe((data: any) => {
       this.employee = data;
     });
     console.log(this.employee);
   }
-
   getInterviews() {
-    this.service.getInterviewsById(this.id).subscribe((data: any) => {
-      this.interview = data;
-    });
-    console.log(this.interview);
+    this.service.getInterviewsById(this.id).subscribe(
+      (data: any) => {
+        this.interview = data;
+        this.interview.forEach((interview) => {
+          this.getUpdatedQuestionsForInterview(interview.id);
+        });
+      },
+      (error) => {
+        console.error('Failed to retrieve interviews', error);
+      }
+    );
   }
-
-
-
+ 
+  getUpdatedQuestionsForInterview(interviewId: number): void {
+    this.service.getUpdatedQuestionInterview(interviewId).subscribe(
+      (updatedQuestions: UpdatedQuestion[]) => {
+        // Process the retrieved UpdatedQuestion array
+        this.updatedQuestion = updatedQuestions;
+      },
+      (error) => {
+        console.error('Failed to retrieve updated questions for interview', error);
+      }
+    );
+  }
+  updateUpdatedQuestion(id: number, updatedQuestion: UpdatedQuestion): void {
+    this.service.updateUpdatedQuestion(id, updatedQuestion)
+      .subscribe(
+        (response: UpdatedQuestion) => {
+          // Update the updatedQuestion object in the local array or perform any other necessary actions
+          console.log('Updated successfully:', response);
+        },
+        
+        (error: any) => {
+          // Handle error
+          console.error('Error occurred:', error);
+        }
+      );
+      this.isCheckDisabled = true;
+  }
+  
   openPopUpEntretien(data: any, isNew?) {
     let title = isNew ? 'Nouveau entretien' : 'Modifier entretien';
     console.log(this.id);
-   
-  
     const dialogRef: MatDialogRef<any> = this.dialog.open(ajoutEntretienPopupComponent, {
       disableClose: true,
       data: { title: title, row: data, evaluationNum: this.id,}
     });
-  
     dialogRef.afterClosed().subscribe(res => {
       if (res) {
         this.service.addInterview({...res,evaluationNum:this.id}).subscribe(
@@ -261,26 +294,27 @@ export class entretienRecrutmentComponent implements OnInit {
       }
     });
   }
-  
   getItems() {
     throw new Error('Method not implemented.');
   }
-
+  InterviewModeMap = {
+    [InterviewMode.REMOTE]: 'À distance',
+    [InterviewMode.ON_SITE]: 'Sur place',
+    [InterviewMode.PHONE_INTERVIEW]: 'Téléphonique',
+    [InterviewMode.VIDEOCONFERENCE]: 'Visioconférence',
+  }
   
- /* addQuestionnaire() {
-    const dialogRef = this.dialog.open( questionnairePopupComponent );
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }*/
-
+  
+    InterviewTypeMap = {
+    [InterviewType.TECHNICAL_INTERVIEW]: 'Entretien technique',
+    [InterviewType.HUMAN_RESOURCE_INTERVIEW]: 'Entretien ressources humaines'
+  }
   openPopupQuestionnaire(interviewId: number): void {
     this.getCategoryTypes().subscribe((data: any) => {
       const dialogRef = this.dialog.open(questionnairePopupComponent, {
         width: '400px',
         data: {
-          interviewId: interviewId, // Pass the interview ID to the popup
+          interviewId: interviewId,
           questionTypes: data.questionTypes,
           questionCategories: data.questionCategories
         }
@@ -292,11 +326,14 @@ export class entretienRecrutmentComponent implements OnInit {
       });
   
       dialogRef.afterClosed().subscribe((result: any) => {
-        // Handle any actions after the popup is closed, if needed
+        // Store the interviewId when the popup is closed
+        if (result) {
+          this.selectedInterviewId = result.interviewId;
+          console.log(this.selectedInterviewId);
+        }
       });
     });
   }
-  
  openPopupAdministrativeData(id:number,data: any, isNew?){
   let title = isNew ? 'Nouveau entretien' : 'Modifier entretien';
   console.log(id);
@@ -322,8 +359,6 @@ export class entretienRecrutmentComponent implements OnInit {
     }
   });
 }
-
-
   getCategoryTypes(): Observable<any> {
     return forkJoin([
       this.service.getAllQuestiontypes(),
@@ -338,23 +373,6 @@ export class entretienRecrutmentComponent implements OnInit {
       })
     );
   }
-  
-  InterviewTypeMap = {
-    [InterviewType.TECHNICAL_INTERVIEW]: 'Entretien technique',
-    [InterviewType.HUMAN_RESOURCE_INTERVIEW]: 'Entretien ressources humaines'
-  }
-
-
-    retrieveFilteredQuestions(filters: any): void {
-    // Make an API call or apply filtering logic to retrieve the filtered questions
-    // based on the selected question type and question category
-    // Assign the retrieved questions to the 'questions' property
-    // Example:
-   // this.questions = // Retrieve the filtered questions 
- 
- 
-  }
-
   openInterviewDetailsPopup(interviewId: number): void {
     const dialogRef = this.dialog.open(InterviewDetailsDialogComponent, {
       width: '600px',
@@ -362,7 +380,10 @@ export class entretienRecrutmentComponent implements OnInit {
     });
     console.log(interviewId)
   }
-  
+
+  enableEdit() {
+    this.isCheckDisabled = false;
+  }
 }
   
 

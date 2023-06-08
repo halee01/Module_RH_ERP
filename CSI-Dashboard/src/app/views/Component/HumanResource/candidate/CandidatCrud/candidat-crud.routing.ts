@@ -14,7 +14,7 @@ export const CandidatRoutes: Routes = [
   { 
     path: 'CandidatCrud-table', 
     component: CandidatCrudTableComponent, 
-    data: { title: '', breadcrumb: 'Candidat' } 
+    data: { title: 'Candidat', breadcrumb: 'Liste des candidats' } 
     
   },
 

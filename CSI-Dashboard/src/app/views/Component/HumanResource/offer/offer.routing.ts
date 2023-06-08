@@ -11,7 +11,7 @@ export const OfferRoutes: Routes = [
   { 
     path: 'offerTable', 
     component: OfferCrudTableComponent, 
-    data: { title: 'Offer', breadcrumb: 'Table' } 
+    data: { title: 'Offer', breadcrumb: 'Liste des offres' } 
   },
   { 
     path: 'affichageOffer/:id', 
