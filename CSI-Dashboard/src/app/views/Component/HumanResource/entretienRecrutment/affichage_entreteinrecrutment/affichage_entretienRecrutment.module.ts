@@ -31,6 +31,7 @@ import { questionnairePopupComponent } from './questionnaire-popup/questionnaire
 import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-popup.component';
 import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDetails-popup.component';
 import { addAdminstrativeDataComponent } from './add-AdsministrativeData-popup/addAdministartiveData-popup.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { addAdminstrativeDataComponent } from './add-AdsministrativeData-popup/a
     MatSelectModule,
     MatSelectModule,
     HttpClientModule,
+    MatSliderModule,
     MatTabsModule,
     MatProgressBarModule,
     MatPaginatorModule,

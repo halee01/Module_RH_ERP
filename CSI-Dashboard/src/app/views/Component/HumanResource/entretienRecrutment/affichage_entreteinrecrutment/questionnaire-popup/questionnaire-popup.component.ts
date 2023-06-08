@@ -23,7 +23,7 @@ export class questionnairePopupComponent {
   selectedQuestionType: QuestionType;
   selectedQuestionCategory: QuestionCategory;
   selectedQuestionCategoryId: number;
-
+  @Output() questionnaireAdded: EventEmitter<number> = new EventEmitter<number>();
   filtersSelected: EventEmitter<any> = new EventEmitter<any>();
   snack: any;
 
@@ -45,9 +45,7 @@ export class questionnairePopupComponent {
     );
   }
 
-  closeDialog(): void {
-    this.dialogRef.close();
-  }
+ 
 
   applyFilters(): void {
     const filters = {
@@ -162,10 +160,6 @@ export class questionnairePopupComponent {
       );
     });
   }
-  
-  
-  
-  
   getQuestions(): void {
     if (this.selectedQuestionType && this.selectedQuestionCategory) {
       const typeId = this.selectedQuestionType.id;
@@ -184,5 +178,10 @@ export class questionnairePopupComponent {
       this.questions = [];
     }}
   
+    closeDialog(): void {
+      const result = {
+        interviewId: this.interviewId  };
+      this.dialogRef.close(result);
+    }
   
   }

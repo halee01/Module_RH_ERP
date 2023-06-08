@@ -127,14 +127,16 @@ getQuestionByTypeAndCategory(id:number ,Id:number):Observable<Question[]> {
     catchError(this.handleError)
   );
 }
+
 getQuestionByTypeCategoryAndLevel(id:number ,Id:number, level:ExperienceLevel):Observable<Question[]> {
   const url =  `${this.apiQuestionType+ '/get'}/${id}/${Id}/${level}`+ '/questions';
   return this.http.get<any>(url).pipe(
     catchError(this.handleError)
   );
 }
+
 addQuestionTypeToInterview(interviewId: number, questionTypeIds: number[]): Observable<any> {
-  const url = `${this.apiUrlInterview}/addQuestionType/${interviewId}`;
+  const url = `${this.apiUrlInterview+'/addQuestionType'}/${interviewId}`;
   return this.http.put(url, questionTypeIds);
 }
 addUpdatedQuestion(updatedQuestion: any): Observable<any> {
@@ -198,16 +200,22 @@ getInterview(id: number): Observable<Interview> {
   );
   }
 
-  getUpdatedQuestionInterview(id: number): Observable<UpdatedQuestion> {
-    const url =  `${this.apiUpdatedQuestion+ '/get'}/${id}`+ '/updatedQuestion';
-    return this.http.get<UpdatedQuestion>(url).pipe(
+  getUpdatedQuestionInterview(id: number): Observable<UpdatedQuestion[]> {
+    const url = `${this.apiUrlInterview}/get/${id}/updatedQuestion`;
+    return this.http.get<UpdatedQuestion[]>(url).pipe(
       catchError(this.handleError)
     );
-    }
+  }
+  updateUpdatedQuestion(id: number, updated: UpdatedQuestion): Observable<UpdatedQuestion> {
+    const url = `${this.apiUpdatedQuestion}/update/${id}`;
+    return this.http.put<UpdatedQuestion>(url, updated).pipe(
+      catchError(this.handleError)
+    );
+  }
 
   getEmployeeEvaluation(id: number): Observable<Interview> {
     const url =  `${this.apiUrl+ '/get'}/${id}`+ '/evaluation';
-    return this.http.get<Interview>(url).pipe(
+    return this.http.get<Evaluation>(url).pipe(
       catchError(this.handleError)
     );
     }
@@ -251,6 +259,15 @@ deleteItem(id: number): Observable<Employee> {
   );
 }
 
+
+// DELETE an evaluation by id
+deleteEvaluation(id: number): Observable<Evaluation> {
+ 
+  const url = `${this.apiUrlEvaluation +'/delete'}/${id}`;
+  return this.http.delete<Evaluation>(url).pipe(
+    catchError(this.handleError)
+  );
+}
 ////////////////////////////////////////////////////////
 private handleError(error: HttpErrorResponse) {
   if (error.error instanceof ErrorEvent) {

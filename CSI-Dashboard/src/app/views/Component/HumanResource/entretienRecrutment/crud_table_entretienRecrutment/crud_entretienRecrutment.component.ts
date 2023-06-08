@@ -13,11 +13,13 @@ import { Observable, Subscription } from 'rxjs';
 import { CrudService } from '../../candidate/CandidatCrud/candidat-crud.service';
 import { interviewStatus } from 'app/shared/models/Interview';
 import { evaluationPopupComponent } from '../evaluationnPopup/evaluation-popup.component';
+import { ViewAllInterviewsComponent } from './viewAll-Interviews/viewAll-Interviews.component';
 
 
 @Component({
   selector: 'evaluation-form',
-  templateUrl: './crud_entretienRecrutment.component.html'
+  templateUrl: './crud_entretienRecrutment.component.html',
+  styleUrls: ['./crud_entretienRecrutment.component.scss'],
 })
 export class crudEntretienRecrutmentComponent implements OnInit {
 
@@ -101,6 +103,7 @@ export class crudEntretienRecrutmentComponent implements OnInit {
   openEvaluationCandidat(){
     this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
   }
+
   goToEvaluer(){
     this.router.navigate(['evaluationCrud/crudEvaluation'])
   }
@@ -117,6 +120,21 @@ export class crudEntretienRecrutmentComponent implements OnInit {
       console.log('Result:', result);
     });
   }
+
+  
+  viewAllEvaluations(row: any) {
+    this.crudEntretien.getEmployeeEvaluation(row.id).subscribe((evaluations: Evaluation) => {
+      const dialogRef = this.dialog.open(ViewAllInterviewsComponent, {
+        width: '900px',
+        data: { evaluations }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+    });
+  }
+  
 
   /*onShowEvaluation() {
     if (this.classAdded) {
@@ -233,7 +251,16 @@ toggleInput1() {
   this.showInput1 = !this.showInput1;
 }
 
+
 saveEvaluation(id: number): void {
+  const currentDate = new Date();
+  const formattedDate = currentDate.toISOString(); // Convert to string in desired format
+  
+  const evaluation: Evaluation = {
+    id: id,
+    evaluationDate: formattedDate,
+  };
+
   this.crudEntretien.addEvaluation({ employeeNum: id }).subscribe(
     response => {
       console.log('Evaluation added successfully');
@@ -243,6 +270,7 @@ saveEvaluation(id: number): void {
     error => console.error('Error adding evaluation:', error)
   );
 }
+
 
 openpopup(row: any): void {
   console.log('Open popup for employee:', row.id);
