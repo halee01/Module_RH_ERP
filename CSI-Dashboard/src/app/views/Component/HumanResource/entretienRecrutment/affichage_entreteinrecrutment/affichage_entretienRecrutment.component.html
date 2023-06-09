@@ -11,15 +11,14 @@
       </div>
       <div fxFlex="30">
         <apx-chart
-          [series]="welcomeProgressChart.series"
-          [chart]="welcomeProgressChart.chartOptions.chart"
-          [grid]="welcomeProgressChart.chartOptions.grid"
-          [plotOptions]="welcomeProgressChart.chartOptions.plotOptions"
-          [colors]="studyChart.chartOptions.colors"
-          [labels]="welcomeProgressChart.chartOptions.labels"
-          [dataLabels]="studyChart.chartOptions.dataLabels"
-          [xaxis]="studyChart.chartOptions.xaxis"
-          [yaxis]="studyChart.chartOptions.yaxis"
+        [series]="welcomeProgressChart.series"
+        [chart]="welcomeProgressChart.chartOptions.chart"
+        [grid]="welcomeProgressChart.chartOptions.grid"
+        [plotOptions]="welcomeProgressChart.chartOptions.plotOptions"
+        [labels]="welcomeProgressChart.chartOptions.labels"
+        [dataLabels]="studyChart.chartOptions.dataLabels"
+        [xaxis]="studyChart.chartOptions.xaxis"
+        [yaxis]="studyChart.chartOptions.yaxis"
         ></apx-chart>
       </div>
     </div>
@@ -27,6 +26,8 @@
     <!-- Buttons to add interview and administrative data -->
     <div>
       <button mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary" (click)="openPopUpEntretien({}, true)">Ajouter un entretien</button>
+      <button (click)="calculateGlobalAppreciation()">Calculate Global Appreciation</button>
+
     </div>
   </mat-card>
 

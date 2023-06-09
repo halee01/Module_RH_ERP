@@ -175,7 +175,18 @@ addEvaluation(evaluation: any): Observable<any> {
     catchError(this.handleError)
   );
 }
+calculateGlobalAppreciation(evaluationId: number): Promise<string> {
+  const url = `${this.apiUrlEvaluation}/${evaluationId}/calculate-global-appreciation`;
 
+  return this.http.post(url, null, { responseType: 'text' })
+    .toPromise()
+    .then((response: any) => {
+      return response;
+    })
+    .catch((error: any) => {
+      throw new Error('Error calculating global appreciation: ' + error.message);
+    });
+}
 // GET an evaluation
 getEvaluation(id: number): Observable<Evaluation> {
   const url = `${this.apiUrlEvaluation+ '/get'}/${id}`;
