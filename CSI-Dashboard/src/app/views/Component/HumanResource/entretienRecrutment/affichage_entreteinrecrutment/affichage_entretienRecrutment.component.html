@@ -3,14 +3,23 @@
   <mat-card class="p-24">
     <!-- Employee details -->
     <div fxLayout="row wrap">
-      <div fxFlex="70">
-        <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
-        <div style="padding-top: 15px;">
-          <p class="text-small"><strong>L'email numéro 1:</strong> {{employee.emailOne}}</p>
-          <p class="text-small"><strong>Numéro de téléphone 1:</strong> {{employee.phoneNumberOne}}</p>
+      <div fxFlex="60">
+
+        <div  class="name-card" >
+            <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
         </div>
+        
+        <div>
+          <div class="infor-card" >
+          <p class="text-small"><strong class="infor-card-text">L'email numéro 1:</strong>{{employee.emailOne}}</p>
+        <p class="text-small"><strong class="infor-card-text">Numéro de téléphone 1:</strong>{{employee.phoneNumberOne}}</p>
+        <p class="text-small"><strong class="infor-card-text">La note globale est:</strong>52</p>
       </div>
-      <div fxFlex="30">
+        </div>
+          
+        
+      </div>
+      <div fxFlex="40">
         <apx-chart
           [series]="welcomeProgressChart.series"
           [chart]="welcomeProgressChart.chartOptions.chart"
@@ -31,6 +40,7 @@
     </div>
   </mat-card>
 
+  
   <!-- Accordion to display interviews and updated questions -->
   <div style="padding-left: 15px; padding-right: 15px;">
     <mat-accordion>
