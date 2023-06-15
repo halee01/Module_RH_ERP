@@ -1,9 +1,9 @@
 import { Offer } from './../../../../../shared/models/Offer';
-import {MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Employee, MaritalSituation } from '../../../../../shared/models/Employee';
-import { Inject, Component, OnInit, ViewChild } from '@angular/core';
+import { Employee} from '../../../../../shared/models/Employee';
+import {  Component, OnInit, ViewChild } from '@angular/core';
 import { UntypedFormGroup, UntypedFormControl, Validators, FormArray, AbstractControl, UntypedFormArray } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {FormBuilder, FormGroup} from '@angular/forms';
@@ -96,7 +96,6 @@ export class cvcandidatComponent implements OnInit {
   selectedFile: File;
   title :string[]= Object.values(Title);
   Civility :string []= Object.values(Civility);
-  MaritalSituation :string []= Object.values(MaritalSituation);
   Service :string []= Object.values(Service);
   Availability : string [] = Object.values(Availability);
   RequirementStatus  :string []= Object.values(RequirementStatus);
@@ -234,13 +233,12 @@ export class cvcandidatComponent implements OnInit {
       emailOne: new UntypedFormControl('',[Validators.required,Validators.email] ),
       phoneNumberOne: new UntypedFormControl('', [Validators.required,Validators.pattern(/^[\d\s\-+]*$/)]),
       civility: new UntypedFormControl('', []),
-      maritalSituation: new UntypedFormControl('', []),
       country: new UntypedFormControl('', [Validators.required]),
       city: new UntypedFormControl('', []),
       postCode: new UntypedFormControl('', [ Validators.pattern(/^[0-9]*$/)]),
       emailTwo: new UntypedFormControl('', [Validators.email]),
-      phoneNumberTwo: new UntypedFormControl('', [Validators.pattern(/^[\d\s\-+]*$/)])
-
+      phoneNumberTwo: new UntypedFormControl('', [Validators.pattern(/^[\d\s\-+]*$/)]),
+      experience:new UntypedFormControl('', [Validators.required])
     })
 
     
@@ -249,7 +247,6 @@ export class cvcandidatComponent implements OnInit {
       description: new UntypedFormControl('', []),
       objective: new UntypedFormControl('', []),
       driverLicense: new UntypedFormControl('', []),
-      experienceAmount:new UntypedFormControl('', [Validators.required])
     })
 
 
@@ -571,13 +568,13 @@ handleRemoveRepeatForm(index: number) {
     return ['reference','title','actions' ];
   }
 
-  maritalSituationMap = {
+ /* maritalSituationMap = {
     [MaritalSituation.SINGLE]:'Célibatire',
     [MaritalSituation.MARRIED]:'Marrié',
    [MaritalSituation.DIVORCED]:'Divorvé',
    [MaritalSituation.WIDOWED] :'Veuf/Veuve',
    [MaritalSituation.COMPLICATED] :'Compliqué'
-  };
+  };*/
 
   civilityMap = {
     [Civility.MRS]:'Mme',

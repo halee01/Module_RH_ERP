@@ -30,6 +30,8 @@ import { MatTabsModule } from "@angular/material/tabs";
 import { Ng2TelInputModule } from "ng2-tel-input";
 import { CandidatDetailComponent } from "./Candidat-details/candidat-details.component";
 import { NgxPaginationModule } from "ngx-pagination";
+import { ConvertToResourceComponent } from "./convert-candidate/convertToResource.component";
+import { updateCandidatService } from "../updateCandidat/updateCandidat.service";
 
 
 @NgModule({
@@ -64,7 +66,7 @@ import { NgxPaginationModule } from "ngx-pagination";
     MatTabsModule,
     RouterModule.forChild(CandidatRoutes)
   ],
-  declarations: [CandidatCrudTableComponent,  CandidatDetailComponent,],
-  providers: [CrudService]
+  declarations: [CandidatCrudTableComponent,  CandidatDetailComponent,ConvertToResourceComponent],
+  providers: [CrudService,updateCandidatService]
 })
 export class CandidatCrudModule { }

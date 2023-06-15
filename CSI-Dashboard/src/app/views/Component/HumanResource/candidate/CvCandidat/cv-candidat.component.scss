@@ -4,8 +4,8 @@
 }
 
 .container{
-  margin-left: 2cm;
-  margin-right: 2cm;
+  margin-left: 1.5cm;
+  margin-right: 1.5cm;
 }
 
 .example-grid {
@@ -44,4 +44,24 @@
 }
 .mat-mdc-form-field {
   margin-top: 16px;
+}
+
+.row-tfile{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-tfile{
+  padding-right: 1cm ;
+}
+
+.card-stepper{
+  margin-bottom: 2cm;
+  margin-right: 1.5cm;
+  margin-left: 1.5cm;
+  
+}
+
+.mat-heading-label{
+  padding-top: 20px;
 }

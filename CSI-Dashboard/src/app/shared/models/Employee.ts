@@ -1,3 +1,4 @@
+
 import { TechnicalFile } from "./TechnicalFile";
 export class Employee {
     id?: number;
@@ -13,6 +14,8 @@ export class Employee {
      city ?: string;
      recommendationMark ?: number;
      experience ?: number;
+     resourceType ?: ResourceType;
+     departement?: Departement;
      experienceDetails ?:string;
      civility?: Civility;
      title?: Title;
@@ -73,9 +76,36 @@ export enum MaritalSituation {
     COMPLICATED="COMPLICATED"
 }
 export enum Provenance {
-    LINKEDIN,
-    SPONTANEOUS_APPLICATION,
-    JOBS_FORUM,
-    RECOMMENDATION,
-    JOBBOARD,OTHER
+    LINKEDIN="LINKEDIN",
+    SPONTANEOUS_APPLICATION="SPONTANEOUS_APPLICATION",
+    JOBS_FORUM="JOBS_FORUM",
+    RECOMMENDATION="RECOMMENDATION",
+    JOBBOARD="JOBBOARD",
+    OTHER="OTHER"
+}
+
+export enum Departement{
+    DEVELOPPEMENT="DEVELOPPEMENT",
+    QUALITE="QUALITE" ,
+    ARCHITECTURE ="ARCHITECTURE",
+    DESIGN="DESIGN" ,
+    TESTS="TESTS" ,
+    RESSOURCES_HUMAINES ="RESSOURCES_HUMAINES",
+    MARKETING="MARKETING" ,
+    VENTE ="VENTE",
+    COMPTABILITE ="COMPTABILITE",
+    FINANCES ="FINANCES",
+    JURIDIQUE ="JURIDIQUE",
+    SUPPORT="SUPPORT"
+}
+
+export enum WorkLocation{
+    MAIN="MAIN",
+     OTHER_LOCATION="OTHER_LOCATION"
+}
+
+export enum ResourceType{
+    EXTERNAL_RESOURCE="EXTERNAL_RESOURCE", 
+    BACKOFFICE_RESOURCE="BACKOFFICE_RESOURCE", 
+    INTERNAL_RESOURCE="INTERNAL_RESOURCE"
 }

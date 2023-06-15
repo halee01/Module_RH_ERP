@@ -40,6 +40,8 @@ export class entretienRecrutmentComponent implements OnInit {
   updatedQuestionForm: FormGroup;
   isCheckDisabled: boolean = true;
   sliderValue: number = 0;
+  globalAppreciation: number;
+
 
   //Global appreciation chart 
 
@@ -113,30 +115,7 @@ export class entretienRecrutmentComponent implements OnInit {
   };
   studyChart = {
     series: [
-      {
-        name: 'Angular',
-        data: [50, 50, 80, 80, 80, 60, 70],
-        type: 'bar',
-        itemStyle: {
-          barBorderRadius: [0, 0, 10, 10],
-        },
-        stack: 'one',
-      },
-      {
-        name: 'React',
-        data: [70, 80, 90, 100, 70, 80, 65],
-        type: 'bar',
-        stack: 'one',
-      },
-      {
-        name: 'Javascript',
-        data: [65, 80, 70, 100, 90, 70, 55],
-        type: 'bar',
-        itemStyle: {
-          barBorderRadius: [10, 10, 0, 0],
-        },
-        stack: 'one',
-      },
+      
     ],
     chartOptions: {
       chart: {
@@ -224,6 +203,24 @@ export class entretienRecrutmentComponent implements OnInit {
   updateSliderValue(value: number) {
     this.sliderValue = value;
   }
+  
+  calculateGlobalAppreciation() {
+    console.log('calculateGlobalAppreciation() method called');
+
+    const evaluationId = this.id; // Replace with the actual evaluation ID
+
+    this.service.calculateGlobalAppreciation(evaluationId)
+    .then((response: any) => {
+      console.log('Response:', response);
+      this.globalAppreciation = parseFloat(response.result);
+    })
+      .catch((error: any) => {
+        console.error('Error calculating global appreciation:', error);
+        // Handle the error and display an appropriate message
+      });
+  }
+  
+
   getEmployee() {
     this.service.getEmployeeById(this.id).subscribe((data: any) => {
       this.employee = data;

@@ -18,6 +18,8 @@ import { LanguageLevel, Languages } from 'app/shared/models/Language';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Observable } from 'rxjs-compat';
 import { PrintSharedService } from 'app/shared/services/PrintShared.service';
+import { ConvertToResourceComponent } from '../convert-candidate/convertToResource.component';
+import { updateCandidatService } from '../../updateCandidat/updateCandidat.service';
 
 
 @Component({
@@ -60,6 +62,7 @@ export class CandidatCrudTableComponent implements OnInit {
 
 
   constructor(
+    private  update:updateCandidatService,
     private _formBuilder: FormBuilder,
     private dialog: MatDialog,
     private snack: MatSnackBar,
@@ -317,4 +320,41 @@ printCV(employee: any) {
   this.printService.printCV(employee);
 }
 
+
+openPopUpEmployee(data: any = {}) {
+  const title = 'Modifier Employee';
+  const dialogRef: MatDialogRef<any> = this.dialog.open(ConvertToResourceComponent, {
+    width: '1000px',
+    height: '600px',
+    disableClose: true,
+    data: { title: title, payload: data }
+  });
+  dialogRef.afterClosed().subscribe(res => {
+    if (res) {
+      const updatedData = { ...data, ...res};
+      this.update.updateEmployee(data.id, res).subscribe(
+        (response) => {
+          console.log('Item updated successfully', response);
+          this.snack.open('Compte bancaire modifié avec succès!', 'OK', { duration: 2000 });
+          // Update the status after updating the employee
+          this.crudService.updateToConvertedToResourceById(data.id).subscribe(
+            (statusResponse) => {
+              console.log('Status updated successfully', statusResponse);
+              this.snack.open('Status modifié avec succès!', 'OK', { duration: 2000 });
+              this.crudService.getItems(); // Refresh the employee list if needed
+            },
+            (statusError) => {
+              console.error('Error updating status', statusError);
+              this.snack.open('Une erreur est survenue lors de la modification du statut.', 'OK', { duration: 2000 });
+            }
+          );
+        },
+        (error) => {
+          console.error('Error updating item', error);
+          this.snack.open('Une erreur est survenue lors de la modification du compte bancaire.', 'OK', { duration: 2000 });
+        }
+      );
+    }
+  });
+}
 }

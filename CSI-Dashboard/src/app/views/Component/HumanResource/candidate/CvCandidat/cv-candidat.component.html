@@ -1,19 +1,20 @@
-<mat-card class="p-0">
-  <mat-horizontal-stepper  #stepper>
+<mat-card class="p-0 card-stepper" >
+  <mat-horizontal-stepper #stepper>
     
     <!--------------------------------------------COORDONNES--------------------------------------->
   <mat-step [stepControl]="step1" errorMessage="Veuillez remplir les champs obligatoires.">
     <form [formGroup]="myForm" >
     <div>
       <ng-template matStepLabel>Coordonnées</ng-template>
-      <mat-card-title class="">
-        <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      
+
+          <mat-card-content class="container" style="padding-top: 1cm;">
+            <mat-card-title class="">
         <div class="card-title-text">Indiquez les renseignements personnels</div>
         <mat-divider></mat-divider>
         </mat-card-title>
-
-          <mat-card-content class="container" style="padding-top: 1.5cm;">
-            <div >
+            <div  >
               <mat-grid-list cols="2" rowHeight="100px">
 
 
@@ -42,7 +43,7 @@
                       name="lastName"
                       formControlName="lastName"
                       placeholder="Ex.Macron">
-                      <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                      <mat-error *ngIf="myForm.get('lastName').invalid && myForm.get('lastName').touched">
                         Le nom est requis et doit commencer par une majuscule.</mat-error>
                   </mat-form-field>
                 </div>
@@ -72,7 +73,7 @@
                         <input matInput [matDatepicker]="picker" formControlName="birthDate" placeholder="Date de naissance">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
-                        <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                        <mat-error *ngIf="myForm.get('birthDate').invalid && myForm.get('birthDate').touched">
                           Le date de naissance est requise.</mat-error>
                       </mat-form-field>
                       </div>
@@ -82,11 +83,14 @@
                     <!--Maritial Situation -->
                     <div class="pb-16">
                       <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Situation Maritale</mat-label>
-                      <mat-select formControlName="maritalSituation" >
-                        <mat-option *ngFor="let MaritalSituations of MaritalSituation " [value]="MaritalSituations">{{maritalSituationMap[MaritalSituations]}}</mat-option>
-                        
-                      </mat-select>
+                        <mat-label>Nombre d'années d'expérience</mat-label>
+                        <input matInput
+                          name="experience"
+                          formControlName="experience"
+                           required>
+                        <mat-error *ngIf="myForm.get('experience').invalid && myForm.get('experience').touched">
+                          Le nombre d'experience est requis et doit commencer par une majuscule.
+                        </mat-error>
                       </mat-form-field>
                     </div>
                   </mat-grid-tile>
@@ -99,40 +103,26 @@
                        <mat-select required formControlName="title" >
                          <mat-option  *ngFor="let titles of title " [value]="titles">{{employeeTitleMap[titles]}}</mat-option>
                        </mat-select>
-                       <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                       <mat-error *ngIf="myForm.get('title').invalid && myForm.get('title').touched">
                          L'Intitulè du poste est requis.</mat-error>
                      </mat-form-field>
                      </div>
                  </mat-grid-tile>
 
-               <!-- <mat-grid-tile>
-                  <div class="pb-16">
-                    <mat-form-field appearance="outline" [style.width.cm]=10>
-                      <mat-label>Nombre d'années d'expérience</mat-label>
-                      <input matInput
-                        name="experienceAmount"
-                        formControlName="experienceAmount"
-                         required>
-                      <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
-                        Le prénom est requis et doit commencer par une majuscule.
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                  </mat-grid-tile>-->
-                
                 </mat-grid-list>
 
       
+                
                 <mat-card-title>
                   <div class="card-title-text">Indiquez les Coordonnées</div>
                 </mat-card-title>
-
                 <mat-divider></mat-divider>
                 <div style="padding-bottom: 1.8cm;"></div>
       
 
-                <mat-grid-list cols="2" rowHeight="100px" >
 
+
+                <mat-grid-list cols="2" rowHeight="100px" >
                   <mat-grid-tile>
                     <!--Adress-->
                     <div class="pb-16">
@@ -172,7 +162,7 @@
                       <mat-select required formControlName="country" placeholder="Ex.France" >
                         <mat-option *ngFor="let country of countries" [value]="country.shortName">{{country.name}}</mat-option>
                       </mat-select>
-                      <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                      <mat-error *ngIf="myForm.get('country').invalid && myForm.get('country').touched">
                         Le pays est requis.</mat-error>
                       </mat-form-field>
                     </div>
@@ -186,7 +176,7 @@
                       <mat-select required formControlName="city" placeholder="Ex.Lyon" >
                         <mat-option *ngFor="let state of states"  [value]="state">{{state}}</mat-option>
                       </mat-select>
-                      <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                      <mat-error *ngIf="myForm.get('city').invalid && myForm.get('city').touched">
                         La ville est requise.</mat-error>
                       </mat-form-field>
                     </div>
@@ -206,7 +196,7 @@
                           name="email"
                           formControlName="emailOne"
                           placeholder="Ex. csi.digital1@exemple.fr">
-                          <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                          <mat-error *ngIf="myForm.get('emailOne').invalid && myForm.get('emailOne').touched">
                             L'email 1 est requis.</mat-error>
                       </mat-form-field>
                     </div>
@@ -225,12 +215,7 @@
                           placeholder="Ex. csi.digital2@exemple.fr"
                           value="">
                       </mat-form-field>
-                      <!--<small 
-                      *ngIf="basicForm.controls['email'].hasError('required') && basicForm.controls['email'].touched" 
-                      class="form-error-msg"> Email is required </small>
-                      <small 
-                      *ngIf="basicForm.controls['email'].hasError('email') && basicForm.controls['email'].touched" 
-                      class="form-error-msg"> Invaild email address </small>-->
+                     
                     </div>
                   </mat-grid-tile>
               
@@ -246,7 +231,7 @@
                        matInput
                        formControlName="phoneNumberOne"
                        placeholder="Ex. +33 801 123 456"  >
-                       <mat-error *ngIf="myForm.get('firstName').invalid && myForm.get('firstName').touched">
+                       <mat-error *ngIf="myForm.get('phoneNumberOne').invalid && myForm.get('phoneNumberOne').touched">
                         Le numéro du téléphone 1 est requis.</mat-error>
                       </mat-form-field>
                      </div>
@@ -299,64 +284,57 @@
         <div class="card-title-text">Remplissez les informations générales du dossier technique </div>
         <mat-divider></mat-divider>
         </mat-card-title>
-        <mat-card-content style="padding-top: 1.5cm;">
-          <!--<div class="form-group mb-1 col-sm-12 col-md-3">
-            <mat-form-field appearance="outline" [style.width.cm]=5 style="padding-right: 1cm;">
-              <mat-label>Candidat</mat-label>
-              <input
-                matInput
-                value="{{selectedEmplyee.id}}"
-                placeholder="Candidat"
-                formControlName="employeeId"
-                disabled="true" />
-            </mat-form-field>
-          </div>-->
-          <div class="container">
-            <mat-grid-list cols="3" rowHeight="100px">
-            <mat-grid-tile>
-              <mat-form-field appearance="outline" class="example-field" [style.width.cm]=7.25>
-                <mat-label>Référence</mat-label>
-                <input 
-                required
-                type="text"
-                matInput
-                formControlName="reference"
-                placeholder="Ex."  >
-                <mat-error *ngIf="techFileForm.get('reference').invalid && techFileForm.get('reference').touched">
-                  Ce champ est obligatoire.</mat-error>
-              </mat-form-field>
-              </mat-grid-tile>
 
-              <mat-grid-tile>
-                <mat-form-field appearance="outline" class="example-field" [style.width.cm]=7 >
-                <mat-label>Permit de conduire</mat-label>
-                <input 
-                type="text"
-                matInput
-                formControlName="driverLicense"  >
-              </mat-form-field>
-              </mat-grid-tile>
-
-              
-              </mat-grid-list>
-                
-              <mat-grid-list cols="2" rowHeight="100px">
-                <mat-grid-tile>
-                   <mat-form-field appearance="outline"  [style.width.cm]=11 [style.padding-right.cm]=1 class="example-full-width">
-                <mat-label>Déscription</mat-label>
-                <textarea matInput formControlName="description" placeholder="Décrivez içi le parcours du candidat."></textarea>
-              </mat-form-field>
-               </mat-grid-tile>
-
-                <mat-grid-tile>
-                  <mat-form-field appearance="outline"  [style.width.cm]=11  class="example-full-width">
-                <mat-label>Objectifs</mat-label>
-                <textarea matInput formControlName="objective" placeholder="Décrivez içi les Objectifs du candidat."></textarea>
+        
+        <mat-card-content style="padding-top: 1cm;">
+          <div class="container-tfile" >
+            <div class="row-tfile">
+              <div class="col-tfile">
+                <mat-form-field appearance="outline" class="example-field"[style.width.cm]=7.5 >
+                  <mat-label>Référence</mat-label>
+                  <input 
+                    required
+                    type="text"
+                    matInput
+                    formControlName="reference"
+                    placeholder="Ex.">
+                  <mat-error *ngIf="techFileForm.get('reference').invalid && techFileForm.get('reference').touched">
+                    Ce champ est obligatoire.
+                  </mat-error>
                 </mat-form-field>
-                </mat-grid-tile>
+              </div>
+              <div class="col-tfile">
+                <mat-form-field appearance="outline" class="example-field"  [style.width.cm]=7.5>
+                  <mat-label>Permit de conduire</mat-label>
+                  <input 
+                    type="text"
+                    matInput
+                    formControlName="driverLicense">
+                </mat-form-field>
+              </div>
+            </div>
+            
+            <div class="row-tfile">
+              
+              <div class="col-tfile">
+                <mat-form-field appearance="outline" class="example-field"  [style.width.cm]=16>
+                  <mat-label>Objectifs</mat-label>
+                  <textarea matInput formControlName="objective" placeholder="Décrivez ici les Objectifs du candidat."></textarea>
+                </mat-form-field>
+              </div>
 
-                </mat-grid-list>
+              <div class="col-tfile">
+                <mat-form-field appearance="outline" class="example-field"  [style.width.cm]=16> 
+                  <mat-label>Commentaire</mat-label>
+                  <textarea matInput formControlName="description" placeholder="Ajoutez un commentaire."></textarea>
+                </mat-form-field>
+              </div>
+
+            </div>
+
           </div>
+          
+          
           
         </mat-card-content>
         
@@ -405,7 +383,7 @@
         <mat-divider></mat-divider>
         </mat-card-title>
 
-        <mat-card-content style="padding-top: 2cm;">
+        <mat-card-content style="padding-top: 1cm;">
 
           <form [formGroup]="formEducation">
             <div class="card-body" formArrayName="value"  >
@@ -414,7 +392,7 @@
                   <div fxLayout="row"  fxLayoutAlign="space-evenly center" *ngFor="let val of getEducation; let i = index"  [formGroupName]="i"  >
                   <div>
                       <div class="form-group mb-1 col-sm-12 col-md-3">
-                        <mat-form-field appearance="outline" [style.width.cm]=15>
+                        <mat-form-field appearance="outline" [style.width.cm]=17>
                           <mat-label>Nom de l'établissement</mat-label>
                             <input
                             required
@@ -427,7 +405,7 @@
 
                       <div class="d-flex ">
                         <div class="form-group mb-1 col-sm-12 col-md-3">
-                          <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
+                          <mat-form-field appearance="outline" [style.width.cm]=8 style="padding-right: 1cm;">
                             <mat-label>Diplôme</mat-label>
                               <input
                               required
@@ -439,7 +417,7 @@
                         </div>
                        <div class="form-group mb-1 col-sm-12 col-md-3">
                             <!--score-->
-                            <mat-form-field appearance="outline"  [style.width.cm]=7>
+                            <mat-form-field appearance="outline"  [style.width.cm]=8>
                               <mat-label>Mention</mat-label>
                               <input
                               matInput
@@ -452,7 +430,7 @@
 
                       <div class="d-flex ">
                         <div class="form-group mb-1 col-sm-12 col-md-3">
-                        <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
+                        <mat-form-field appearance="outline" [style.width.cm]=8 style="padding-right: 1cm;">
                           <mat-label>Date de dèbut</mat-label>
                           <input matInput [matDatepicker]="picker1" formControlName="startYear" placeholder="Date de dèbut" >
                           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
@@ -462,7 +440,7 @@
 
 
                       <div class="form-group mb-1 col-sm-12 col-md-3">
-                        <mat-form-field appearance="outline" [style.width.cm]=7>
+                        <mat-form-field appearance="outline" [style.width.cm]=8>
                           <mat-label>Date d'obtention</mat-label>
                           <input matInput [matDatepicker]="picker2" formControlName="obtainedDate" placeholder="Date d'obtention" >
                           <mat-datepicker-toggle  matSuffix [for]="picker2"></mat-datepicker-toggle>
@@ -532,7 +510,7 @@
         <mat-divider></mat-divider>
         </mat-card-title>
 
-        <mat-card-content style="padding-top: 2cm;">
+        <mat-card-content style="padding-top: 1cm;">
           <form  [formGroup]="formExperience">
             <div class="card-body" formArrayName="value"  >
               <div class="row" >
@@ -542,7 +520,7 @@
                      <div class="d-flex ">
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <!--Institution-->
-                          <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
+                          <mat-form-field appearance="outline" [style.width.cm]=8 style="padding-right: 1cm;">
                             <mat-label>Employeur / Société</mat-label>
                               <input
                               matInput
@@ -555,7 +533,7 @@
                         </div>
                        <div class="form-group mb-1 col-sm-12 col-md-3">
                             <!--Contract type -->
-                            <mat-form-field appearance="outline" [style.width.cm]=7>
+                            <mat-form-field appearance="outline" [style.width.cm]=8>
                               <mat-label>Type de contrat</mat-label>
                                 <input
                                 matInput
@@ -570,7 +548,7 @@
                       <div class="d-flex ">
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <!--Post Title-->
-                          <mat-form-field appearance="outline" [style.width.cm]=7 style="padding-right: 1cm;">
+                          <mat-form-field appearance="outline" [style.width.cm]=8 style="padding-right: 1cm;">
                             <mat-label>Intitulé du poste</mat-label>
                               <input
                               matInput
@@ -582,7 +560,7 @@
                         </div>
                       <div class="form-group mb-1 col-sm-12 col-md-3">
                         <!--Role-->
-                        <mat-form-field appearance="outline" [style.width.cm]=7>
+                        <mat-form-field appearance="outline" [style.width.cm]=8>
                           <mat-label>Role / Tâches</mat-label>
                             <input
                             matInput
@@ -595,7 +573,7 @@
                       </div>
                       <div class="form-group mb-1 col-sm-12 col-md-3">
                         <!--Technologies-->
-                        <mat-form-field appearance="outline"  [style.width.cm]=15 class="example-full-width">
+                        <mat-form-field appearance="outline"  [style.width.cm]=17 class="example-full-width">
                           <mat-label>Technologies</mat-label>
                           <textarea matInput formControlName="technology" placeholder="Listez ici les technologies utilisées."></textarea>
                         </mat-form-field>
@@ -603,7 +581,7 @@
                       <div class="d-flex ">
                         <div class="form-group mb-1 col-sm-12 col-md-3">
                           <!--Dates-->
-                          <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
+                          <mat-form-field [style.width.cm]=8 appearance="outline" style="padding-right: 1cm;">
                             <mat-hint>Date Début</mat-hint>
                             <input matInput [matDatepicker]="picker11" formControlName="experienceStartDate" placeholder="Année Début ">
                             <mat-datepicker-toggle matSuffix [for]="picker11"></mat-datepicker-toggle>
@@ -611,7 +589,7 @@
                           </mat-form-field>
                           </div>
                           <div class="form-group mb-1 col-sm-12 col-md-3">
-                            <mat-form-field [style.width.cm]=5 appearance="outline" style="padding-right: 0.5cm;">
+                            <mat-form-field [style.width.cm]=8 appearance="outline" >
                               <mat-hint>Date Fin</mat-hint>
                               <input matInput [matDatepicker]="picker10" formControlName="experienceEndDate" placeholder="Année Fin ">
                               <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
@@ -671,7 +649,7 @@
         <mat-divider></mat-divider>
         </mat-card-title>
 
-        <mat-card-content style="padding-top: 2cm;">
+        <mat-card-content style="padding-top: 1cm;">
           <mat-accordion>
             <!------------------Certification------------------->
             <mat-expansion-panel >
