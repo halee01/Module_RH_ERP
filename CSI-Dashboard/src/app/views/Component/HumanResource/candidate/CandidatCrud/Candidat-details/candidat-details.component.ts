@@ -220,7 +220,7 @@ cvData: string;
   viewAllEvaluations(id: number) {
     this.crudEntretien.getEmployeeEvaluation(this.id).subscribe((evaluations: Evaluation) => {
       const dialogRef = this.dialog.open( ViewAllInterviewsDetailsComponent, {
-        width: '900px',
+        width: '550px',
         data: { evaluations }
       });
   

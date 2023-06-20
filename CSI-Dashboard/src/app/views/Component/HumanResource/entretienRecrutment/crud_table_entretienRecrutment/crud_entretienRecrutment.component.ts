@@ -87,21 +87,6 @@ export class crudEntretienRecrutmentComponent implements OnInit {
  
  }
 
-
-  deleteItem(row) {
-    this.confirmService.confirm({message: `Delete ${row.name}?`})
-      .subscribe(res => {
-        if (res) {
-          this.loader.open('Deleting Candidat');
-          this.crudEntretien.deleteItem(row)
-            .subscribe(data => {
-              this.dataSource = data;
-              this.loader.close();
-              this.snack.open('Candidat deleted!', 'OK', { duration: 4000 })
-            })
-        }
-      })
-  }
   
   openEvaluationCandidat(){
     this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
@@ -128,7 +113,7 @@ export class crudEntretienRecrutmentComponent implements OnInit {
   viewAllEvaluations(row: any) {
     this.crudEntretien.getEmployeeEvaluation(row.id).subscribe((evaluations: Evaluation) => {
       const dialogRef = this.dialog.open(ViewAllInterviewsComponent, {
-        width: '900px',
+        width: '550px',
         data: { evaluations }
       });
   
@@ -269,7 +254,7 @@ saveEvaluation(id: number): void {
 }
 
 
-openpopup(row: any): void {
+openpopupp(row: any): void {
   console.log('Open popup for employee:', row.id);
   
   this.crudEntretien.addEvaluation({ employeeNum: row.id }).subscribe(
@@ -295,8 +280,28 @@ openpopup(row: any): void {
   );
 }
 
-//status 
+openpopup(row: any): void {
+  this.confirmService.confirm({ message: `Voulez-vous vraiment ajouter une évaluation à ${row.lastName} ${row.firstName}?` })
+    .subscribe(res => {
+      if (res) {
+        this.loader.open('Ajout de l\'évaluation');
 
+        this.crudEntretien.addEvaluation({ employeeNum: row.id })
+          .subscribe((data: any) => {
+
+            // Close the loader before showing the snack bar
+            this.loader.close();
+
+            this.snack.open('Evaluation ajoutée !', 'OK', { duration: 2000 });
+          });
+      }
+    });
+}
+
+
+
+
+//status 
 
 applyFilterr(event: Event, key: string) {
   const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();

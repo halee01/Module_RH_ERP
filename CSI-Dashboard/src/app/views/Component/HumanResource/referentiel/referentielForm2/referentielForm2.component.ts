@@ -37,12 +37,6 @@ constructor(private refService:referentielService, private fb: FormBuilder,
 
 ngOnInit(): void {
 
-
- /*this.typeForm = new UntypedFormGroup({
-    questionTypeName: new UntypedFormControl('', [Validators.required])
-  })*/
-
-
   this.form = new UntypedFormGroup({
     name: new UntypedFormControl('', [Validators.required]),
     level: new UntypedFormControl('', [Validators.required]),

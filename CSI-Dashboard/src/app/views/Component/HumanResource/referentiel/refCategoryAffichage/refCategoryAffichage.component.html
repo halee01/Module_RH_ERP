@@ -72,10 +72,10 @@
            <ng-container matColumnDef="actions">
              <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
              <mat-cell *matCellDef="let row">
-               <button mat-icon-button mat-sm-button style="color: #757575;" class=" mr-16 "  routerLink="/refQuestionAffichage/quest/{{row.id}}" routerLinkActive="router-link-active" >
+               <button  matTooltip="Voir la liste des questions" mat-icon-button mat-sm-button style="color: #757575;" class=" mr-16 "  routerLink="/refQuestionAffichage/quest/{{row.id}}" routerLinkActive="router-link-active" >
                  <mat-icon>remove_red_eye </mat-icon>
                </button>
-               <button mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row.id)">
+               <button  matTooltip="Supprimer le domaine" mat-icon-button mat-sm-button color="warn" (click)="deleteItem(row.id)">
                  <mat-icon>delete</mat-icon>
                </button>
              </mat-cell>
