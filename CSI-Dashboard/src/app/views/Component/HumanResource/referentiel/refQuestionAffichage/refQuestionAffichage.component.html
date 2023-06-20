@@ -1,3 +1,8 @@
+<mat-form-field style="padding-left: 19px;" >
+  <input  matInput (keyup)="applyFilter($event)" placeholder="Rechercher">
+  </mat-form-field>
+
+  <button mat-raised-button class="mb-2" style="float: right ;margin-right: 19px;margin-top: 12px;"  color="primary" (click)="AddQuestion()"> Ajouter une question </button>
 <mat-card>
     <div class="container">
     <ng-template matStepLabel></ng-template>
@@ -14,16 +19,6 @@
         
                 <ng-container matColumnDef="question">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Question 
-                      <div>
-                        <button style="size:10px ;" mat-icon-button (click)="toggleInput1()">
-                          <mat-icon style="size:10px ;">search</mat-icon>
-                        </button>
-                        
-                        <mat-form-field *ngIf="showInput1" style="width:1.3cm;" >
-                          <input matInput (input)="applyFilterr($event, 'question')" placeholder="Filtrer">
-                       </mat-form-field>
-                
-                         </div>
                     </mat-header-cell>
                     <mat-cell *matCellDef="let row" data-label="question"> {{row.question}} </mat-cell>
                   </ng-container>
@@ -31,9 +26,9 @@
                   <ng-container matColumnDef="actions">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Actions </mat-header-cell>
                     <mat-cell *matCellDef="let row">
-                      <button mat-icon-button mat-button color="primary" (click)="openUpdateQuestionDialog(row.id)" class="mr-16" >
+                      <!--<button mat-icon-button mat-button color="primary" (click)="openUpdateQuestionDialog(row.id)" class="mr-16" >
                         <mat-icon>edit</mat-icon>
-                      </button>
+                      </button>-->
                       <button mat-icon-button mat-button color="warn" (click)="deleteQuestion(row.id)">
                         <mat-icon>delete</mat-icon>
                       </button>
@@ -50,30 +45,3 @@
     </div>
 </mat-card>
 
-<!--<mat-card>
-    <div class="container">
-    <ng-template matStepLabel></ng-template>
-        <mat-card-title class="">
-            <div style="padding-bottom: 20px;">
-                <div style="padding-right:4px ;" class="card-title-text">Référentiel<strong> {{ questionCategory.name}}, </strong> </div>
-             <div class="card-title-text"> Niveau <strong>{{ ExperienceLevelMap[questionCategory.level]}}</strong> </div>
-            </div>
-            </mat-card-title>
-
-        <mat-card-content>
-     
-        <div class="container-container">
-            <mat-list *ngFor="let questions of question">
-                <mat-list-item><mat-icon color="primary" class="mr-16">help_outline</mat-icon>{{questions?.question}}</mat-list-item>
-                <mat-divider></mat-divider>
-                </mat-list>
-        </div>
-
-        <div>
-
-
-        </div>
-
-        </mat-card-content> 
-    </div>
-</mat-card>-->

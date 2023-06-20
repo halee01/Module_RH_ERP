@@ -1,6 +1,4 @@
 import { referentielService } from '../referentiel.service';
-
-
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
@@ -17,6 +15,7 @@ import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.serv
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { questionUpdateComponent } from './questionUpdate.component';
+import { addQuestionComponent } from './addQuestion/addQuestion.component';
 
 
 @Component({
@@ -34,7 +33,9 @@ import { questionUpdateComponent } from './questionUpdate.component';
     ExperienceLevel :string []= Object.values(ExperienceLevel);
     question:Question;
     public displayedColumnsQuestions: any;  
-    public dataSource: any; 
+
+
+
     public dataSourceQuestion: MatTableDataSource<Question> ;
     questionCategory:QuestionCategory;
     selectedFile: File;
@@ -80,7 +81,7 @@ import { questionUpdateComponent } from './questionUpdate.component';
             this.loader.open('Supprssion de l`offre');
             this.ref.deleteQuestion(row)
               .subscribe((data:any)=> {
-                this.dataSource = data;
+                this.dataSourceQuestion = data;
                 this.loader.close();
                 this.snack.open('Offre supprimée!', 'OK', { duration: 2000 });
                 this.getQuestions();
@@ -127,39 +128,38 @@ import { questionUpdateComponent } from './questionUpdate.component';
               // Call the updateQuestion() method from your service
               this.ref.updateQuestion(row.id, { question: updatedQuestion }).subscribe(
                 (res) => {
-                  console.log(`Question with ID ${row.id} updated successfully`, res);
+                  console.log(`Question mise à jour avec succés`, res);
                   // Perform any additional actions upon successful update
                 },
                 (error) => {
-                  console.error('Error updating question', error);
+                  console.error('Erreur lors de la mise à jour de la question', error);
                   // Handle the error case
                 }
               );
             }
           });
         }
-        applyFilterr(event: Event, key: string) {
-          const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-          const filterWords = filterValue.split(' ');
+
+        AddQuestion(): void {
+          const dialogRef = this.dialog.open(addQuestionComponent, {
+            data: { QCid: this.questionCategory.id },
+          });
         
-          this.dataSource.filterPredicate = (data, filter) => {
-            // Split the data value into words and convert to lowercase
-            const dataWords = data[key].trim().toLowerCase().split(' ');
-        
-            // Check if all filter words are present in the data (case-insensitive)
-            return filterWords.every(word => {
-              return dataWords.some(dataWord => dataWord.indexOf(word.toLowerCase()) !== -1);
-            });
-          };
-        
-          this.dataSource.filter = filterValue;
-        
-          if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
-          }
+          dialogRef.afterClosed().subscribe((result: any) => {
+            this.snack.open('Questions ajoutées avec succès!', 'OK', { duration: 2000 });
+            this.getQuestions();
+          });
         }
+        
       
         toggleInput1() {
           this.showInput1 = !this.showInput1;
         }
+
+
+        applyFilter(event :Event){
+          const FilterValue = (event.target as HTMLInputElement).value ;
+           this.dataSourceQuestion.filter = FilterValue.trim().toLowerCase();
+       
+       }
 }

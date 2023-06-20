@@ -42,6 +42,7 @@ export class OfferCrudTableComponent implements OnInit {
   showInput2 = false;
   showInput3 = false;
   showInput4 = false;
+  showInput5 = false;
   submitted = false;
   visible = true;
   selectable = true;
@@ -121,7 +122,8 @@ export class OfferCrudTableComponent implements OnInit {
               this.snack.open('Offre ajoutée avec succès!', 'OK', { duration: 2000 });
               this.getItems();
             })
-        } else {
+        } 
+        else {
           this.loader.open('modification en cours');
           this.crudService.updateItem(data.id, res)
             .subscribe((data: any) => {
@@ -232,6 +234,10 @@ export class OfferCrudTableComponent implements OnInit {
   }
   toggleInput4() {
     this.showInput4 = !this.showInput4;
+  }
+
+  toggleInput5() {
+    this.showInput5 = !this.showInput5;
   }
   applyFilterr(event: Event, key: string) {
     const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();

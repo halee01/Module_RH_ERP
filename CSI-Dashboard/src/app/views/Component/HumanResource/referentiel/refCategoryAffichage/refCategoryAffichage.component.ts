@@ -19,7 +19,8 @@ import { referentielService } from '../referentiel.service';
 
 @Component({
   selector: 'referentiel-crud',
-  templateUrl: './refCategoryAffichage.component.html'
+  templateUrl: './refCategoryAffichage.component.html',
+  styleUrls: ['./refCategoryAffichage.component.scss'],
 })
 
 
@@ -32,7 +33,6 @@ export class refCategoryAffichageComponent implements OnInit {
  questionType:QuestionType;
   selectedFile: File;
   title :string[]= Object.values(Title);
-  showInput1 = false;
   formWidth = 200; //declare and initialize formWidth property
   formHeight = 700; //declare and initialize formHeight property
   submitted = false;
@@ -44,6 +44,10 @@ export class refCategoryAffichageComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
  
+  
+  showInput1 = false;
+  showInput2 = false;
+  showInput3 = false;
 
   public dataSource: MatTableDataSource<QuestionCategory>;
   public displayedColumns: any;
@@ -115,7 +119,9 @@ export class refCategoryAffichageComponent implements OnInit {
 
   applyFilter(event :Event){
     const FilterValue = (event.target as HTMLInputElement).value ;
-     this.dataSource.filter = FilterValue.trim().toLowerCase();}
+     this.dataSource.filter = FilterValue.trim().toLowerCase();
+ 
+ }
 
 
  goToForm(){
@@ -152,10 +158,58 @@ export class refCategoryAffichageComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  } 
+  
+  applyFilterEnum(event: Event, key: string) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    const filterWords = filterValue.split(' ');
+  
+    this.dataSource.filterPredicate = (data, filter) => {
+      // Split the data value into words and convert to lowercase
+      const dataWords = this.getEnumMappedValue(data[key]).trim().toLowerCase().split(' ');
+  
+      // Check if all filter words are present in the data (case-insensitive)
+      return filterWords.every(word => {
+        return dataWords.some(dataWord => dataWord.indexOf(word.toLowerCase()) !== -1);
+      });
+    };
+  
+    this.dataSource.filter = filterValue;
+  
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
+
+  getEnumMappedValue(value: any): string {
+    // Modify this function based on your enum mapping implementation
+    // For example, if `value` is an enum value, you can use a mapping object to retrieve the corresponding mapped value
+    const questionnaireTypeMapping = {
+      [QuestionnaireType.FOR_EMPLOYEES]: 'Pour Employées',
+      [QuestionnaireType.FOR_CANDIDATES]: 'Pour candidats',
+    };
+  
+    const experienceLevelMapping = {
+      [ExperienceLevel.JUNIOR]: 'Junior',
+      [ExperienceLevel.MID_LEVEL]: 'Confirmé',
+      [ExperienceLevel.SENIOR]: 'Senior',
+      [ExperienceLevel.EXPERT]: 'Expert',
+    };
+  
+    return questionnaireTypeMapping[value] || experienceLevelMapping[value] || '';
+  }
+
 
   toggleInput1() {
     this.showInput1 = !this.showInput1;
+  }
+  
+  toggleInput2() {
+    this.showInput2 = !this.showInput2;
+  }
+  
+  toggleInput3() {
+    this.showInput3 = !this.showInput3;
   }
   
   getQuestionsType() {

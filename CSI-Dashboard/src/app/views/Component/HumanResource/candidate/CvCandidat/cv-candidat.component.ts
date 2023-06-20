@@ -433,6 +433,12 @@ saveTechFile(): void {
     }
   
     saveAllExperiences(): void {
+      if (this.formExperience.invalid) {
+        console.log('Form has validation errors. Cannot submit.');
+        this.openSnackBar('Erreur lors de l\'ajout de l\'expérience');
+        return;
+      }
+    
       const experiences = this.formExperience.get('value').value;
       const experiencesWithTechFileNum = experiences.map((experience: any) => ({
         ...experience,
@@ -441,19 +447,18 @@ saveTechFile(): void {
     
       this.cvCandidatService.addExperiences(experiencesWithTechFileNum).subscribe({
         next: (res) => {
-          console.log('experiences added successfully', res);
+          console.log('Experiences added successfully', res);
           console.log('Form value', this.formExperience.value);
           this.submitted = true;
-          this.openSnackBar('Expérience ajouté avec succés');
+          this.openSnackBar('Expérience ajoutée avec succès');
         },
         error: (e) => {
           console.error('Error adding experiences', e);
-          console.log('cv Form is invalid');
           console.log(this.formExperience.errors);
-          this.openSnackBar('Une erreur s\'est produite lors de l\'ajout de l\'éxperience');
         }
       });
     }
+    
     
 
     // Delete experience
@@ -636,6 +641,7 @@ if (index > 0) {
   saveAllEducations(): void {
     if (this.formEducation.invalid) {
       console.log('Form has validation errors. Cannot submit.');
+      this.openSnackBar('Erreur lors de l\'ajout de l\'éducation');
       return;
     }
   
@@ -653,7 +659,7 @@ if (index > 0) {
         this.openSnackBar('Education ajouté avec succés');
       },
       error: (e) => {
-        this.openSnackBar('Erreur lors de l\'ajout de l\'éducation');
+       
         console.error('Error adding educations', e);
         console.log(this.formEducation.errors);
         

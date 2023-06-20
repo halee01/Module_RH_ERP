@@ -30,6 +30,7 @@ import { refQuestionAffichageComponent} from "./refQuestionAffichage.component";
 import { referentielService } from "../referentiel.service";
 import { referentielRoutes } from "../referentiel.routing";
 import { questionUpdateComponent } from "./questionUpdate.component";
+import { addQuestionComponent } from "./addQuestion/addQuestion.component";
 
 
 @NgModule({
@@ -64,7 +65,7 @@ import { questionUpdateComponent } from "./questionUpdate.component";
     MatTabsModule,
     RouterModule.forChild(referentielRoutes)
   ],
-  declarations: [refQuestionAffichageComponent,questionUpdateComponent],
+  declarations: [refQuestionAffichageComponent,questionUpdateComponent,addQuestionComponent],
   providers: [referentielService]
 })
 export class refQuestionAffichageModule{ }

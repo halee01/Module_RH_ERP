@@ -4,8 +4,8 @@
   <button mat-raised-button class="mb-2" style="float: right ;"  color="primary" (click)="goToForm()"> Ajouter un référentiel </button>
 
   <mat-form-field style="padding-left: 19px;" >
-    <input matInput (keyup)="applyFilter($event)" placeholder="Recherche">
-    </mat-form-field> 
+    <input  matInput (keyup)="applyFilter($event)" placeholder="Rechercher">
+    </mat-form-field>
   
 
 <mat-card  style="border: 60 px; "  [@animate]="{value:'*',params:{y:'10px',delay:'500ms'}}">
@@ -14,16 +14,6 @@
 
   <ng-container matColumnDef="questionTypeName">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Catégorie
-      <div>
-        <button style="size:10px ;" mat-icon-button (click)="toggleInput1()">
-          <mat-icon style="size:10px ;">search</mat-icon>
-        </button>
-        
-        <mat-form-field *ngIf="showInput1" style="width:1.3cm;" >
-          <input matInput (input)="applyFilterr($event, 'questionTypeName')" placeholder="Filtrer">
-       </mat-form-field>
-
-         </div>
     </mat-header-cell>
     <mat-cell  *matCellDef="let row"  [style.color]="row.color"> {{row.questionTypeName}} </mat-cell> b
   </ng-container>
