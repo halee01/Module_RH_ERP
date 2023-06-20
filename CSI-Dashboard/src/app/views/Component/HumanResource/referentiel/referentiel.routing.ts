@@ -22,7 +22,7 @@ export const referentielRoutes: Routes = [
       { 
         path: ':id', 
         component: referentielForm2Component , 
-        data: { title: 'Formulaire', breadcrumb: 'Création d\'un questionnaire' } 
+        data: { title: 'refForm', breadcrumb: 'TablForm' } 
       },
 
       { 

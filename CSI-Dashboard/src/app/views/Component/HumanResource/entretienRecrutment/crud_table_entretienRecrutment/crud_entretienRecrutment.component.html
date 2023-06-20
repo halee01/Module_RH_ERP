@@ -8,8 +8,7 @@
  <mat-form-field style="padding-left: 19px;">
   <input matInput (keyup)="applyFilter($event)" placeholder="Recherche">
   </mat-form-field> 
-  <button  mat-raised-button class="mb-8 mr-16" style="float: right;" color="primary"  (click)="goToEvaluer()">
-      Ajouter un entretien </button>
+  
      <div style="clear: both;"></div>
  <mat-card class="p-0" [@animate]="{value:'*',params:{y:'50px',delay:'300ms'}}">
    <mat-card-content class="p-0">
@@ -52,21 +51,20 @@
        </ng-container>
 
 
-       <ng-container matColumnDef="note globale">
-         <mat-header-cell *matHeaderCellDef mat-sort-header>note globale
+       <ng-container matColumnDef="title" >
+        <mat-header-cell *matHeaderCellDef > Intitulé du poste
           <div>
             <button [class.transparent-button]="!showInput3" mat-icon-button (click)="toggleInput3()">
               <mat-icon>search</mat-icon>
             </button>
             
             <mat-form-field *ngIf="showInput3" style="width:1.3cm;">
-              <input matInput (input)="applyFilterr($event, 'note globale')" placeholder="Filtrer">
+              <input matInput (input)="applyFilterr($event, 'title')" placeholder="Filtrer">
             </mat-form-field>
           </div>
-         </mat-header-cell>
-         <mat-cell *matCellDef="let row" [style.color]="row.color" data-label="color"> {{row.note_globale}} </mat-cell>
-       </ng-container>
-
+        </mat-header-cell>
+        <mat-cell style="padding-right: 20px;" *matCellDef="let row" data-label="title" [style.color]="row.color"> {{employeeTitleMap[row.title]}} </mat-cell>
+      </ng-container>
 
        <ng-container matColumnDef="actions">
          <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>

@@ -112,7 +112,6 @@ export class CandidatCrudTableComponent implements OnInit {
   }
 
   
-  
 
   getEmployees() {    
     this.getEmployeesub = this.crudService.getItems()
@@ -349,6 +348,7 @@ openPopUpEmployee(data: any = {}) {
             }
           );
         },
+
         (error) => {
           console.error('Error updating item', error);
           this.snack.open('Une erreur est survenue lors de la modification du compte bancaire.', 'OK', { duration: 2000 });

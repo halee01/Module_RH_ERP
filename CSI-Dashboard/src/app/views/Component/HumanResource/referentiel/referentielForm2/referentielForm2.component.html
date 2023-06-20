@@ -2,7 +2,7 @@
   <ng-template matStepLabel></ng-template>
   <mat-card-title class="title">
       <div >
-          <div class="card-title-text"><strong> Veuillez ajouter un domaine et des questions selon la catégorie approprié </strong> </div>
+          <div class="card-title-text"><strong> Veuillez ajouter un domaine et des questions selon la catégorie choisie </strong> </div>
       </div>
       </mat-card-title>
       <div class="border-bottom"></div>
@@ -24,12 +24,12 @@
                 <div class="mini-container1">
                    <form [formGroup]="form" >
 
-                  <mat-form-field class="i-need-padding" appearance="outline">
-                    <mat-label>Destiné à qui</mat-label>
-                    <mat-select formControlName="level">
-                      <mat-option *ngFor="let qt of questionnaireType" [value]="qt">{{QuestionnaireTypeMap[qt]}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+                    <mat-form-field class="i-need-padding" appearance="outline">
+                      <mat-label>Destiné à qui</mat-label>
+                      <mat-select formControlName="questionnaireType">
+                        <mat-option *ngFor="let qt of questionnaireType" [value]="qt">{{QuestionnaireTypeMap[qt]}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
 
                     <mat-form-field class="i-need-padding" appearance="outline">
                       <mat-label>Domaine du questionnaire</mat-label>
