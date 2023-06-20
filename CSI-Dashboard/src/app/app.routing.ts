@@ -111,7 +111,7 @@ export const rootRouterConfig: Routes = [
       {
         path: 'cvCandidat',
         loadChildren: () => import('./views/Component/HumanResource/candidate/CvCandidat/cv-candidat.module').then(m => m.CvCandidatModule),
-        data: { title: 'CvCandidat', breadcrumb: 'CVCANDIDAT'}
+        data: { title: 'CvCandidat', breadcrumb: 'Candidats'}
       },
       {
         path: 'candidatUpdate',
@@ -138,45 +138,45 @@ export const rootRouterConfig: Routes = [
       {
         path: 'CandidatEvaluation',
         loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/affichage_entreteinrecrutment/affichage_entretienRecrutment.module').then(m => m.EntretienRecrutmentModule),
-        data: { title: 'EntretienRecrutment', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
+        data: { title: 'EntretienRecrutment', breadcrumb: 'Entretien du candidat'}
       },
 
       {
         path: 'entretienTable',
         loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/crud_table_entretienRecrutment/crud_entretienRecrutment.module').then(m => m.CrudEntretienRecrutmentModule),
-        data: { title: 'CrudEvaluation', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
+        data: { title: 'CrudEvaluation', breadcrumb: 'Entretiens & recrutements'}
       },
       {
         path: 'evaluationCrud',
         loadChildren: () => import('./views/Component/HumanResource/entretienRecrutment/add_evaluation/add_crud_evaluation.module').then(m => m.CrudEvaluationModule),
-        data: { title: 'Evaluation', breadcrumb: 'ENTRETIEN&RECRUTMENT'}
+        data: { title: 'Evaluation', breadcrumb: 'Entretiens & recrutements'}
       },
       {
         path: 'TableReferentiel',
         loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielDataTable/referentiel-crud.module').then(m => m.referentielCrudModule),
-        data: { title: 'refTable', breadcrumb: 'Table'}
+        data: { title: 'Questionnaire', breadcrumb: 'Questionnaire'}
       },
 
       {
         path: 'refQuestionAffichage',
         loadChildren: () => import('./views/Component/HumanResource/referentiel/refQuestionAffichage/refQuestionAffichage.module').then(m => m.refQuestionAffichageModule),
-        data: { title: 'refTable', breadcrumb: 'Table'}
+        data: { title: 'Questionnaire', breadcrumb: 'Questionnaire'}
       },
 
       {
         path: 'refCategoryAffichage',
         loadChildren: () => import('./views/Component/HumanResource/referentiel/refCategoryAffichage/refCategoryAffichage.module').then(m => m.refCategoryAffichageModule),
-        data: { title: 'refTable', breadcrumb: 'Table'}
+        data: { title: 'Questionnaire', breadcrumb: 'Questionnaire'}
       },
       {
         path: 'formReferentiel',
         loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielForm/referentielForm.module').then(m => m.referentielFormModule),
-        data: { title: 'refForm', breadcrumb: 'form'}
+        data: { title: 'Questionnaire', breadcrumb: 'Questionnaire'}
       },
       {
         path: 'formReferentiel2',
         loadChildren: () => import('./views/Component/HumanResource/referentiel/referentielForm2/referentielForm2.module').then(m => m.referentielForm2Module),
-        data: { title: 'refForm', breadcrumb: 'form'}
+        data: { title: 'Questionnaire', breadcrumb: 'Questionnaire'}
       },
     
       {

@@ -6,7 +6,10 @@
 .container{
   margin-left: 1.5cm;
   margin-right: 1.5cm;
+  
 }
+
+
 
 .example-grid {
   display: flex;
@@ -46,10 +49,6 @@
   margin-top: 16px;
 }
 
-.row-tfile{
-  display: flex;
-  flex-wrap: wrap;
-}
 
 .col-tfile{
   padding-right: 1cm ;
@@ -64,4 +63,25 @@
 
 .mat-heading-label{
   padding-top: 20px;
+}
+
+
+ .right-button {
+  background-color: rgb(158, 156, 156);
+  color: white;
+}
+.left-button{
+  background-color: rgb(158, 156, 156);
+  color: white;
+  margin-right: 15px;
+}
+
+
+ .right-button:hover {
+  background-color: #35e578d3;
+}
+
+.left-button:hover {
+  background-color: rgba(255, 0, 0, 0.74);
+  
 }

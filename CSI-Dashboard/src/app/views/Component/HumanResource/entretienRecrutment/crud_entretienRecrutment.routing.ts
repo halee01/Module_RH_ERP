@@ -11,7 +11,7 @@ import { CrudEvaluationModule } from './add_evaluation/add_crud_evaluation.modul
 export const crudEntretien: Routes = [{ 
     path: 'tableEntretien', 
 component: crudEntretienRecrutmentComponent, 
-data: { title: 'CrudEvaluation' } },
+data: { title: 'CrudEvaluation', breadcrumb: 'Liste des Candidats' } },
 { 
 
   path: 'crudEvaluation', 

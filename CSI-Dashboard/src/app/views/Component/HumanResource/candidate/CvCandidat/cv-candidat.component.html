@@ -10,10 +10,10 @@
       
 
           <mat-card-content class="container" style="padding-top: 1cm;">
-            <mat-card-title class="">
-        <div class="card-title-text">Indiquez les renseignements personnels</div>
-        <mat-divider></mat-divider>
-        </mat-card-title>
+            <mat-card-title style="padding-bottom: 1cm;" class="">
+            <div class="card-title-text">Indiquez les renseignements personnels</div>
+            <mat-divider></mat-divider>
+           </mat-card-title>
             <div  >
               <mat-grid-list cols="2" rowHeight="100px">
 
@@ -117,7 +117,7 @@
                   <div class="card-title-text">Indiquez les Coordonnées</div>
                 </mat-card-title>
                 <mat-divider></mat-divider>
-                <div style="padding-bottom: 1.8cm;"></div>
+                <div style="padding-bottom: 1.2cm;"></div>
       
 
 
@@ -263,7 +263,7 @@
       mat-raised-button 
       color="primary"  
       (click)="saveCandidate()"
-      matStepperNext>Création du Cv
+      matStepperNext>Suivant : Informations complémentaires
       </button>
       </div>
       
@@ -271,72 +271,79 @@
   </div>
     </form>
   </mat-step>
-  
+
 
   <!-------------------------------------------Info techniques--------------------------------------------------->
   
   <mat-step [stepControl]="stepTechFile"errorMessage="Veuillez remplir les champs obligatoires.">
     <form [formGroup]="techFileForm" >
     <div>
-      <ng-template matStepLabel>Informations Générales </ng-template>
-      <mat-card-title class="">
+      <ng-template matStepLabel>Informations complémentaires </ng-template>
+      <mat-card-title class=""> 
         <mat-divider></mat-divider>
-        <div class="card-title-text">Remplissez les informations générales du dossier technique </div>
+        <div class="card-title-text">Remplissez les informations complémentaires du dossier technique</div>
+        <mat-divider></mat-divider>
+        <div class="mat-heading-label" [style.padding-left.px]=24>
+          Présentez les objectifs professionnels du candidat de manière claire et concise.
+        </div>
         <mat-divider></mat-divider>
         </mat-card-title>
 
         
-        <mat-card-content style="padding-top: 1cm;">
-          <div class="container-tfile" >
-            <div class="row-tfile">
-              <div class="col-tfile">
-                <mat-form-field appearance="outline" class="example-field"[style.width.cm]=7.5 >
-                  <mat-label>Référence</mat-label>
-                  <input 
-                    required
-                    type="text"
-                    matInput
-                    formControlName="reference"
-                    placeholder="Ex.">
-                  <mat-error *ngIf="techFileForm.get('reference').invalid && techFileForm.get('reference').touched">
-                    Ce champ est obligatoire.
-                  </mat-error>
-                </mat-form-field>
+        <div class="d-flex justify-content-center">
+          <mat-card-content style="padding-top: 1cm;">
+            <div class="container-tfile d-flex justify-content-between flex-column">
+
+              <div class="row-tfile d-flex">
+                <div class="col-tfile">
+                  <mat-form-field appearance="outline" class="ref-field" style="width: 7.5cm;">
+                    <mat-label>Référence</mat-label>
+                    <input 
+                      required
+                      type="text"
+                      matInput
+                      formControlName="reference"
+                      placeholder="Ex.">
+                    <mat-error *ngIf="techFileForm.get('reference').invalid && techFileForm.get('reference').touched">
+                      Ce champ est obligatoire.
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-tfile">
+                  <mat-form-field appearance="outline" class="ref-field" style="width: 7.5cm;">
+                    <mat-label>Permit de conduire</mat-label>
+                    <input 
+                      type="text"
+                      matInput
+                      formControlName="driverLicense">
+                  </mat-form-field>
+                </div>
               </div>
-              <div class="col-tfile">
-                <mat-form-field appearance="outline" class="example-field"  [style.width.cm]=7.5>
-                  <mat-label>Permit de conduire</mat-label>
-                  <input 
-                    type="text"
-                    matInput
-                    formControlName="driverLicense">
-                </mat-form-field>
-              </div>
-            </div>
-            
-            <div class="row-tfile">
               
-              <div class="col-tfile">
-                <mat-form-field appearance="outline" class="example-field"  [style.width.cm]=16>
-                  <mat-label>Objectifs</mat-label>
-                  <textarea matInput formControlName="objective" placeholder="Décrivez ici les Objectifs du candidat."></textarea>
-                </mat-form-field>
+              <div class="row-tfile d-flex">
+                <div class="col-tfile">
+                  <mat-form-field appearance="outline" class="objective-field" style="width: 16cm;">
+                    <mat-label>Commentaire</mat-label>
+                    <textarea matInput formControlName="description" placeholder="Ajoutez un commentaire."></textarea>
+                  </mat-form-field>
+                </div>
               </div>
-
-              <div class="col-tfile">
-                <mat-form-field appearance="outline" class="example-field"  [style.width.cm]=16> 
-                  <mat-label>Commentaire</mat-label>
-                  <textarea matInput formControlName="description" placeholder="Ajoutez un commentaire."></textarea>
-                </mat-form-field>
+        
+              <div class="row-tfile d-flex">
+                <div class="col-tfile">
+                  <mat-form-field appearance="outline" class="objective-field" style="width: 16cm;">
+                    <mat-label>Objectifs</mat-label>
+                    <textarea matInput formControlName="objective" placeholder="Décrivez ici les Objectifs du candidat."></textarea>
+                  </mat-form-field>
+                </div>
               </div>
-
+        
             </div>
-
-          </div>
-          
-          
-          
-        </mat-card-content>
+          </mat-card-content>
+        </div>
+        
+        
+        
         
         <div  fxLayout="row" dir="rtl" fxLayoutAlign="space-between center">
           <!--Button 2-->
@@ -371,9 +378,6 @@
       <ng-template matStepLabel>Formation</ng-template>
 
       <mat-card-title class=""> 
-        <div [style.padding-left.px]=24>
-        <mat-label>{{ lastEmployee?.firstName }} {{ lastEmployee?.lastName }}</mat-label>
-        </div>
         <mat-divider></mat-divider>
         <div class="card-title-text">Décrivez la formation du candidat</div>
         <mat-divider></mat-divider>
@@ -445,20 +449,23 @@
                           <input matInput [matDatepicker]="picker2" formControlName="obtainedDate" placeholder="Date d'obtention" >
                           <mat-datepicker-toggle  matSuffix [for]="picker2"></mat-datepicker-toggle>
                           <mat-datepicker #picker2></mat-datepicker>
+                          <mat-error *ngIf="formEducation.hasError('rangeError', ['obtainedDate'])">
+                            La date d'obtention ne peut pas être supérieure à la date de début.
+                          </mat-error>
                         </mat-form-field>
                       </div>
                       </div>
 
                       <div class="pb-16">
-                        <mat-checkbox formControlName="actual">En cours</mat-checkbox>
+                        <mat-checkbox color="primary" formControlName="actual">En cours</mat-checkbox>
                       </div>
-                      <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
-                        <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
-                          <mat-icon>delete</mat-icon>
-                        </button>
-                        <button mat-icon-button color="primary" type="button" (click)="saveEducation(i)">
-                          <mat-icon>check</mat-icon>
-                        </button>
+
+                      <div class="form-group col-sm-12 col-md-3 d-flex " style="padding-bottom: 1cm;">
+                        <button mat-raised-button   class="left-button" type="button"  (click)="deleteEducation(i)">
+                          <mat-icon>delete</mat-icon>Supprimer</button>
+                        
+                        <button mat-raised-button class="right-button" type="button" (click)="saveEducation(i)">
+                          <mat-icon>check</mat-icon>Ajouter</button>
                       </div>
                     </div>
                   </div>
@@ -484,7 +491,8 @@
           <button 
         mat-raised-button 
         color="primary" 
-        matStepperNext>Suivant : Expérience
+        matStepperNext
+        (click)="saveAllEducations()">Suivant : Expérience
         </button>
         </div>
       
@@ -502,10 +510,10 @@
 
       <mat-card-title class="">
         <mat-divider></mat-divider>
-        <div class="card-title-text">Parcours professionnel</div>
+        <div class="card-title-text">Decrivez le parcours professionnel</div>
         <mat-divider></mat-divider>
         <div class="mat-heading-label" [style.padding-left.px]=24>
-          Indiquez les postes par ordre chronologique, en commençant par le plus récent.
+          Présentez les postes occupés de manière chronologique, en commençant par les plus récents.
         </div>
         <mat-divider></mat-divider>
         </mat-card-title>
@@ -594,20 +602,24 @@
                               <input matInput [matDatepicker]="picker10" formControlName="experienceEndDate" placeholder="Année Fin ">
                               <mat-datepicker-toggle matSuffix [for]="picker10"></mat-datepicker-toggle>
                               <mat-datepicker #picker10></mat-datepicker>
+                              <mat-error *ngIf="formExperience.hasError('rangeError', ['experienceEndDate'])">
+                                La date d'obtention ne peut pas être supérieure à la date de début.
+                              </mat-error>
                             </mat-form-field>
                           </div>
                           </div>
-
-                      <div class="pb-16">
+                          
+                      <div class="pb-16" style="padding-top: 20px;">
                         <mat-checkbox formControlName="actualEmployment">En cours</mat-checkbox>
                       </div>
-                      <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
-                        <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
-                          <mat-icon>delete</mat-icon>
-                        </button>
-                        <button mat-icon-button color="primary" type="button" (click)="saveExperience(i)">
-                          <mat-icon>check</mat-icon>
-                        </button>
+
+                      <div class="form-group col-sm-12 col-md-3 d-flex " style="padding-bottom: 1cm;">
+                        <button mat-raised-button   class="left-button" type="button"  (click)="deleteExperience(i)">
+                          <mat-icon>delete</mat-icon>Supprimer</button>
+                        
+                        <button mat-raised-button class="right-button" type="button" (click)="saveExperience(i)">
+                          <mat-icon>check</mat-icon>Ajouter</button>
+                        
                       </div>
                     </div>
                   </div>
@@ -631,18 +643,20 @@
           <button 
         mat-raised-button 
         color="primary" 
-         matStepperNext>Suivant : Compétances
+         matStepperNext
+         (click)=" saveAllExperiences()"
+         >Suivant : Compétances
         </button>
         </div>
       </div>
     </div>
   </mat-step>
 
-  <!--------------------------------COMPETANCES------------------------------->
+  <!--------------------------------Compétences------------------------------->
 
   <mat-step [stepControl]="step4" errorMessage="Veuillez ajouter les compétences." >
     <div >
-      <ng-template matStepLabel>Compétances</ng-template>
+      <ng-template matStepLabel>Compétences</ng-template>
       <mat-card-title class="">
         <mat-divider></mat-divider>
         <div class="card-title-text">Indiquez les compétences</div>
@@ -682,14 +696,14 @@
                             <mat-datepicker #pickerCertif></mat-datepicker>
                           </mat-form-field>
                         </div>
-                    <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
-                      <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
-                        <mat-icon>delete</mat-icon>
-                      </button>
-                      <button mat-icon-button color="primary" type="button" (click)="saveCertification(i)">
-                        <mat-icon>check</mat-icon>
-                      </button>
-                    </div>
+                        <div class="form-group col-sm-12 col-md-3 d-flex " style="padding-bottom: 1cm;">
+                          <button mat-raised-button   class="left-button" type="button"  (click)="deleteCertification(i)">
+                            <mat-icon>delete</mat-icon>Supprimer</button>
+                          
+                          <button mat-raised-button class="right-button" type="button" (click)="saveCertification(i)">
+                            <mat-icon>check</mat-icon>Ajouter</button>
+                          
+                        </div>
                   </div>
                 </div>
               </div>
@@ -705,6 +719,7 @@
                  Langues
                 </mat-panel-title>
               </mat-expansion-panel-header>
+
               <form  [formGroup]="formLanguage">
                 <div class="card-body" formArrayName="value"  >
                   <div class="row" >
@@ -729,24 +744,24 @@
                             </mat-select>
                             </mat-form-field>
                         </div>
-                        <!--Langauage Info-->
-                        <div class="form-group mb-1 col-sm-12 col-md-3">
-                          <mat-form-field appearance="outline"  [style.width.cm]=8 class="example-full-width">
-                            <mat-label>Informations supplémentaires</mat-label>
-                            <textarea matInput placeholder="Listez ici les technologies utilisées." formControlName="additionalInformation"></textarea>
-                          </mat-form-field>
-                        </div>
-                        <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
-                          <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                          <button mat-icon-button color="primary" type="button" (click)="saveLanguage(i)">
-                            <mat-icon>check</mat-icon>
-                          </button>
+                        
+                        <div class="form-group col-sm-12 col-md-3 d-flex " style="padding-bottom: 1cm;">
+                          <button mat-raised-button   class="left-button" type="button"  (click)="deleteLanguage(i)">
+                            <mat-icon>delete</mat-icon>Supprimer</button>
+                          
+                          <button mat-raised-button class="right-button" type="button" (click)="saveLanguage(i)">
+                            <mat-icon>check</mat-icon>Ajouter</button>
+                          
                         </div>
                       </div>
                     </div>
                   </div>
+                   <div class="form-group mb-1 col-sm-12 col-md-3" fxLayout="row"  fxLayoutAlign="space-evenly center">
+                      <mat-form-field appearance="outline"  [style.width.cm]=12 class="example-full-width">
+                        <mat-label>Informations supplémentaires</mat-label>
+                        <textarea matInput placeholder="Listez ici les technologies utilisées." formControlName="additionalInformation"></textarea>
+                      </mat-form-field>
+                    </div>
                 </div>
               </div>
 
@@ -777,36 +792,16 @@
                               placeholder="Ex. Soft Skills / Hard Skills">
                           </mat-form-field>
                         </div>
-                        <div class="form-group col-sm-12 col-md-3 d-flex justify-content-center align-items-center">
-                          <button mat-icon-button color="warn" type="button"  (click)="deleteCertif(i)">
-                            <mat-icon>delete</mat-icon>
-                          </button>
-                          <button mat-icon-button color="primary" type="button" (click)="saveSkills(i)">
-                            <mat-icon>check</mat-icon>
-                          </button>
+                        <div class="form-group col-sm-12 col-md-3 d-flex " style="padding-bottom: 1cm;">
+                          <button mat-raised-button   class="left-button" type="button"  (click)="deleteSkills(i)">
+                            <mat-icon>delete</mat-icon>Supprimer</button>
+                          
+                          <button mat-raised-button class="right-button" type="button" (click)="saveSkills(i)">
+                            <mat-icon>check</mat-icon>Ajouter</button>
+                          
                         </div>
                         
-                        <!--Skills Chips -->
-                       <!--<div class="form-group mb-1 col-sm-12 col-md-3">
-                          <div class=" pb-16">
-                            <mat-form-field  class="example-chip-list" style="width:10cm; margin-left: 1.5cm;">
-                              <mat-label>Compétances</mat-label>
-                              <mat-chip-list #chipList formControlName="skillTitle" >
-                                <mat-chip *ngFor="let skill of skills" [selectable]="selectable"
-                                         [removable]="removable" (removed)="remove(skill)">
-                                  {{skill.skillTitle}}
-                                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-                                </mat-chip>
-                                <input placeholder="Ex. Communication / Java"
-                                       [matChipInputFor]="chipList"
-                                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                                       [matChipInputAddOnBlur]="addOnBlur"
-                                       (matChipInputTokenEnd)="add($event)">
-                              </mat-chip-list>
-                            </mat-form-field>
-                          </div>
-                        </div>--> 
-
+                       
                       </div>
                     </div>
                   </div>
@@ -829,22 +824,13 @@
       </mat-card-content>
 
       <div  fxLayout="row" dir="rtl" fxLayoutAlign="space-between center">
-        <!--Button 2-->
-       <!--<div>
-          <button 
-        mat-raised-button 
-        color="primary" 
-        matStepperPrevious>
-        Précédent : Expérience
-        </button>
-        </div>-->
-
         <!--Button 1-->
         <div>
           <button  mat-raised-button 
           color="primary"
            type="submit"
-          >Créer le Cv</button>
+           (click)="saveAllData()"
+          >Suivant : Candidature</button>
         </div>
       </div>
     </div>
@@ -906,14 +892,17 @@
           
           </mat-card-content>
           </mat-card>
-        </div>      
-        <div>
+        </div> 
+        <div  fxLayout="row" dir="rtl"  fxLayoutAlign="space-between center">
+           <div>
             <button 
           mat-raised-button 
           color="primary" 
           matStepperNext>Finalisation
           </button>
           </div>
+        </div>     
+       
       </form>
         </mat-step>
 

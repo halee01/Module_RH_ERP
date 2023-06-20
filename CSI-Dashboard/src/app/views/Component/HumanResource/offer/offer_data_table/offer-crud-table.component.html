@@ -13,12 +13,33 @@
     <mat-table [dataSource]="dataSource" matSort  >
   
   <ng-container matColumnDef="reference">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Référance </mat-header-cell>
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Référance 
+      <div>
+        <button [class.transparent-button]="!showInput1" mat-icon-button (click)="toggleInput1()">
+          <mat-icon>search</mat-icon>
+        </button>
+        
+        <mat-form-field *ngIf="showInput1" style="width:1.3cm;">
+          <input matInput (input)="applyFilterr($event, 'reference')" placeholder="Filtrer">
+        </mat-form-field>
+      </div>
+      
+    </mat-header-cell>
     <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.reference}} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="title">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Title
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Titre
+      <div>
+        <button style="size:10px ;" mat-icon-button (click)="toggleInput2()">
+          <mat-icon style="size:10px ;">search</mat-icon>
+        </button>
+        
+        <mat-form-field *ngIf="showInput2" style="width:1.3cm;" >
+          <input matInput (input)="applyFilterr($event, 'title')" placeholder="Filtrer">
+       </mat-form-field>
+
+         </div>
     </mat-header-cell>
     <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.title}} </mat-cell>
   </ng-container>
@@ -26,14 +47,34 @@
 
   <ng-container matColumnDef="startDate">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Date de début
+      <div>
+        <button style="size:10px ;" mat-icon-button (click)="toggleInput3()">
+          <mat-icon style="size:10px ;">search</mat-icon>
+        </button>
+        
+        <mat-form-field *ngIf="showInput3" style="width:1.3cm;" >
+          <input matInput (input)="applyFilterr($event, 'startDate')" placeholder="Filtrer">
+       </mat-form-field>
+
+         </div>
     </mat-header-cell>
     <mat-cell *matCellDef="let row" data-label="Date de début" [style.color]="row.color"> {{row.startDate}} </mat-cell>
   </ng-container>
 
 
 
-  <ng-container matColumnDef="endDate">
+  <ng-container style="padding-left:25px" matColumnDef="endDate">
     <mat-header-cell *matHeaderCellDef mat-sort-header>Date de fin
+      <div>
+        <button style="size:10px ;" mat-icon-button (click)="toggleInput4()">
+          <mat-icon style="size:10px ;">search</mat-icon>
+        </button>
+        
+        <mat-form-field *ngIf="showInput4" style="width:1.3cm;" >
+          <input matInput (input)="applyFilterr($event, 'endDate')" placeholder="Filtrer">
+       </mat-form-field>
+
+         </div>
       
     </mat-header-cell>
     <mat-cell *matCellDef="let row" data-label="Date de fin" [style.color]="row.color"> {{row.endDate}} </mat-cell>
@@ -41,14 +82,6 @@
 
  <!----> <ng-container matColumnDef="statut" >
     <mat-header-cell *matHeaderCellDef style="padding-left: 2cm;"> Statut   
-      <div>
-        <button mat-icon-button (click)="toggleInput1()">
-        </button>
-        
-        <mat-form-field *ngIf="showInput1" style="width:1.3cm;" >
-          <input matInput (input)="applyStatusFilter($event)" placeholder="Filter by Status">
-       </mat-form-field>
-         </div>
         </mat-header-cell>
     <mat-cell *matCellDef="let row">
       <button mat-button class="mat-button-as-chip"  [matMenuTriggerFor]="menu" [color]="getStatusColor(row.offerStatus).color" >{{ getStatusColor(row.offerStatus).displayText }}</button>

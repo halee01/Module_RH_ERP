@@ -14,6 +14,10 @@ import { Civility } from 'app/shared/models/contact';
 import html2pdf from 'html2pdf.js';
 import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
 import { PrintSharedService } from 'app/shared/services/PrintShared.service';
+import { entretienRecrutmentService } from '../../../entretienRecrutment/entretienRecrutment.service';
+import { ViewAllInterviewsDetailsComponent } from './viewAll-Interviews/viewAll-Interviews.Detailscomponent';
+import { Evaluation } from 'app/shared/models/Evaluation';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-details-candidat',
@@ -46,6 +50,8 @@ cvData: string;
     private candidatService: CrudService,
     private routerPdf: Router,
     private printService: PrintSharedService,
+    private crudEntretien: entretienRecrutmentService,
+    private dialog: MatDialog,
     ) { }
 
   ngOnInit(): void {
@@ -208,5 +214,20 @@ cvData: string;
     [LanguageLevel.NATIVE_LANGUAGE]: 'Langue Maternelle',
     [LanguageLevel.BILINGUAL]: 'Bilingue'
   };
+
+
+
+  viewAllEvaluations(id: number) {
+    this.crudEntretien.getEmployeeEvaluation(this.id).subscribe((evaluations: Evaluation) => {
+      const dialogRef = this.dialog.open( ViewAllInterviewsDetailsComponent, {
+        width: '900px',
+        data: { evaluations }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+    });
+  }
   
 }

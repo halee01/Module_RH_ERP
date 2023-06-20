@@ -29,12 +29,15 @@ import { entretienRecrutmentService } from '../entretienRecrutment.service';
 import { evaluationPopupComponent } from '../evaluationnPopup/evaluation-popup.component';
 import { ViewAllInterviewsComponent } from './viewAll-Interviews/viewAll-Interviews.component';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
+import { MatTooltip, MatTooltipModule } from '@angular/material/tooltip';
 
 
 
 @NgModule({
   imports: [
     CommonModule,
+    MatTooltipModule,
+    MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatProgressBarModule,

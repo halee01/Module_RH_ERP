@@ -30,7 +30,7 @@ import { questionUpdateComponent } from './questionUpdate.component';
   export class refQuestionAffichageComponent implements OnInit {
     repeatForm: FormGroup;
     public getItemSub: Subscription;
-
+    showInput1 = false;
     ExperienceLevel :string []= Object.values(ExperienceLevel);
     question:Question;
     public displayedColumnsQuestions: any;  
@@ -138,5 +138,28 @@ import { questionUpdateComponent } from './questionUpdate.component';
             }
           });
         }
+        applyFilterr(event: Event, key: string) {
+          const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+          const filterWords = filterValue.split(' ');
         
+          this.dataSource.filterPredicate = (data, filter) => {
+            // Split the data value into words and convert to lowercase
+            const dataWords = data[key].trim().toLowerCase().split(' ');
+        
+            // Check if all filter words are present in the data (case-insensitive)
+            return filterWords.every(word => {
+              return dataWords.some(dataWord => dataWord.indexOf(word.toLowerCase()) !== -1);
+            });
+          };
+        
+          this.dataSource.filter = filterValue;
+        
+          if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+          }
+        }
+      
+        toggleInput1() {
+          this.showInput1 = !this.showInput1;
+        }
 }

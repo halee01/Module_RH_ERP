@@ -41,23 +41,22 @@
        <ng-container matColumnDef="actions">
          <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
          <mat-cell *matCellDef="let row">
-           <button mat-icon-button mat-sm-button style=" color: #757575;" class=" mr-16 " (click)="viewAllEvaluations(row)">
-             <mat-icon>remove_red_eye </mat-icon>
-           </button>
-
-           <button  class="mr-16 " mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
+          
+            <button mat-icon-button style="color: #757575;padding-right: 10px; "(click)="viewAllEvaluations(row)"
+           matTooltip="Voir la liste des évaluations" 
+           matTooltipClass="example-tooltip"
+           class="tooltip-button">
+            <mat-icon>remove_red_eye</mat-icon>
           </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item class="mr-16 " style=" color: #757575;" (click)="deleteItem(row)">
-              <mat-icon>delete</mat-icon>
-              <span>Supprimer le candidat</span>
-            </button>
-            <button mat-menu-item class="mr-16 "style=" color: #757575;" class=" mr-16 "  (click)="openpopup(row)">
-              <mat-icon>work </mat-icon>
-              <span>Ajouter une évaluation</span>
-            </button>
-          </mat-menu>
+
+           <button mat-icon-button style="color: #757575; " (click)="openpopup(row)" 
+           matTooltip="Ajouter une évaluation" 
+           matTooltipClass="example-tooltip"
+           class="tooltip-button">
+            <mat-icon>work</mat-icon>
+          </button>
+          
+          
 
          </mat-cell>
        </ng-container>

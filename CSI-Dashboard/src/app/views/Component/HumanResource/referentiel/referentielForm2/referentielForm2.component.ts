@@ -5,6 +5,7 @@ import { FormArray, FormBuilder, FormGroup, UntypedFormControl, UntypedFormGroup
 import { referentielService } from '../referentiel.service';
 import { QuestionCategory, QuestionnaireType } from 'app/shared/models/QuestionCategory';
 import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'referentiel-crud',
@@ -29,6 +30,7 @@ selectedCategory= { id:null};
 
 
 constructor(private refService:referentielService, private fb: FormBuilder,
+  private snackBar: MatSnackBar,
   private route: ActivatedRoute){
 
 }
@@ -88,6 +90,7 @@ saveCatQuestion(): void {
       console.log('Selected technical file ID:', this.selectedCategory.id);
       console.log('Form value', this.form.value);
       this.submitted = true;
+      this.openSnackBar('Domaine ajouté avec succés');
     },
     error: (e) => {
       console.error('Error adding item', e);
@@ -120,4 +123,11 @@ saveQuestion(i:any): void {
   });
 }
 
+///////Snack Bar////
+openSnackBar(message: string): void {
+  this.snackBar.open(message, 'Close', {
+    duration: 3000,
+    verticalPosition: 'bottom' 
+  });
+}
 }

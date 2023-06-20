@@ -32,8 +32,8 @@ export const CandidatRoutes: Routes = [
   { 
     path: ":id", 
    component: CandidatDetailComponent, 
-   pathMatch: "full"
-   //data: { title: 'AffichageCandidat' }
+   pathMatch: "full",
+   data: { title: 'Candidat', breadcrumb: 'Détails du candidat' } 
   },
 
   { 

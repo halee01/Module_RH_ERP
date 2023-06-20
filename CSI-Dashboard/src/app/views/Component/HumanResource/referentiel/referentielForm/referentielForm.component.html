@@ -45,7 +45,7 @@
 
                   <mat-form-field class="i-need-padding" appearance="outline">
                     <mat-label>Destiné à qui</mat-label>
-                    <mat-select formControlName="level">
+                    <mat-select formControlName="questionnaireType">
                       <mat-option *ngFor="let qt of questionnaireType" [value]="qt">{{QuestionnaireTypeMap[qt]}}</mat-option>
                     </mat-select>
                   </mat-form-field>

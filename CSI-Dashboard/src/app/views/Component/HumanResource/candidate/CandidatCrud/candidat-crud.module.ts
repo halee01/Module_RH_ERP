@@ -32,6 +32,8 @@ import { CandidatDetailComponent } from "./Candidat-details/candidat-details.com
 import { NgxPaginationModule } from "ngx-pagination";
 import { ConvertToResourceComponent } from "./convert-candidate/convertToResource.component";
 import { updateCandidatService } from "../updateCandidat/updateCandidat.service";
+import { ViewAllInterviewsDetailsComponent } from "./Candidat-details/viewAll-Interviews/viewAll-Interviews.Detailscomponent";
+import { entretienRecrutmentService } from "../../entretienRecrutment/entretienRecrutment.service";
 
 
 @NgModule({
@@ -66,7 +68,7 @@ import { updateCandidatService } from "../updateCandidat/updateCandidat.service"
     MatTabsModule,
     RouterModule.forChild(CandidatRoutes)
   ],
-  declarations: [CandidatCrudTableComponent,  CandidatDetailComponent,ConvertToResourceComponent],
-  providers: [CrudService,updateCandidatService]
+  declarations: [CandidatCrudTableComponent,  CandidatDetailComponent,ConvertToResourceComponent,ViewAllInterviewsDetailsComponent,],
+  providers: [CrudService,updateCandidatService,entretienRecrutmentService]
 })
 export class CandidatCrudModule { }

@@ -31,11 +31,13 @@ import { MatGridList, MatGridListModule } from '@angular/material/grid-list';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import { OfferPopupComponent } from './cv-popups/offerPopup.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
   imports: [
     MatDialogModule,
+    MatSnackBarModule,
     CommonModule,
     MatSelectModule,
     ReactiveFormsModule,

@@ -3,7 +3,7 @@
     <ng-template matStepLabel></ng-template>
     <mat-card-title class="">
         <div style="padding-bottom: 20px;">
-            <div style="padding-right:4px ;" class="card-title-text">Référentiel<strong> {{ questionCategory.name}}, </strong> </div>
+            <div style="padding-right:4px ;" class="card-title-text">Domaine<strong> {{ questionCategory.name}}, </strong> </div>
          <div class="card-title-text"> Niveau <strong>{{ ExperienceLevelMap[questionCategory.level]}}</strong> </div>
         </div>
         </mat-card-title>
@@ -13,7 +13,18 @@
             <mat-table [dataSource]="dataSourceQuestion" matSort >
         
                 <ng-container matColumnDef="question">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header> Question </mat-header-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header> Question 
+                      <div>
+                        <button style="size:10px ;" mat-icon-button (click)="toggleInput1()">
+                          <mat-icon style="size:10px ;">search</mat-icon>
+                        </button>
+                        
+                        <mat-form-field *ngIf="showInput1" style="width:1.3cm;" >
+                          <input matInput (input)="applyFilterr($event, 'question')" placeholder="Filtrer">
+                       </mat-form-field>
+                
+                         </div>
+                    </mat-header-cell>
                     <mat-cell *matCellDef="let row" data-label="question"> {{row.question}} </mat-cell>
                   </ng-container>
 

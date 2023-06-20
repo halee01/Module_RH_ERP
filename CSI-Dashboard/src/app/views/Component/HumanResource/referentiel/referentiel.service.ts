@@ -87,6 +87,13 @@ getItems(): Observable<QuestionCategory[]> {
   );
 }
 
+getQcategoryByQtype(id: number): Observable<QuestionCategory>{
+  const url = `${this.quesTypeUrl+ '/get'}/${id}`+ '/questionCategories';
+  return this.http.get<QuestionCategory>(url).pipe(
+    catchError(this.handleError)
+  )
+  }
+
 getAllQuestiontypes(): Observable<QuestionType[]> {
   const quesTypeUrlWithGET = this.quesTypeUrl + '/getAll';
   return this.http.get<any>(quesTypeUrlWithGET).pipe(
@@ -94,13 +101,14 @@ getAllQuestiontypes(): Observable<QuestionType[]> {
   );
 }
 
-//get question category by question type id
-getQcByQtId(id: number): Observable<Question>{
-  const url = `${this.apiUrl}/${id}`+ '/questionType';
-  return this.http.get<Question>(url).pipe(
+getQuestionTypeId(id: number): Observable<QuestionType> {
+  const url = `${this.quesTypeUrl+ '/getBy'}/${id}`;
+  return this.http.get<QuestionType>(url).pipe(
     catchError(this.handleError)
-  )
-  }
+  );
+}
+
+
 
 getQuestionCategoryId(id: number): Observable<QuestionCategory> {
   const url = `${this.apiUrl+ '/getBy'}/${id}`;

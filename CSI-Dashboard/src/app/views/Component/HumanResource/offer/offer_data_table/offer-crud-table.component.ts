@@ -36,6 +36,12 @@ export class OfferCrudTableComponent implements OnInit {
   formHeight = 700; //declare and initialize formHeight property
 
 
+
+
+  showInput1 = false;
+  showInput2 = false;
+  showInput3 = false;
+  showInput4 = false;
   submitted = false;
   visible = true;
   selectable = true;
@@ -90,26 +96,6 @@ export class OfferCrudTableComponent implements OnInit {
         this.dataSource.sort = this.sort;
       })
 
-  }
-  applyFilterr(event: Event, key: string) {
-    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
-    const filterWords = filterValue.split(' ');
-
-    this.dataSource.filterPredicate = (data, filter) => {
-      // Split the data value into words and convert to lowercase
-      const dataWords = data[key].trim().toLowerCase().split(' ');
-
-      // Check if all filter words are present in the data (case-insensitive)
-      return filterWords.every(word => {
-        return dataWords.some(dataWord => dataWord.indexOf(word.toLowerCase()) !== -1);
-      });
-    };
-
-    this.dataSource.filter = filterValue;
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
   }
 
   openPopUp(data: any, isNew?) {
@@ -233,8 +219,38 @@ export class OfferCrudTableComponent implements OnInit {
     }
   }
 
-  showInput1 = false;
   toggleInput1() {
     this.showInput1 = !this.showInput1;
   }
+  
+  toggleInput2() {
+    this.showInput2 = !this.showInput2;
+  }
+  
+  toggleInput3() {
+    this.showInput3 = !this.showInput3;
+  }
+  toggleInput4() {
+    this.showInput4 = !this.showInput4;
+  }
+  applyFilterr(event: Event, key: string) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    const filterWords = filterValue.split(' ');
+  
+    this.dataSource.filterPredicate = (data, filter) => {
+      // Split the data value into words and convert to lowercase
+      const dataWords = data[key].trim().toLowerCase().split(' ');
+  
+      // Check if all filter words are present in the data (case-insensitive)
+      return filterWords.every(word => {
+        return dataWords.some(dataWord => dataWord.indexOf(word.toLowerCase()) !== -1);
+      });
+    };
+  
+    this.dataSource.filter = filterValue;
+  
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }  
 }

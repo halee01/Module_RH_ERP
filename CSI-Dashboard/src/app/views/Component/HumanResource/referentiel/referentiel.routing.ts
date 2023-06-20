@@ -11,30 +11,30 @@ export const referentielRoutes: Routes = [
     { 
         path: 'referentielTable', 
         component: referentielCrudTableComponent , 
-        data: { title: 'refTable', breadcrumb: 'Table' } 
+        data: { title: 'Catégories', breadcrumb: 'Liste des catégories du questionnaire' } 
       },
 
       { 
         path: 'referentielForm', 
         component: referentielFormComponent , 
-        data: { title: 'refForm', breadcrumb: 'TablForm' } 
+        data: { title: 'Formulaire', breadcrumb: 'Création d\'un questionnaire' } 
       },
       { 
         path: ':id', 
         component: referentielForm2Component , 
-        data: { title: 'refForm', breadcrumb: 'TablForm' } 
+        data: { title: 'Formulaire', breadcrumb: 'Création d\'un questionnaire' } 
       },
 
       { 
         path: 'ref/:id', 
         component: refCategoryAffichageComponent, 
-        data: { title: 'refAffiche', breadcrumb: 'Table' } 
+        data: { title: 'Domaines', breadcrumb: 'Liste des domaines du questionnaire' } 
       },
 
       { 
         path: ':quest/:id', 
         component: refQuestionAffichageComponent , 
-        data: { title: 'refAffiche', breadcrumb: 'Table' } 
+        data: { title: 'Questions', breadcrumb: 'Liste questions du questionnaire' } 
       }
 
       

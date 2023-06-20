@@ -8,11 +8,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AppConfirmService } from 'app/shared/services/app-confirm/app-confirm.service';
 import { AppLoaderService } from 'app/shared/services/app-loader/app-loader.service';
 import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup} from '@angular/forms';
 import {  Title } from 'app/shared/models/Employee';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { QuestionCategory } from 'app/shared/models/QuestionCategory';
+import { QuestionCategory, QuestionnaireType } from 'app/shared/models/QuestionCategory';
 import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 import { QuestionType } from 'app/shared/models/QuestionType';
 import { referentielService } from '../referentiel.service';
@@ -27,11 +27,12 @@ export class refCategoryAffichageComponent implements OnInit {
   formData = {}
   console = console;
   ExperienceLevel :string []= Object.values(ExperienceLevel);
-  public itemForm: FormGroup;;
- 
+  public itemForm: FormGroup;
+  QuestionnaireType :string []= Object.values(QuestionnaireType);
+ questionType:QuestionType;
   selectedFile: File;
   title :string[]= Object.values(Title);
-
+  showInput1 = false;
   formWidth = 200; //declare and initialize formWidth property
   formHeight = 700; //declare and initialize formHeight property
   submitted = false;
@@ -48,10 +49,12 @@ export class refCategoryAffichageComponent implements OnInit {
   public displayedColumns: any;
   public getItemSub: Subscription;
   public getItemSub2: Subscription;
- 
+  id: number;
+  questionnaireType = Object.values(QuestionnaireType);
 
   constructor(
     private router : Router,
+    private route: ActivatedRoute,
     private dialog: MatDialog,
     private snack: MatSnackBar,
     private crudService: referentielService,
@@ -62,12 +65,14 @@ export class refCategoryAffichageComponent implements OnInit {
   { this.dataSource = new MatTableDataSource<QuestionCategory>([]);}
 
   ngOnInit() {
+    this.id = this.route.snapshot.params['id'];
+    this.getQuestionsType();
    this.displayedColumns = this.getDisplayedColumns();
-    this.getItems()  ;
+    this.getQuestions()  ;
   }
 
   getDisplayedColumns() {
-    return ['name','level','actions' ]; }
+    return ['name','level','questionnaireType','actions' ]; }
 
 
   ngAfterViewInit() {
@@ -81,15 +86,14 @@ export class refCategoryAffichageComponent implements OnInit {
   }
 
 
-  getItems() {    
-    this.getItemSub = this.crudService.getItems()
-      .subscribe((data: any) => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });
-  }
   
+  getQuestions() {
+    this.getItemSub =this.crudService.getQcategoryByQtype(this.id).subscribe((data:any)  => {
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+      }
 
 
   deleteItem(row) {
@@ -102,7 +106,7 @@ export class refCategoryAffichageComponent implements OnInit {
               this.dataSource = data;
               this.loader.close();
               this.snack.open('Questionnaire supprimée!', 'OK', { duration: 2000 });
-              this.getItems();
+              this.getQuestions();
             })
         }
       })
@@ -124,4 +128,39 @@ export class refCategoryAffichageComponent implements OnInit {
   [ExperienceLevel.SENIOR]:'Senior',
   [ExperienceLevel.EXPERT]:'Expert', }
 
+  QuestionnaireTypeMap={
+    [QuestionnaireType.FOR_EMPLOYEES]:'Pour Employées',
+    [QuestionnaireType.FOR_CANDIDATES]:'Pour candidats',
+  };
+
+  applyFilterr(event: Event, key: string) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    const filterWords = filterValue.split(' ');
+  
+    this.dataSource.filterPredicate = (data, filter) => {
+      // Split the data value into words and convert to lowercase
+      const dataWords = data[key].trim().toLowerCase().split(' ');
+  
+      // Check if all filter words are present in the data (case-insensitive)
+      return filterWords.every(word => {
+        return dataWords.some(dataWord => dataWord.indexOf(word.toLowerCase()) !== -1);
+      });
+    };
+  
+    this.dataSource.filter = filterValue;
+  
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  toggleInput1() {
+    this.showInput1 = !this.showInput1;
+  }
+  
+  getQuestionsType() {
+    this.crudService.getQuestionTypeId(this.id).subscribe((data: any) => {
+      this.questionType = data;
+    });
+  }
 }
