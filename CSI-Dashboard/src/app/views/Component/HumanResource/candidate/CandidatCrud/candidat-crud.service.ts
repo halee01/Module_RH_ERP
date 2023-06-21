@@ -14,6 +14,7 @@ import { Certification } from 'app/shared/models/Certification';
 import { Language } from 'highlight.js';
 import { Skills } from 'app/shared/models/Skills';
 import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
+import { Offer } from 'app/shared/models/Offer';
 
 @Injectable()
 
@@ -109,6 +110,12 @@ getItems(): Observable<Employee[]> {
  getItemById(id: number): Observable<Employee> {
   const url = `${this.apiUrl+ '/get'}/${id}`;
   return this.http.get<Employee>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+getOffersById(id: number): Observable<Offer> {
+  const url = `${this.apiAssOffreCandidat+ '/getByEmployee'}/${id}`;
+  return this.http.get<Offer>(url).pipe(
     catchError(this.handleError)
   );
 }

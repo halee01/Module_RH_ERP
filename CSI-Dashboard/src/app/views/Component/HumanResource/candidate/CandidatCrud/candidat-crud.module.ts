@@ -20,7 +20,6 @@ import { TranslateModule } from "@ngx-translate/core";
 import { SharedModule } from "app/shared/shared.module";
 import { CandidatRoutes } from "./candidat-crud.routing";
 import { CrudService } from "./candidat-crud.service";
-import { CandidatCrudTableComponent } from "./CandidatCrud-table/candidat-crud-table.component";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -31,9 +30,10 @@ import { Ng2TelInputModule } from "ng2-tel-input";
 import { CandidatDetailComponent } from "./Candidat-details/candidat-details.component";
 import { NgxPaginationModule } from "ngx-pagination";
 import { ConvertToResourceComponent } from "./convert-candidate/convertToResource.component";
-import { updateCandidatService } from "../updateCandidat/updateCandidat.service";
 import { ViewAllInterviewsDetailsComponent } from "./Candidat-details/viewAll-Interviews/viewAll-Interviews.Detailscomponent";
 import { entretienRecrutmentService } from "../../entretienRecrutment/entretienRecrutment.service";
+import { CandidatCrudTableComponent } from "./CandidatCrud-table/candidat-crud-table.component";
+import { updateCandidatService } from "../updateCandidat/updateCandidat.service";
 
 
 @NgModule({
@@ -68,7 +68,7 @@ import { entretienRecrutmentService } from "../../entretienRecrutment/entretienR
     MatTabsModule,
     RouterModule.forChild(CandidatRoutes)
   ],
-  declarations: [CandidatCrudTableComponent,  CandidatDetailComponent,ConvertToResourceComponent,ViewAllInterviewsDetailsComponent,],
+  declarations: [CandidatCrudTableComponent, CandidatDetailComponent,ConvertToResourceComponent,ViewAllInterviewsDetailsComponent],
   providers: [CrudService,updateCandidatService,entretienRecrutmentService]
 })
 export class CandidatCrudModule { }

@@ -18,6 +18,7 @@ import { entretienRecrutmentService } from '../../../entretienRecrutment/entreti
 import { ViewAllInterviewsDetailsComponent } from './viewAll-Interviews/viewAll-Interviews.Detailscomponent';
 import { Evaluation } from 'app/shared/models/Evaluation';
 import { MatDialog } from '@angular/material/dialog';
+import { Offer } from 'app/shared/models/Offer';
 
 @Component({
   selector: 'app-details-candidat',
@@ -35,6 +36,7 @@ education : Education
 language: Language
 technicalFile: TechnicalFile
 skills : Skills
+offer : Offer;
 skillsCategory : SkillsCategory
 certification : Certification
 experience : Experience
@@ -45,6 +47,7 @@ Civility :string []= Object.values(Civility);
 MaritalSituation :string []= Object.values(MaritalSituation);
 LanguageLevel : string[] = Object.values(LanguageLevel);
 cvData: string; 
+
 
   constructor (  private route: ActivatedRoute,
     private candidatService: CrudService,
@@ -65,6 +68,7 @@ cvData: string;
    this.getlanguage();
    this.getSkills();
    this.getCandidature();
+   this.getOffers();
    /*const cv = document.getElementById('CV');
     if (cv) {
       this.cvHtml = cv.innerHTML;
@@ -156,6 +160,12 @@ cvData: string;
     })
   }
 
+  getOffers() {
+    this.candidatService.getOffersById(this.id).subscribe((data: any) => {
+      this.offer = data;
+      console.log(this.offer);
+    });
+  }
   openEvaluationCandidat(){
     this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
   }

@@ -7,8 +7,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup, UntypedFormControl, Unt
 import { LanguageLevel } from 'app/shared/models/Language';
 import { MatTabGroup } from '@angular/material/tabs';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { updateCandidatService } from '../../updateCandidat/updateCandidat.service';
 import { ConvertToResourceService } from './convertToResource.service';
+import { updateCandidatService } from '../../updateCandidat/updateCandidat.service';
 
 
 @Component({

@@ -1,5 +1,5 @@
 import { Offer } from './../../../../../shared/models/Offer';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Employee} from '../../../../../shared/models/Employee';
@@ -107,7 +107,7 @@ export class cvcandidatComponent implements OnInit {
   employee: Employee;
   offers: Offer[];
   isLinear = false;
-
+  isButtonDisabled=false;
  
   step1 = this._formBuilder.group({
    // firstCtrl: ['', Validators.required],
@@ -873,5 +873,58 @@ handleRemoveRepeatForm(index: number) {
 
   }
   
+  openPopUpCandidature(offerId: number) {
+    const title = 'Nouvelle candidature';
+    const dialogRef: MatDialogRef<any> = this.dialog.open(OfferPopupComponent, {
+      width: '600px',
+      disableClose: true,
+      data: { title: title, isNew: true, offerNum: offerId }
+    });
   
+    dialogRef.afterClosed().subscribe(res => {
+      if (!res) {
+        // If the user presses cancel or closes the dialog
+        console.log('Dialog closed without submitting.');
+        return;
+      }
+  
+      console.log('Dialog submitted:', res);
+      
+  
+      const employeeNum = this.selectedEmplyee.id; // Assuming you have stored the employee number in the 'selectedEmployeeNum' variable
+      console.log('Employee Number:', employeeNum);
+      console.log('Offer Number:', offerId);
+  
+      // Create the request payload based on the form values
+      const payload = {
+        applicationDate: res.applicationDate,
+        experienceLevel: res.experienceLevel,
+        employeeNum: employeeNum,
+        offerNum: offerId
+        // Add other attributes as needed
+
+      };
+  
+      // Assuming you have a service called 'cvCandidatService' to handle the API requests
+      this.cvCandidatService.addOfferCandidate(payload).subscribe(
+        (data: any) => {
+          console.log('Add offer candidate success:', data);
+          this.dataSource = data;
+          this.loader.close();
+          this.snack.open('Candidature ajoutée avec succès!', 'OK', { duration: 2000 });
+          this.isButtonDisabled = true; // Disable the button
+        },
+        (error) => {
+          console.log('Add offer candidate error:', error);
+          this.loader.close();
+          this.snack.open('Erreur lors de l\'ajout de la candidature', 'OK', { duration: 2000 });
+        }
+      );
+     
+    });
+  }
+
+  Finalisation() {
+    this.router.navigateByUrl('/candidat/CandidatCrud-table');
+  }
 }

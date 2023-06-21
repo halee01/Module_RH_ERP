@@ -77,7 +77,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   declarations: [
     cvcandidatComponent, 
     CalendarFormDialogComponent,
-    OfferPopupComponent
+    OfferPopupComponent,
   ]
 })
 export class CvCandidatModule { }

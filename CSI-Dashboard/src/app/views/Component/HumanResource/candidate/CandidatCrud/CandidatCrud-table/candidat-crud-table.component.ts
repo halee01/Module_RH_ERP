@@ -22,6 +22,7 @@ import { ConvertToResourceComponent } from '../convert-candidate/convertToResour
 import { updateCandidatService } from '../../updateCandidat/updateCandidat.service';
 
 
+
 @Component({
   selector: 'app-candidat-crud',
   templateUrl: './candidat-crud-table.component.html',

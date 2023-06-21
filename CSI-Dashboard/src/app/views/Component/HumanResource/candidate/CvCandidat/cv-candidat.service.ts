@@ -102,7 +102,12 @@ getOfferItems(): Observable<Offer[]> {
     catchError(this.handleError)
   );
 }
-
+getOffersById(id: number): Observable<Offer> {
+  const url = `${this.apiAssOffreCandidat+ '/getByEmployee'}/${id}`;
+  return this.http.get<Offer>(url).pipe(
+    catchError(this.handleError)
+  );
+}
 
  // GET an item by id
  getItem(id: number): Observable<Employee> {
