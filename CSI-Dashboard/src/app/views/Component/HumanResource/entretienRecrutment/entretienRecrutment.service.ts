@@ -14,6 +14,7 @@ import { QuestionCategory } from 'app/shared/models/QuestionCategory';
 import { Question } from 'app/shared/models/Question';
 import { ExperienceLevel } from 'app/shared/models/AssOfferCandidate';
 import { UpdatedQuestion } from 'app/shared/models/UpdtaedQuestion';
+import { AdministrativeData } from 'app/shared/models/AdministrativeData';
 
 @Injectable()
 export class entretienRecrutmentService {
@@ -270,6 +271,7 @@ deleteItem(id: number): Observable<Employee> {
 }
 
 
+
 // DELETE an evaluation by id
 deleteEvaluation(id: number): Observable<Evaluation> {
  
@@ -305,6 +307,17 @@ getEmployeeById(id: number): Observable<any> {
 getInterviewsById(id: number): Observable<any> {
   const url = `${this.apiUrlEvaluation+ '/get'}/${id}`+ '/interview';
   return this.http.get<any>(url).pipe(
+    catchError(this.handleError)
+  );
+}
+checkAdministrativeData(id:number): Observable<boolean> {
+  const url = `${this.apiUrl}/${id}/hasAdministrativeData`;
+  return this.http.get<boolean>(url) ;
+ 
+}
+getAdministrativeDataById(id: number): Observable<AdministrativeData> {
+  const url = `${this.apiUrl+ '/get'}/${id}`+ '/administrativeData';
+  return this.http.get<AdministrativeData>(url).pipe(
     catchError(this.handleError)
   );
 }

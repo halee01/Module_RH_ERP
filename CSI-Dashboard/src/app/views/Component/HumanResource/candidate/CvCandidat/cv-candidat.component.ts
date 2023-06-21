@@ -692,7 +692,6 @@ saveAllData(): void {
       console.log('Languages added successfully', res);
       console.log('Form value', this.formLanguage.value);
       this.submitted = true;
-      this.openSnackBar('Langue ajoutée avec succès');
 
       // Save Skills
       const skills = this.formSkills.get('value').value;
@@ -706,7 +705,7 @@ saveAllData(): void {
           console.log('Skills added successfully', res);
           console.log('Form value', this.formSkills.value);
           this.submitted = true;
-          this.openSnackBar('Compétence ajoutée avec succès');
+          this.openSnackBar('Informations ajoutées avec succès');
 
           // Save Certifications
           const certifications = this.formCertif.get('value').value;

@@ -32,7 +32,9 @@ import { ajoutEntretienPopupComponent } from './add-entretien-pop/addEntretien-p
 import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDetails-popup.component';
 import { addAdminstrativeDataComponent } from './add-AdsministrativeData-popup/addAdministartiveData-popup.component';
 import { MatSliderModule } from '@angular/material/slider';
-
+import { HalfCircleDashboardComponent } from './GlobalAppDash/globalAppDash.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ViewAdministrativeDataComponent } from './viewAdministartiveData/viewAdministrativeData.component';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { MatSliderModule } from '@angular/material/slider';
     FormsModule,
     MatSelectModule,
     MatSelectModule,
+    MatProgressSpinnerModule,
     HttpClientModule,
     MatSliderModule,
     MatTabsModule,
@@ -74,7 +77,7 @@ import { MatSliderModule } from '@angular/material/slider';
   providers: [entretienRecrutmentService],
   // entryComponents: [CalendarFormDialogComponent],
   declarations: [
-    entretienRecrutmentComponent,questionnairePopupComponent,ajoutEntretienPopupComponent,entretienRecrutmentComponent,InterviewDetailsDialogComponent,
-    addAdminstrativeDataComponent]
+    entretienRecrutmentComponent,questionnairePopupComponent,ajoutEntretienPopupComponent,InterviewDetailsDialogComponent,
+    addAdminstrativeDataComponent,ViewAdministrativeDataComponent,HalfCircleDashboardComponent]
 })
 export class EntretienRecrutmentModule { }

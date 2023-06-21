@@ -84,6 +84,7 @@ saveCatQuestion(): void {
       console.log('Selected technical file ID:', this.selectedCategory.id);
       console.log('Form value', this.form.value);
       this.submitted = true;
+      this.openSnackBar('Domaine ajouté avec succés');
     },
     error: (e) => {
       console.error('Error adding item', e);
