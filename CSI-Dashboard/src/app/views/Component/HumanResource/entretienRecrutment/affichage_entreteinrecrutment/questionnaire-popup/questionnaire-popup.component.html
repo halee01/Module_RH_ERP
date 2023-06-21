@@ -45,29 +45,33 @@
          </mat-tab-group>
     </mat-card>--> 
     <h2 mat-dialog-title>Filter Questions</h2>
-<mat-dialog-content>
-  <mat-form-field>
-    <mat-label>Select Question Type</mat-label>
-    <mat-select [(value)]="selectedQuestionType" (selectionChange)="filterQuestionCategories()">
-      <mat-option *ngFor="let questionType of questionTypes" [value]="questionType">
-        {{ questionType.questionTypeName }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Select Question Category</mat-label>
-    <mat-select [(value)]="selectedQuestionCategory">
-      <mat-option *ngFor="let questionCategory of filteredQuestionCategories" [value]="questionCategory">
-        {{ questionCategory.name }} {{questionCategory.level}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-</mat-dialog-content>
+    <mat-dialog-content>
+      <div style="display: flex; flex-direction: column;">
+        <mat-form-field style="width: 10cm;">
+          <mat-label>Selectionnez une catégorie du questionnaire</mat-label>
+          <mat-select [(value)]="selectedQuestionType" (selectionChange)="filterQuestionCategories()">
+            <mat-option *ngFor="let questionType of questionTypes" [value]="questionType">
+              {{ questionType.questionTypeName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field style="width: 10cm;">
+          <mat-label>Selectionnez un domaine du questionnaire</mat-label>
+          <mat-select [(value)]="selectedQuestionCategory">
+            <mat-option *ngFor="let questionCategory of filteredQuestionCategories" [value]="questionCategory">
+              {{ questionCategory.name }} {{questionCategory.level}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-dialog-content>
+    
+    
 
 <mat-dialog-actions align="end">
-  <button mat-button (click)="closeDialog()">Close</button>
-  <button mat-button color="primary" (click)="applyFilters()">Filtrer</button>
+  <button mat-button color="warn" (click)="closeDialog()">Fermer</button>
+  <button mat-raised-button color="primary" (click)="applyFilters()">Filtrer</button>
 </mat-dialog-actions>
 
 <mat-dialog-content *ngIf="questions.length > 0">
@@ -77,7 +81,7 @@
       {{ question.question }}
     </li>
   </ul>
-  <button mat-button color="primary" (click)="onAddQuestionnaire(selectedQuestionType.id)">ajouter</button>
+  <button mat-raised-button color="primary" (click)="onAddQuestionnaire(selectedQuestionType.id)">ajouter</button>
 </mat-dialog-content>
 
 

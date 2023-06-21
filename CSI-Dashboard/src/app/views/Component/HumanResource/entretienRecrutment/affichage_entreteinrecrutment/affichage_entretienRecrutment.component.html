@@ -3,12 +3,23 @@
     <!-- Employee details -->
     <div fxLayout="row wrap">
       <div fxFlex="70">
-        <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
-        <div style="padding-top: 15px;">
-          <p class="text-small"><strong>L'email numéro 1:</strong> {{employee.emailOne}}</p>
-          <p class="text-small"><strong>Numéro de téléphone 1:</strong> {{employee.phoneNumberOne}}</p>
+
+        <div  class="name-card" >
+            <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
         </div>
+        
+        <div>
+          <div class="infor-card" >
+          <p class="text-small"><strong class="infor-card-text">L'email numéro 1:</strong>{{employee.emailOne}}</p>
+        <p class="text-small"><strong class="infor-card-text">Numéro de téléphone 1:</strong>{{employee.phoneNumberOne}}</p>
+        <p class="text-small"><strong class="infor-card-text">La note globale est:</strong>{{evaluation.globalAppreciation}}</p>
       </div>
+        </div>
+          
+        
+      </div>
+
+      
       <div fxFlex="30">
         <app-half-circle-dashboard [globalAppreciation]="evaluation.globalAppreciation"></app-half-circle-dashboard>
 
@@ -78,9 +89,6 @@
                   </button>
                 </div>
                 
-                
-                
-  
                 </div>
             </div>
           </div>

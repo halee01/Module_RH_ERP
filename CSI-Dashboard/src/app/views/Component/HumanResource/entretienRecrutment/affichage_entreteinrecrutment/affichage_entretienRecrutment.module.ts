@@ -42,6 +42,7 @@ import { ViewAdministrativeDataComponent } from './viewAdministartiveData/viewAd
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    MatCardModule,
     MatSelectModule,
     MatSelectModule,
     MatProgressSpinnerModule,

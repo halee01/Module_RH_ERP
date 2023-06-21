@@ -15,8 +15,7 @@ import { EMPTY, Observable, catchError, forkJoin, map } from 'rxjs';
 import { InterviewDetailsDialogComponent } from './interviewDetails/interviewDetails-popup.component';
 import { UpdatedQuestion } from 'app/shared/models/UpdtaedQuestion';
 import { addAdminstrativeDataComponent } from './add-AdsministrativeData-popup/addAdministartiveData-popup.component';
-import { Location } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
+
 import { Evaluation } from 'app/shared/models/Evaluation';
 import { ViewAdministrativeDataComponent } from './viewAdministartiveData/viewAdministrativeData.component';
 
@@ -339,7 +338,7 @@ export class entretienRecrutmentComponent implements OnInit {
   openPopupQuestionnaire(interviewId: number): void {
     this.getCategoryTypes().subscribe((data: any) => {
       const dialogRef = this.dialog.open(questionnairePopupComponent, {
-        width: '400px',
+        width: '700px',
         data: {
           interviewId: interviewId,
           questionTypes: data.questionTypes,
