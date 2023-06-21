@@ -85,3 +85,14 @@
   background-color: rgba(255, 0, 0, 0.74);
   
 }
+
+.transparent-button {
+  background-color: transparent;
+  opacity: 0;
+  transition: opacity 0.2s;
+  size:10px ;
+}
+
+.transparent-button:hover {
+  opacity: 1;
+}

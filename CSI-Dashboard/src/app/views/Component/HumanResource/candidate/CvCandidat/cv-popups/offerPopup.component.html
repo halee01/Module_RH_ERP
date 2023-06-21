@@ -4,7 +4,7 @@
     <form [formGroup]="offerCandidatForm"  >
 
             <div class="pb-16">
-                <mat-form-field appearance="outline" [style.width.cm]=10>
+                <mat-form-field appearance="outline" [style.width.cm]=9>
                     <mat-label>Niveau d'experience</mat-label>
                     <mat-select formControlName="experienceLevel" >
                       <mat-option *ngFor="let ExperienceLevels of ExperienceLevel " [value]="ExperienceLevels">{{ ExperienceLevelMap[ExperienceLevels]}}</mat-option>
@@ -14,7 +14,7 @@
 
 
             <div class="pb-16">
-              <mat-form-field appearance="outline" [style.width.cm]="8">
+              <mat-form-field appearance="outline" [style.width.cm]="9">
                 <mat-label>Date d'application</mat-label>
                 <input matInput [matDatepicker]="picker" formControlName="applicationDate" placeholder=" ">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -23,8 +23,8 @@
             </div>
 
             <mat-dialog-actions align="end">
-              <button mat-button mat-dialog-close>Fermer</button>
-              <button mat-button [mat-dialog-close]="true" cdkFocusInitial (click)="submit()">Ajouter</button>
+              <button mat-button color="warn" mat-dialog-close>Fermer</button>
+              <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial (click)="submit()">Ajouter</button>
             </mat-dialog-actions>
 
       </form>

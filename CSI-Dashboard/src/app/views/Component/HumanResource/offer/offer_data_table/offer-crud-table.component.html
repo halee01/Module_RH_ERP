@@ -110,7 +110,7 @@
    <ng-container matColumnDef="actions">
      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
      <mat-cell *matCellDef="let row">
-       <button  matTooltip="Voir les détails de l'offre" mat-icon-button mat-sm-button  class=" mr-16 "  (click)="Affiche(row.id)">
+       <button  matTooltip="Voir les détails de l'offre" mat-icon-button mat-sm-button  class=" mr-16 " (click)="openPopupDetails(row, false)">
          <mat-icon>remove_red_eye </mat-icon>
        </button>
        

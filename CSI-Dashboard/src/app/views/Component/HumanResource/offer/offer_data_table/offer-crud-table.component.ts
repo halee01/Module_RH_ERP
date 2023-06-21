@@ -15,6 +15,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { OfferService } from '../offer.service';
 import { Offer, OfferStatus } from 'app/shared/models/Offer';
 import { OfferPopupComponent } from '../offer-popup/offer-popup.component';
+import { OfferDetailPopupComponent } from '../affichage_offer/affichage_offer.component';
 
 @Component({
   selector: 'offer-crud',
@@ -97,6 +98,29 @@ export class OfferCrudTableComponent implements OnInit {
         this.dataSource.sort = this.sort;
       })
 
+  }
+
+
+  openPopupDetails(row: any, isNew?: boolean): void {
+    const title = isNew ? 'Nouvelle offre' : 'Détails de l\'offre';
+    const dialogRef: MatDialogRef<OfferDetailPopupComponent> = this.dialog.open(OfferDetailPopupComponent, {
+      width: '400px',
+      disableClose: true,
+      data: { title: title, payload: { id: row.id, ...row } }
+    });
+  
+    dialogRef.afterClosed().subscribe(res => {
+      if (!res) {
+        // If user presses cancel
+        return;
+      }
+  
+      if (isNew) {
+        // Handle adding new offer
+      } else {
+        // Handle updating existing offer
+      }
+    });
   }
 
   openPopUp(data: any, isNew?) {

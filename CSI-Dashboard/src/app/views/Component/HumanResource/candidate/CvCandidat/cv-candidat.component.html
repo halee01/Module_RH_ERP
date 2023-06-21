@@ -852,21 +852,30 @@
             
             <ng-container matColumnDef="reference">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Référance
-                <div style="padding-left: 20px;">
-                  <mat-form-field style="width:1.5cm;" >
-                   <input matInput (input)="applyFilterReference($event)" placeholder="Filtrer">
-                 </mat-form-field>
-                 </div> </mat-header-cell>
+                <div>
+                  <button [class.transparent-button]="!showInput1" mat-icon-button (click)="toggleInput1()">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                  
+                  <mat-form-field *ngIf="showInput1" style="width:1.3cm;">
+                    <input matInput (input)="applyFilterr($event, 'reference')" placeholder="Filtrer">
+                  </mat-form-field>
+                </div>
+               </mat-header-cell>
               <mat-cell *matCellDef="let row"  [style.color]="row.color"> {{row.reference}} </mat-cell>
             </ng-container>
           
             <ng-container matColumnDef="title">
               <mat-header-cell *matHeaderCellDef mat-sort-header> Title
-                <div style="padding-left: 20px;">
-                  <mat-form-field style="width:1.5cm;" >
-                   <input matInput (input)="applyFilterTitle($event)" placeholder="Filtrer">
-                 </mat-form-field>
-                 </div>
+                <div>
+                  <button [class.transparent-button]="!showInput2" mat-icon-button (click)="toggleInput2()">
+                    <mat-icon>search</mat-icon>
+                  </button>
+                  
+                  <mat-form-field *ngIf="showInput2" style="width:1.3cm;">
+                    <input matInput (input)="applyFilterr($event, 'title')" placeholder="Filtrer">
+                  </mat-form-field>
+                </div>
               </mat-header-cell>
               <mat-cell *matCellDef="let row" data-label="title" [style.color]="row.color"> {{row.title}} </mat-cell>
             </ng-container>

@@ -87,7 +87,7 @@
               </mat-card-title>
               
               <mat-card-content>
-                <mat-list *ngFor="let educations of education">
+                <mat-list *ngFor="let educations of education" style="padding-bottom: 30px;">
                   <mat-list-item><mat-icon color="primary" class="mr-16">school</mat-icon><strong style="padding-right: 10px;">Diplome : </strong>{{educations?.diploma}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">business</mat-icon> <strong style="padding-right: 10px;">Institution : </strong>{{educations?.institution}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date d'inscription : </strong> {{educations?.startYear}}</mat-list-item>
@@ -110,7 +110,7 @@
                   
                 </mat-list>
 
-                <mat-list *ngFor="let experiences of experience" >
+                <mat-list *ngFor="let experiences of experience" style="padding-bottom: 30px;" >
                 <mat-list>
                   <mat-list-item><mat-icon  color="primary"class="mr-16">business</mat-icon> <strong style="padding-right: 10px;">Société : </strong>{{experiences.experienceCompany}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">person</mat-icon> <strong style="padding-right: 10px;">Intitulé du poste : </strong>{{experiences.experienceTitle}}</mat-list-item>
@@ -201,8 +201,9 @@
               </mat-card-title>
               <mat-card-content>
                 <mat-list *ngFor="let Candidatures of candidature" >
-                  <mat-list-item style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Titre de l'offre : </strong>{{Candidatures.id}}</mat-list-item>
-                  <mat-list-item  style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Déscription de l'offre: </strong></mat-list-item>
+                  <mat-list-item style="padding-bottom: 20px;"><strong style="padding-right: 10px;">ID de l'offre : </strong>{{Candidatures.id}}</mat-list-item>
+                  <mat-list-item  style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Date de l'application: </strong>{{Candidatures.applicationDate}}</mat-list-item>
+                  <mat-list-item  style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Niveau d'éxpérience: </strong>{{Candidatures.expeienceLevel}}</mat-list-item>
                 </mat-list>
               </mat-card-content>
             </mat-card>
