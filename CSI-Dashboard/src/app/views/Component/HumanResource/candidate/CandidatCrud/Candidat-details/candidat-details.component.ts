@@ -13,12 +13,6 @@ import { Language, LanguageLevel } from 'app/shared/models/Language';
 import { Civility } from 'app/shared/models/contact';
 import html2pdf from 'html2pdf.js';
 import { AssOfferCandidate } from 'app/shared/models/AssOfferCandidate';
-import { PrintSharedService } from 'app/shared/services/PrintShared.service';
-import { entretienRecrutmentService } from '../../../entretienRecrutment/entretienRecrutment.service';
-import { ViewAllInterviewsDetailsComponent } from './viewAll-Interviews/viewAll-Interviews.Detailscomponent';
-import { Evaluation } from 'app/shared/models/Evaluation';
-import { MatDialog } from '@angular/material/dialog';
-import { Offer } from 'app/shared/models/Offer';
 
 @Component({
   selector: 'app-details-candidat',
@@ -36,7 +30,6 @@ education : Education
 language: Language
 technicalFile: TechnicalFile
 skills : Skills
-offer : Offer;
 skillsCategory : SkillsCategory
 certification : Certification
 experience : Experience
@@ -46,16 +39,11 @@ title :string[]= Object.values(Title);
 Civility :string []= Object.values(Civility);
 MaritalSituation :string []= Object.values(MaritalSituation);
 LanguageLevel : string[] = Object.values(LanguageLevel);
-cvData: string; 
 
 
-  constructor (  private route: ActivatedRoute,
+  constructor(    private route: ActivatedRoute,
     private candidatService: CrudService,
-    private routerPdf: Router,
-    private printService: PrintSharedService,
-    private crudEntretien: entretienRecrutmentService,
-    private dialog: MatDialog,
-    ) { }
+    private routerPdf: Router ,) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
@@ -68,20 +56,15 @@ cvData: string;
    this.getlanguage();
    this.getSkills();
    this.getCandidature();
-   this.getOffers();
    /*const cv = document.getElementById('CV');
     if (cv) {
       this.cvHtml = cv.innerHTML;
     }*/
 
-    this.printService.print$.subscribe((employee: any) => {
-      this.printCv(employee);
-    });
-
   }
 
   //////////////////CV Print///////////////////
-  printCv(employee: any) {
+  printCv() {
     const printableArea = document.getElementById('resume');
     var originalContents = document.body.innerHTML;
     var printContents = document.getElementById('resume').innerHTML;
@@ -89,16 +72,6 @@ cvData: string;
     window.print();
     document.body.innerHTML = originalContents;
   }
-
- /* printCvFromDataTbale(cvData: string) {
-    var originalContents = document.body.innerHTML;
-    document.body.innerHTML = cvData;
-    window.print();
-    document.body.innerHTML = originalContents;
-  }*/
-
-  
-
   
  downloadCV() {
     const element = document.getElementById("resume");
@@ -115,20 +88,18 @@ cvData: string;
 
     });
   }
-
   getTechnicalFile() {
     this.candidatService.getTechnicalFileById(this.id).subscribe((data: any) => {
       this.technicalFile = data;
+
     });
   }
-
   getEducation() {
     this.candidatService.getEducationById(this.id).subscribe((data: any) => {
       this.education = data;
       console.log(this.education);
     });
   }
-  
   getExperience(){
     this.candidatService.getExperienceById(this.id).subscribe((data : any)=>{
       this.experience = data;
@@ -160,12 +131,6 @@ cvData: string;
     })
   }
 
-  getOffers() {
-    this.candidatService.getOffersById(this.id).subscribe((data: any) => {
-      this.offer = data;
-      console.log(this.offer);
-    });
-  }
   openEvaluationCandidat(){
     this.router.navigate(['CandidatEvaluation/evaluationCandidat'])
   }
@@ -224,20 +189,5 @@ cvData: string;
     [LanguageLevel.NATIVE_LANGUAGE]: 'Langue Maternelle',
     [LanguageLevel.BILINGUAL]: 'Bilingue'
   };
-
-
-
-  viewAllEvaluations(id: number) {
-    this.crudEntretien.getEmployeeEvaluation(this.id).subscribe((evaluations: Evaluation) => {
-      const dialogRef = this.dialog.open( ViewAllInterviewsDetailsComponent, {
-        width: '550px',
-        data: { evaluations }
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
-      });
-    });
-  }
   
 }

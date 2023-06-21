@@ -1,4 +1,4 @@
-<div style="margin-top: 17px;" class="page-layout overflow-hidden pb-8">
+<div class="page-layout overflow-hidden pb-8">
   <div class="header-bg blue"></div>
 
   <div class="content">
@@ -30,7 +30,6 @@
                   <div class="flex-item"><mat-icon color="primary" class="mr-16">add_locationgit </mat-icon> <strong style="padding-right: 10px;" >Code Postal : </strong>{{ employee.postCode }}</div>
                   <div class="flex-item"><mat-icon color="primary" class="mr-16">location_city</mat-icon> <strong style="padding-right: 10px;">Ville : </strong>{{ employee.city }}</div>
                   <div class="flex-item"><mat-icon color="primary" class="mr-16">public</mat-icon> <strong style="padding-right: 10px;">Pays : </strong>{{ employee.country }}</div>
-                  <mat-icon  color="primary"class="mr-16" style="padding-left:15px ;">work_outline</mat-icon><strong style="padding-right: 10px;">Nombre d'années d'expérience : </strong>{{employee.experience}}
                   </div>
                <!-- <mat-divider></mat-divider>
                 <div  fxLayoutAlign="center center" style="padding-top: 25px;">
@@ -72,8 +71,7 @@
           </div>
           <span fxFlex></span>
             <span style=" padding-top: 30px;"><mat-icon color="primary" class="mr-16" title="Voir l'évaluation">create</mat-icon></span>
-            <div style="padding-top: 20px; padding-right: 20px;"><button  mat-raised-button  color="primary"
-              (click)="viewAllEvaluations(id)" >Voir l'évaluation</button></div>
+            <div style="padding-top: 20px; padding-right: 20px;"><button  mat-raised-button  color="primary"  (click)="openViewById(id)" >Voir l'évaluation</button></div>
         </div>
         <mat-divider></mat-divider>
       </mat-card-title>
@@ -116,8 +114,11 @@
                   <mat-list-item><mat-icon color="primary" class="mr-16">person</mat-icon> <strong style="padding-right: 10px;">Intitulé du poste : </strong>{{experiences.experienceTitle}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">keyboard</mat-icon><strong style="padding-right: 10px;">Technologies: </strong>{{experiences.technology}}</mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de début : </strong>{{experiences.experienceStartDate}}</mat-list-item>
-                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de fin : </strong> <ng-container *ngIf="actualEmploymentIsChecked; else experienceEndDate">{{'Present'}}</ng-container>
-                    <ng-template #experienceEndDate>{{experiences.experienceEndDate}}</ng-template></mat-list-item>
+                  <mat-list-item><mat-icon color="primary" class="mr-16">date_range</mat-icon> <strong style="padding-right: 10px;">Date de fin : </strong><p>
+                    <ng-container *ngIf="actualEmploymentIsChecked; else experienceEndDate">{{'Present'}}</ng-container>
+                    <ng-template #experienceEndDate>{{experiences.experienceEndDate}}</ng-template>
+                    
+                  </p></mat-list-item>
                   <mat-list-item><mat-icon color="primary" class="mr-16">location_on</mat-icon> <strong style="padding-right: 10px;">Actuellement employé : </strong>{{experiences.actualEmployment}}</mat-list-item>
                 </mat-list>
               </mat-list>
@@ -200,9 +201,9 @@
                 <mat-divider></mat-divider>
               </mat-card-title>
               <mat-card-content>
-                <mat-list *ngFor="let offers of offer" >
-                  <mat-list-item style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Titre de l'offre : </strong>{{offers.title}}</mat-list-item>
-                  <mat-list-item  style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Compétances demandees: </strong>{{offers.requiredSkills}}</mat-list-item>
+                <mat-list *ngFor="let Candidatures of candidature" >
+                  <mat-list-item style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Titre de l'offre : </strong>{{Candidatures.id}}</mat-list-item>
+                  <mat-list-item  style="padding-bottom: 20px;"><strong style="padding-right: 10px;">Déscription de l'offre: </strong></mat-list-item>
                 </mat-list>
               </mat-card-content>
             </mat-card>
@@ -217,9 +218,9 @@
     </mat-card> 
   </mat-tab>
 
-   <mat-tab label="Résumé"> 
+    <mat-tab label="Résumé"> 
     <div style="padding-top: 20px; padding-left: 20px;">
-      <button mat-raised-button color="primary" (click)="printCv(employee)" style="display: block;">
+      <button mat-raised-button color="primary" (click)="printCv()" style="display: block;">
         Imprimer le Cv
       </button>
       <div style="padding-top: 20px;">
@@ -326,7 +327,6 @@
   </div>
  </div>
  </mat-tab>
-
 </mat-tab-group>
       </div>
     </div>
