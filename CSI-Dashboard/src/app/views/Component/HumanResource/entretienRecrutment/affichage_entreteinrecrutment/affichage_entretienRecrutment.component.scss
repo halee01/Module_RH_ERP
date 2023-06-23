@@ -93,4 +93,17 @@ font-size: 14px;
 ::ng-deep .mat-slider-disabled .mat-slider-wrapper {
     background-color: #1972f9; /* Replace with your desired color */
   }
+  .info-iconn{
+    color: #bdb7b7;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  
+  .slider-field {
+    width: fit-content;
+  }
   
