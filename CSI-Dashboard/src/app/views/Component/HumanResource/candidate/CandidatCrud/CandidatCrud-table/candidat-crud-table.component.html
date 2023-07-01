@@ -1,4 +1,48 @@
+<mat-card class="p-0" [@animate]="{ value: '*', params: { y: '50px', delay: '300ms' } }" style="margin-bottom: 35px;" >
+  <div fxLayout="row wrap" >
+    <div fxFlex="50" fxFlex.gt-sm="20" fxFlex.sm="50" class="statistic-item">
+      <div class="text-center pt-16 pb-16 border-right-light">
+        <mat-icon color="primary">restore</mat-icon>
+        <h4 class="m-0">{{processCount}}</h4>
+        <small class="m-0">En processus</small>
+      </div>
+    </div>
 
+<div fxFlex="50" fxFlex.gt-sm="20" fxFlex.sm="50" class="statistic-item">
+      <div class="text-center pt-16 pb-16 border-right-light">
+        <mat-icon color="accent">star</mat-icon>
+        <h4 class="m-0">{{ profileCount }}</h4>
+        <small class="m-0">Top Profiles</small>
+      </div>
+    </div>
+
+   
+    <div fxFlex="50" fxFlex.gt-sm="20" fxFlex.sm="50" class="statistic-item">
+      <div class="text-center pt-16 pb-16 border-right-light">
+        <mat-icon class="text-green">done_all</mat-icon>
+        <h4 class="m-0">{{ convertedCount }}</h4>
+        <small class="m-0">Converti</small>
+      </div>
+    </div>
+
+<div fxFlex="50" fxFlex.gt-sm="20" fxFlex.sm="50" class="statistic-item">
+      <div class="text-center pt-16 pb-16 border-right-light">
+        <mat-icon style="color: #a7a1a1;">archive</mat-icon>
+        <h4 class="m-0">{{archivedCount}}</h4>
+        <small class="m-0">Archivé</small>
+      </div>
+    </div>
+
+    <div fxFlex="50" fxFlex.gt-sm="20" fxFlex.sm="50" class="statistic-item">
+      <div class="text-center pt-16 pb-16 border-right-light">
+        <mat-icon class="text-red">highlight_off</mat-icon>
+        <h4 class="m-0">{{ qualifiedCount }}</h4>
+        <small class="m-0">Non qualifié</small>
+      </div>
+    </div>
+
+  </div>
+</mat-card>
 
    <mat-form-field style="padding-left: 19px;">
     <input matInput (keyup)="applyFilter($event)" placeholder="Recherche">

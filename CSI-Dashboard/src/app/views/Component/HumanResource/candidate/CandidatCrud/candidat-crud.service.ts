@@ -290,4 +290,47 @@ setCvData(cvData: string) {
   this.cvDataSubject.next(cvData);
 }
 
+
+
+
+// les statistiques 
+getAllConvertedToRessource(): Observable<any> {
+  return this.http.get<any>(this.apiUrl + '/countAllConvertedToResource').pipe(
+    catchError(this.handleError)
+  );
+}
+
+getAllArchived(): Observable<any> {
+  return this.http.get<any>(this.apiUrl + '/countAllArchived').pipe(
+    catchError(this.handleError)
+  );
+}
+getAllDoNotContact(): Observable<any> {
+  return this.http.get<any>(this.apiUrl + '/countAllDoNotContact').pipe(
+    catchError(this.handleError)
+  );
+}
+
+getAllInProcess(): Observable<any> {
+  return this.http.get<any>(this.apiUrl + '/countAllInProcess').pipe(
+    catchError(this.handleError)
+  );
+}
+
+getAllPreQualified(): Observable<any> {
+  return this.http.get<any>(this.apiUrl + '/countAllPreQualified').pipe(
+    catchError(this.handleError)
+  );
+}
+
+getAllTopProfiles(): Observable<any> {
+  return this.http.get<any>(this.apiUrl + '/countAllTopProfiles').pipe(
+    catchError(this.handleError)
+  );
+}
+getAllInProgress(): Observable<any> {
+  return this.http.get<any>(this.apiUrl + '/countAllInProgress').pipe(
+    catchError(this.handleError)
+  );
+}
 }

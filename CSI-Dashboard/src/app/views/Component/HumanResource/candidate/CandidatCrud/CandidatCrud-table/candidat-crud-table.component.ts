@@ -31,6 +31,14 @@ import { updateCandidatService } from '../../updateCandidat/updateCandidat.servi
 
 
 export class CandidatCrudTableComponent implements OnInit {
+
+  convertedCount : number;
+  profileCount : number;
+  qualifiedCount : number;
+  processCount : number;
+  progressCount : number;
+  archivedCount : number;
+  contactCount : number;
   formData = {}
   console = console;
   submitted = false;
@@ -83,6 +91,13 @@ export class CandidatCrudTableComponent implements OnInit {
     
     this.displayedColumns = this.getDisplayedColumns();
     this.getEmployees();
+    this.getAllArchivedCount();
+    this.getAllConvertedToResourceCount();
+    this.getAllDoNotContactCount();
+    this.getAllInProcessCount();
+    this.getAllInProgressCount();
+    this.getAllPreQualifiedCount();
+    this.getAllTopProfilesCount();
   }
 
 
@@ -358,4 +373,78 @@ openPopUpEmployee(data: any = {}) {
     }
   });
 }
+
+
+// les statistiques 
+getAllConvertedToResourceCount(): void {
+  this.crudService.getAllConvertedToRessource().subscribe(
+    (response: any) => {
+      this.convertedCount = response;
+    },
+    (error: any) => {
+      console.error('Erreur lors de la récupération du nombre de commentaires :', error);
+    }
+  );
+}
+getAllArchivedCount(): void {
+  this.crudService.getAllArchived().subscribe(
+    (response: any) => {
+      this.archivedCount = response;
+    },
+    (error: any) => {
+      console.error('Erreur lors de la récupération du nombre de commentaires :', error);
+    }
+  );
+}
+getAllDoNotContactCount(): void {
+  this.crudService.getAllDoNotContact().subscribe(
+    (response: any) => {
+      this.contactCount = response;
+    },
+    (error: any) => {
+      console.error('Erreur lors de la récupération du nombre de commentaires :', error);
+    }
+  );
+}
+getAllInProcessCount(): void {
+  this.crudService.getAllInProcess().subscribe(
+    (response: any) => {
+      this.processCount = response;
+    },
+    (error: any) => {
+      console.error('Erreur lors de la récupération du nombre de commentaires :', error);
+    }
+  );
+}
+getAllPreQualifiedCount(): void {
+  this.crudService.getAllPreQualified().subscribe(
+    (response: any) => {
+      this.qualifiedCount = response;
+    },
+    (error: any) => {
+      console.error('Erreur lors de la récupération du nombre de commentaires :', error);
+    }
+  );
+}
+getAllTopProfilesCount(): void {
+  this.crudService.getAllTopProfiles().subscribe(
+    (response: any) => {
+      this.profileCount = response;
+    },
+    (error: any) => {
+      console.error('Erreur lors de la récupération du nombre de commentaires :', error);
+    }
+  );
+}
+getAllInProgressCount(): void {
+  this.crudService.getAllInProgress().subscribe(
+    (response: any) => {
+      this.progressCount = response;
+    },
+    (error: any) => {
+      console.error('Erreur lors de la récupération du nombre de commentaires :', error);
+    }
+  );
+}
+
 }
