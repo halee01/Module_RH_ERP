@@ -30,7 +30,7 @@ interface IBadge {
 export class NavigationService {
   iconMenu: IMenuItem[] = [
    
-    {
+    {  
       name: 'Tableau de Bord',
       type: 'dropDown',
       tooltip: 'Dashboard',
